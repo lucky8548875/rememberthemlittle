@@ -79,14 +79,30 @@
 
     <script>
 
-        // Remove preloader
-        document.querySelector("#preloader").style.display = "none";
         
+        
+        setTimeout(()=>{
 
-        FB.getLoginStatus(function(response) {
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+            FB.getLoginStatus(function(response) {
+
+                if(response.status == "unknown"){
+                    console.log(response);
+                }
+
+                else {
+
+                    console.log('Successful login for: ' + response.name);
+                    document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+
+                }
+
+            // Remove preloader
+            document.querySelector("#preloader").style.display = "none";
         });
+
+        },3000)
+
+
 
 
     </script>
