@@ -46,6 +46,24 @@
                 js = d.createElement(s); js.id = id;
                 js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
                 fjs.parentNode.insertBefore(js, fjs);
+
+                FB.getLoginStatus(function(response) {
+
+                    if(response.status == "unknown"){ // unknown means logged out
+                        console.log(response);
+                    }
+
+                    else {
+
+                        console.log('Successful login for: ' + response.name);
+                        console.log(response)
+                        document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+
+                    }
+
+                    // Remove preloader
+                    document.querySelector("#preloader").style.display = "none";
+                    });
         
                 
         
@@ -75,32 +93,6 @@
     <script src="/src/system/static/vendor/materialize-src/js/bin/materialize.js"></script>
 
    
-
-    <script>
-
-            FB.getLoginStatus(function(response) {
-
-                if(response.status == "unknown"){ // unknown means logged out
-                    console.log(response);
-                }
-
-                else {
-
-                    console.log('Successful login for: ' + response.name);
-                    console.log(response)
-                    document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
-
-                }
-
-            // Remove preloader
-            document.querySelector("#preloader").style.display = "none";
-        });
-
-
-
-
-
-    </script>
 
 </body>
 </html>
