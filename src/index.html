@@ -50,11 +50,28 @@
 
             FB.getLoginStatus(function (response) {
 
-                statusCallbackChanged(response);
+                //statusCallbackChanged(response);
 
                 // Remove preloader
                 document.querySelector("#preloader").style.display = "none";
             });
+
+            FB.Event.subscribe('auth.login', function(response)
+            {
+                console.log(response);
+                statusCallbackChanged(response);
+            }
+
+            FB.Event.subscribe('auth.logout', function(response)
+            {
+                console.log(response);
+                statusCallbackChanged(response);
+
+            }
+
+
+
+);
 
         };
 
