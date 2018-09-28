@@ -60,18 +60,14 @@
             {
                 console.log(response);
                 statusCallbackChanged(response);
-            }
+            })
 
             FB.Event.subscribe('auth.logout', function(response)
             {
                 console.log(response);
                 statusCallbackChanged(response);
 
-            }
-
-
-
-);
+            });
 
         };
 
