@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="/src/system/static/vendor/materialize-src/sass/materialize.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Document</title>
+    <title>Remember Them Little</title>
 </head>
 
 <body>
@@ -30,13 +30,16 @@
         </div>
     </div>
 
-    <!-- Facebook init-->
+    <!-- Facebook required element-->
     <div id="fb-root"></div>
+
+    <!-- Facebook bootstrap-->
     <script>
 
         console.log("v1.1");
 
         window.fbAsyncInit = function () {
+
             FB.init({
                 appId: '736479600033096',
                 cookie: true,
@@ -49,11 +52,13 @@
             FB.getLoginStatus(function (response) {
 
                 statusCallbackChanged(response);
+
                 // Remove preloader
                 document.querySelector("#preloader").style.display = "none";
             });
 
         };
+
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -115,8 +120,6 @@
         }
 
     </script>
-
-
 
 </body>
 
