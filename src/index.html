@@ -27,6 +27,30 @@
 
     <!-- Facebook init-->
     <div id="fb-root"></div>
+    <script>
+    
+            window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '736479600033096',
+              cookie     : true,
+              xfbml      : true,
+              version    : 'v3.1'
+            });
+              
+            FB.AppEvents.logPageView();   
+              
+          };
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+        
+                
+        
+            }(document, 'script', 'facebook-jssdk'));
+            </script>
     
     <!-- App bar -->
     <div style="display: flex; justify-content: space-between; align-items: center">
@@ -50,48 +74,20 @@
 
     <script src="/src/system/static/vendor/materialize-src/js/bin/materialize.js"></script>
 
-    <script>
-    
-    window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '736479600033096',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v3.1'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-    
-    
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
-        fjs.parentNode.insertBefore(js, fjs);
-
-        
-
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
+   
 
     <script>
-
-        
-        
-        setTimeout(()=>{
 
             FB.getLoginStatus(function(response) {
 
-                if(response.status == "unknown"){
+                if(response.status == "unknown"){ // unknown means logged out
                     console.log(response);
                 }
 
                 else {
 
                     console.log('Successful login for: ' + response.name);
+                    console.log(response)
                     document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
 
                 }
@@ -100,7 +96,6 @@
             document.querySelector("#preloader").style.display = "none";
         });
 
-        },3000)
 
 
 
