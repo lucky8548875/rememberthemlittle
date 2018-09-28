@@ -71,13 +71,13 @@
 
         <!-- FB Login Button-->
         <div style="padding: 1rem" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with"
-            data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"></div>
+            data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" onclick="FB.getLoginStatus(statusCallbackChanged(response))"></div>
     </div>
 
-    <br><br><br>
-    <h2 style="text-align: center">
+    <br><br><br><br>
+    <h3 style="text-align: center">
         <span id="status"></span>
-    </h2>
+    </h3>
 
 
 
@@ -92,7 +92,9 @@
             
 
                 if (response.status == "unknown") { // unknown means logged out
-                    console.log(response);
+
+                    document.getElementById('status').innerHTML = 'Hello!';
+
                 }
                 else {
                     FB.api('/me', function (response) {
