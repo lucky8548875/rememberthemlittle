@@ -13,6 +13,7 @@
 
 <body>
 
+    <!-- Preloader -->
     <div id="preloader" style="top: 0; left: 0; position: fixed; z-index: 10; display: flex; width: 100%; height: 100vh;background-color: white">
         <div class="preloader-wrapper active" style="margin: auto">
             <div class="spinner-layer spinner-red-only">
@@ -46,19 +47,7 @@
 
             FB.getLoginStatus(function (response) {
 
-                if (response.status == "unknown") { // unknown means logged out
-                    console.log(response);
-                }
-                else {
-                    FB.api('/me', function (response) {
-
-                        console.log(response)
-                        document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
-
-                    });
-                    
-                }
-
+                statusCallbackChanged(response);
                 // Remove preloader
                 document.querySelector("#preloader").style.display = "none";
             });
@@ -96,6 +85,30 @@
 
 
     <script src="/src/system/static/vendor/materialize-src/js/bin/materialize.js"></script>
+    <script>
+
+        function statusCallbackChanged(response) {
+            function (response) {
+
+                if (response.status == "unknown") { // unknown means logged out
+                    console.log(response);
+                }
+                else {
+                    FB.api('/me', function (response) {
+
+                        console.log(response)
+                        document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+
+                    });
+
+                }
+
+                // Remove preloader
+                document.querySelector("#preloader").style.display = "none";
+            }
+        }
+
+    </script>
 
 
 
