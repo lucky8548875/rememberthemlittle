@@ -1,0 +1,12 @@
+{
+    "name": "remember-them-little",
+    "description": "Online transaction processing system for Remember Them Little",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Stephen John Raymundo",
+            "email": "stephenjohnraymundo@outlook.com"
+        }
+    ],
+    "require": {}
+}
