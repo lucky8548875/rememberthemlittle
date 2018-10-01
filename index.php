@@ -1,10 +1,3 @@
-<html>
-<head>
-  <title>Remember Them Little</title>
-</head>
-<body>
-<center>
-<h1>Hello World</h1>
-</center>
-</body>
-</html>
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/src/index.html';
