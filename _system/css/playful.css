@@ -1,0 +1,392 @@
+.color-primary {
+    color: #5252FF;
+  }
+  
+  .wide {
+    width: 100%;
+  }
+  
+  .high {
+    height: 100vh;
+  }
+  
+  .no-margin, body {
+    margin: 0;
+  }
+  
+  .no-padding, body {
+    padding: 0;
+  }
+  
+  .padding {
+    padding: 1rem;
+  }
+  
+  .padding-x {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .padding-y {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .margin {
+    margin: 1rem;
+  }
+  
+  .margin-x {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .margin-y {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .border-box {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .inline {
+    display: inline;
+  }
+
+  .fixed {
+    position: fixed;
+  }
+  
+  .inline-block, a {
+    display: inline-block;
+  }
+  
+  .flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .inline-flex {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+  
+  .wrap {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  
+  .nowrap {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  
+  .row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  
+  .row-reverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
+  
+  .column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  
+  .column-reverse {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  
+  .justify-center {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  
+  .justify-start {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  
+  .justify-end {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  
+  .space-around {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  
+  .space-between {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+  .align-items-center {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  .center-child {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  body {
+    font-family: "Proxima Nova";
+    color: #495057;
+    background-color: #ffffff;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
+  
+  *, *::before, *::after {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  a {
+    color: #919599;
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-transition: 0.2s color;
+    transition: 0.2s color;
+  }
+  
+  a:hover {
+    color: #495057;
+  }
+  
+  button {
+    font-family: "Proxima Nova";
+    font-weight: 600;
+    color: #495057;
+    background-color: #e9ecef;
+    font-size: 1rem;
+    border: 2px solid #e9ecef;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    -webkit-transition: 0.2s background-color, 0.2s border-color;
+    transition: 0.2s background-color, 0.2s border-color;
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: #dae0e5;
+    border-color: #dae0e5;
+  }
+  
+  button:active {
+    background-color: #bdc6d0;
+    border: 2px solid #cbd3da;
+  }
+  
+  button:focus {
+    border: 2px solid #cbd3da;
+  }
+  
+  button.outline {
+    background-color: transparent;
+  }
+  
+  button.outline:hover {
+    border: 2px solid #cbd3da;
+  }
+  
+  button.outline:active {
+    background-color: #dae0e5;
+    border: 2px solid #cbd3da;
+  }
+  
+  button.outline:focus {
+    border: 2px solid #cbd3da;
+  }
+  
+  button.primary {
+    background-color: #5252FF;
+    border-color: #5252FF;
+    color: white;
+  }
+  
+  button.primary:hover {
+    background-color: #6c6cff;
+    border-color: #6c6cff;
+  }
+  
+  button.medium {
+    padding: 0.75rem 2rem;
+    border-radius: 2.5rem;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]), select, textarea {
+    font-family: "Proxima Nova";
+    color: #495057;
+    background-color: white;
+    border: 2px solid #e9ecef;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  input:not([type=checkbox]):not([type=radio])::-webkit-input-placeholder, select::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #abafb2;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]):-ms-input-placeholder, select:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #abafb2;
+  }
+  
+  input:not([type=checkbox]):not([type=radio])::-ms-input-placeholder, select::-ms-input-placeholder, textarea::-ms-input-placeholder {
+    color: #abafb2;
+  }
+  
+  input:not([type=checkbox]):not([type=radio])::placeholder, select::placeholder, textarea::placeholder {
+    color: #abafb2;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]):focus, select:focus, textarea:focus {
+    border: 2px solid #cbd3da;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom, select.custom, textarea.custom {
+    background-color: #f8f9fa !important;
+    border: 2px solid #f8f9fa !important;
+    font-weight: 600 !important;
+    height: initial !important;
+    color: #495057 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 2rem !important;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom::-webkit-input-placeholder, select.custom::-webkit-input-placeholder, textarea.custom::-webkit-input-placeholder {
+    color: #abafb2 !important;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom:-ms-input-placeholder, select.custom:-ms-input-placeholder, textarea.custom:-ms-input-placeholder {
+    color: #abafb2 !important;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom::-ms-input-placeholder, select.custom::-ms-input-placeholder, textarea.custom::-ms-input-placeholder {
+    color: #abafb2 !important;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom::placeholder, select.custom::placeholder, textarea.custom::placeholder {
+    color: #abafb2 !important;
+  }
+  
+  input:not([type=checkbox]):not([type=radio]).custom:focus, select.custom:focus, textarea.custom:focus {
+    border: 2px solid #e9ecef !important;
+  }
+  
+  form input:not([type=checkbox]):not([type=radio]), form select, form textarea {
+    margin-bottom: 1rem;
+  }
+  
+  form label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  form fieldset {
+    border-radius: 1rem;
+    border: 0px;
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  form fieldset.outline {
+    border: 2px solid #e9ecef;
+  }
+  
+  form fieldset legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  rigid {
+    display: inline-block;
+    width: 1rem;
+  }
+  
+  rigid-small {
+    display: inline-block;
+    width: 0.5rem;
+  }
+  
+  table {
+    width: 70%;
+    border-spacing: 0;
+  }
+  
+  table td, table th {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .card {
+    padding: 1rem;
+    -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  body {
+    background-color: white;
+  }
+  
+  body *:hover {
+    outline: 2px dashed rgba(145, 149, 153, 0.25);
+    outline-offset: -2px;
+  }
+  
+  body *:hover * {
+    outline: 2px dashed rgba(145, 149, 153, 0.1);
+    outline-offset: -2px;
+  }
+  /*# sourceMappingURL=style.css.map */
