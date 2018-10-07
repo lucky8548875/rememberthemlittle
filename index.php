@@ -1,3 +1,3 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/src/index.html';
+require_once $_SERVER['DOCUMENT_ROOT'].'/app/index.html';
