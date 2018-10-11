@@ -1,9 +1,23 @@
 <?php
-require_once("../openConnection.php");
+$servername = "localhost";
+$dbname = "rtl_v1";
+$username = "root";
+$password = "mysql";
 
-$id = 'Something123';
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $conn->prepare("DELETE FROM categories WHERE id = :id");
-$stmt->bindValue(":id", $id);
-$stmt->execute();
+    $id = 'Something123';
+
+    $stmt = $conn->prepare("DELETE FROM categories WHERE id = :id");
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+    }
+catch(PDOException $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
+
+$conn = null;
 ?>

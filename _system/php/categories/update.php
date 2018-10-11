@@ -1,11 +1,26 @@
 <?php
-require_once("../openConnection.php");
+$servername = "localhost";
+$dbname = "rtl_v1";
+$username = "root";
+$password = "mysql";
 
-$col = "Col_n";
-$val = "Value";
-$id = "Something123";
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $conn->prepare("UPDATE categories SET $col = $val WHERE id = :id");
-$stmt->bindValue(":id", $id);
-$stmt->execute();
+    $col = "Col_n";
+    $val = "Value";
+    $id = "Something123";
+
+    $sql = "UPDATE categories SET $col = $val WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+    }
+catch(PDOException $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
+
+$conn = null;
 ?>
