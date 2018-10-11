@@ -1,26 +1,39 @@
 <?php
-$servername = "localhost";
-$dbname = "rtl_v1";
-$username = "root";
-$password = "mysql";
+require("../openConnection.php");
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if($_POST['id'])
+{
+    $id = $_POST['id'];
 
-    $col = "Col_n";
-    $val = "Value";
-    $id = "Something123";
+    $sql = "UPDATE categories SET category_name = :name, category_description = :description, category_active = :active WHERE category_id = :id";
 
-    $sql = "UPDATE categories SET $col = $val WHERE id = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(":id", $id);
-    $stmt->execute();
-    }
-catch(PDOException $e)
+    if($_POST['name'])
     {
-    echo "Connection failed: " . $e->getMessage();
+        $name = $_POST['name'];
+    }
+    if($_POST['description'])
+    {
+        $description = $_POST['description'];
+    }
+    if(isset($_POST['active']))
+    {
+        $active = $_POST['active'];
     }
 
-$conn = null;
+    try
+    {
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->bindValue(":name", $name);
+        $stmt->bindValue(":description", $description);
+        $stmt->bindValue(":active", $active);
+        $stmt->execute();
+    }
+    catch(PDOException $e)
+    {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+
+require("../closeConnection.php");
 ?>

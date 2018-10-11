@@ -1,16 +1,14 @@
 <?php
-$servername = "localhost";
-$dbname = "rtl_v1";
-$username = "root";
-$password = "mysql";
+require("../openConnection.php");
+
+if($_POST['id'])
+{
+    $id = $_POST['id'];
+}
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $id = 'Something123';
-
-    $stmt = $conn->prepare("DELETE FROM categories WHERE id = :id");
+    $sql = "DELETE FROM categories WHERE id = :id";
+    $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id", $id);
     $stmt->execute();
     }
@@ -19,5 +17,5 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
     }
 
-$conn = null;
+require("../closeConnection.php");
 ?>

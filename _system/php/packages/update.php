@@ -1,32 +1,54 @@
 <?php
-$servername = "localhost";
-$dbname = "rtl_v1";
-$username = "root";
-$password = "mysql";
+require("../openConnection.php");
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if($_POST['package_id'])
+{
+    $package_id = $_POST['package_id'];
 
-    $col = "Col_n";
-    $val = "Value";
-    $id = "Something123";
+    $sql = "UPDATE packages SET package_name = :name, package_description = :description, package_price = :price, package_active = :active, package_created = :created, category_id = :category_id WHERE package_id = :package_id";
 
-    $sql = "UPDATE packages SET $col = $val WHERE id = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(":id", $id);
-    $stmt->execute();
-    }
-catch(PDOException $e)
+    if($_POST['name'])
     {
-    echo "Connection failed: " . $e->getMessage();
+        $name = $_POST['name'];
+    }
+    if($_POST['description'])
+    {
+        $description = $_POST['description'];
+    }
+    if($_POST['price'])
+    {
+        $price = $_POST['price'];
+    }
+    if(isset($_POST['active']))
+    {
+        $active = $_POST['active'];
+    }
+    if($_POST['created'])
+    {
+        $created = $_POST['created'];
+    }
+    if($_POST['category_id'])
+    {
+        $category_id = $_POST['category_id'];
     }
 
-$conn = null;
+    try
+    {
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":package_id", $package_id);
+        $stmt->bindValue(":name", $name);
+        $stmt->bindValue(":description", $description);
+        $stmt->bindValue(":price", $price);
+        $stmt->bindValue(":active", $active);
+        $stmt->bindValue(":created", $created);
+        $stmt->bindValue(":category_id", $category_id);
+        $stmt->execute();
+    }
+    catch(PDOException $e)
+    {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
 
-
-
-
-//$name = $_POST['name'];
-
+require("../closeConnection.php");
 ?>
