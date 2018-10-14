@@ -1,0 +1,339 @@
+.font-primary, body {
+  font-family: "Proxima Nova";
+}
+
+.color-primary {
+  color: #5252FF;
+}
+
+.none {
+  display: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.inline-flex {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.inline-grid {
+  display: -ms-inline-grid;
+  display: inline-grid;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.static {
+  position: static;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.nowrap {
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.grow {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.row-reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.column-reverse {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.justify-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.justify-start {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.justify-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.space-around {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.align-items-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.margin {
+  margin: 1rem;
+}
+
+.margin-small {
+  margin: 0.5rem;
+}
+
+.margin-medium {
+  margin: 1.25rem;
+}
+
+.margin-large {
+  margin: 1.5rem;
+}
+
+.margin-x {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.margin-x-small {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.margin-x-medium {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.margin-x-large {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.margin-y {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.margin-y-small {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.margin-y-medium {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.margin-y-large {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.padding {
+  padding: 1rem;
+}
+
+.padding-small {
+  padding: 0.5rem;
+}
+
+.padding-medium {
+  padding: 1.25rem;
+}
+
+.padding-large {
+  padding: 1.5rem;
+}
+
+.padding-x {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.padding-x-small {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.padding-x-medium {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.padding-x-large {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.padding-y {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.padding-y-small {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.padding-y-medium {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.padding-y-large {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.wide {
+  width: 100%;
+}
+
+.high {
+  height: 100vh;
+}
+
+.max-wide {
+  max-width: 100%;
+}
+
+button {
+  color: #495057;
+  font-family: "Proxima Nova";
+  font-weight: 600;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #e9ecef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.5rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 2rem;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: 0.2s background-color, 0.2s border-color;
+  transition: 0.2s background-color, 0.2s border-color;
+}
+
+button:hover {
+  background-color: #dae0e5;
+  border-color: #dae0e5;
+}
+
+button:active {
+  background-color: #bdc6d0;
+}
+
+button:focus {
+  border: 2px solid #cbd3da;
+}
+
+button.primary {
+  color: #ffffff;
+  background-color: #5252FF;
+  border-color: #5252FF;
+}
+
+button.primary:hover {
+  background-color: #3939ff;
+  border-color: #3939ff;
+}
+
+button.primary:active {
+  background-color: #0000eb;
+}
+
+button.primary:focus {
+  border: 2px solid #1f1fff;
+}
+
+button.outline {
+  background-color: transparent;
+}
+
+button.outline:active {
+  background-color: #dae0e5;
+}
+
+button.outline:focus {
+  border: 2px solid #cbd3da;
+}
+
+h1 {
+  font-weight: 300;
+  color: #495057;
+}
+/*# sourceMappingURL=playfulcss.css.map */
