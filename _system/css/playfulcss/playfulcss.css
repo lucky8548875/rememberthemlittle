@@ -272,6 +272,7 @@ button {
   color: #495057;
   font-family: "Proxima Nova";
   font-weight: 600;
+  font-size: 1rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
