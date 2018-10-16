@@ -1,0 +1,18 @@
+$debug-background: white
+$debug-outline: transparentize($color-gray,0.75)
+$debug-outline-sub: $debug-outline
+
+
+@if $debug
+
+    body
+        background-color: $debug-background
+    
+        *:hover
+            outline: 2px dashed $debug-outline
+            outline-offset: -2px
+
+            *
+                outline: 2px dashed $debug-outline-sub
+                outline-offset: -2px
+
