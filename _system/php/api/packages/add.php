@@ -6,10 +6,16 @@ $username = "root";
 $password = "mysql";
 
 # Retrieve POST parameters
+$package_name = $_POST['package_name'];
+$package_description = $_POST['package_description'];
+$package_price = $_POST['package_price'];
+$package_minutes = $_POST['package_minutes'];
+$package_themes = $_POST['package_themes'];
+$package_active = $_POST['package_active'];
 $category_id = $_POST['category_id'];
 
 # Check parameters if null
-if (isset($category_id)) {
+if (isset($package_name) && isset($package_description) && isset($package_price) && isset($package_minutes) && isset($package_themes) && isset($package_active) && isset($category_id)) {
 
     try {
 
@@ -18,7 +24,7 @@ if (isset($category_id)) {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         # Perform SQL Query
-        $sql = "DELETE FROM categories WHERE category_id = $category_id";
+        $sql = "INSERT INTO packages (package_name, package_description, package_price, package_minutes, package_themes, package_active, category_id) VALUES ('$package_name', '$package_description', $package_price, $package_minutes, $package_themes, '$package_active', $category_id)";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 

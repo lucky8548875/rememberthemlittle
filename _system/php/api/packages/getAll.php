@@ -12,7 +12,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare('SELECT * FROM categories');
+    $stmt = $conn->prepare('SELECT * FROM packages');
     $stmt->execute();
 
     # Fetch Result
