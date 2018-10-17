@@ -67,6 +67,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Category</th>
             <th>Description</th>
             <th>Price</th>
             <th>Minutes</th>
@@ -79,6 +80,7 @@
         <tbody>
           <tr v-for="package in packages">
             <td>{{package.package_name}}</td>
+            <td>{{$root.categories.find(category => category.category_id === package.category_id).category_name}}</td>
             <td>{{package.package_description}}</td>
             <td>{{package.package_price}}</td>
             <td>{{package.package_minutes}}</td>
@@ -101,32 +103,32 @@
           <!-- Form Title -->
           <legend>New Package</legend>
           <div class="flex">
-          <div class="flex column" style="margin-right: 0.5rem">
-          <label>Category</label>
-          <select>
-            <option v-for="(category,index) in $root.categories">{{category.category_name}}</option>
-          </select>
+            <div class="flex column" style="margin-right: 0.5rem">
+              <label>Category</label>
+              <select name="category_id">
+                <option v-for="(category,index) in $root.categories" :value="category.category_id">{{category.category_name}}</option>
+              </select>
 
-          <label>Package Price</label>
-          <input type="number" name="package_price" required>
+              <label>Package Price</label>
+              <input type="number" name="package_price" required>
 
-          <label>Package Description</label>
-          <textarea style="height: 100px" name="package_description" required></textarea>
-        </div>
-        <div class="flex column">
+              <label>Package Description</label>
+              <textarea style="height: 100px" name="package_description" required></textarea>
+            </div>
+            <div class="flex column">
 
-          <label>Package Name</label>
-          <input type="text" name="package_name" required>
+              <label>Package Name</label>
+              <input type="text" name="package_name" required>
 
-          <label>Package Minutes</label>
-          <input type="number" name="package_minutes" required>
+              <label>Package Minutes</label>
+              <input type="number" name="package_minutes" required>
 
-          <label>Package Themes</label>
-          <input type="number" name="package_themes" required>
+              <label>Package Themes</label>
+              <input type="number" name="package_themes" required>
 
-          <label><input type="checkbox" name="package_active" checked>&nbspActive</label>
-        </div>
-      </div>
+              <label><input type="checkbox" name="package_active" checked>&nbspActive</label>
+            </div>
+          </div>
           <!-- Form action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
@@ -146,29 +148,36 @@
         <fieldset>
 
           <legend>Edit Package</legend>
+          <div class="flex">
+            <div class="flex column" style="margin-right: 0.5rem">
+              <label>Category</label>
+              <select name="category_id">
+                <option v-for="(category,index) in $root.categories" :value="category.category_id" :selected="(params.category_id == category.category_id)">{{category.category_name}}</option>
+              </select>
 
-          <label>Category</label>
-          <select>
-            <option>Category</option>
-          </select>
+              <label>Package Price</label>
+              <input type="number" name="package_price" required :value="params.package_price">
 
-          <label>Package Name</label>
-          <input type="text" name="package_name" :value="params.package_name" required>
+              <label>Package Description</label>
+              <textarea style="height: 100px" name="package_description" required :value="params.package_description"></textarea>
 
-          <label>Package Description</label>
-          <textarea style="height: 100px" name="package_description" required></textarea>
 
-          <label>Package Price</label>
-          <input type="number" name="package_price" required>
+            </div>
+            <div class="flex column">
 
-          <label>Package Minutes</label>
-          <input type="number" name="package_minutes" required>
+              <label>Package Name</label>
+              <input type="text" name="package_name" :value="params.package_name" required>
 
-          <label>Package Themes</label>
-          <input type="number" name="package_themes" required>
 
-          <label><input type="checkbox" name="package_active" :checked="(params.package_active)">&nbspActive</label>
+              <label>Package Minutes</label>
+              <input type="number" name="package_minutes" required :value="params.package_minutes">
 
+              <label>Package Themes</label>
+              <input type="number" name="package_themes" required :value="params.package_themes">
+
+              <label><input type="checkbox" name="package_active" :checked="(params.package_active)">&nbspActive</label>
+            </div>
+          </div>
           <!-- Action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
