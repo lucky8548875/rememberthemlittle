@@ -100,18 +100,23 @@
 
           <!-- Form Title -->
           <legend>New Package</legend>
-
+          <div class="flex">
+          <div class="flex column" style="margin-right: 0.5rem">
           <label>Category</label>
-          <select><option>Category</option></select>
-
-          <label>Package Name</label>
-          <input type="text" name="package_name" required>
-
-          <label>Package Description</label>
-          <textarea style="height: 100px" name="package_description" required></textarea>
+          <select>
+            <option v-for="(category,index) in $root.categories">{{category.category_name}}</option>
+          </select>
 
           <label>Package Price</label>
           <input type="number" name="package_price" required>
+
+          <label>Package Description</label>
+          <textarea style="height: 100px" name="package_description" required></textarea>
+        </div>
+        <div class="flex column">
+
+          <label>Package Name</label>
+          <input type="text" name="package_name" required>
 
           <label>Package Minutes</label>
           <input type="number" name="package_minutes" required>
@@ -120,7 +125,8 @@
           <input type="number" name="package_themes" required>
 
           <label><input type="checkbox" name="package_active" checked>&nbspActive</label>
-
+        </div>
+      </div>
           <!-- Form action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
@@ -142,7 +148,9 @@
           <legend>Edit Package</legend>
 
           <label>Category</label>
-          <select><option>Category</option></select>
+          <select>
+            <option>Category</option>
+          </select>
 
           <label>Package Name</label>
           <input type="text" name="package_name" :value="params.package_name" required>
@@ -187,10 +195,12 @@
     var app = new Vue({
       el: '#app',
       data: {
-        packages: []
+        packages: [],
+        categories: []
       },
       created: function () {
         this.loadPackages();
+        this.loadCategories();
       },
       methods: {
 
@@ -310,6 +320,22 @@
 
               });
 
+        },
+
+        loadCategories: function () {
+
+          Vue.http.get('/_system/php/api/categories/getAll.php')
+            .then(
+              response => {
+
+                if (response.body.success)
+                  this.categories = response.body.data;
+                else
+                  console.error(response.body.message);
+              },
+              response => {
+                console.log('fail');
+              });
         }
       }
     })

@@ -1,7 +1,7 @@
 <?php
 
 # Set database parameters
-$servername = "localhost:3307";
+$servername = "localhost";
 $username = "root";
 $password = "root";
 
