@@ -3,7 +3,7 @@
 # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "usbw";
 
 # Retrieve POST parameters
 $category_id = $_POST['category_id'];
