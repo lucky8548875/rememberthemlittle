@@ -97,7 +97,7 @@
           <textarea style="height: 100px" name="theme_description" required></textarea>
 
           <label>Theme Image</label>
-          <input type="text" name="theme_image" required>
+          <input type="file" name="theme_image" accept="image/*" required />
 
           <!-- Form action buttons -->
           <div class="flex align-items-center">
@@ -123,7 +123,7 @@
           <textarea style="height: 100px" name="theme_description" required :value="params.theme_description"></textarea>
 
           <label>Theme Image</label>
-          <input type="text" name="theme_image" required :value="params.theme_image">
+          <input type="file" name="theme_image" accept="image/*" required :value="params.theme_image"/>
 
           <!-- Action buttons -->
           <div class="flex align-items-center">

@@ -1,14 +1,15 @@
 <?php
     
     # Set database parameters
-    $servername = "localhost";
+    $servername = "localhost:3307";
     $username = "root";
-    $password = "root";
+    $password = "usbw";
 
     # Retrieve POST parameters
     $theme_description = $_POST['theme_description'];
-    $theme_image = $_POST['theme_image'];
- 
+    $theme_image = $mysqli->real_escape_string('/_system/images/'.$_FILES['theme_image']['name']);
+    copy($_FILES['theme_image']['tmp_name'], $theme_image);
+
     # Check parameters if null
     if (isset($theme_description) && isset($theme_image)) {
         try {
