@@ -3,7 +3,7 @@
 # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "mysql";
 
 # Retrieve POST parameters
 $package_name = $_POST['package_name'];

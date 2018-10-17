@@ -2,7 +2,7 @@
  # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "mysql";
  # Retrieve POST parameters
 $theme_id = $_POST['theme_id'];
 $theme_description = $_POST['theme_description'];

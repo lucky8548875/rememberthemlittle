@@ -2,7 +2,7 @@
  # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "mysql";
  try {
      # Connect to Database
     $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);

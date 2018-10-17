@@ -3,7 +3,7 @@
     # Set database parameters
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "mysql";
 
     # Retrieve POST parameters
     $theme_description = $_POST['theme_description'];
