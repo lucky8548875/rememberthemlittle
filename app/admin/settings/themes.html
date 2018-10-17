@@ -46,8 +46,8 @@
       <ul>
         <li><a href="index.html">Categories</a></li>
         <li><a href="packages.html">Packages</a></li>
-        <li><a href="addons.html" class="color-primary">Addons</a></li>
-        <li><a href="themes.html">Themes</a></li>
+        <li><a href="addons.html">Addons</a></li>
+        <li><a href="themes.html" class="color-primary">Themes</a></li>
       </ul>
     </aside>
 
@@ -56,8 +56,8 @@
 
       <!-- Action bar -->
       <div>
-        <h3>AddOn</h3>
-        <button class="primary" @click="$root.$refs.add.show()">Add AddOn</button>
+        <h3>Themes</h3>
+        <button class="primary" @click="$root.$refs.add.show()">Add Themes</button>
       </div>
 
       <!-- Table -->
@@ -66,23 +66,17 @@
         <!-- Table headers -->
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Type</th>
             <th>Description</th>
-            <th>Price</th>
-            <th>Active</th>
+            <th>Image</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr v-for="addon in addons">
-            <td>{{addon.addon_name}}</td>
-            <td>{{addon.addon_type}}</td>
-            <td>{{addon.addon_description}}</td>
-            <td>{{addon.addon_price}}</td>
-            <td>{{addon.addon_active == 1 ? 'Yes' : 'No'}}</td>
-            <td><a @click.prevent="$root.$refs.edit.show(addon)" class="color-primary">Edit</a></td>
+          <tr v-for="theme in themes">
+            <td>{{theme.theme_description}}</td>
+            <td>{{theme.theme_image}}</td>
+            <td><a @click.prevent="$root.$refs.edit.show(theme)" class="color-primary">Edit</a></td>
           </tr>
         </tbody>
       </table>
@@ -91,36 +85,24 @@
 
     <modal class="modal" inline-template ref="add">
 
-      <!-- Add Package form-->
-      <form v-if="visible" @submit.prevent="$root.addAddOn($event); hide();">
+      <!-- Add Theme form-->
+      <form v-if="visible" @submit.prevent="$root.addTheme($event); hide();">
 
         <fieldset>
 
           <!-- Form Title -->
-          <legend>New AddOn</legend>
+          <legend>New Theme</legend>
 
-          <label>AddOn Name</label>
-          <input type="text" name="addon_name" required>
+          <label>Theme Description</label>
+          <textarea style="height: 100px" name="theme_description" required></textarea>
 
-          <label>AddOn Type</label>
-          <select name = "addon_type">
-              <option>Prints</option>
-                <option>Extra Service</option>
-                <option>Product</option>
-            </select>
-
-          <label>AddOn Description</label>
-          <textarea style="height: 100px" name="addon_description" required></textarea>
-
-          <label>AddOn Price</label>
-          <input type="number" name="addon_price" required>
-
-          <label><input type="checkbox" name="addon_active" checked>&nbspActive</label>
+          <label>Theme Image</label>
+          <input type="text" name="theme_image" required>
 
           <!-- Form action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button type="submit" class="primary" style="margin-left: 0.5rem">Add AddOn</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Add Theme</button>
           </div>
 
         </fieldset>
@@ -131,34 +113,22 @@
     <modal class="modal" inline-template ref="edit">
 
       <!-- Edit Category form -->
-      <form v-if="visible" @submit.prevent="$root.updateAddOn(params.addon_id,$event); hide();">
+      <form v-if="visible" @submit.prevent="$root.updateTheme(params.theme_id,$event); hide();">
 
         <fieldset>
 
-          <legend>Edit AddOn</legend>
+          <legend>Edit Theme</legend>
 
-          <label>AddOn Name</label>
-          <input type="text" name="addon_name" required>
+          <label>Theme Description</label>
+          <textarea style="height: 100px" name="theme_description" required></textarea>
 
-          <label>AddOn Type</label>
-          <select name = "addon_type">
-              <option>Prints</option>
-                <option>Extra Service</option>
-                <option>Product</option>
-            </select>
-
-          <label>AddOn Description</label>
-          <textarea style="height: 100px" name="addon_description" required></textarea>
-
-          <label>AddOn Price</label>
-          <input type="number" name="addon_price" required>
-
-          <label><input type="checkbox" name="addon_active" checked>&nbspActive</label>
+          <label>Theme Image</label>
+          <input type="text" name="theme_image" required>
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button @click.prevent="$root.deleteAddOn(params.addon_id); hide();" style="margin-left: 0.5rem">Delete</button>
+            <button @click.prevent="$root.deleteTheme(params.theme_id); hide();" style="margin-left: 0.5rem">Delete</button>
             <button type="submit" class="primary" style="margin-left: 0.5rem">Update</button>
           </div>
 
@@ -181,21 +151,21 @@
     var app = new Vue({
       el: '#app',
       data: {
-        addons: []
+        themes: []
       },
       created: function () {
-        this.loadAddOns();
+        this.loadThemes();
       },
       methods: {
 
-        loadAddOns: function () {
+        loadThemes: function () {
 
-          Vue.http.get('/_system/php/api/addons/getAll.php')
+          Vue.http.get('/_system/php/api/themes/getAll.php')
             .then(
               response => {
 
                 if (response.body.success)
-                  this.addons = response.body.data;
+                  this.themes = response.body.data;
                 else
                   console.error(response.body.message);
               },
@@ -204,17 +174,14 @@
               });
         },
 
-        addAddOn: function (submitEvent) {
+        addTheme: function (submitEvent) {
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
-          formData.append('addon_name', elements.addon_name.value);
-          formData.append('addon_type', elements.addon_type.value);
-          formData.append('addon_description', elements.addon_description.value);
-          formData.append('addon_price', elements.addon_price.value);
-          formData.append('addon_active', elements.package_active.checked ? 1 : 0);
+          formData.append('theme_description', elements.theme_description.value);
+          formData.append('theme_image', elements.theme_image.value);
 
-          Vue.http.post('/_system/php/api/addons/add.php', formData)
+          Vue.http.post('/_system/php/api/themes/add.php', formData)
             .then(
 
               // If the server request is successful
@@ -222,7 +189,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadAddOns();
+                  this.loadThemes();
                 }
                 else
                   console.error(response.body.message)
@@ -238,18 +205,14 @@
 
         },
 
-        updateAddOn: function (addon_id, submitEvent) {
+        updateTheme: function (theme_id, submitEvent) {
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
-          formData.append('addon_id', addon_id);
-          formData.append('addon_name', elements.addon_name.value);
-          formData.append('addon_type', elements.addon_type.value);
-          formData.append('addon_description', elements.addon_description.value);
-          formData.append('addon_price', elements.addon_price.value);
-          formData.append('addon_active', elements.addon_active.checked ? 1 : 0);
+          formData.append('theme_description', elements.theme_description.value);
+          formData.append('theme_image', elements.theme_image.value);
 
-          Vue.http.post('/_system/php/api/addons/update.php', formData)
+          Vue.http.post('/_system/php/api/themes/update.php', formData)
             .then(
 
               // If the server request is successful
@@ -257,7 +220,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadAddOns();
+                  this.loadThemes();
                 }
                 else
                   console.error(response.body.message)
@@ -273,12 +236,12 @@
 
         },
 
-        deleteAddOn: function (addon_id) {
+        deleteTheme: function (theme_id) {
 
           var formData = new FormData();
-          formData.append('addon_id', addon_id);
+          formData.append('theme_id', theme_id);
 
-          Vue.http.post('/_system/php/api/addons/delete.php', formData)
+          Vue.http.post('/_system/php/api/themes/delete.php', formData)
             .then(
 
               // If the server request is successful
@@ -286,7 +249,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadAddOns();
+                  this.loadThemes();
                 }
                 else
                   console.error(response.body.message)
