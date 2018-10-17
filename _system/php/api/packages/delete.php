@@ -3,16 +3,13 @@
 # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "root";
-
+$password = "mysql";
 
 # Retrieve POST parameters
-$category_name = $_POST['category_name'];
-$category_description = $_POST['category_description'];
-$category_active = $_POST['category_active'];
+$package_id = $_POST['package_id'];
 
 # Check parameters if null
-if (isset($category_name) && isset($category_description) && isset($category_active)) {
+if (isset($package_id)) {
 
     try {
 
@@ -21,7 +18,7 @@ if (isset($category_name) && isset($category_description) && isset($category_act
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         # Perform SQL Query
-        $sql = "INSERT INTO categories (category_name, category_description, category_active) VALUES ('$category_name', '$category_description', '$category_active')";
+        $sql = "DELETE FROM packages WHERE package_id = $package_id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
