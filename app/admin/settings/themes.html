@@ -120,10 +120,10 @@
           <legend>Edit Theme</legend>
 
           <label>Theme Description</label>
-          <textarea style="height: 100px" name="theme_description" required></textarea>
+          <textarea style="height: 100px" name="theme_description" required :value="params.theme_description"></textarea>
 
           <label>Theme Image</label>
-          <input type="text" name="theme_image" required>
+          <input type="text" name="theme_image" required :value="params.theme_image">
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
@@ -209,6 +209,7 @@
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
+          formData.append('theme_id', theme_id);
           formData.append('theme_description', elements.theme_description.value);
           formData.append('theme_image', elements.theme_image.value);
 
