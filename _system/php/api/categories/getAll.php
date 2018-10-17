@@ -1,9 +1,9 @@
 <?php
 
 # Set database parameters
-$servername = "localhost";
+$servername = "localhost:3307";
 $username = "root";
-$password = "mysql";
+$password = "root";
 
 try {
 
