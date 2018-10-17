@@ -1,9 +1,9 @@
 <?php
 
 # Set database parameters
-$servername = "localhost:3307";
+$servername = "localhost";
 $username = "root";
-$password = "usbw";
+$password = "root";
 
 # Retrieve POST parameters
 $category_name = $_POST['category_name'];
