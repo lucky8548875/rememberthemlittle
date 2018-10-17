@@ -66,7 +66,6 @@
         <!-- Table headers -->
         <thead>
           <tr>
-            <th>Name</th>
             <th>Type</th>
             <th>Description</th>
             <th>Price</th>
@@ -77,7 +76,6 @@
         <!-- Table body -->
         <tbody>
           <tr v-for="addon in addons">
-            <td>{{addon.addon_name}}</td>
             <td>{{addon.addon_type}}</td>
             <td>{{addon.addon_description}}</td>
             <td>{{addon.addon_price}}</td>
@@ -99,14 +97,11 @@
           <!-- Form Title -->
           <legend>New AddOn</legend>
 
-          <label>AddOn Name</label>
-          <input type="text" name="addon_name" required>
-
           <label>AddOn Type</label>
-          <select name = "addon_type">
-              <option>Prints</option>
-                <option>Extra Service</option>
-                <option>Product</option>
+          <select name="addon_type">
+              <option value="PRINT">Prints</option>
+                <option value="EXTRA_SERVICE">Extra Service</option>
+                <option value="PRODUCT">Product</option>
             </select>
 
           <label>AddOn Description</label>
@@ -137,23 +132,20 @@
 
           <legend>Edit AddOn</legend>
 
-          <label>AddOn Name</label>
-          <input type="text" name="addon_name" required>
-
           <label>AddOn Type</label>
-          <select name = "addon_type">
-              <option>Prints</option>
-                <option>Extra Service</option>
-                <option>Product</option>
+          <select name="addon_type">
+              <option value="PRINT" :selected="(params.addon_type=='PRINT')">Prints</option>
+                <option value="EXTRA_SERVICE" :selected="(params.addon_type=='EXTRA_SERVICE')">Extra Service</option>
+                <option value="PRODUCT" :selected="(params.addon_type=='PRODUCT')">Product</option>
             </select>
 
           <label>AddOn Description</label>
-          <textarea style="height: 100px" name="addon_description" required></textarea>
+          <textarea style="height: 100px" name="addon_description" required :value="params.addon_description"></textarea>
 
           <label>AddOn Price</label>
-          <input type="number" name="addon_price" required>
+          <input type="number" name="addon_price" required :value="(params.addon_price)">
 
-          <label><input type="checkbox" name="addon_active" checked>&nbspActive</label>
+          <label><input type="checkbox" name="addon_active" :checked="(params.addon_active)">&nbspActive</label>
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
@@ -208,11 +200,10 @@
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
-          formData.append('addon_name', elements.addon_name.value);
           formData.append('addon_type', elements.addon_type.value);
           formData.append('addon_description', elements.addon_description.value);
           formData.append('addon_price', elements.addon_price.value);
-          formData.append('addon_active', elements.package_active.checked ? 1 : 0);
+          formData.append('addon_active', elements.addon_active.checked ? 1 : 0);
 
           Vue.http.post('/_system/php/api/addons/add.php', formData)
             .then(
@@ -243,7 +234,6 @@
           var elements = submitEvent.target.elements;
           var formData = new FormData();
           formData.append('addon_id', addon_id);
-          formData.append('addon_name', elements.addon_name.value);
           formData.append('addon_type', elements.addon_type.value);
           formData.append('addon_description', elements.addon_description.value);
           formData.append('addon_price', elements.addon_price.value);

@@ -3,7 +3,7 @@
 # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "mysql";
+$password = "root";
 
 try {
 

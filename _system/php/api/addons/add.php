@@ -3,7 +3,7 @@
 # Set database parameters
 $servername = "localhost";
 $username = "root";
-$password = "mysql";
+$password = "root";
 
 # Retrieve POST parameters
 $addon_type = $_POST['addon_type'];
