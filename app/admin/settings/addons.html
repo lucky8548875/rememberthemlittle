@@ -57,7 +57,7 @@
       <!-- Action bar -->
       <div>
         <h3>AddOn</h3>
-        <button class="primary" @click="$root.$refs.add.show()">Add AddOn</button>
+        <button class="primary" @click="$root.$refs.add.show()">New Addon</button>
       </div>
 
       <!-- Table -->
@@ -115,7 +115,7 @@
           <!-- Form action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button type="submit" class="primary" style="margin-left: 0.5rem">Add AddOn</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Create Addon</button>
           </div>
 
         </fieldset>
@@ -126,13 +126,13 @@
     <modal class="modal" inline-template ref="edit">
 
       <!-- Edit Category form -->
-      <form v-if="visible" @submit.prevent="$root.updateAddOn(params.addon_id,$event); hide();">
+      <form v-if="visible" @submit.prevent="$root.updateAddon(params.addon_id,$event); hide();">
 
         <fieldset>
 
-          <legend>Edit AddOn</legend>
+          <legend>Edit Addon</legend>
 
-          <label>AddOn Type</label>
+          <label>Addon Type</label>
           <select name="addon_type">
               <option value="PRINT" :selected="(params.addon_type=='PRINT')">Prints</option>
                 <option value="EXTRA_SERVICE" :selected="(params.addon_type=='EXTRA_SERVICE')">Extra Service</option>
@@ -150,7 +150,7 @@
           <!-- Action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button @click.prevent="$root.deleteAddOn(params.addon_id); hide();" style="margin-left: 0.5rem">Delete</button>
+            <button @click.prevent="$root.deleteAddon(params.addon_id); hide();" style="margin-left: 0.5rem">Delete</button>
             <button type="submit" class="primary" style="margin-left: 0.5rem">Update</button>
           </div>
 
@@ -229,7 +229,7 @@
 
         },
 
-        updateAddOn: function (addon_id, submitEvent) {
+        updateAddon: function (addon_id, submitEvent) {
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
@@ -263,7 +263,7 @@
 
         },
 
-        deleteAddOn: function (addon_id) {
+        deleteAddon: function (addon_id) {
 
           var formData = new FormData();
           formData.append('addon_id', addon_id);
