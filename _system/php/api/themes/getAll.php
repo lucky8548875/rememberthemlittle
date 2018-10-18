@@ -1,9 +1,9 @@
 <?php
  # Set database parameters
-$servername = "localhost:3307";
+$servername = "localhost";
 $username = "root";
-$password = "usbw";
- try {
+$password = "root";
+try {
      # Connect to Database
     $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,16 +14,14 @@ $password = "usbw";
     $result = $stmt->fetchAll();
     
      # Print Result in JSON Format
-     echo json_encode((object)[
+    echo json_encode((object)[
         'success' => true,
         'data' => $result
-     ],JSON_NUMERIC_CHECK);
-     }
-catch(PDOException $e)
-    {
-        echo json_encode((object)[
-            'success' => false,
-            'message' => "Connection failed: " . $e->getMessage()
-        ]);
-    }
+    ], JSON_NUMERIC_CHECK);
+} catch (PDOException $e) {
+    echo json_encode((object)[
+        'success' => false,
+        'message' => "Connection failed: " . $e->getMessage()
+    ]);
+}
 ?> 

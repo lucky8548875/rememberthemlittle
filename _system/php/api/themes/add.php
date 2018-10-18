@@ -1,38 +1,51 @@
 <?php
     
     # Set database parameters
-    $servername = "localhost:3307";
-    $username = "root";
-    $password = "usbw";
+$servername = "localhost";
+$username = "root";
+$password = "root";
 
     # Retrieve POST parameters
-    $theme_description = $_POST['theme_description'];
-    $theme_image = $mysqli->real_escape_string('/_system/images/'.$_FILES['theme_image']['name']);
-    copy($_FILES['theme_image']['tmp_name'], $theme_image);
+$theme_description = $_POST['theme_description'];
+$theme_image = $_SERVER['DOCUMENT_ROOT'].'/_system/images/' . basename($_FILES['theme_image']['name']);
 
     # Check parameters if null
-    if (isset($theme_description) && isset($theme_image)) {
+if (isset($theme_description) && isset($_FILES)) {
+
+
+    if (copy($_FILES['theme_image']['tmp_name'], $theme_image)) {
         try {
             # Connect to Database
-            $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             # Perform SQL Query
-            $sql = "INSERT INTO themes (theme_description, theme_image) VALUES ('$theme_description', '$theme_image')";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
+        $sql = "INSERT INTO themes (theme_description, theme_image) VALUES ('$theme_description', '".'/_system/images/'.basename($_FILES['theme_image']['name'])."')";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
 
             # Print success
-            echo json_encode((object)[
-                'success' => true
-            ]);
+        echo json_encode((object)[
+            'success' => true
+        ]);
 
-        } catch (PDOException $e) {
-            echo json_encode((object)[
-                'success' => false,
-                'message' => "Connection failed: " . $e->getMessage()
-            ]);
+    } catch (PDOException $e) {
+        echo json_encode((object)[
+            'success' => false,
+            'message' => "Connection failed: " . $e->getMessage()
+        ]);
     }
+    }
+    else {
+        echo json_encode((object)[
+            'success' => false,
+            'message' => json_encode($_FILES)
+        ]);
+    }
+    
 } else {
-    echo 'values not set';
+    echo json_encode((object)[
+        'success' => false,
+        'message' => "Values not set"
+    ]);
 }

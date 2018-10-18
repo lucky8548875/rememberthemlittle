@@ -1,8 +1,8 @@
 <?php
  # Set database parameters
-$servername = "localhost:3307";
+$servername = "localhost";
 $username = "root";
-$password = "usbw";
+$password = "root";
  # Retrieve POST parameters
 $theme_id = $_POST['theme_id'];
  # Check parameters if null
