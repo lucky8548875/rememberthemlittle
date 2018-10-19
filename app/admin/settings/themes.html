@@ -75,7 +75,7 @@
         <tbody>
           <tr v-for="theme in themes">
             <td>{{theme.theme_description}}</td>
-            <td>{{theme.theme_image}}</td>
+            <td><img width=100px :src="theme.theme_image"></td>
             <td><a @click.prevent="$root.$refs.edit.show(theme)" class="color-primary">Edit</a></td>
           </tr>
         </tbody>
@@ -86,7 +86,7 @@
     <modal class="modal" inline-template ref="add">
 
       <!-- Add Theme form-->
-      <form v-if="visible" @submit.prevent="$root.addTheme($event); hide();">
+      <form v-if="visible" enctype="multipart/form-data" @submit.prevent="$root.addTheme($event); hide();">
 
         <fieldset>
 
@@ -97,7 +97,7 @@
           <textarea style="height: 100px" name="theme_description" required></textarea>
 
           <label>Theme Image</label>
-          <input type="text" name="theme_image" required>
+          <input type="file" name="theme_image" accept="image/*" required />
 
           <!-- Form action buttons -->
           <div class="flex align-items-center">
@@ -121,9 +121,6 @@
 
           <label>Theme Description</label>
           <textarea style="height: 100px" name="theme_description" required :value="params.theme_description"></textarea>
-
-          <label>Theme Image</label>
-          <input type="text" name="theme_image" required :value="params.theme_image">
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
@@ -179,9 +176,14 @@
           var elements = submitEvent.target.elements;
           var formData = new FormData();
           formData.append('theme_description', elements.theme_description.value);
-          formData.append('theme_image', elements.theme_image.value);
+          formData.append('theme_image', elements.theme_image.files[0]);
+          
 
-          Vue.http.post('/_system/php/api/themes/add.php', formData)
+          Vue.http.post('/_system/php/api/themes/add.php', formData, {
+            headers: {
+              'Content-Type' : 'multipart/form-data'
+            }
+          })
             .then(
 
               // If the server request is successful
@@ -211,7 +213,6 @@
           var formData = new FormData();
           formData.append('theme_id', theme_id);
           formData.append('theme_description', elements.theme_description.value);
-          formData.append('theme_image', elements.theme_image.value);
 
           Vue.http.post('/_system/php/api/themes/update.php', formData)
             .then(
