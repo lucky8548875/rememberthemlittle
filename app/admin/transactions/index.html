@@ -34,8 +34,8 @@
 
       <!-- Navigation Links -->
       <ul>
-        <li><a href="/app/admin/transactions/">Transactions</a></li>
-        <li><a href="/app/admin/settings/" class="color-primary">Settings</a></li>
+        <li><a href="/app/admin/transactions/" class="color-primary">Transactions</a></li>
+        <li><a href="/app/admin/settings/">Settings</a></li>
         <li><a href="#">Link</a></li>
       </ul>
 
@@ -44,10 +44,8 @@
     <!-- Side Navigation Bar -->
     <aside>
       <ul>
-        <li><a href="index.html">Categories</a></li>
-        <li><a href="packages.html">Packages</a></li>
-        <li><a href="addons.html">Addons</a></li>
-        <li><a href="themes.html" class="color-primary">Themes</a></li>
+        <li><a href="index.html" class="color-primary">Bookings</a></li>
+        <li><a href="orders.html">Orders</a></li>
       </ul>
     </aside>
 
@@ -56,8 +54,8 @@
 
       <!-- Action bar -->
       <div>
-        <h3>Themes</h3>
-        <button class="primary" @click="$root.$refs.add.show()">Add Themes</button>
+        <h3>Bookings</h3>
+        <button class="primary" @click="$root.$refs.add.show()">Add Booking</button>
       </div>
 
       <!-- Table -->
@@ -66,17 +64,20 @@
         <!-- Table headers -->
         <thead>
           <tr>
+            <th>Name</th>
             <th>Description</th>
-            <th>Image</th>
+            <th>Active</th>
+            <th>Action</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr v-for="theme in themes">
-            <td>{{theme.theme_description}}</td>
-            <td><img width=100px :src="theme.theme_image"></td>
-            <td><a @click.prevent="$root.$refs.edit.show(theme)" class="color-primary">Edit</a></td>
+          <tr v-for="category in categories">
+            <td>{{category.category_name}}</td>
+            <td>{{category.category_description}}</td>
+            <td>{{category.category_active == 1 ? 'Yes' : 'No'}}</td>
+            <td><a @click.prevent="$root.$refs.edit.show(category)" class="color-primary">Edit</a></td>
           </tr>
         </tbody>
       </table>
@@ -85,24 +86,26 @@
 
     <modal class="modal" inline-template ref="add">
 
-      <!-- Add Theme form-->
-      <form v-if="visible" enctype="multipart/form-data" @submit.prevent="$root.addTheme($event); hide();">
+      <!-- Add Category form-->
+      <form v-if="visible" @submit.prevent="$root.addCategory($event); hide();">
 
         <fieldset>
 
           <!-- Form Title -->
-          <legend>New Theme</legend>
+          <legend>New Category</legend>
 
-          <label>Theme Description</label>
-          <textarea style="height: 100px" name="theme_description" required></textarea>
+          <label>Category Name</label>
+          <input type="text" name="category_name" required>
 
-          <label>Theme Image</label>
-          <input type="file" name="theme_image" accept="image/*" required />
+          <label>Category Description</label>
+          <textarea style="height: 100px" name="category_description" required></textarea>
+
+          <label><input type="checkbox" name="category_active" checked>&nbspActive</label>
 
           <!-- Form action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button type="submit" class="primary" style="margin-left: 0.5rem">Add Theme</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Add Category</button>
           </div>
 
         </fieldset>
@@ -113,19 +116,24 @@
     <modal class="modal" inline-template ref="edit">
 
       <!-- Edit Category form -->
-      <form v-if="visible" @submit.prevent="$root.updateTheme(params.theme_id,$event); hide();">
+      <form v-if="visible" @submit.prevent="$root.updateCategory(params.category_id,$event); hide();">
 
         <fieldset>
 
-          <legend>Edit Theme</legend>
+          <legend>Edit Category</legend>
 
-          <label>Theme Description</label>
-          <textarea style="height: 100px" name="theme_description" required :value="params.theme_description"></textarea>
+          <label>Category Name</label>
+          <input type="text" name="category_name" :value="params.category_name" required>
+
+          <label>Category Description</label>
+          <textarea style="height: 100px" name="category_description" :value="params.category_description" required></textarea>
+
+          <label><input type="checkbox" name="category_active" :checked="(params.category_active)">&nbspActive</label>
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Cancel</button>
-            <button @click.prevent="$root.deleteTheme(params.theme_id); hide();" style="margin-left: 0.5rem">Delete</button>
+            <button @click.prevent="$root.deleteCategory(params.category_id); hide();" style="margin-left: 0.5rem">Delete</button>
             <button type="submit" class="primary" style="margin-left: 0.5rem">Update</button>
           </div>
 
@@ -148,21 +156,21 @@
     var app = new Vue({
       el: '#app',
       data: {
-        themes: []
+        categories: []
       },
       created: function () {
-        this.loadThemes();
+        this.loadCategories();
       },
       methods: {
 
-        loadThemes: function () {
+        loadCategories: function () {
 
-          Vue.http.get('/_system/php/api/themes/getAll.php')
+          Vue.http.get('/_system/php/api/categories/getAll.php')
             .then(
               response => {
 
                 if (response.body.success)
-                  this.themes = response.body.data;
+                  this.categories = response.body.data;
                 else
                   console.error(response.body.message);
               },
@@ -171,19 +179,15 @@
               });
         },
 
-        addTheme: function (submitEvent) {
+        addCategory: function (submitEvent) {
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
-          formData.append('theme_description', elements.theme_description.value);
-          formData.append('theme_image', elements.theme_image.files[0]);
-          
+          formData.append('category_name', elements.category_name.value);
+          formData.append('category_description', elements.category_description.value);
+          formData.append('category_active', elements.category_active.checked ? 1 : 0);
 
-          Vue.http.post('/_system/php/api/themes/add.php', formData, {
-            headers: {
-              'Content-Type' : 'multipart/form-data'
-            }
-          })
+          Vue.http.post('/_system/php/api/categories/add.php', formData)
             .then(
 
               // If the server request is successful
@@ -191,7 +195,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadThemes();
+                  this.loadCategories();
                 }
                 else
                   console.error(response.body.message)
@@ -207,14 +211,16 @@
 
         },
 
-        updateTheme: function (theme_id, submitEvent) {
+        updateCategory: function (category_id, submitEvent) {
 
           var elements = submitEvent.target.elements;
           var formData = new FormData();
-          formData.append('theme_id', theme_id);
-          formData.append('theme_description', elements.theme_description.value);
+          formData.append('category_id', category_id);
+          formData.append('category_name', elements.category_name.value);
+          formData.append('category_description', elements.category_description.value);
+          formData.append('category_active', elements.category_active.checked ? 1 : 0);
 
-          Vue.http.post('/_system/php/api/themes/update.php', formData)
+          Vue.http.post('/_system/php/api/categories/update.php', formData)
             .then(
 
               // If the server request is successful
@@ -222,7 +228,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadThemes();
+                  this.loadCategories();
                 }
                 else
                   console.error(response.body.message)
@@ -238,12 +244,12 @@
 
         },
 
-        deleteTheme: function (theme_id) {
+        deleteCategory: function (category_id) {
 
           var formData = new FormData();
-          formData.append('theme_id', theme_id);
+          formData.append('category_id', category_id);
 
-          Vue.http.post('/_system/php/api/themes/delete.php', formData)
+          Vue.http.post('/_system/php/api/categories/delete.php', formData)
             .then(
 
               // If the server request is successful
@@ -251,7 +257,7 @@
 
                 // If the PHP file has no errors
                 if (response.body.success) {
-                  this.loadThemes();
+                  this.loadCategories();
                 }
                 else
                   console.error(response.body.message)
