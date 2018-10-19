@@ -64,19 +64,19 @@
         <!-- Table headers -->
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Active</th>
+            <th>Field 1</th>
+            <th>Field 2</th>
+            <th>Field 3</th>
             <th>Action</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr v-for="category in categories">
-            <td>{{category.category_name}}</td>
-            <td>{{category.category_description}}</td>
-            <td>{{category.category_active == 1 ? 'Yes' : 'No'}}</td>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
             <td><a @click.prevent="$root.$refs.edit.show(category)" class="color-primary">Edit</a></td>
           </tr>
         </tbody>
