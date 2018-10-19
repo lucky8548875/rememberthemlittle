@@ -31,7 +31,7 @@
 
         </nav>
 
-        <form style="width: 50%">
+        <form style="width: 50%" @submit.prevent="addBooking">
             <fieldset>
                 <legend>Step 1</legend>
                 <label>Choose a Category</label>
@@ -79,7 +79,7 @@
                 <legend>Step 3</legend>
                 <label>Purchase Addons</label>
                 <div class="flex align-items-center">
-                    <select style="margin: 0" v-model="selected_addon">
+                    <select style="margin: 0" v-model="selected_addon" name="addons">
                         <option v-for="addon in addons" :value="addon.addon_id">{{addon.addon_type}} -
                             {{addon.addon_description}}</option>
                     </select>
@@ -113,69 +113,72 @@
             <fieldset>
                 <legend>Step 4</legend>
                 <label>Choose Themes</label>
-                <select multiple size="5" style="height: auto">
-                    <option v-for="theme in themes">{{theme.theme_description}}</option>
+                <select multiple size="5" style="height: auto" name="booking_themes" v-model="selected_themes">
+                    <option v-for="theme in themes" :value="theme.theme_id">{{theme.theme_description}}</option>
                 </select>
             </fieldset>
 
             <fieldset>
                 <legend>Step 5</legend>
                 <label>Choose a Date</label>
-                <input type="date" name="date">
-        
+                <input type="date" name="booking_date">
+
                 <label>Choose a Time</label>
                 <div class="flex space-between">
-                <div>
-                <label><input type="radio" name="time">&nbsp8:00</label>
-                <label><input type="radio" name="time">&nbsp8:30</label>
-                <label><input type="radio" name="time">&nbsp9:00</label>
-                <label><input type="radio" name="time">&nbsp9:30</label>
-                <label><input type="radio" name="time">&nbsp10:00</label>
-                <label><input type="radio" name="time">&nbsp10:30</label>
-                <label><input type="radio" name="time">&nbsp11:00</label>
-                <label><input type="radio" name="time">&nbsp11:30</label>
+                    <div>
+                        <label><input type="radio" name="booking_time" value="08:00">&nbsp8:00</label>
+                        <label><input type="radio" name="booking_time" value="08:30">&nbsp8:30</label>
+                        <label><input type="radio" name="booking_time" value="09:00">&nbsp9:00</label>
+                        <label><input type="radio" name="booking_time" value="09:30">&nbsp9:30</label>
+                        <label><input type="radio" name="booking_time" value="10:00">&nbsp10:00</label>
+                        <label><input type="radio" name="booking_time" value="10:30">&nbsp10:30</label>
+                        <label><input type="radio" name="booking_time" value="11:00">&nbsp11:00</label>
+                        <label><input type="radio" name="booking_time" value="11:30">&nbsp11:30</label>
+                    </div>
+                    <div>
+                        <label><input type="radio" name="booking_time" value="12:00">&nbsp12:00</label>
+                        <label><input type="radio" name="booking_time" value="12:30">&nbsp12:30</label>
+                        <label><input type="radio" name="booking_time" value="13:00">&nbsp1:00</label>
+                        <label><input type="radio" name="booking_time" value="13:30">&nbsp1:30</label>
+                        <label><input type="radio" name="booking_time" value="14:00">&nbsp2:00</label>
+                        <label><input type="radio" name="booking_time" value="14:30">&nbsp2:30</label>
+                        <label><input type="radio" name="booking_time" value="15:00">&nbsp3:00</label>
+                        <label><input type="radio" name="booking_time" value="15:30">&nbsp3:30</label>
+                    </div>
+                    <div>
+                        <label><input type="radio" name="booking_time" value="16:00">&nbsp4:00</label>
+                        <label><input type="radio" name="booking_time" value="16:30">&nbsp4:30</label>
+                        <label><input type="radio" name="booking_time" value="16:00">&nbsp5:00</label>
+                        <label><input type="radio" name="booking_time" value="16:30">&nbsp5:30</label>
+                        <label><input type="radio" name="booking_time" value="16:00">&nbsp6:00</label>
+                        <label><input type="radio" name="booking_time" value="16:30">&nbsp6:30</label>
+                        <label><input type="radio" name="booking_time" value="16:00">&nbsp7:00</label>
+                    </div>
                 </div>
-                <div>
-                <label><input type="radio" name="time">&nbsp12:00</label>
-                <label><input type="radio" name="time">&nbsp12:30</label>
-                <label><input type="radio" name="time">&nbsp1:00</label>
-                <label><input type="radio" name="time">&nbsp1:30</label>
-                <label><input type="radio" name="time">&nbsp2:00</label>
-                <label><input type="radio" name="time">&nbsp2:30</label>
-                <label><input type="radio" name="time">&nbsp3:00</label>
-                <label><input type="radio" name="time">&nbsp3:30</label>
-                </div>
-                <div>
-                <label><input type="radio" name="time">&nbsp4:00</label>
-                <label><input type="radio" name="time">&nbsp4:30</label>
-                <label><input type="radio" name="time">&nbsp5:00</label>
-                <label><input type="radio" name="time">&nbsp5:30</label>
-                <label><input type="radio" name="time">&nbsp6:00</label>
-                <label><input type="radio" name="time">&nbsp6:30</label>
-                <label><input type="radio" name="time">&nbsp7:00</label>
-                </div>
-            </div>
             </fieldset>
 
             <fieldset>
                 <legend>Step 6</legend>
                 <label>Baby's Information</label>
                 <input type="text" name="subject_name" placeholder="Baby's Name">
-                <input type="text" name="subject_name" placeholder="Baby's Age">
+                <input type="text" name="subject_age" placeholder="Baby's Age">
                 <label>Personal Information</label>
-                <input type="text" name="name" placeholder="Parent's/Guardian's Name">
-                <input type="text" name="fb_id" placeholder="Facebook ID">
-                <input type="number" name="contact" placeholder="Contact Number">
-                <input type="email" name="email" placeholder="Email address">
+                <input type="text" name="account_name" placeholder="Parent's/Guardian's Name">
+                <input type="text" name="account_fb_id" placeholder="Facebook ID">
+                <input type="number" name="account_contact" placeholder="Contact Number">
+                <input type="email" name="account_email" placeholder="Email address">
             </fieldset>
 
             <fieldset>
                 <legend>Payment Method</legend>
-                <label><input type="radio" name="payment_method">&nbspBank Deposit</label>
-                <label><input type="radio" name="payment_method">&nbspCredit Card</label>
+                <label><input type="radio" name="booking_payment" value="BANK_DEPOSIT">&nbspBank Deposit</label>
+                <label><input type="radio" name="booking_payment" value="CREDIT_CARD">&nbspCredit Card</label>
             </fieldset>
 
-
+            <fieldset>
+                <legend>Total Price</legend>
+                <h3>P {{total_price}}</h3>
+            </fieldset>
             <button type="submit" class="primary">Confirm Booking</button>
 
 
@@ -200,7 +203,8 @@
                 selected_category: '',
                 selected_package: '',
                 selected_addon: '',
-                booking_addons: []
+                selected_themes: [],
+                booking_addons: [],
             },
             mounted: function () {
                 this.loadCategories();
@@ -209,6 +213,48 @@
                 this.loadThemes();
             },
             methods: {
+                addBooking: function (submitEvent) {
+
+                    var elements = submitEvent.target.elements;
+                    var formData = new FormData();
+                    formData.append('package_id', elements.package_id.value);
+                    formData.append('booking_addons', JSON.stringify(this.booking_addons));
+                    formData.append('booking_themes', JSON.stringify(this.selected_themes));
+                    formData.append('booking_date', elements.booking_date.value);
+                    formData.append('booking_time', elements.booking_time.value);
+                    formData.append('subject_name', elements.subject_name.value);
+                    formData.append('subject_age', elements.subject_age.value);
+                    formData.append('account_name', elements.account_name.value);
+                    formData.append('account_fb_id', elements.account_fb_id.value);
+                    formData.append('account_contact', elements.account_contact.value);
+                    formData.append('account_email', elements.account_email.value);
+                    formData.append('booking_payment', elements.booking_payment.value);
+                    formData.append('booking_total_price', this.total_price);
+
+                    Vue.http.post('/_system/php/api/booking/add.php', formData)
+                        .then(
+
+                            // If the server request is successful
+                            response => {
+
+                                // If the PHP file has no errors
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                }
+                                else
+                                    console.error(response.body.message)
+
+                            },
+
+                            // If the server request is unsuccessful
+                            response => {
+
+                                console.error(response);
+
+                            });
+
+
+                },
                 loadCategories: function () {
 
                     Vue.http.get('/_system/php/api/categories/getAll.php')
@@ -284,6 +330,18 @@
                 selected_category: function () {
                     if (this.packages.length > 0)
                         this.selected_package = this.packages.find(package => package.category_id === this.selected_category).package_id
+                }
+            },
+            computed: {
+                total_price: function() {
+                    var package_price =  this.packages.find(package => package.package_id === this.selected_package).package_price
+                    var addons_price = 0;
+                    for(var i=0;i<this.booking_addons.length;i++){
+                        addons_price += this.booking_addons[i].addon_price
+                    }
+                    return package_price + addons_price;
+                    
+
                 }
             }
         })
