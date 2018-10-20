@@ -80,10 +80,10 @@
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
         <a v-else-if="loginStatus.status=='connected'" class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
           <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
-          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 30px">&nbsp&nbsp<span>{{fbapi_me.first_name}}</span>
-          &nbsp&nbsp<i class="fas fa-angle-down"></i>
+          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 30px">&nbsp&nbsp<span>Logout</span>
         <button v-else class="outline">
-          <i class="fas fa-circle-notch fa-spin"></i></button>
+          <i class="fas fa-circle-notch fa-spin"></i>
+        </button>
 
       </ul>
 
@@ -95,8 +95,7 @@
       <br>
       <a class="button" href="/app/admin/settings/">Admin Dashboard</a>
       <br>
-      {{loginStatus.status}}<br>
-      {{fbapi_me.name}}
+      <h3>Welcome, {{fbapi_me.first_name}}</h3>
 
     </main>
 
