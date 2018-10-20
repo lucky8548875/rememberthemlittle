@@ -78,10 +78,15 @@
 
         <button v-if="loginStatus.status=='unknown' || loginStatus.status=='not_authorized'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
-        <a v-else-if="loginStatus.status=='connected'" class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
-          <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
-          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 30px">&nbsp&nbsp<span>Logout</span>
+        <template v-else-if="loginStatus.status=='connected'">
+          <button class="primary" style="margin-right: 1rem">Go to Dashboard</button>
+          <a class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
+            <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 38px">&nbsp&nbsp
+            &nbsp
+            <i class="fas fa-angle-down"></i>
+            <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
           </a>
+        </template>
         <button v-else class="outline">
           <i class="fas fa-circle-notch fa-spin"></i>
         </button>
@@ -129,7 +134,7 @@
       },
       watch: {
         loginStatus: function () {
-          FB.api('/me', {fields: ['first_name','picture']}, function (response) {
+          FB.api('/me', { fields: ['first_name', 'picture'] }, function (response) {
 
             app.fbapi_me = response
           });
