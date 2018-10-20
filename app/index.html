@@ -13,18 +13,109 @@
 
 <body>
 
-  <!-- App -->
-  <div id="app">
+  <!-- Required facebook div element -->
+  <div id="fb-root"></div>
 
-    <div class="flex wide high column align-items-center justify-center">
-      <h1 style="font-weight: 300">Remember Them Little</h1>
-      <br>
+  <!-- Required facebook bootstrapper-->
+  <script>
+      window.fbAsyncInit = function () {
+
+          FB.init({
+              appId: '736479600033096',
+              cookie: true,
+              xfbml: true,
+              version: 'v3.1'
+          });
+
+          FB.AppEvents.logPageView();
+
+          FB.getLoginStatus(function (response) {
+
+              //statusChangeCallback(response);
+              // Remove preloader
+              //document.querySelector("#preloader").style.display = "none";
+          });
+
+          // FB.Event.subscribe('auth.login', function (response) {
+          //     console.log(response);
+          //     statusChangeCallback(response);
+          // })
+
+          // FB.Event.subscribe('auth.logout', function (response) {
+          //     console.log(response);
+          //     statusChangeCallback(response);
+          // });
+
+      };
+
+      (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+
+      }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+
+  <!-- App -->
+  <div id="app" class="index">
+
+    <!-- Navigation Bar-->
+    <nav>
+
+      <!-- Company Logo -->
+      <h3><i class="fas fa-crown"></i>Remember Them Little</h3>
+
+      <!-- Navigation Links -->
+      <ul>
+        <li><a href="#" class="color-dark">Home</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Packages</a></li>
+        <li><a href="#">Themes</a></li>
+        <button class="primary" onclick=" FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});"> <i class="fab fa-facebook-square"></i>Login with Facebook</button>
+      </ul>
+
+    </nav>
+
+    <main>
+
       <a class="button" href="/app/booking/">Booking</a>
       <br>
       <a class="button" href="/app/admin/settings/">Admin Dashboard</a>
-    </div>
+    </main>
 
   </div>
+
+  <!-- Facebook statusChangedCallback-->
+  <script>
+
+      function statusChangeCallback(response) {
+        
+
+
+          if (response.status == "unknown") { // unknown means logged out
+
+              //document.getElementById('status').innerHTML = 'Welcome!';
+
+          }
+          else {
+              FB.api('/me', function (response) {
+
+                  // console.log(response)
+                  // document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+
+              });
+
+          }
+
+          // Remove preloader
+          //document.querySelector("#preloader").style.display = "none";
+
+      }
+
+  </script>
 
 </body>
 
