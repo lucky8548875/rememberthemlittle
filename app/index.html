@@ -30,14 +30,14 @@
 
       FB.AppEvents.logPageView();
 
-      //FB.getLoginStatus(function (response) {
+      FB.getLoginStatus(function (response) {
 
-       // statusChangeCallback(response);
+       statusChangeCallback(response);
 
         //statusChangeCallback(response);
         // Remove preloader
         //document.querySelector("#preloader").style.display = "none";
-      //});
+      });
 
       FB.Event.subscribe('auth.login', function (response) {
         statusChangeCallback(response);
