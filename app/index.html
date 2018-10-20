@@ -84,9 +84,36 @@
       <a class="button" href="/app/booking/">Booking</a>
       <br>
       <a class="button" href="/app/admin/settings/">Admin Dashboard</a>
+      <br>
+      {{message}}
     </main>
 
   </div>
+
+  <!-- Imported Scripts -->
+  <script src="/_system/js/vendor/vue.js"></script>
+  <script src="/_system/js/components/components.js"></script>
+  <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+
+  <!-- Local Scripts -->
+  <script>
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: "Hello world",
+        loginStatus: {},
+      },
+      methods:{
+        getLoginStatus: function(){
+          FB.getLoginStatus(function(response){
+            this.loginStatus = response;
+          })
+        }
+      }
+    })
+
+  </script>
 
   <!-- Facebook statusChangedCallback-->
   <script>
