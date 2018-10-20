@@ -80,7 +80,7 @@
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
         <button v-else-if="loginStatus.status=='connected'" class="primary" onclick="FB.logout(statusChangeCallback)">
           <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></button> -->
-          <img :src="fbapi_me.picture.data.url">&nbsp<span>{{fbapi_me.first_name}}</span>
+          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%">&nbsp<span>{{fbapi_me.first_name}}</span>
         <button v-else class="outline">
           <i class="fas fa-circle-notch fa-spin"></i></button>
 
