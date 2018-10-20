@@ -79,7 +79,8 @@
         <button v-if="loginStatus.status=='unknown'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
         <button v-else-if="loginStatus.status=='connected'" class="primary" onclick="FB.logout(statusChangeCallback)">
-          <i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+          <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></button> -->
+          <img :src="fbapi_me.picture.data.url">&nbsp<span>{{fbapi_me.first_name}}</span>
         <button v-else class="outline">
           <i class="fas fa-circle-notch fa-spin"></i></button>
 
@@ -118,7 +119,7 @@
       },
       watch: {
         loginStatus: function () {
-          FB.api('/me', {fields: 'picture'}, function (response) {
+          FB.api('/me', {fields: ['first_name','picture']}, function (response) {
 
             app.fbapi_me = response
           });
