@@ -106,10 +106,9 @@
       },
       methods:{
         getLoginStatus: function(){
-          var loginStatus = this.loginStatus;
           FB.getLoginStatus(function(response){
             console.log(response);
-            loginStatus = response;
+            app.loginStatus = response;
           })
         }
       }
