@@ -79,7 +79,7 @@
         <button v-if="loginStatus.status=='unknown' || loginStatus.status=='not_authorized'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
         <template v-else-if="loginStatus.status=='connected'">
-          <a class="button outline" style="margin-right: 1rem;">Go to Dashboard</a>
+          <a class="button outline color-primary" style="margin-right: 1rem;">Go to Dashboard</a>
           <a class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
             <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 38px">&nbsp&nbsp
             {{fbapi_me.first_name}}

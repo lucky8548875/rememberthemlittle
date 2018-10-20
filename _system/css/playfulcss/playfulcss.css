@@ -225,6 +225,10 @@ button.outline:focus, a.outline.button:focus {
   border: 2px solid #cbd3da;
 }
 
+button.color-primary, a.color-primary.button {
+  color: #5252FF !important;
+}
+
 a {
   color: #919599;
   font-weight: 600;
