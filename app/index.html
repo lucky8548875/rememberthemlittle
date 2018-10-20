@@ -23,7 +23,6 @@
       FB.init({
         appId: '736479600033096',
         cookie: true,
-        status: true,
         xfbml: true,
         version: 'v3.1'
       });
@@ -32,7 +31,7 @@
 
       FB.getLoginStatus(function (response) {
 
-       //statusChangeCallback(response);
+        statusChangeCallback(response);
 
         //statusChangeCallback(response);
         // Remove preloader
@@ -76,14 +75,14 @@
         <li><a href="#">About us</a></li>
         <li><a href="#">Packages</a></li>
         <li><a href="#">Themes</a></li>
-        
+
         <button v-if="loginStatus.status=='unknown'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
         <button v-else-if="loginStatus.status=='connected'" class="primary" onclick="FB.logout(statusChangeCallback)">
-            <i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+          <i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
         <button v-else class="outline">
-            <i class="fas fa-circle-notch fa-spin"></i></button>
-          
+          <i class="fas fa-circle-notch fa-spin"></i></button>
+
       </ul>
 
     </nav>
