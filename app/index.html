@@ -18,46 +18,46 @@
 
   <!-- Required facebook bootstrapper-->
   <script>
-      window.fbAsyncInit = function () {
+    window.fbAsyncInit = function () {
 
-          FB.init({
-              appId: '736479600033096',
-              cookie: true,
-              xfbml: true,
-              version: 'v3.1'
-          });
+      FB.init({
+        appId: '736479600033096',
+        cookie: true,
+        status: true,
+        xfbml: true,
+        version: 'v3.1'
+      });
 
-          FB.AppEvents.logPageView();
+      FB.AppEvents.logPageView();
 
-          FB.getLoginStatus(function (response) {
+      //FB.getLoginStatus(function (response) {
 
-            app.loginStatus = response;
+       // statusChangeCallback(response);
 
-              //statusChangeCallback(response);
-              // Remove preloader
-              //document.querySelector("#preloader").style.display = "none";
-          });
+        //statusChangeCallback(response);
+        // Remove preloader
+        //document.querySelector("#preloader").style.display = "none";
+      //});
 
-          // FB.Event.subscribe('auth.login', function (response) {
-          //     console.log(response);
-          //     statusChangeCallback(response);
-          // })
+      FB.Event.subscribe('auth.login', function (response) {
+        statusChangeCallback(response);
+      })
 
-          // FB.Event.subscribe('auth.logout', function (response) {
-          //     console.log(response);
-          //     statusChangeCallback(response);
-          // });
+      FB.Event.subscribe('auth.logout', function (response) {
+        statusChangeCallback(response);
 
-      };
+      });
 
-      (function (d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
-          fjs.parentNode.insertBefore(js, fjs);
+    };
 
-      }(document, 'script', 'facebook-jssdk'));
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+
+    }(document, 'script', 'facebook-jssdk'));
 
   </script>
 
@@ -76,7 +76,9 @@
         <li><a href="#">About us</a></li>
         <li><a href="#">Packages</a></li>
         <li><a href="#">Themes</a></li>
-        <button class="primary" onclick=" FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});"> <i class="fab fa-facebook-square"></i>Login with Facebook</button>
+        
+        <button v-if="loginStatus.status=='unknown'" class="primary" onclick=" FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
+          <i class="fab fa-facebook-square"></i>Login with Facebook</button>
       </ul>
 
     </nav>
@@ -87,7 +89,8 @@
       <br>
       <a class="button" href="/app/admin/settings/">Admin Dashboard</a>
       <br>
-      {{loginStatus}}
+      {{loginStatus.status}}<br>
+      {{fbapi_me.name}}
     </main>
 
   </div>
@@ -99,20 +102,29 @@
 
   <!-- Local Scripts -->
   <script>
-  
+
     var app = new Vue({
       el: '#app',
       data: {
         message: "Hello world",
         loginStatus: {},
+        fbapi_me: {}
       },
-      methods:{
-        getLoginStatus: function(){
-          FB.getLoginStatus(function(response){
-            app.loginStatus = response;
+      watch: {
+        loginStatus: function () {
+          FB.api('/me', function (response) {
+
+            app.fbapi_me = response
           })
         }
       }
+      // methods: {
+      //   getLoginStatus: function () {
+      //     FB.getLoginStatus(function (response) {
+      //       app.loginStatus = response;
+      //     })
+      //   }
+      // }
     })
 
   </script>
@@ -120,29 +132,32 @@
   <!-- Facebook statusChangedCallback-->
   <script>
 
-      function statusChangeCallback(response) {
-        
-        console.log('statuschangecallback');
+    function statusChangeCallback(response) {
+      console.log('status called')
 
-          if (response.status == "unknown") { // unknown means logged out
+      app.loginStatus = response
 
-              //document.getElementById('status').innerHTML = 'Welcome!';
 
-          }
-          else {
-              FB.api('/me', function (response) {
 
-                  // console.log(response)
-                  // document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
+      //if (response.status == "unknown") { // unknown means logged out
 
-              });
+      //document.getElementById('status').innerHTML = 'Welcome!';
 
-          }
+    }
+      //else {
+//        FB.api('/me', function (response) {
 
-          // Remove preloader
-          //document.querySelector("#preloader").style.display = "none";
+          // console.log(response)
+          // document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
 
-      }
+  //      });
+
+      //}
+
+      // Remove preloader
+      //document.querySelector("#preloader").style.display = "none";
+
+    //}
 
   </script>
 
