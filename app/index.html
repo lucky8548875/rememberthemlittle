@@ -81,6 +81,7 @@
         <a v-else-if="loginStatus.status=='connected'" class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
           <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
           <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 30px">&nbsp&nbsp<span>Logout</span>
+          </a>
         <button v-else class="outline">
           <i class="fas fa-circle-notch fa-spin"></i>
         </button>
