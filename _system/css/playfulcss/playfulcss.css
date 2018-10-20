@@ -1,9 +1,13 @@
 .font-primary, body {
-  font-family: "Proxima Nova";
+  font-family: "Proxima Soft";
 }
 
 .color-primary {
   color: #5252FF;
+}
+
+.color-dark {
+  color: #495057;
 }
 
 .none {
@@ -22,7 +26,7 @@
   display: inline-block;
 }
 
-.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div {
+.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div, .index nav, .index nav h3, .index nav ul, .index main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -95,7 +99,7 @@
           flex-direction: row;
 }
 
-.column, .admin aside ul {
+.column, .admin aside ul, .index main {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -132,23 +136,23 @@
       justify-content: space-around;
 }
 
-.space-between, .admin nav, .admin main > div {
+.space-between, .admin nav, .admin main > div, .index nav {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
 
-.align-items-center, .admin main > div {
+.align-items-center, .admin main > div, .index nav h3, .index nav ul, .index main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-.wide, .admin main table {
+.wide, .admin main table, .index main {
   width: 100%;
 }
 
-.high {
+.high, .index {
   height: 100vh;
 }
 
@@ -158,7 +162,7 @@
 
 button, a.button {
   color: #495057;
-  font-family: "Proxima Nova";
+  font-family: "Proxima Soft";
   font-weight: 600;
   font-size: 1rem;
   -webkit-box-align: center;
@@ -256,7 +260,7 @@ a.button {
 }
 
 input:not([type=checkbox]):not([type=radio]), select, textarea {
-  font-family: "Proxima Nova";
+  font-family: "Proxima Soft";
   color: #495057;
   background-color: white;
   border: 2px solid #e9ecef;
@@ -484,5 +488,56 @@ form fieldset legend {
 
 form fieldset > * {
   width: 100%;
+}
+
+.index {
+  background-color: #f8f9fa;
+}
+
+.index nav {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+}
+
+.index nav h3 {
+  padding: 1rem;
+  color: #495057;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.index nav h3 i {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.index nav ul {
+  padding: 1rem;
+  list-style: none;
+}
+
+.index nav ul a {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.index nav ul button, .index nav ul a.button {
+  margin-left: 1rem;
+}
+
+.index nav ul button i, .index nav ul a.button i {
+  margin-right: 0.5rem;
+}
+
+.index main * {
+  display: inline;
 }
 /*# sourceMappingURL=playfulcss.css.map */
