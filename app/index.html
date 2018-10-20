@@ -112,14 +112,16 @@
       data: {
         message: "Hello world",
         loginStatus: {},
-        fbapi_me: {}
+        fbapi_me: {},
+        profile_pic: "",
       },
       watch: {
         loginStatus: function () {
-          FB.api('/me', function (response) {
+          FB.api('/me', {fields: 'picture'}, function (response) {
 
             app.fbapi_me = response
-          })
+          });
+
         }
       }
       // methods: {
