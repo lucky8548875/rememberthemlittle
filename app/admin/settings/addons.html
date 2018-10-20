@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/_system/css/proxima.woff2.css">
+  <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+  <link rel="stylesheet" href="/_system/css/fontawesome-free-5.3.1-web/css/all.min.css">
+
+  <!-- Page Title -->
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <!--
+    The Vue instance runs inside this <div id="app">.
+    Also, the class="admin" loads the admin style for this page.
+      -->
+  <div id="app" class="admin">
+
+    <!-- Navigation Bar-->
+    <nav>
+
+      <!-- Company Logo -->
+      <h3>Remember Them Little</h3>
+
+      <!-- Navigation Links -->
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+
+    </nav>
+
+    <!-- Side Navigation Bar -->
+    <aside>
+      <ul>
+        <li><a href="index.html">Categories</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="addons.html" class="color-primary">Addons</a></li>
+        <li><a href="themes.html">Themes</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+
+      <!-- Action bar -->
+      <div>
+        <h3>AddOn</h3>
+        <button class="primary" @click="$root.$refs.add.show()">New Addon</button>
+      </div>
+
+      <!-- Table -->
+      <table>
+
+        <!-- Table headers -->
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+
+        <!-- Table body -->
+        <tbody>
+          <tr v-for="addon in addons">
+            <td>{{addon.addon_type}}</td>
+            <td>{{addon.addon_description}}</td>
+            <td>{{addon.addon_price}}</td>
+            <td>{{addon.addon_active == 1 ? 'Yes' : 'No'}}</td>
+            <td><a @click.prevent="$root.$refs.edit.show(addon)" class="color-primary">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </main>
+
+    <modal class="modal" inline-template ref="add">
+
+      <!-- Add Package form-->
+      <form v-if="visible" @submit.prevent="$root.addAddOn($event); hide();">
+
+        <fieldset>
+
+          <!-- Form Title -->
+          <legend>New AddOn</legend>
+
+          <label>AddOn Type</label>
+          <select name="addon_type">
+              <option value="PRINT">Prints</option>
+                <option value="EXTRA_SERVICE">Extra Service</option>
+                <option value="PRODUCT">Product</option>
+            </select>
+
+          <label>AddOn Description</label>
+          <textarea style="height: 100px" name="addon_description" required></textarea>
+
+          <label>AddOn Price</label>
+          <input type="number" name="addon_price" required>
+
+          <label><input type="checkbox" name="addon_active" checked>&nbspActive</label>
+
+          <!-- Form action buttons -->
+          <div class="flex align-items-center">
+            <button @click.prevent="hide">Cancel</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Create Addon</button>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </modal>
+
+    <modal class="modal" inline-template ref="edit">
+
+      <!-- Edit Category form -->
+      <form v-if="visible" @submit.prevent="$root.updateAddon(params.addon_id,$event); hide();">
+
+        <fieldset>
+
+          <legend>Edit Addon</legend>
+
+          <label>Addon Type</label>
+          <select name="addon_type">
+              <option value="PRINT" :selected="(params.addon_type=='PRINT')">Prints</option>
+                <option value="EXTRA_SERVICE" :selected="(params.addon_type=='EXTRA_SERVICE')">Extra Service</option>
+                <option value="PRODUCT" :selected="(params.addon_type=='PRODUCT')">Product</option>
+            </select>
+
+          <label>AddOn Description</label>
+          <textarea style="height: 100px" name="addon_description" required :value="params.addon_description"></textarea>
+
+          <label>AddOn Price</label>
+          <input type="number" name="addon_price" required :value="(params.addon_price)">
+
+          <label><input type="checkbox" name="addon_active" :checked="(params.addon_active)">&nbspActive</label>
+
+          <!-- Action buttons -->
+          <div class="flex align-items-center">
+            <button @click.prevent="hide">Cancel</button>
+            <button @click.prevent="$root.deleteAddon(params.addon_id); hide();" style="margin-left: 0.5rem">Delete</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Update</button>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </modal>
+
+  </div>
+
+  <!-- Imported Scripts -->
+  <script src="/_system/js/vendor/vue.js"></script>
+  <script src="/_system/js/components/components.js"></script>
+  <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+
+  <!-- Local Scripts -->
+  <script>
+
+    // Vue Instance
+    var app = new Vue({
+      el: '#app',
+      data: {
+        addons: []
+      },
+      created: function () {
+        this.loadAddOns();
+      },
+      methods: {
+
+        loadAddOns: function () {
+
+          Vue.http.get('/_system/php/api/addons/getAll.php')
+            .then(
+              response => {
+
+                if (response.body.success)
+                  this.addons = response.body.data;
+                else
+                  console.error(response.body.message);
+              },
+              response => {
+                console.log('fail');
+              });
+        },
+
+        addAddOn: function (submitEvent) {
+
+          var elements = submitEvent.target.elements;
+          var formData = new FormData();
+          formData.append('addon_type', elements.addon_type.value);
+          formData.append('addon_description', elements.addon_description.value);
+          formData.append('addon_price', elements.addon_price.value);
+          formData.append('addon_active', elements.addon_active.checked ? 1 : 0);
+
+          Vue.http.post('/_system/php/api/addons/add.php', formData)
+            .then(
+
+              // If the server request is successful
+              response => {
+
+                // If the PHP file has no errors
+                if (response.body.success) {
+                  this.loadAddOns();
+                }
+                else
+                  console.error(response.body.message)
+
+              },
+
+              // If the server request is unsuccessful
+              response => {
+
+                console.error(response);
+
+              });
+
+        },
+
+        updateAddon: function (addon_id, submitEvent) {
+
+          var elements = submitEvent.target.elements;
+          var formData = new FormData();
+          formData.append('addon_id', addon_id);
+          formData.append('addon_type', elements.addon_type.value);
+          formData.append('addon_description', elements.addon_description.value);
+          formData.append('addon_price', elements.addon_price.value);
+          formData.append('addon_active', elements.addon_active.checked ? 1 : 0);
+
+          Vue.http.post('/_system/php/api/addons/update.php', formData)
+            .then(
+
+              // If the server request is successful
+              response => {
+
+                // If the PHP file has no errors
+                if (response.body.success) {
+                  this.loadAddOns();
+                }
+                else
+                  console.error(response.body.message)
+
+              },
+
+              // If the server request is unsuccessful
+              response => {
+
+                console.error(response);
+
+              });
+
+        },
+
+        deleteAddon: function (addon_id) {
+
+          var formData = new FormData();
+          formData.append('addon_id', addon_id);
+
+          Vue.http.post('/_system/php/api/addons/delete.php', formData)
+            .then(
+
+              // If the server request is successful
+              response => {
+
+                // If the PHP file has no errors
+                if (response.body.success) {
+                  this.loadAddOns();
+                }
+                else
+                  console.error(response.body.message)
+
+              },
+
+              // If the server request is unsuccessful
+              response => {
+
+                console.error(response);
+
+              });
+
+        }
+      }
+    })
+
+  </script>
+
+
+</body>
+
+</html>

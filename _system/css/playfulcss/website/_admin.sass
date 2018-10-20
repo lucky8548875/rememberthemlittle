@@ -1,0 +1,74 @@
+.admin
+    @extend .flex, .wrap
+
+    // Navigation Bar
+    nav
+        @extend .flex, .space-between
+        @include padding($size-normal)
+        margin-bottom: 2rem
+        flex-basis: 100%
+        align-items: center
+        background-color: $color-light
+
+        h3
+            @include padding($size-normal)
+            color: $color-gray
+            font-weight: $weight-bold
+
+        ul
+            @extend .flex
+            @include padding($size-normal)
+            list-style: none
+
+            a
+                @include padding-x($size-normal)
+
+    // Side Navigation Bar
+    aside
+        @include padding($size-normal)
+        display: none
+
+        @include medium
+            display: inline-flex
+            flex-basis: 10rem
+        
+        @include large
+            margin-left: 5rem
+
+        ul
+            @extend .flex, .column
+            list-style: none
+
+            a
+                @extend .inline-block
+                @include padding-y($size-normal)
+
+    // Main Activity Bar
+    main
+        @include padding($size-normal)
+        flex-grow: 1
+
+        @include large
+            margin-right: 5rem
+
+        > div
+            @extend .flex, .space-between, .align-items-center
+            @include padding-y($size-small)
+
+        table
+            @extend .wide
+            @include padding($size-normal)
+            @include margin-y($size-normal)
+            border-radius: 0.5rem
+            border: 2px solid $color-light-gray
+            
+form
+    fieldset
+        display: flex
+
+        legend
+            color: $color-gray
+    
+        > *
+            width: 100%
+            
