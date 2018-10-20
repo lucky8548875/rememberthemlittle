@@ -95,7 +95,8 @@
       <br>
       <a class="button" href="/app/admin/settings/">Admin Dashboard</a>
       <br>
-      <h3>Welcome, {{fbapi_me.first_name}}</h3>
+
+      <h3 v-if="loginStatus.status=='connected'">Welcome, {{fbapi_me.first_name}}</h3>
 
     </main>
 
