@@ -533,7 +533,7 @@ form fieldset > * {
   margin-left: 1rem;
 }
 
-.index nav ul button i, .index nav ul a.button i {
+.index nav ul button i:not(:only-child), .index nav ul a.button i:not(:only-child) {
   margin-right: 0.5rem;
 }
 
