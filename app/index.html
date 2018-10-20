@@ -78,9 +78,10 @@
 
         <button v-if="loginStatus.status=='unknown'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
           <i class="fab fa-facebook-square"></i><span>Login with Facebook</span></button>
-        <button v-else-if="loginStatus.status=='connected'" class="outline" onclick="FB.logout(statusChangeCallback)">
-          <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></button> -->
-          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 50px">&nbsp<span>{{fbapi_me.first_name}}</span>
+        <a v-else-if="loginStatus.status=='connected'" class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
+          <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
+          <img :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 30px">&nbsp&nbsp<span>{{fbapi_me.first_name}}</span>
+          &nbsp&nbsp<i class="fas fa-angle-down"></i>
         <button v-else class="outline">
           <i class="fas fa-circle-notch fa-spin"></i></button>
 
@@ -96,7 +97,7 @@
       <br>
       {{loginStatus.status}}<br>
       {{fbapi_me.name}}
-      <img :src="fbapi_me.picture.data.url">
+
     </main>
 
   </div>
