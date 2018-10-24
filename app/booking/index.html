@@ -41,7 +41,7 @@
 
         <main style="display: flex !important; flex-direction: row !important; justify-content: center">
 
-            <stepper steps=5 inline-template>
+            <stepper steps=7 inline-template>
                 <div>
 
                     <!-- Step 1 -->
@@ -172,7 +172,20 @@
                     </form>
 
                     <!-- Step 6 -->
-                    
+                    <form @submit.prevent="next" v-if="step==6" style="display: flex; flex-direction: column !important">
+                        <h5>Step 6</h5>
+                        <h3>Customer Information</h3><br><br>
+
+                        Facebook Account: 
+
+                        <br><br>
+                        <div class="flex">
+                            <button @click.prevent="previous">Prev</button>
+                            <button type="reset">Clear</button>
+                            <button type="submit" class="primary">Next</button>
+                        </div>
+                    </form>
+
 
 
                 </div>

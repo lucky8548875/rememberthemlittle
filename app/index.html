@@ -27,45 +27,10 @@
 
   <!-- Required facebook bootstrapper-->
   <script>
-    window.fbAsyncInit = function () {
 
-      FB.init({
-        appId: '736479600033096',
-        cookie: true,
-        xfbml: true,
-        version: 'v3.1'
-      });
 
-      FB.AppEvents.logPageView();
 
-      FB.getLoginStatus(function (response) {
 
-        statusChangeCallback(response);
-
-        //statusChangeCallback(response);
-        // Remove preloader
-        //document.querySelector("#preloader").style.display = "none";
-      });
-
-      FB.Event.subscribe('auth.login', function (response) {
-        statusChangeCallback(response);
-      })
-
-      FB.Event.subscribe('auth.logout', function (response) {
-        statusChangeCallback(response);
-
-      });
-
-    };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
-      fjs.parentNode.insertBefore(js, fjs);
-
-    }(document, 'script', 'facebook-jssdk'));
 
   </script>
 
@@ -88,14 +53,14 @@
         <!-------------------- CUSTOM FACEBOOK LOGIN BUTTON ----------------------->
 
         <!-- Not authorized / Not connected button -->
-        <button v-if="loginStatus.status=='unknown' || loginStatus.status=='not_authorized'" class="primary" onclick="FB.login(statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});">
+        <button v-if="loginStatus.status=='unknown' || loginStatus.status=='not_authorized'" class="primary" @click="login">
           <i class="fab fa-facebook-square"></i><span>Login</span></button>
 
         <!-- Authorized / Connected -->
         <template v-else-if="loginStatus.status=='connected'">
 
           <button class="outline" style="margin-right: 1rem;">My Dashboard</button>
-          <a class="flex align-items-center" onclick="FB.logout(statusChangeCallback)">
+          <a class="flex align-items-center" @click="logout">
             <img class="profile_pic" :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 38px">&nbsp&nbsp
             {{fbapi_me.first_name}}&nbsp
             <i class="fas fa-angle-down"></i>
@@ -119,7 +84,7 @@
 
       <br><br><br><br><br><br><br>
       <h1>Welcome to Remember Them Little</h1>
-      
+
       <h3 v-if="loginStatus.status=='connected'">Hi {{fbapi_me.first_name}}!</h3>
       <br>
       <a class="button primary flex align-items-center" href="/app/booking/">
@@ -140,77 +105,19 @@
   <script src="/_system/js/components/components.js"></script>
   <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
 
+  <!-- Mixins -->
+  <script src="/_system/js/mixins/facebook.js"></script>
+
   <!-- Local Scripts -->
   <script>
 
     var app = new Vue({
       el: '#app',
-      data: {
-        message: "Hello world",
-        loginStatus: {
-          status: ''
-        },
-        fbapi_me: {
-          picture: {
-            data: {
-              url: ''
-            }
-          },
-          first_name: ''
-        },
-        profile_pic: "",
-      },
-      watch: {
-        loginStatus: function () {
-          FB.api('/me', { fields: ['first_name', 'picture'] }, function (response) {
-
-            app.fbapi_me = response
-          });
-
-        }
-      }
-      // methods: {
-      //   getLoginStatus: function () {
-      //     FB.getLoginStatus(function (response) {
-      //       app.loginStatus = response;
-      //     })
-      //   }
-      // }
+      mixins: [FacebookMixin]
     })
 
   </script>
 
-  <!-- Facebook statusChangedCallback-->
-  <script>
-
-    function statusChangeCallback(response) {
-      console.log('status called')
-
-      app.loginStatus = response
-
-
-
-      //if (response.status == "unknown") { // unknown means logged out
-
-      //document.getElementById('status').innerHTML = 'Welcome!';
-
-    }
-      //else {
-//        FB.api('/me', function (response) {
-
-          // console.log(response)
-          // document.getElementById('status').innerHTML = 'Welcome back, ' + response.name + '!';
-
-  //      });
-
-      //}
-
-      // Remove preloader
-      //document.querySelector("#preloader").style.display = "none";
-
-    //}
-
-  </script>
 
 </body>
 
