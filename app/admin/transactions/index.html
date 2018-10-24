@@ -55,7 +55,7 @@
       <!-- Action bar -->
       <div>
         <h3>Bookings</h3>
-        <button class="primary" @click="$root.$refs.add.show()">Add Booking</button>
+        <a class="button primary" href="addBooking.html">Add Booking</a>
       </div>
 
       <!-- Table -->
@@ -153,7 +153,7 @@
 
         loadBookings: function () {
 
-          Vue.http.get('/_system/php/api/booking/getAll.php')
+          Vue.http.get('/_system/php/api/bookings/getAll.php')
             .then(
               response => {
 
@@ -172,7 +172,7 @@
           var formData = new FormData();
           formData.append('booking_id',booking_id)
 
-          Vue.http.post('/_system/php/api/booking/approveBooking.php',formData)
+          Vue.http.post('/_system/php/api/bookings/approveBooking.php',formData)
             .then(
               response => {
 

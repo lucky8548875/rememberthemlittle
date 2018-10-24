@@ -11,11 +11,12 @@ $package_description = $_POST['package_description'];
 $package_price = $_POST['package_price'];
 $package_minutes = $_POST['package_minutes'];
 $package_themes = $_POST['package_themes'];
+$package_addons = $_POST['package_addons'];
 $package_active = $_POST['package_active'];
 $category_id = $_POST['category_id'];
 
 # Check parameters if null
-if (isset($package_name) && isset($package_description) && isset($package_price) && isset($package_minutes) && isset($package_themes) && isset($package_active) && isset($category_id)) {
+if (isset($package_name) && isset($package_description) && isset($package_price) && isset($package_minutes) && isset($package_themes) && isset($package_active) && isset($category_id) && isset($package_addons) ) {
 
     try {
 
@@ -27,6 +28,21 @@ if (isset($package_name) && isset($package_description) && isset($package_price)
         $sql = "INSERT INTO packages (package_name, package_description, package_price, package_minutes, package_themes, package_active, category_id) VALUES ('$package_name', '$package_description', $package_price, $package_minutes, $package_themes, '$package_active', $category_id)";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
+
+        # Get id of previous query
+        $package_id =  $conn->lastInsertId(); 
+
+        # Loop through addons
+        $addons = json_decode($package_addons);
+
+        foreach ($addons as $addon) {
+
+            $sql = "INSERT INTO package_addons (package_id, addon_id) VALUES ('$package_id', '$addon')";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+        }
+        
 
         # Print success
         echo json_encode((object)[
@@ -41,8 +57,10 @@ if (isset($package_name) && isset($package_description) && isset($package_price)
         ]);
 
     }
-}
-else {
-    echo 'values not set';
+} else {
+    echo json_encode((object)[
+        'success' => false,
+        'message' => "Values not set"
+    ]);
 }
 

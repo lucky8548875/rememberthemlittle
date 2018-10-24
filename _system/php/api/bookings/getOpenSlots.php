@@ -4,10 +4,15 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 #Retrieve POST parameters
-$date = '2018-10-20'; //$_POST['booking_date'];
-$duration = "+30 minutes"; //$_POST['package_minutes'];
+$date = $_POST['booking_date'];
+$duration = $_POST['package_minutes'];
+
 if (isset($date) && isset($duration))
 {
+
+    # Convert to PHP recognized format
+    $duration = "+$duration minutes";
+
     try
     {
         # Connect to Database
@@ -19,7 +24,7 @@ if (isset($date) && isset($duration))
         $stmt->execute();
         # Fetch Result
         $result = $stmt->fetchAll();
-        print_r($result);
+        // print_r($result);
         $start = strtotime("8:00"); #opening time
         $stop = strtotime("20:00"); #closing time
         $step = "+30 minutes"; #preferred interval
@@ -38,17 +43,17 @@ if (isset($date) && isset($duration))
         {   
             if($current >= $reserved_start && $end_of_current <= $end_of_reserved)
             {
-               echo "<br>Conflict with booking #".$reserved[$c]['booking_id']." @".date("H:i", $reserved_start)." - ".date("H:i", $end_of_reserved)."<br>"; 
+               //echo "<br>Conflict with booking #".$reserved[$c]['booking_id']." @".date("H:i", $reserved_start)." - ".date("H:i", $end_of_reserved)."<br>"; 
             }
             else
             {
                 $availables[] = date("H:i", $current);
-                echo "<br>".date("H:i", $current)."<br>";
+                //echo "<br>".date("H:i", $current)."<br>";
             }
             
             if($current >= $end_of_reserved && $c < sizeof($reserved) - 1)
             {
-                echo "<br>Past booking #".$reserved[$c]['booking_id']." @".date("H:i", $reserved_start)." - ".date("H:i", $end_of_reserved)."<br>";
+                //echo "<br>Past booking #".$reserved[$c]['booking_id']." @".date("H:i", $reserved_start)." - ".date("H:i", $end_of_reserved)."<br>";
                 $c = $c + 1;
                 $reserved_start = strtotime($reserved[$c]['booking_time']);
                 $reserved_duration = "+".$reserved[$c]['package_minutes']." minutes";
@@ -57,13 +62,25 @@ if (isset($date) && isset($duration))
             $current = strtotime($step, $current);
             $end_of_current = strtotime($duration, $current);
         }
+
+        echo json_encode((object)[
+            'success' => true,
+            'data' => $availables
+        ]);
+
     }
     catch(PDOException $e)
     {
         echo json_encode((object)[
             'success' => false,
-            'message' => "Connection failed: " . $e->getMessage()
+            'message' => "Connection failed"
         ]);
     }
+}
+else{
+    echo json_encode((object)[
+        'success' => false,
+        'message' => "Error"
+    ]);
 }
 ?>

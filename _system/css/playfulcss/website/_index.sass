@@ -21,11 +21,15 @@
             i
                 margin-right: 1rem
                 font-size: 1.5rem
+                color: $color-primary
 
         ul
-            @extend .flex, .align-items-center
-            @include padding($size-normal)
+            @extend .align-items-center
             list-style: none
+            display: none
+            
+            @include large
+                display: flex
 
             a
                 @include padding-x($size-normal)
@@ -35,10 +39,9 @@
 
                 i:not(:only-child)
                     margin-right: $size-small
+        
+        .profile-pic
+            background-color: #ddd
 
     main
         @extend  .flex, .wide, .column, .align-items-center
-        
-
-        *
-            display: inline

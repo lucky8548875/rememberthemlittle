@@ -26,7 +26,7 @@
   display: inline-block;
 }
 
-.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div, .index nav, .index nav h3, .index nav ul, .index main {
+.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div, .index nav, .index nav h3, .index main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -521,11 +521,20 @@ form fieldset > * {
 .index nav h3 i {
   margin-right: 1rem;
   font-size: 1.5rem;
+  color: #5252FF;
 }
 
 .index nav ul {
-  padding: 1rem;
   list-style: none;
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .index nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .index nav ul a {
@@ -541,7 +550,7 @@ form fieldset > * {
   margin-right: 0.5rem;
 }
 
-.index main * {
-  display: inline;
+.index nav .profile-pic {
+  background-color: #ddd;
 }
 /*# sourceMappingURL=playfulcss.css.map */
