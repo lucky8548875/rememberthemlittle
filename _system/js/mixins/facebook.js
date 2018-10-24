@@ -68,7 +68,7 @@ var FacebookMixin = {
             FB.login(this.statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});
         },
         logout(){
-            FB.logout(this.statusChangeCallback)
+            FB.logout(this.statusChangeCallback);
         }
     },
     watch: {
