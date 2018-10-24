@@ -11,7 +11,9 @@ var FacebookMixin = {
                     url: ''
                 }
             },
-            first_name: ''
+            first_name: '',
+            name: '',
+            id: ''
         },
     },
 
@@ -65,7 +67,7 @@ var FacebookMixin = {
             this.loginStatus = response
           },
         login(){
-            FB.login(this.statusChangeCallback, {scope: 'email,public_profile', return_scopes: true});
+            FB.login(this.statusChangeCallback, {scope: 'public_profile', return_scopes: true});
         },
         logout(){
             FB.logout(this.statusChangeCallback);
@@ -73,7 +75,7 @@ var FacebookMixin = {
     },
     watch: {
         loginStatus: function () {
-            FB.api('/me', { fields: ['first_name', 'picture'] }, function (response) {
+            FB.api('/me', { fields: ['first_name', 'picture','name','id'] }, function (response) {
 
                 app.fbapi_me = response
             });

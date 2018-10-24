@@ -173,10 +173,31 @@
 
                     <!-- Step 6 -->
                     <form @submit.prevent="next" v-if="step==6" style="display: flex; flex-direction: column !important">
-                        <h5>Step 6</h5>
+                            <h5>Step 6</h5>
+                            <h3>Baby's Information</h3><br><br>
+                            <label>Baby's nickname</label>
+                            <input type="text" placeholder="e.g. Charlie" v-model="$root.booking.subject_name">
+                            <label>Baby's age</label>
+                            <input type="text" placeholder="e.g. 5 months old"  v-model="$root.booking.subject_age">
+    
+                            <br><br>
+                            <div class="flex">
+                                <button @click.prevent="previous">Prev</button>
+                                <button type="reset">Clear</button>
+                                <button type="submit" class="primary">Next</button>
+                            </div>
+                        </form>
+
+                    <!-- Step 7 -->
+                    <form @submit.prevent="next" v-if="step==7" style="display: flex; flex-direction: column !important">
+                        <h5>Step 7</h5>
                         <h3>Customer Information</h3><br><br>
 
-                        Facebook Account: 
+                        Facebook Account: Signed in as {{$root.fbapi_me.first_name}}
+
+                        <input type="text" v-model="$root.account.account_name" placeholder="Parent's Real Name">
+                        <input type="number" v-model="$root.account.account_contact" placeholder="Contact Number">
+                        <input type="email" v-model="$root.account.account_email" placeholder="Email address">
 
                         <br><br>
                         <div class="flex">
@@ -201,6 +222,12 @@
                     <label>Themes: {{booking.theme_ids}}</label>
                     <label>Date: {{booking.booking_date}}</label>
                     <label>Time: {{booking.selected_time}}</label>
+                    <label>Baby's Name: {{booking.subject_name}}</label>
+                    <label>Baby's Age: {{booking.subject_age}}</label>
+                    <label>Mommy or Daddy's Full Name: {{account.account_name}}</label>
+                    <label>Contact Number: {{account.account_contact}}</label>
+                    <label>Email: {{account.account_email}}</label>
+                    
                 </fieldset>
             </form>
 
@@ -214,6 +241,7 @@
     <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
 
     <!-- Import Mixins -->
+    <script src="/_system/js/mixins/facebook.js"></script>
     <script src="/_system/js/mixins/categories.js"></script>
     <script src="/_system/js/mixins/packages.js"></script>
     <script src="/_system/js/mixins/addons.js"></script>
@@ -225,7 +253,7 @@
 
         var app = new Vue({
 
-            mixins: [CategoryMethods, PackageMethods, AddonMethods, ThemeMethods, BookingMethods],
+            mixins: [FacebookMixin, CategoryMethods, PackageMethods, AddonMethods, ThemeMethods, BookingMethods],
 
             el: '#app',
 
@@ -247,9 +275,18 @@
                     addon_ids: [],
                     theme_ids: [],
                     booking_date: "",
-                    booking_time: ""
+                    booking_time: "",
+                    subject_name: "",
+                    subject_age: "",
+                },
 
+                account: {
+                    account_name: "",
+                    account_contact: "",
+                    account_email: "",
                 }
+
+                
             },
 
             created() {
