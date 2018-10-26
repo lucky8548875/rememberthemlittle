@@ -158,7 +158,7 @@
                         <input type="date" v-model="$root.selected_date">
 
                         <label>Choose a Time</label>
-                        <select v-model="$root.booking.selected_time">
+                        <select v-model="$root.booking.booking_time">
                             <option v-for="slot in $root.slots">{{slot}}</option>
                         </select>
 
@@ -189,7 +189,7 @@
                         </form>
 
                     <!-- Step 7 -->
-                    <form @submit.prevent="next" v-if="step==7" style="display: flex; flex-direction: column !important">
+                    <form @submit.prevent="$root.submitBooking" v-if="step==7" style="display: flex; flex-direction: column !important">
                         <h5>Step 7</h5>
                         <h3>Customer Information</h3><br><br>
 
@@ -227,6 +227,7 @@
                     <label>Mommy or Daddy's Full Name: {{account.account_name}}</label>
                     <label>Contact Number: {{account.account_contact}}</label>
                     <label>Email: {{account.account_email}}</label>
+                    <label>Total: {{total_price}}</label>
                     
                 </fieldset>
             </form>
@@ -297,8 +298,27 @@
             },
 
             methods: {
+
                 addAddon() {
                     this.booking.addon_ids.push(this.selected_addon_id)
+                },
+
+                submitBooking(){
+
+                    var formData = new FormData();
+                    formData.append('package_id', this.booking.package_id);
+                    formData.append('booking_addons', JSON.stringify(booking.addon_ids));
+                    formData.append('booking_themes', JSON.stringify(booking.theme_ids));
+                    formData.append('booking_date', this.booking.booking_date);
+                    formData.append('booking_time', this.booking.booking_time);
+                    formData.append('subject_name', this.booking.subject_name);
+                    formData.append('subject_age', this.booking.subject_age);
+                    formData.append('account_id', 1);
+                    formData.append('booking_payment', 'BANK_DEPOSIT');
+                    formData.append('booking_total_price', this.total_price);
+                    this.addBookingFromCustomer(formData);
+
+
                 }
             },
 
@@ -308,6 +328,18 @@
 
                     return this.filteredPackages(this.booking.category_id);
                 },
+
+                total_price(){
+                    try{
+                    var package_price =  this.packages.find(package => package.package_id === this.booking.package_id).package_price
+                    var addons_price = 0;
+                    for(var i=0;i<this.booking.addon_ids.length;i++){
+                        addons_price += this.addons.find(addon => addon.addon_id === this.booking.addon_ids[i]).addon_price
+                    }
+                    return package_price + addons_price;
+                }
+                catch(x){}
+                }
 
             },
 

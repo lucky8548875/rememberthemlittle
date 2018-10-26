@@ -15,9 +15,6 @@ $booking_time = $_POST['booking_time'];
 $subject_name = $_POST['subject_name'];
 $subject_age = $_POST['subject_age'];
 $account_name = $_POST['account_name'];
-$account_fb_id = $_POST['account_fb_id'];
-$account_contact = $_POST['account_contact'];
-$account_email = $_POST['account_email'];
 $booking_payment = $_POST['booking_payment'];
 $booking_total_price = $_POST['booking_total_price'];
 

@@ -22,7 +22,34 @@ var BookingMethods = {
           response => {
             console.log('fail');
           });
-        }
+        },
+
+        addBookingFromCustomer: function (formData) {
+
+          Vue.http.post('/_system/php/api/bookings/add.php', formData)
+              .then(
+
+                  // If the server request is successful
+                  response => {
+
+                      // If the PHP file has no errors
+                      if (response.body.success) {
+                          console.log(response.body)
+                      }
+                      else
+                          console.error(response.body.message)
+
+                  },
+
+                  // If the server request is unsuccessful
+                  response => {
+
+                      console.error(response);
+
+                  });
+
+
+      },
 
     }
 
