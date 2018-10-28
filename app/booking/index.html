@@ -5,7 +5,7 @@
 
     <!-- Meta tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Stylesheets -->
@@ -92,6 +92,28 @@
                     <form @submit.prevent="next" v-if="step==3" style="display: flex; flex-direction: column !important">
                         <h5>Step 3</h5>
                         <h3>Purchase Addons</h3><br><br>
+
+                        <!-- Table -->
+                        <table style="display: table !important">
+
+                            <!-- Table headers -->
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+
+                            <!-- Table body -->
+                            <tbody>
+                                <tr v-for="addon_id in $root.inclusion_ids">
+                                    <td>{{$root.getAddon(addon_id).addon_type}}</td>
+                                    <td>{{$root.getAddon(addon_id).addon_description}}</td>
+                                    <td>{{$root.getAddon(addon_id).addon_price}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <div class="flex align-items-center">
                             <select style="margin: 0" v-model="$root.selected_addon_id" name="addons">
@@ -221,7 +243,7 @@
                     <label>Addons: {{booking.addon_ids}}</label>
                     <label>Themes: {{booking.theme_ids}}</label>
                     <label>Date: {{booking.booking_date}}</label>
-                    <label>Time: {{booking.selected_time}}</label>
+                    <label>Time: {{booking.booking_time}}</label>
                     <label>Baby's Name: {{booking.subject_name}}</label>
                     <label>Baby's Age: {{booking.subject_age}}</label>
                     <label>Mommy or Daddy's Full Name: {{account.account_name}}</label>
@@ -248,13 +270,14 @@
     <script src="/_system/js/mixins/addons.js"></script>
     <script src="/_system/js/mixins/themes.js"></script>
     <script src="/_system/js/mixins/bookings.js"></script>
+    <script src="/_system/js/mixins/accounts.js"></script>
 
     <!-- Local Scripts -->
     <script>
 
         var app = new Vue({
 
-            mixins: [FacebookMixin, CategoryMethods, PackageMethods, AddonMethods, ThemeMethods, BookingMethods],
+            mixins: [FacebookMixin, CategoryMethods, PackageMethods, AddonMethods, ThemeMethods, BookingMethods, AccountMethods],
 
             el: '#app',
 
@@ -270,6 +293,8 @@
 
                 slots: [],
 
+                inclusion_ids: [2,3,4,5,6],
+
                 booking: {
                     category_id: "",
                     package_id: "",
@@ -280,13 +305,6 @@
                     subject_name: "",
                     subject_age: "",
                 },
-
-                account: {
-                    account_name: "",
-                    account_contact: "",
-                    account_email: "",
-                }
-
                 
             },
 
@@ -307,16 +325,21 @@
 
                     var formData = new FormData();
                     formData.append('package_id', this.booking.package_id);
-                    formData.append('booking_addons', JSON.stringify(booking.addon_ids));
-                    formData.append('booking_themes', JSON.stringify(booking.theme_ids));
+                    formData.append('booking_addons', JSON.stringify(this.booking.addon_ids));
+                    formData.append('booking_themes', JSON.stringify(this.booking.theme_ids));
                     formData.append('booking_date', this.booking.booking_date);
                     formData.append('booking_time', this.booking.booking_time);
                     formData.append('subject_name', this.booking.subject_name);
                     formData.append('subject_age', this.booking.subject_age);
-                    formData.append('account_id', 1);
+                    formData.append('account_id', this.account.account_id);
                     formData.append('booking_payment', 'BANK_DEPOSIT');
                     formData.append('booking_total_price', this.total_price);
                     this.addBookingFromCustomer(formData);
+
+                    // Update Customer Profile
+                    this.updateAccount(this.account.account_id,this.account.account_name,this.account.account_contact,this.account.account_email)
+                    
+
 
 
                 }
@@ -347,7 +370,7 @@
                 selected_date: function () {
                     this.booking.booking_date = this.selected_date;
                     this.getOpenSlots(this.selected_date, this.getPackage(this.booking.package_id).package_minutes);
-                }
+                },
             }
 
 

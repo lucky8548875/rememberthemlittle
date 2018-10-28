@@ -3,9 +3,9 @@
 // !TODO :: Fix image update
 
  # Set database parameters
-$servername = "localhost";
-$username = "root";
-$password = "root";
+
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
  # Retrieve POST parameters
 $theme_id = $_POST['theme_id'];
 $theme_description = $_POST['theme_description'];

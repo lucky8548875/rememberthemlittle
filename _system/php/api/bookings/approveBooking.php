@@ -1,9 +1,9 @@
 <?php
 
 # Set database parameters
-$servername = "localhost";
-$username = "root";
-$password = "root";
+
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 
 # Retrieve POST parameters
 $booking_id = $_POST['booking_id'];

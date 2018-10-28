@@ -3,122 +3,88 @@
 
 <head>
 
-  <!-- Meta tags -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="/_system/css/proxima.woff2.css">
-  <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
-  <link rel="stylesheet" href="/_system/css/fontawesome-free-5.3.1-web/css/all.min.css">
+    <!-- Critical Styles -->
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
 
-  <link rel="icon" href="/_system/images/favicon.png">
-
-  <!-- Page Title -->
-  <title>Remember Them Little</title>
+    <!-- Page Title -->
+    <title>Remember Them Little</title>
 
 </head>
 
-<body>
+<body class="index-mobile-experiment">
 
-  <!-- Required facebook div element -->
-  <div id="fb-root"></div>
+    <!-- Vue App -->
+    <div id="app">
 
-  <!-- Required facebook bootstrapper-->
-  <script>
+        <!-- Navigation Bar-->
+        <nav>
+            <a><i class="fas fa-bars" style="font-size: 1.2rem"></i></a>
+            <account_button></account_button>
+        </nav>
 
+        <main>
 
+            <i class="fab fa-instagram" style="font-size: 3rem; color: #495057"></i><br>
+            <h1 class="flex wrap justify-center align-items-center">
+                
+                <span>Remember</span>&nbsp
+                <span>Them Little</span>
+                </h1>
+            <br><br>
+            <a href="/app/booking/" class="button primary" style="padding: 1rem 1.5rem">
+                <span>Book Your Pictorial</span>
+                <i class="fas fa-arrow-right"></i>
+            </a><br>
+            <a href="/app/admin/transactions/" class="button outline" style="padding: 1rem 1.5rem">
+                <span>Admin Dashboard</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </main>
 
+    </div>
 
+    <!-- External Scripts -->
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/lazyload.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
 
-  </script>
+    <!-- Internal Scripts -->
+    <script>
 
-  <!-- App -->
-  <div id="app" class="index">
+        var app = new Vue({
+            el: '#app',
+            mixins: [lazyload, FacebookMixin],
+            created() {
+                this.lazyload('/_system/css/fontawesome-free-5.3.1-web/css/all.min.css');
+                this.lazyload('/_system/css/proxima.woff2.css');
+            },
 
-    <!-- Navigation Bar-->
-    <nav>
-
-      <!-- Company Logo -->
-      <h3><i class="fab fa-instagram"></i>Remember Them Little</h3>
-
-      <!-- Navigation Links -->
-      <ul>
-        <li><a href="#" class="color-dark">Home</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Packages</a></li>
-        <li><a href="#">Themes</a></li>
-
-        <!-------------------- CUSTOM FACEBOOK LOGIN BUTTON ----------------------->
-
-        <!-- Not authorized / Not connected button -->
-        <button v-if="loginStatus.status=='unknown' || loginStatus.status=='not_authorized'" class="primary" @click="login">
-          <i class="fab fa-facebook-square"></i><span>Login</span></button>
-
-        <!-- Authorized / Connected -->
-        <template v-else-if="loginStatus.status=='connected'">
-
-          <button class="outline" style="margin-right: 1rem;">My Dashboard</button>
-          <a class="flex align-items-center" @click="logout">
-            <img class="profile_pic" :src="fbapi_me.picture.data.url" style="border-radius: 50%; width: 38px">&nbsp&nbsp
-            {{fbapi_me.first_name}}&nbsp
-            <i class="fas fa-angle-down"></i>
-            <!-- <i class="fas fa-sign-out-alt"></i><span>Logout</span></a> -->
-          </a>
-        </template>
-
-        <!-- For undetermined connection / loading -->
-        <button v-else class="outline" disabled style="cursor: default">
-          <i class="fa fa-sync fa-spin" style="color: #ddd"></i>
-          <span style=" color: #ddd">Loading account</span>
-        </button>
-
-        <!---------------- END OF CUSTOM FACEBOOK LOGIN BUTTON --------------------->
-
-      </ul>
-
-    </nav>
-
-    <main>
-
-      <br><br><br><br><br><br><br>
-      <h1>Welcome to Remember Them Little</h1>
-
-      <h3 v-if="loginStatus.status=='connected'">Hi {{fbapi_me.first_name}}!</h3>
-      <br>
-      <a class="button primary flex align-items-center" href="/app/booking/">
-        Book a Pictorial
-        <i class="fa fa-sign-in-alt" style="margin-left: 0.25rem"></i></a>
-      <br>or go to <br><br>
-      <a class="button outline flex align-items-center" href="/app/admin/transactions/">
-        Admin Dashboard
-        <i class="fa fa-sign-in-alt" style="margin-left: 0.25rem"></i></a>
-      <br>
-
-    </main>
-
-  </div>
-
-  <!-- Imported Scripts -->
-  <script src="/_system/js/vendor/vue.js"></script>
-  <script src="/_system/js/components/components.js"></script>
-  <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
-
-  <!-- Mixins -->
-  <script src="/_system/js/mixins/facebook.js"></script>
-
-  <!-- Local Scripts -->
-  <script>
-
-    var app = new Vue({
-      el: '#app',
-      mixins: [FacebookMixin]
-    })
-
-  </script>
+        })
+    </script>
+    <script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>

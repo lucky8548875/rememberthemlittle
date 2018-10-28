@@ -1,6 +1,9 @@
 var FacebookMixin = {
     data: {
 
+        // Account Schema from Database
+        account: {},
+
         loginStatus: {
             status: ''
         },
@@ -25,7 +28,8 @@ var FacebookMixin = {
                 appId: '736479600033096',
                 cookie: true,
                 xfbml: true,
-                version: 'v3.1'
+                version: 'v3.1',
+                status: true
             });
 
             FB.AppEvents.logPageView();
@@ -34,9 +38,6 @@ var FacebookMixin = {
 
                 app.statusChangeCallback(response);
 
-                //statusChangeCallback(response);
-                // Remove preloader
-                //document.querySelector("#preloader").style.display = "none";
             });
 
             FB.Event.subscribe('auth.login', function (response) {
@@ -61,25 +62,69 @@ var FacebookMixin = {
 
     },
 
-    methods :{
+    methods: {
         statusChangeCallback(response) {
             console.log('status called')
             this.loginStatus = response
-          },
-        login(){
-            FB.login(this.statusChangeCallback, {scope: 'public_profile', return_scopes: true});
         },
-        logout(){
+        login() {
+            FB.login(this.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
+        },
+        logout() {
             FB.logout(this.statusChangeCallback);
+            
         }
     },
     watch: {
         loginStatus: function () {
-            FB.api('/me', { fields: ['first_name', 'picture','name','id'] }, function (response) {
 
-                app.fbapi_me = response
-            });
+            if (this.loginStatus.status == "connected") {
 
+                FB.api('/me', { fields: ['first_name', 'picture', 'name', 'id', 'email'] }, function (response) {
+
+                    // Set response data
+                    app.fbapi_me = response
+
+                    // Check if user exists
+                    var formData = new FormData();
+                    formData.append('account_fb_id', response.id);
+
+                    Vue.http.post('/_system/php/api/accounts/addIfNew.php?',formData)
+                        .then(
+                            response => {
+
+                                if (response.body.success){
+
+                                    console.log(response.body.data);
+
+                                }   
+                                else
+                                    console.error(response.body.message);
+                            },
+                            response => {
+                                console.log('fail');
+                            });
+
+                    // Load Account
+                    Vue.http.get('/_system/php/api/accounts/getAccountFromFbid.php?account_fb_id='+response.id)
+                        .then(
+                            response => {
+
+                                if (response.body.success){
+                                    console.log(response.body.data);
+                                    app.account = response.body.data;
+                                    
+                                }
+                                else {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.log('fail');
+                            });
+
+                });
+            }
         }
     }
 }
