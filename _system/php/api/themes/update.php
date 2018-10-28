@@ -14,7 +14,7 @@ $theme_description = $_POST['theme_description'];
 if (isset($theme_id) && isset($theme_description)) {
      try {
          # Connect to Database
-        $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          # Perform SQL Query
         $sql = "UPDATE themes SET theme_description='$theme_description' WHERE theme_id='$theme_id'";

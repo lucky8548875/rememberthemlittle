@@ -15,7 +15,7 @@ if (isset($addon_type) && isset($addon_description) && isset($addon_price) && is
     try {
 
         # Connect to Database
-        $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         # Perform SQL Query

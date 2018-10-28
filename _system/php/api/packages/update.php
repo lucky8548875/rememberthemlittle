@@ -21,7 +21,7 @@ if (isset($package_id) && isset($package_name) && isset($package_description) &&
     try {
 
         # Connect to Database
-        $conn = new PDO("mysql:host=$servername;dbname=rtl_v1", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         # Perform SQL Query
