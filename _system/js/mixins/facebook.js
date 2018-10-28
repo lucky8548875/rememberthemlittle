@@ -4,17 +4,17 @@ var FacebookMixin = {
         debug: {
             enabled: true,
             loginStatus: {
-                status: 'connected'
+                status: ''
             },
             fbapi_me: {
                 picture: {
                     data: {
-                        url: 'http://localhost'
+                        url: ''
                     }
                 },
-                first_name: 'Stephen John',
-                name: 'Stephen John Raymundo',
-                id: '2058223887563931'
+                first_name: '',
+                name: '',
+                id: ''
             },
 
         },

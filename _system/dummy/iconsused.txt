@@ -1,0 +1,13 @@
+facebook-square
+angle-down
+sync
+calendar-check
+cog
+sign-out-alt
+arrow-left
+instagram
+plus
+sign-in-alt
+bars
+user-circle
+arrow-right

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <!-- Meta Tags -->
@@ -21,31 +20,36 @@
     <!-- Vue App -->
     <div id="app">
 
-        <!-- Navigation Bar-->
+        <!-- Navigation Bar -->
         <nav>
-            <a><i class="fas fa-bars" style="font-size: 1.2rem"></i></a>
+            <a><i class="fas fa-bars"></i></a>
             <account_button></account_button>
         </nav>
 
+        <!-- Main Content -->
         <main>
             
-            <i class="fab fa-instagram" style="font-size: 3rem; color: #495057"></i><br>
-            <h1 class="flex wrap justify-center align-items-center">
-                
-                <span>Remember</span>&nbsp
+            <!-- Banner Logo -->
+            <i class="fab fa-instagram icon"></i><br>
+            <h1>
+                <span>Remember</span>
                 <span>Them Little</span>
-                </h1>
-            <br><br>
-            <div class="flex wrap align-items-center justify-center">
-            <a href="/app/booking/" class="button primary" style="padding: 1rem 1.5rem; margin: 0.25rem">
-                <span>Book Your Pictorial</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="/app/admin/transactions/" class="button outline" style="padding: 1rem 1.5rem;  margin: 0.25rem">
-                <span>Admin Dashboard</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
+            </h1>
+
+            <!-- Call to Action Buttons -->
+            <div class="ctas">
+
+                <a href="/app/booking/" class="cta1">
+                    <span>Book Your Pictorial</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="/app/admin/transactions/" class="cta2">
+                    <span>Admin Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
             </div>
+
         </main>
 
     </div>
@@ -56,10 +60,8 @@
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/lazyload.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
-
     <!-- Internal Scripts -->
     <script>
-
         var app = new Vue({
             el: '#app',
             mixins: [lazyload, FacebookMixin],
@@ -67,10 +69,7 @@
                 this.lazyload('/_system/css/fontawesome-free-5.3.1-web/css/all.min.css');
                 this.lazyload('/_system/css/proxima.woff2.css');
             },
-
         })
     </script>
-
 </body>
-
 </html>

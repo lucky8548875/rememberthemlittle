@@ -46,7 +46,7 @@
   display: inline-block;
 }
 
-.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div, .index nav, .index nav h3, .index main, .index-mobile nav, .index-mobile nav span, .index-mobile-two nav, .index-mobile-two nav span {
+.flex, .admin, .admin nav, .admin nav ul, .admin aside ul, .admin main > div, .index nav, .index nav h3, .index main, .index-mobile nav, .index-mobile nav span, .index-mobile-two nav, .index-mobile-two nav span, .index-mobile-experiment main h1, .index-mobile-experiment main div.ctas {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,7 +89,7 @@
   position: fixed;
 }
 
-.wrap, .admin {
+.wrap, .admin, .index-mobile-experiment main h1, .index-mobile-experiment main div.ctas {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -133,7 +133,7 @@
           flex-direction: column-reverse;
 }
 
-.justify-center {
+.justify-center, .index-mobile-experiment main h1, .index-mobile-experiment main div.ctas {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -162,7 +162,7 @@
           justify-content: space-between;
 }
 
-.align-items-center, .admin main > div, .index nav h3, .index nav ul, .index main, .index-mobile nav, .index-mobile nav span, .index-mobile-two nav, .index-mobile-two nav span {
+.align-items-center, .admin main > div, .index nav h3, .index nav ul, .index main, .index-mobile nav, .index-mobile nav span, .index-mobile-two nav, .index-mobile-two nav span, .index-mobile-experiment main h1, .index-mobile-experiment main div.ctas {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -180,7 +180,7 @@
   max-width: 100%;
 }
 
-button, a.button {
+button, a.button, .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experiment main div.ctas a.cta2 {
   color: #495057;
   font-family: "Proxima Soft", "Segoe UI", "Roboto", sans-serif;
   font-weight: 600;
@@ -201,51 +201,51 @@ button, a.button {
   transition: 0.2s background-color, 0.2s border-color;
 }
 
-button:hover, a.button:hover {
+button:hover, a.button:hover, .index-mobile-experiment main div.ctas a.cta1:hover, .index-mobile-experiment main div.ctas a.cta2:hover {
   background-color: #dae0e5;
   border-color: #dae0e5;
 }
 
-button:active, a.button:active {
+button:active, a.button:active, .index-mobile-experiment main div.ctas a.cta1:active, .index-mobile-experiment main div.ctas a.cta2:active {
   background-color: #bdc6d0;
 }
 
-button:focus, a.button:focus {
+button:focus, a.button:focus, .index-mobile-experiment main div.ctas a.cta1:focus, .index-mobile-experiment main div.ctas a.cta2:focus {
   border: 2px solid #cbd3da;
 }
 
-button.primary, a.primary.button {
+button.primary, a.primary.button, .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experiment main div.ctas a.primary.cta2, .index-mobile-experiment main div.ctas button.cta1 {
   color: #ffffff;
   background-color: #5252FF;
   border-color: #5252FF;
 }
 
-button.primary:hover, a.primary.button:hover {
+button.primary:hover, a.primary.button:hover, .index-mobile-experiment main div.ctas a.cta1:hover, .index-mobile-experiment main div.ctas a.primary.cta2:hover, .index-mobile-experiment main div.ctas button.cta1:hover {
   background-color: #3939ff;
   border-color: #3939ff;
 }
 
-button.primary:active, a.primary.button:active {
+button.primary:active, a.primary.button:active, .index-mobile-experiment main div.ctas a.cta1:active, .index-mobile-experiment main div.ctas a.primary.cta2:active, .index-mobile-experiment main div.ctas button.cta1:active {
   background-color: #0000eb;
 }
 
-button.primary:focus, a.primary.button:focus {
+button.primary:focus, a.primary.button:focus, .index-mobile-experiment main div.ctas a.cta1:focus, .index-mobile-experiment main div.ctas a.primary.cta2:focus, .index-mobile-experiment main div.ctas button.cta1:focus {
   border: 2px solid #1f1fff;
 }
 
-button.outline, a.outline.button {
+button.outline, a.outline.button, .index-mobile-experiment main div.ctas a.outline.cta1, .index-mobile-experiment main div.ctas a.cta2, .index-mobile-experiment main div.ctas button.cta2 {
   background-color: transparent;
 }
 
-button.outline:active, a.outline.button:active {
+button.outline:active, a.outline.button:active, .index-mobile-experiment main div.ctas a.outline.cta1:active, .index-mobile-experiment main div.ctas a.cta2:active, .index-mobile-experiment main div.ctas button.cta2:active {
   background-color: #dae0e5;
 }
 
-button.outline:focus, a.outline.button:focus {
+button.outline:focus, a.outline.button:focus, .index-mobile-experiment main div.ctas a.outline.cta1:focus, .index-mobile-experiment main div.ctas a.cta2:focus, .index-mobile-experiment main div.ctas button.cta2:focus {
   border: 2px solid #cbd3da;
 }
 
-button.color-primary, a.color-primary.button {
+button.color-primary, a.color-primary.button, .index-mobile-experiment main div.ctas a.color-primary.cta1, .index-mobile-experiment main div.ctas a.color-primary.cta2 {
   color: #5252FF !important;
 }
 
@@ -262,7 +262,7 @@ a:hover {
   color: #495057;
 }
 
-a.button {
+a.button, .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experiment main div.ctas a.cta2 {
   text-decoration: none;
 }
 
@@ -377,7 +377,7 @@ form fieldset {
   padding: 1rem;
 }
 
-form fieldset.outline {
+form fieldset.outline, form .index-mobile-experiment main div.ctas fieldset.cta2, .index-mobile-experiment main div.ctas form fieldset.cta2 {
   border: 2px solid #e9ecef;
 }
 
@@ -574,11 +574,11 @@ form fieldset > * {
   padding-right: 1rem;
 }
 
-.index nav ul button, .index nav ul a.button {
+.index nav ul button, .index nav ul a.button, .index nav ul .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experiment main div.ctas .index nav ul a.cta1, .index nav ul .index-mobile-experiment main div.ctas a.cta2, .index-mobile-experiment main div.ctas .index nav ul a.cta2 {
   margin-left: 1rem;
 }
 
-.index nav ul button i:not(:only-child), .index nav ul a.button i:not(:only-child) {
+.index nav ul button i:not(:only-child), .index nav ul a.button i:not(:only-child), .index nav ul .index-mobile-experiment main div.ctas a.cta1 i:not(:only-child), .index-mobile-experiment main div.ctas .index nav ul a.cta1 i:not(:only-child), .index nav ul .index-mobile-experiment main div.ctas a.cta2 i:not(:only-child), .index-mobile-experiment main div.ctas .index nav ul a.cta2 i:not(:only-child) {
   margin-right: 0.5rem;
 }
 
@@ -663,6 +663,10 @@ form fieldset > * {
   width: 100%;
 }
 
+.index-mobile-experiment nav a > i {
+  font-size: 1.2rem;
+}
+
 .index-mobile-experiment nav .account_options {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -713,5 +717,29 @@ form fieldset > * {
           align-items: center;
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.index-mobile-experiment main .icon {
+  font-size: 3rem;
+  color: #495057;
+}
+
+.index-mobile-experiment main h1 {
+  margin-bottom: 2rem;
+}
+
+.index-mobile-experiment main h1 span {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.index-mobile-experiment main div.ctas .cta1 {
+  padding: 1rem 1.5rem !important;
+  margin: 0.25rem;
+}
+
+.index-mobile-experiment main div.ctas .cta2 {
+  padding: 1rem 1.5rem !important;
+  margin: 0.25rem;
 }
 /*# sourceMappingURL=playfulcss.css.map */

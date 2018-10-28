@@ -79,6 +79,10 @@
         position: fixed
         width: 100%
 
+        a>i
+            font-size: 1.2rem
+
+
         .account_options
             display: flex
             position: fixed
@@ -107,6 +111,30 @@
         align-items: center
         margin-left: 2rem
         margin-right: 2rem
+
+        .icon
+            font-size: 3rem
+            color: #495057
+
+        h1
+            @extend .flex, .wrap, .justify-center, .align-items-center
+            margin-bottom: 2rem
+            span
+                margin-left: 0.25rem
+                margin-right: 0.25rem
+
+        div.ctas
+            @extend .flex, .wrap, .justify-center, .align-items-center
+
+            .cta1
+                @extend .button, .primary
+                padding: 1rem 1.5rem !important
+                margin: 0.25rem
+            
+            .cta2
+                @extend .button, .outline
+                padding: 1rem 1.5rem !important
+                margin: 0.25rem
 
 
         
