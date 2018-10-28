@@ -18,7 +18,7 @@ Vue.component('account_button',{
 
             <!-- Authorized / Connected -->
             <a v-else-if="$root.loginStatus.status=='connected' || $root.loginStatus.status=='cached'" class="flex align-items-center" @click.prevent="context_visible=true">
-                <img class="profile_pic" :src="$root.fbapi_me.picture.data.url" style="border-radius: 50%; width: 26px; height: 26px; margin-right: 0.25rem;">
+                <img class="profile_pic" :src="$root.fbapi_me.picture.data.url" style="border-radius: 50%; width: 26px; margin-right: 0.25rem;">
                 <i class="fas fa-angle-down"></i>
             </a>
 
