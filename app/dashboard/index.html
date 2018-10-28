@@ -117,7 +117,7 @@
     <modal class="modal" inline-template ref="view">
 
       <!-- Edit Category form -->
-      <form v-if="visible" @submit.prevent="$root.approveBooking(params.booking_id); hide();">
+      <form v-if="visible" enctype="multipart/form-data" @submit.prevent="$root.uploadPayment(params.booking_id,$event); hide();">
 
         <fieldset>
 
@@ -127,23 +127,27 @@
           <span>{{params.booking_created}}</span>
           <br>
 
-          <label>Client Name</label>
-          <span>{{params.account_id}}</span>
-          <br>
-
           <label>Package Details</label>
-          <span>{{params.package_id}}</span>
+          <span>{{params.package_id}}
+            TODO: List Package Details Here
+          </span>
           <br>
 
           <label>Themes</label>
-          <span>{{params.booking_themes}}</span>
+          <span>{{params.booking_themes}}
+              TODO: Show theme images here
+          </span>
           <br>
 
-          <label>Addons</label>
+          <label>Addons
+          </label>
           <ul>
             <li v-for="addon in JSON.parse(params.booking_addons)">{{addon.addon_type}}: {{addon.addon_description}}</li>
+            TODO: Show packages and inclusions here
           </ul>
           <br>
+          <label>Payment Deposit Slip</label>
+          <input type="file" name="deposit_slip">
 
           <!-- Action buttons -->
           <div class="flex align-items-center">
@@ -181,6 +185,45 @@
       created: function () {
         this.getAllBookingsByAccountId(this.account.account_id);
       },
+      methods:{
+
+        uploadPayment(booking_id, submitEvent){
+          
+          var elements = submitEvent.target.elements;
+          var formData = new FormData();
+          formData.append('booking_id', booking_id);
+          formData.append('deposit_slip', elements.deposit_slip.files[0]);
+
+          Vue.http.post('/_system/php/api/bookings/addDepositSlip.php', formData, {
+            headers: {
+              'Content-Type' : 'multipart/form-data'
+            }
+          })
+            .then(
+
+              // If the server request is successful
+              response => {
+
+                // If the PHP file has no errors
+                if (response.body.success) {
+                  console.log(response.body.data)
+                  this.getAllBookingsByAccountId(this.account.account_id)
+                }
+                else
+                  console.error(response.body.message)
+
+              },
+
+              // If the server request is unsuccessful
+              response => {
+
+                console.error(response);
+
+              });
+
+
+        }
+      }
 
     })
 
