@@ -60,8 +60,10 @@
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/lazyload.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
+
     <!-- Internal Scripts -->
     <script>
+
         var app = new Vue({
             el: '#app',
             mixins: [lazyload, FacebookMixin],
@@ -70,6 +72,7 @@
                 this.lazyload('/_system/css/proxima.woff2.css');
             },
         })
+        
     </script>
 </body>
 </html>

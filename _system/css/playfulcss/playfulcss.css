@@ -19,7 +19,7 @@
 }
 
 .font-primary, body {
-  font-family: "Proxima Soft", "Segoe UI", "Roboto", sans-serif;
+  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
 }
 
 .color-primary {
@@ -182,7 +182,7 @@
 
 button, a.button, .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experiment main div.ctas a.cta2 {
   color: #495057;
-  font-family: "Proxima Soft", "Segoe UI", "Roboto", sans-serif;
+  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 1rem;
   -webkit-box-align: center;
@@ -284,7 +284,7 @@ a.button, .index-mobile-experiment main div.ctas a.cta1, .index-mobile-experimen
 }
 
 input:not([type=checkbox]):not([type=radio]), select, textarea {
-  font-family: "Proxima Soft", "Segoe UI", "Roboto", sans-serif;
+  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   color: #495057;
   background-color: white;
   border: 2px solid #e9ecef;
@@ -657,8 +657,6 @@ form fieldset > * {
       -ms-flex-align: center;
           align-items: center;
   padding: 1.25rem 2rem;
-  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   position: fixed;
   width: 100%;
 }
