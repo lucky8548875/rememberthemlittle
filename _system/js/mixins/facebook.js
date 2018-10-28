@@ -1,11 +1,31 @@
 var FacebookMixin = {
     data: {
 
+        debug: {
+            enabled: true,
+            loginStatus: {
+                status: 'connected'
+            },
+            fbapi_me: {
+                picture: {
+                    data: {
+                        url: 'http://localhost'
+                    }
+                },
+                first_name: 'Stephen John',
+                name: 'Stephen John Raymundo',
+                id: '2058223887563931'
+            },
+
+        },
+
         // Account Schema from Database
-        account: {},
+        account: {
+            account_id: 1
+        },
 
         loginStatus: {
-            status: ''
+            status: 'connected'
         },
 
         fbapi_me: {
@@ -14,9 +34,9 @@ var FacebookMixin = {
                     url: ''
                 }
             },
-            first_name: '',
-            name: '',
-            id: ''
+            first_name: 'Stephen John',
+            name: 'Stephen John Raymundo',
+            id: '2058223887563931'
         },
     },
 
@@ -80,7 +100,7 @@ var FacebookMixin = {
 
             if (this.loginStatus.status == "connected") {
 
-                FB.api('/me', { fields: ['first_name', 'picture', 'name', 'id', 'email'] }, function (response) {
+                FB.api('/me', { fields: ['first_name', 'picture', 'name', 'id'] }, function (response) {
 
                     // Set response data
                     app.fbapi_me = response

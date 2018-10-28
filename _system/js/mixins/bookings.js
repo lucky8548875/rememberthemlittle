@@ -47,9 +47,34 @@ var BookingMethods = {
                       console.error(response);
 
                   });
-
-
       },
+
+      getAllBookingsByAccountId(account_id){
+          
+
+        Vue.http.get('/_system/php/api/bookings/get.php?account_id='+account_id)
+        .then(
+
+            // If the server request is successful
+            response => {
+
+                // If the PHP file has no errors
+                if (response.body.success) {
+                    this.bookings = response.body.data
+                }
+                else
+                    console.error(response.body.message)
+
+            },
+
+            // If the server request is unsuccessful
+            response => {
+
+                console.error(response);
+
+            });
+
+      }
 
     }
 

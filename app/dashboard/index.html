@@ -128,7 +128,7 @@
           <br>
 
           <label>Client Name</label>
-          <span>Margaret Swann</span>
+          <span>{{params.account_id}}</span>
           <br>
 
           <label>Package Details</label>
@@ -148,9 +148,8 @@
           <!-- Action buttons -->
           <div class="flex align-items-center">
             <button @click.prevent="hide">Close</button>
-            <button @click.prevent="$root.deleteCategory(params.category_id); hide();" style="margin-left: 0.5rem">Cancel
-              Request</button>
-            <button type="submit" class="primary" style="margin-left: 0.5rem">Approve</button>
+            <button @click.prevent="$root.deleteCategory(params.category_id); hide();" style="margin-left: 0.5rem">Reschedule</button>
+            <button type="submit" class="primary" style="margin-left: 0.5rem">Upload Payment</button>
           </div>
 
         </fieldset>
@@ -167,58 +166,22 @@
 
   <!-- Mixins -->
   <script src="/_system/js/mixins/facebook.js"></script>
+  <script src="/_system/js/mixins/bookings.js"></script>
 
   <!-- Local Scripts -->
   <script>
 
     // Vue Instance
     var app = new Vue({
-      mixins: [FacebookMixin],
+      mixins: [FacebookMixin,BookingMethods],
       el: '#app',
       data: {
         bookings: []
       },
       created: function () {
-        this.loadBookings();
+        this.getAllBookingsByAccountId(this.account.account_id);
       },
-      methods: {
 
-        loadBookings: function () {
-
-          Vue.http.get('/_system/php/api/bookings/getAll.php')
-            .then(
-              response => {
-
-                if (response.body.success)
-                  this.bookings = response.body.data;
-                else
-                  console.error(response.body.message);
-              },
-              response => {
-                console.log('fail');
-              });
-        },
-
-        approveBooking: function (booking_id) {
-
-          var formData = new FormData();
-          formData.append('booking_id',booking_id)
-
-          Vue.http.post('/_system/php/api/bookings/approveBooking.php',formData)
-            .then(
-              response => {
-
-                if (response.body.success){
-                  this.loadBookings();
-                }
-                else
-                  console.error(response.body.message);
-              },
-              response => {
-                console.log('fail');
-              });
-        }
-      }
     })
 
   </script>
