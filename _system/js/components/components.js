@@ -13,7 +13,7 @@ Vue.component('account_button',{
 
             <!-- Not Authorized / Not Connected-->
             <button v-if="$root.loginStatus.status=='unknown' || $root.loginStatus.status=='not_authorized'" class="outline color-primary"
-                @click="this.login" v-cloak>
+                @click="$root.login" v-cloak>
                 <i class="fab fa-facebook-square"></i><span>Login</span></button>
 
             <!-- Authorized / Connected -->
@@ -46,7 +46,7 @@ Vue.component('account_button',{
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </a>
-                    <a>
+                    <a @click.prevent="$root.logout(); context_visible=false">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Sign Out</span>
                     </a>
