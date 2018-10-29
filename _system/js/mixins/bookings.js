@@ -14,10 +14,12 @@ var BookingMethods = {
         .then(
           response => {
 
-            if (response.body.success)
+            if (response.body.success){
               this.slots = response.body.data;
+              console.log(response.body);
+            }
             else
-              console.error(response.body.message);
+              console.error(response.body);
           },
           response => {
             console.log('fail');

@@ -28,7 +28,7 @@ if (isset($account_name) && isset($account_contact) && isset($account_email)) {
 
         # Print success
         echo json_encode((object)[
-            'success' => true
+            'success' => true,
         ]);
 
     } catch (PDOException $e) {
@@ -40,6 +40,9 @@ if (isset($account_name) && isset($account_contact) && isset($account_email)) {
 
     }
 } else {
-    echo 'values not set';
+    echo json_encode((object)[
+        'success' => false,
+        'message' => "Connection failed: " . $e->getMessage() . "UPDATE accounts SET account_name='$account_name', account_contact='$account_contact', account_email='$account_email' WHERE account_id='$account_id'"
+    ]);
 }
 

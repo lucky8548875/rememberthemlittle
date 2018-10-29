@@ -74,8 +74,8 @@
                         <div class="card" v-for="package in $root.packagesFromSelectedCategory" style="padding: 1rem">
 
                             <label :for="package.package_name">
-                                <input required type="radio" name="package" :id="package.package_name" v-model="$root.booking.package_id"
-                                    :value="package.package_id">
+                                <input required type="radio" name="package" :id="package.package_name" v-model="$root.booking.package"
+                                    :value="package">
                                 <a>{{package.package_name}}</a>
                             </label>
                         </div>
@@ -116,8 +116,8 @@
                         </table>
 
                         <div class="flex align-items-center">
-                            <select style="margin: 0" v-model="$root.selected_addon_id" name="addons">
-                                <option v-for="addon in $root.addons" :value="addon.addon_id">{{addon.addon_type}} -
+                            <select style="margin: 0" v-model="$root.selected_addon" name="addons">
+                                <option v-for="addon in $root.addons" :value="addon">{{addon.addon_type}} -
                                     {{addon.addon_description}}</option>
                             </select>
                             <button @click.prevent="$root.addAddon">Add</button>
@@ -137,10 +137,10 @@
 
                             <!-- Table body -->
                             <tbody>
-                                <tr v-for="addon_id in $root.booking.addon_ids">
-                                    <td>{{$root.getAddon(addon_id).addon_type}}</td>
-                                    <td>{{$root.getAddon(addon_id).addon_description}}</td>
-                                    <td>{{$root.getAddon(addon_id).addon_price}}</td>
+                                <tr v-for="addon in $root.booking.addons">
+                                    <td>{{addon.addon_type}}</td>
+                                    <td>{{addon.addon_description}}</td>
+                                    <td>{{addon.addon_price}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -239,8 +239,8 @@
                 <fieldset class="outline">
                     <legend>Summary</legend>
                     <label>Category: {{booking.category_id}}</label>
-                    <label>Package: {{booking.package_id}}</label>
-                    <label>Addons: {{booking.addon_ids}}</label>
+                    <label>Package: {{booking.package}}</label>
+                    <label>Addons: {{booking.addons}}</label>
                     <label>Themes: {{booking.theme_ids}}</label>
                     <label>Date: {{booking.booking_date}}</label>
                     <label>Time: {{booking.booking_time}}</label>
@@ -288,7 +288,7 @@
                 addons: [],
                 themes: [],
 
-                selected_addon_id: "",
+                selected_addon: "",
                 selected_date: "",
 
                 slots: [],
@@ -297,8 +297,8 @@
 
                 booking: {
                     category_id: "",
-                    package_id: "",
-                    addon_ids: [],
+                    package: "",
+                    addons: [],
                     theme_ids: [],
                     booking_date: "",
                     booking_time: "",
@@ -318,14 +318,14 @@
             methods: {
 
                 addAddon() {
-                    this.booking.addon_ids.push(this.selected_addon_id)
+                    this.booking.addons.push(this.selected_addon)
                 },
 
                 submitBooking(){
 
                     var formData = new FormData();
-                    formData.append('package_id', this.booking.package_id);
-                    formData.append('booking_addons', JSON.stringify(this.booking.addon_ids));
+                    formData.append('package', JSON.stringify(this.booking.package));
+                    formData.append('booking_addons', JSON.stringify(this.booking.addons));
                     formData.append('booking_themes', JSON.stringify(this.booking.theme_ids));
                     formData.append('booking_date', this.booking.booking_date);
                     formData.append('booking_time', this.booking.booking_time);
@@ -354,10 +354,10 @@
 
                 total_price(){
                     try{
-                    var package_price =  this.packages.find(package => package.package_id === this.booking.package_id).package_price
+                    var package_price =  this.booking.package.package_price
                     var addons_price = 0;
-                    for(var i=0;i<this.booking.addon_ids.length;i++){
-                        addons_price += this.addons.find(addon => addon.addon_id === this.booking.addon_ids[i]).addon_price
+                    for(var i=0;i<this.booking.addons.length;i++){
+                        addons_price += this.booking.addons[i].addon_price
                     }
                     return package_price + addons_price;
                 }
@@ -369,7 +369,7 @@
             watch: {
                 selected_date: function () {
                     this.booking.booking_date = this.selected_date;
-                    this.getOpenSlots(this.selected_date, this.getPackage(this.booking.package_id).package_minutes);
+                    this.getOpenSlots(this.selected_date, this.booking.package.package_minutes);
                 },
             }
 

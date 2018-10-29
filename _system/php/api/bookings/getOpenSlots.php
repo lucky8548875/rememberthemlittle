@@ -19,7 +19,8 @@ if (isset($date) && isset($duration))
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         # Perform SQL Query
-        $sql = "SELECT b.booking_id, b.booking_date, b.booking_time, p.package_minutes FROM bookings b INNER JOIN packages p ON b.booking_date = '$date' AND b.package_id = p.package_id ORDER BY b.booking_time ASC";
+        // $sql = "SELECT b.booking_id, b.booking_date, b.booking_time, p.package_minutes FROM bookings b INNER JOIN packages p ON b.booking_date = '$date' AND b.package_id = p.package_id ORDER BY b.booking_time ASC";
+        $sql = "SELECT booking_id, booking_date, booking_time, package FROM bookings WHERE booking_date = '$date' ORDER BY booking_time ASC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         # Fetch Result
@@ -36,7 +37,7 @@ if (isset($date) && isset($duration))
         $current = $start; #initialize current time
         $end_of_current = strtotime($duration, $current); #initialize and compute end time of current
         $reserved_start = strtotime($reserved[$c]['booking_time']);
-        $reserved_duration = "+".$reserved[$c]['package_minutes']." minutes";
+        $reserved_duration = "+".(json_decode($reserved[$c]['package'])->package_minutes)." minutes";
         $end_of_reserved = strtotime($reserved_duration, $reserved_start);
         
         while ($current < $stop && strtotime($duration, $current) <= $stop)
@@ -56,7 +57,7 @@ if (isset($date) && isset($duration))
                 //echo "<br>Past booking #".$reserved[$c]['booking_id']." @".date("H:i", $reserved_start)." - ".date("H:i", $end_of_reserved)."<br>";
                 $c = $c + 1;
                 $reserved_start = strtotime($reserved[$c]['booking_time']);
-                $reserved_duration = "+".$reserved[$c]['package_minutes']." minutes";
+                $reserved_duration = "+".(json_decode($reserved[$c]['package'])->package_minutes)." minutes";
                 $end_of_reserved = strtotime($reserved_duration, $reserved_start);
             }
             $current = strtotime($step, $current);
@@ -73,7 +74,7 @@ if (isset($date) && isset($duration))
     {
         echo json_encode((object)[
             'success' => false,
-            'message' => "Connection failed"
+            'message' => "Connection failed".$e
         ]);
     }
 }

@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.ph
 
 
 # Retrieve POST parameters
-$package_id =  $_POST['package_id'];
+$package =  $_POST['package'];
 $booking_addons = $_POST['booking_addons'];
 $booking_themes = $_POST['booking_themes'];
 $booking_date = $_POST['booking_date'];
@@ -19,7 +19,7 @@ $booking_payment = $_POST['booking_payment'];
 $booking_total_price = $_POST['booking_total_price'];
 
 # Check parameters if null
-if (isset($package_id)) {
+if (isset($package)) {
 
     try {
 
@@ -30,7 +30,7 @@ if (isset($package_id)) {
 
         // !Todo : Fix account_id (currently fixed to 1) and booking_total_price
         # Perform SQL Query
-        $sql = "INSERT INTO bookings (account_id, package_id, booking_addons, booking_themes, booking_date, booking_time, subject_name, subject_age, booking_payment, booking_total_price) VALUES (1,'$package_id', '$booking_addons', '$booking_themes', '$booking_date', '$booking_time', '$subject_name', '$subject_age','$booking_payment','$booking_total_price')";
+        $sql = "INSERT INTO bookings (account_id, package, booking_addons, booking_themes, booking_date, booking_time, subject_name, subject_age, booking_payment, booking_total_price) VALUES (1,'$package', '$booking_addons', '$booking_themes', '$booking_date', '$booking_time', '$subject_name', '$subject_age','$booking_payment','$booking_total_price')";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
@@ -51,7 +51,7 @@ if (isset($package_id)) {
 else {
     echo json_encode((object)[
         'success' => false,
-        'message' => "Values not set"
+        'message' => "Values not set"."$package $booking_addons $booking_themes $booking_date $booking_time $subject_name $subject_age $account_name $booking_payment $booking_total_price"
     ]);
 }
 

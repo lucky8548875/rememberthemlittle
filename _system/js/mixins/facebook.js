@@ -1,24 +1,6 @@
 var FacebookMixin = {
     data: {
 
-        debug: {
-            enabled: true,
-            loginStatus: {
-                status: ''
-            },
-            fbapi_me: {
-                picture: {
-                    data: {
-                        url: ''
-                    }
-                },
-                first_name: '',
-                name: '',
-                id: ''
-            },
-
-        },
-
         // Account Schema from Database
         account: {
             account_id: 1
