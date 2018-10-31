@@ -23,10 +23,8 @@
                 <i class="fas fa-bars"></i>
                 <span>Menu</span>
             </a>
-            <a href="#" @click="$root.$refs.signin.show()">
-                <i class="fas fa-user"></i>
-                <span>Sign In</span>
-            </a>
+            <account-button></account-button>
+            
         </nav>
 
         <!-- Main Content -->
@@ -105,10 +103,11 @@
                         <div>
                             <i class="fas fa-user-circle"></i>
                             
-                            <button>
+                            <button @click="$root.fbInit()">
                                 <i class="fab fa-facebook-square"></i>
                                 <span>Sign in with Facebook</span>
                             </button>
+
                             <button>
                                 <i class="fas fa-mobile-alt"></i>
                                 <span>Sign in thru SMS</span>
@@ -120,11 +119,19 @@
 
     </div>
 
+    <!--External Scripts -->
     <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
     <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+
+    <!-- Internal Scripts -->
     <script>
         var app = new Vue({
-            el: '#app'
+            el: '#app',
+            mixins: [accountMixin,facebookMixin]
+
         })
     </script>
 
