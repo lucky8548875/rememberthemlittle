@@ -442,6 +442,10 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   margin-right: 2rem;
 }
 
+*[v-cloak] {
+  display: none;
+}
+
 .index nav {
   display: -webkit-box;
   display: -ms-flexbox;

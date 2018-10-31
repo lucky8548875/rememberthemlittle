@@ -58,7 +58,7 @@
         </main>
 
         <!-- Sliding Drawer -->
-        <toggle inline-template ref="drawer">
+        <toggle inline-template ref="drawer" v-cloak>
 
 
             <div>
@@ -97,7 +97,7 @@
 
         </toggle>
 
-        <toggle inline-template ref="signin">
+        <toggle inline-template ref="signin" v-cloak>
                 <transition name="zoom-out" appear>
                     <div class="signin" v-show="visible" @click="hide()">
                         <div>
