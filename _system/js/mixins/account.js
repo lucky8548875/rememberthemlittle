@@ -16,6 +16,9 @@ var accountMixin = {
 
         if(this.account.status != "DISCONNECTED"){
             this.verifyToken();
+        }else{
+            // If disconnected, init fb
+            this.fbInit();
         }
         
     },

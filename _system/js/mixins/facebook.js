@@ -18,11 +18,10 @@ var facebookMixin = {
                 // FB.getLoginStatus(function (response) {
                 //     app.statusChangeCallback(response);
                 // });
-                FB.login(app.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
     
-                FB.Event.subscribe('auth.login', function (response) {
-                    app.statusChangeCallback(response);
-                })
+                // FB.Event.subscribe('auth.login', function (response) {
+                //     app.statusChangeCallback(response);
+                // })
     
             };
     
@@ -75,6 +74,10 @@ var facebookMixin = {
             }
 
         },
+
+        facebook_login(){
+            FB.login(app.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
+        }
 
     }
 
