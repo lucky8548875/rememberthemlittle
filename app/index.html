@@ -1,22 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/_system/css/normalize.css">
-  <link rel="stylesheet" href="/_system/css/proxima.woff2.css">
-  <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
-  <link rel="stylesheet" href="/_system/css/fontawesome-free-5.3.1-web/css/all.min.css">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+
 </head>
-<body>
 
-  <div class="flex wide high align-items-center justify-center">
+<body class="index">
 
-    <h1>Hello, World!</h1>
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <a href="#" @click="$root.$refs.drawer.show()">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+            <a href="#" @click="$root.$refs.signin.show()">
+                <i class="fas fa-user"></i>
+                <span>Sign In</span>
+            </a>
+        </nav>
 
-  </div>
-  
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+
+                <i class="fab fa-instagram icon"></i>
+                <h1>
+                    <span>Remember</span>
+                    <span>Them Little</span>
+                </h1>
+
+                <div>
+                    <button>
+                        <span>Book Now</span>
+                        <i class="fas fa-calendar-alt"></i>
+                    </button>
+                    <button>
+                        <span>Explore</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+                <br><br><br><br>
+
+                <a href="https://www.facebook.com/rememberthemlittle" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    <span>Visit us on Facebook</span>
+                </a>
+
+            </div>
+        </main>
+
+        <!-- Sliding Drawer -->
+        <toggle inline-template ref="drawer">
+
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+                        <a>
+                            <h2>
+                                <i class="fab fa-instagram"></i><br>
+                                <span>Remember<br>Them Little</span></span>
+                            </h2>
+                        </a>
+
+                        <a href="#" class="active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-camera"></i>
+                            <span>Services</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-th"></i>
+                            <span>Gallery</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-phone fa-flip-horizontal"></i>
+                            <span>Contact Us</span>
+                        </a>
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+
+        <toggle inline-template ref="signin">
+                <transition name="zoom-out" appear>
+                    <div class="signin" v-show="visible" @click="hide()">
+                        <div>
+                            <i class="fas fa-user-circle"></i>
+                            
+                            <button>
+                                <i class="fab fa-facebook-square"></i>
+                                <span>Sign in with Facebook</span>
+                            </button>
+                            <button>
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Sign in thru SMS</span>
+                            </button>
+                        </div>
+                    </div>
+                </transition>
+        </toggle>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app'
+        })
+    </script>
+
 </body>
+
 </html>

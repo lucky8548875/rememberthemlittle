@@ -1,0 +1,115 @@
+.transactions
+
+    nav
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 1rem
+        width: 100%
+        background-color: white
+        z-index: 1
+
+        > a
+            padding: 1rem
+            display: flex
+            align-items: center
+
+            > i
+                font-size: 1.2rem
+
+        > a:nth-child(2)
+            color: $color-primary
+
+    main
+        padding-left: 2rem
+        padding-right: 2rem
+
+        .control
+            display: flex
+            align-items: center
+            width: 100%
+            justify-content: space-between
+            margin-bottom: 2rem
+
+            .filter
+                display: flex
+                align-items: center
+
+                i
+                    margin-left: 0.5rem
+
+            .group
+                display: flex
+                
+                a
+                    padding: 0.5rem 1rem
+                    background-color: $color-light
+                    color: $color-gray
+
+                a.active
+                    background-color: $color-primary
+                    color: $color-white
+                    
+
+                a:first-child
+                    border-radius: 2rem 0rem 0rem 2rem
+
+                a:last-child
+                    border-radius: 0rem 2rem 2rem 0rem
+        table
+            width: 100%
+
+    .blocker
+        position: fixed
+        display: inline-block
+        width: 100%
+        height: 100vh
+        top: 0
+        left: 0
+        background-color: rgba(0,0,0,0.5)
+        z-index: 2
+
+    .drawer
+        position: fixed
+        top: 0
+        left: 0
+        height: 100vh
+        display: flex
+        flex-direction: column
+        background-color: $color-white
+        background-color: $color-primary
+        box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0,0,0,0.05)
+        padding: 1rem 1rem 1rem 0rem
+        z-index: 3
+
+        a
+            border-radius: 0 2rem 2rem 0
+            padding: 1rem 2rem
+            position: relative
+            display: flex
+            color: $color-white
+
+            i
+                width: 1rem
+                text-align: center
+                margin-right: 0.5rem
+
+        > a + div
+
+            a
+                font-weight: lighter
+
+            a.active
+                color: $color-white
+                font-weight: bold
+                position: relative
+
+            a:hover
+                color: $color-white
+
+        > a.active
+            color: $color-primary
+            background-color: $color-white
+
+        > a:not(.active):hover
+            background-color: transparentize($color-white,0.8)
