@@ -10,7 +10,7 @@ var accountMixin = {
         }
     },
 
-    created: function () {
+    mounted: function () {
 
         this.loadAccountFromCache();
 
@@ -18,7 +18,7 @@ var accountMixin = {
             this.verifyToken();
         }else{
             // If disconnected, init fb
-            app.fbInit();
+            this.fbInit();
         }
         
     },
