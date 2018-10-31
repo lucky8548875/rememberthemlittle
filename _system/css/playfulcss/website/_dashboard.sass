@@ -1,0 +1,176 @@
+.dashboard
+
+    nav
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 1rem
+        width: 100%
+        background-color: white
+        z-index: 1
+
+        a
+            padding: 1rem
+            display: flex
+            align-items: center
+
+            i
+                font-size: 1.2rem
+
+        > span
+            display: flex
+
+    main
+        padding-left: 2rem
+        padding-right: 2rem
+
+        .control
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 1rem
+
+            button
+                @extend .primary
+
+        .bookings
+           display: flex
+           flex-direction: column
+
+           table
+                width: 100%
+
+                td:first-child
+                    div
+                        display: flex
+                        flex-direction: column
+
+                        span:nth-child(2)
+                            font-size: 0.8rem
+                            margin-top: 0.25rem
+
+                td
+                    a
+                        @extend .button, .outline, .color-primary
+                        display: flex
+                        font-size: 0.9rem
+                        justify-content: center
+                        border-width: 1px
+                        border-color: $color-primary
+
+                td:last-child
+                    padding-right: 0
+
+    .notification-modal
+        position: fixed
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        background-color: white
+        padding: 2rem
+        display: flex
+        flex-direction: column
+
+        > h3
+            display: flex
+            justify-content: space-between
+            align-items: center
+        
+            > a
+                @extend .button, .outline
+                        
+    .booking-modal
+        position: fixed
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        background-color: white
+        padding: 2rem
+        display: flex
+        flex-direction: column
+
+        > h3
+            display: flex
+            justify-content: space-between
+            align-items: center
+        
+            > a
+                @extend .button, .outline
+
+        .overflow-container
+            overflow: auto
+         
+            table
+                margin-top: 1rem
+                width: 100%
+
+                td:last-child
+                    padding-right: 0
+
+                td:first-child
+                    font-weight: bold
+
+                button
+                    width: 100%
+                    justify-content: center
+
+            details
+                summary
+                    *
+                        display: inline
+
+
+    .blocker
+        position: fixed
+        display: inline-block
+        width: 100%
+        height: 100vh
+        top: 0
+        left: 0
+        background-color: rgba(0,0,0,0.5)
+        z-index: 2
+
+    .drawer
+        overflow: auto
+        position: fixed
+        top: 0
+        left: 0
+        height: 100vh
+        display: flex
+        flex-direction: column
+        background-color: $color-white
+        box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0,0,0,0.05)
+        padding: 1rem 1rem 1rem 0rem
+        z-index: 3
+
+        a
+            padding: 1rem 2rem
+            position: relative
+
+            i
+                width: 1rem
+                text-align: center
+                margin-right: 0.5rem
+
+        a:first-child
+            text-align: center
+            margin-bottom: 1rem
+            > h2
+                display: flex
+                flex-direction: column
+                align-items: center
+                font-weight: lighter
+                > i
+                    width: initial
+                    margin-bottom: 0.25rem
+                    font-size: 3rem
+                    font-weight: normal
+
+        a.active
+            color: $color-white
+            background-color: $color-primary
+            border-radius: 0 2rem 2rem 0
+
+   

@@ -1,44 +1,10 @@
+@mixin margin($size)
+    margin: $size
 
-.margin
-    margin: $size-normal
+@mixin margin-x($size)
+    margin-left: $size
+    margin-right: $size
 
-.margin-small
-    margin: $size-small
-
-.margin-medium
-    margin: $size-medium
-
-.margin-large
-    margin: $size-large
-
-.margin-x
-    margin-left: $size-normal
-    margin-right: $size-normal
-
-.margin-x-small
-    margin-left: $size-small
-    margin-right: $size-small
-
-.margin-x-medium
-    margin-left: $size-medium
-    margin-right: $size-medium
-
-.margin-x-large
-    margin-left: $size-large
-    margin-right: $size-large
-
-.margin-y
-    margin-top: $size-normal
-    margin-bottom: $size-normal
-
-.margin-y-small
-    margin-top: $size-small
-    margin-bottom: $size-small
-
-.margin-y-medium
-    margin-top: $size-medium
-    margin-bottom: $size-medium
-
-.margin-y-large
-    margin-top: $size-large
-    margin-bottom: $size-large
+@mixin margin-y($size)
+    margin-top: $size
+    margin-bottom: $size
