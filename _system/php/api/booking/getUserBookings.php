@@ -41,13 +41,11 @@ catch(PDOException $e)
 
 }
 else{
-    // echo json_encode((object)[
-    //     'success' => false,
-    //     'status' => 'UNAUTHORIZED',
-    //     'account_id' => $account_id,
-    //     'token' => $token,
-    //     'query' => "SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true"
-
-    // ]);
+    echo json_encode((object)[
+        'success' => false,
+        'status' => 'UNAUTHORIZED',
+        'account_id' => $account_id,
+        'token' => $token
+    ]);
 }
 ?>

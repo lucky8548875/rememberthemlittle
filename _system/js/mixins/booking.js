@@ -19,7 +19,7 @@ var bookingMixin = {
                             console.log(this.account.account_id)
                             console.log(this.account.token)
                             console.log(response.body);
-                            // this.clearAccountFromCache();
+                            this.clearAccountFromCache();
                         }
                         else
                             console.error(response.body.message);
