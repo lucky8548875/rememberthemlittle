@@ -40,7 +40,7 @@ try {
         $timezone = date_default_timezone_get();
         $date = date('m/d/Y h:i:s a', time());
         $token = md5($account_id.$date);
-        $remote_addr = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $remote_addr = file_get_contents("http://ipecho.net/plain");
         $http_user_agent = str_replace("/","",str_replace("\\","",$_SERVER['HTTP_USER_AGENT']));
 
         // Create new token

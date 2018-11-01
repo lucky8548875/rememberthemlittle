@@ -8,7 +8,7 @@ $account_id = $_GET['account_id'];
 $token = $_GET['token'];
 
 # Get UA/IP Parameters
-$remote_addr = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+$remote_addr = file_get_contents("http://ipecho.net/plain");
 $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 if (isset($account_id) && isset($token) && isset($remote_addr) && isset($http_user_agent)) {
