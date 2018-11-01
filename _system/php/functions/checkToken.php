@@ -9,7 +9,7 @@ function isTokenValid($account_id,$token){
 
     try{
 
-    $remote_addr = $_SERVER['REMOTE_ADDR'];
+    $remote_addr = gethostbyaddr($_SERVER['REMOTE_ADDR']);
     $http_user_agent = str_replace("/","",str_replace("\\","",$_SERVER['HTTP_USER_AGENT']));
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
