@@ -249,11 +249,12 @@
     <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
     <script src="/_system/js/mixins/booking.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin, bookingMixin],
+            mixins: [accountMixin, bookingMixin, facebookMixin],
             mounted: function () {
                 this.getUserBookings();
             },
