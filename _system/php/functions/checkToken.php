@@ -2,10 +2,7 @@
 
 function isTokenValid($account_id,$token){
 
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "usbw";
-    $dbname = "rtl_v1";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 
     try{
 
