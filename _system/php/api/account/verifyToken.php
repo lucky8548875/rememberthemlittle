@@ -10,7 +10,7 @@ $token = $_GET['token'];
 # Get UA/IP Parameters
 $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-if (isset($account_id) && isset($token) && && isset($http_user_agent)) {
+if (isset($account_id) && isset($token) && isset($http_user_agent)) {
 
     // Format http_user_agent
     $http_user_agent = str_replace("/","",str_replace("\\","",$http_user_agent));
