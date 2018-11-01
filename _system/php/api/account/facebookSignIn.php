@@ -40,11 +40,10 @@ try {
         $timezone = date_default_timezone_get();
         $date = date('m/d/Y h:i:s a', time());
         $token = md5($account_id.$date);
-        $remote_addr = file_get_contents("http://ipecho.net/plain");
         $http_user_agent = str_replace("/","",str_replace("\\","",$_SERVER['HTTP_USER_AGENT']));
 
         // Create new token
-        $sql = "INSERT INTO tokens (account_id,token,remote_addr,http_user_agent,token_valid) VALUES ('$account_id','$token','$remote_addr','$http_user_agent',true)";
+        $sql = "INSERT INTO tokens (account_id,token,http_user_agent,token_valid) VALUES ('$account_id','$token','$http_user_agent',true)";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 

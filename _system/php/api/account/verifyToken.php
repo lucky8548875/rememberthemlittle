@@ -8,10 +8,9 @@ $account_id = $_GET['account_id'];
 $token = $_GET['token'];
 
 # Get UA/IP Parameters
-$remote_addr = file_get_contents("http://ipecho.net/plain");
 $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-if (isset($account_id) && isset($token) && isset($remote_addr) && isset($http_user_agent)) {
+if (isset($account_id) && isset($token) && && isset($http_user_agent)) {
 
     // Format http_user_agent
     $http_user_agent = str_replace("/","",str_replace("\\","",$http_user_agent));
@@ -23,7 +22,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare("SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND remote_addr='$remote_addr' AND http_user_agent='$http_user_agent' AND token_valid=true");
+    $stmt = $conn->prepare("SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true");
     $stmt->execute();
 
     # Fetch Result
@@ -46,7 +45,6 @@ try {
             'data' => $result,
             'account_id' => $account_id,
             'token' => $token,
-            'remote_addr' => $remote_addr,
             'http_user_agent' => $http_user_agent
         ],JSON_NUMERIC_CHECK);
     }
@@ -64,7 +62,7 @@ catch(PDOException $e)
 else {
     echo json_encode((object)[
         'success' => false,
-        'message' => "Values not set $account_id -- $token -- $remote_addr -- $http_user_agent"
+        'message' => "Values not set $account_id -- $token -- $http_user_agent"
     ]);
 }
 ?>

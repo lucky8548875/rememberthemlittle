@@ -9,13 +9,12 @@ function isTokenValid($account_id,$token){
 
     try{
 
-    $remote_addr = file_get_contents("http://ipecho.net/plain");
     $http_user_agent = str_replace("/","",str_replace("\\","",$_SERVER['HTTP_USER_AGENT']));
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $conn->prepare("SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND remote_addr='$remote_addr' AND http_user_agent='$http_user_agent' AND token_valid=true");
+    $stmt = $conn->prepare("SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true");
     $stmt->execute();
 
     # Fetch Result
