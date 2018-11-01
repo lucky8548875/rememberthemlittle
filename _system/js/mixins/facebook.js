@@ -15,14 +15,6 @@ var facebookMixin = {
     
                 FB.AppEvents.logPageView();
     
-                // FB.getLoginStatus(function (response) {
-                //     app.statusChangeCallback(response);
-                // });
-    
-                // FB.Event.subscribe('auth.login', function (response) {
-                //     app.statusChangeCallback(response);
-                // })
-    
             };
     
             (function (d, s, id) {

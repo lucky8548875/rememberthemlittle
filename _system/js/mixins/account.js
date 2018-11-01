@@ -14,10 +14,10 @@ var accountMixin = {
 
         this.loadAccountFromCache();
 
-        if(this.account.status != "DISCONNECTED"){
+        if (this.account.status != "DISCONNECTED"){
             this.verifyToken();
-        }else{
-            // If disconnected, init fb
+        }
+        else {
             this.fbInit();
         }
         

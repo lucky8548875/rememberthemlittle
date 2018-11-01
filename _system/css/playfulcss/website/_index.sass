@@ -83,16 +83,17 @@
                 display: flex
                 flex-wrap: wrap
                 
-                button
+                a
+                    @extend .button
                     padding: 1rem 1.5rem
                     justify-content: center
                     width: 13rem
                     margin: 0.5rem
 
-                button:first-of-type
+                a:first-of-type
                     @extend .primary
 
-                button:nth-of-type(2)
+                a:nth-of-type(2)
                     @extend .outline
 
             

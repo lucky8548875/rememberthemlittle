@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+
+</head>
+
+<body class="index">
+
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <a href="#" @click="$root.$refs.drawer.show()">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+
+            <stepper steps=7 inline-template v-cloak>
+
+                <div @submit.prevent="next()" style="text-align: center">
+                    <transition name="fade" mode="out-in">
+                        <form v-if="step==1" key="1">
+                            <fieldset>
+                                <legend>Step 1</legend>
+                                <label>Choose a Category</label>
+                                <select v-model="$root.selected_category_id">
+                                    <option v-for="category in $root.categories" :value="category.category_id">
+                                        {{category.category_name}}
+                                    </option>
+                                </select>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==2" key="2" mode="out-in">
+                            <fieldset>
+                                <legend>Step 2</legend>
+                                <label>Choose a Package</label>
+                                <select v-model="$root.selected_package_id">
+                                    <option v-for="package in $root.filteredPackages" :value="package.package_id">{{package.package_name}}</option>
+                                </select>
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==3" key="3" mode="out-in">
+                            <fieldset>
+                                <legend>Step 3</legend>
+                                <label>Purchase Addons</label>
+
+                                <select v-model="$root.selected_addon">
+                                    <option v-for="addon in $root.addons" :value="addon" v-if="$root.checkLimit(addon)">
+                                        {{addon.addon_type}} - {{addon.addon_description}} (Php {{addon.addon_price}})
+                                    </option>
+                                </select>
+                                <button @click.prevent="$root.addAddon">Add</button>
+                                <table style="display: table !important; width: 100%;">
+
+                                    <!-- Table headers -->
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- Table body -->
+                                    <tbody>
+                                        <tr v-for="addon,index in $root.booking.addons">
+                                            <td>{{addon.addon_type}}</td>
+                                            <td>{{addon.addon_description}}</td>
+                                            <td>{{addon.addon_price == 0 ? 'FREE' : 'Php ' + addon.addon_price}}</td>
+                                            <td>
+                                                <a v-if="addon.addon_price != 0 && addon.addon_description!='8x10 (Upgrade to 12x16)'"
+                                                    href="#" @click="$root.booking.addons.splice(index,1)">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <a v-if="addon.addon_price == 0 && addon.addon_type == 'PRINT' && addon.addon_description == '8x10'"
+                                                    href="#" @click="$root.booking.addons[index].addon_description='8x10 (Upgrade to 12x16)';$root.booking.addons[index].addon_price=250;">
+                                                    Upgrade
+                                                </a>
+                                                <a v-if="addon.addon_price == 250 && addon.addon_type == 'PRINT' && addon.addon_description == '8x10 (Upgrade to 12x16)'"
+                                                    href="#" @click="$root.booking.addons[index].addon_description='8x10';$root.booking.addons[index].addon_price=0;">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==4" key="4">
+                            <fieldset>
+                                <legend>Step 4</legend>
+                                <label>Choose your Themes</label>
+
+                                <select multiple size="5" style="height: auto" v-model="$root.booking.theme_ids">
+                                    <option v-for="theme in $root.themes" :value="theme.theme_id">{{theme.theme_description}}</option>
+                                </select>
+
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==5" key="5">
+                            <fieldset>
+                                <legend>Step 5</legend>
+                                <label>Pick a Schedule</label>
+
+                                <label>Choose a Date</label>
+                                <input type="date" v-model="$root.selected_date">
+
+                                <label>Choose a Time</label>
+                                <select v-model="$root.booking.booking_time">
+                                    <option v-for="slot in $root.slots">{{slot}}</option>
+                                </select>
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==6" key="6">
+                            <fieldset>
+                                <legend>Step 6</legend>
+                                <label>Tell us about your baby</label>
+                                <label>Name of baby</label>
+                                <input type="text" placeholder="e.g. Charlie" v-model="$root.booking.subject_name">
+                                <label>Age of baby (months or years)</label>
+                                <input type="text" placeholder="e.g. 5 months old" v-model="$root.booking.subject_age">
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
+                        </form>
+                        <form v-if="step==7" key="7">
+                            <fieldset>
+                                <legend>Step 7</legend>
+                                <label>Payment</label>
+                                <label>Choose a Payment Method</label>
+                                <label>
+                                    <input type="radio" name="payment_method" value="BANK_DEPOSIT" v-model="$root.booking.payment_method">
+                                    Bank Deposit
+                                </label>
+                                <label>
+                                    <input type="radio" name="payment_method" value="CREDIT_CARD" v-model="$root.booking.payment_method">
+                                    Credit Card
+                                </label>
+                                <button @click.prevent="previous()">Prev</button>
+                                <button @click.prevent="$root.facebook_login()" v-if="$root.account.status == 'DISCONNECTED'">
+                                    Sign in and Finish Booking
+                                </button>
+                                <button v-else @click.prevent="$root.submitBooking()">Finish Booking</button>
+                            </fieldset>
+                        </form>
+
+                    </transition>
+                </div>
+
+            </stepper>
+
+        </main>
+
+        <!-- Sliding Drawer -->
+        <toggle inline-template ref="drawer" v-cloak>
+
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+                        <a>
+                            <h2>
+                                <i class="fab fa-instagram"></i><br>
+                            </h2>
+                        </a>
+
+                        <a href="#" class="active">
+                            <i class="fas fa-info"></i>
+                            <span>Package</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-info"></i>
+                            <span>Addons</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-info"></i>
+                            <span>Themes</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Schedule</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-info"></i>
+                            <span>Details</span>
+                        </a>
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+
+
+    </div>
+
+    <!--External Scripts -->
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
+    <script src="/_system/js/mixins/package.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
+    <script src="/_system/js/mixins/themes.js"></script>
+    <script src="/_system/js/mixins/booking.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+
+
+    <!-- Internal Scripts -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, categoryMixin, packageMixin, addonMixin, themeMixin, bookingMixin, facebookMixin],
+
+            data: {
+
+                categories: [],
+                packages: [],
+                addons: [],
+                themes: [],
+
+                selected_category_id: "",
+                selected_package_id: "",
+                selected_addon: "",
+                selected_date: "",
+
+                inclusions: [], // All inclusions from packages
+                slots: [],
+
+                booking: {
+                    package: {},
+                    addons: [], // For selected package only
+                    theme_ids: [],
+                    booking_date: "",
+                    booking_time: "",
+                    subject_name: "",
+                    subject_age: "",
+                    payment_method: ""
+                },
+            },
+
+            computed: {
+
+                filteredPackages: function () {
+                    return this.packages.filter(package => package.category_id == app.selected_category_id)
+                },
+                booking_total_price: function () {
+                    var package_price = this.booking.package.package_price;
+                    var addons_price = 0;
+                    for (x in this.booking.addons) {
+                        addons_price += this.booking.addons[x].addon_price
+                    }
+                    return package_price + addons_price;
+                }
+            },
+
+            watch: {
+                selected_package_id: function () {
+
+                    var addonArray = [];
+                    for (x in this.inclusions) {
+                        if (this.inclusions[x].package_id == this.selected_package_id) {
+
+                            var fetched_addon = this.getAddon(this.inclusions[x].addon_id);
+                            var free_addon = {
+                                addon_id: fetched_addon.addon_id,
+                                addon_type: fetched_addon.addon_type,
+                                addon_description: fetched_addon.addon_description,
+                                addon_price: 0
+                            }
+
+                            addonArray.push(free_addon);
+
+
+                        }
+                    }
+                    this.booking.addons = addonArray;
+                    this.booking.package = this.packages.find(package => package.package_id == app.selected_package_id)
+
+                }
+                ,
+                selected_date: function () {
+                    this.booking.booking_date = this.selected_date;
+                    console.log('D: ' + this.selected_date + " M: " + this.booking.package.package_minutes);
+                    this.getOpenSlots(this.selected_date, this.booking.package.package_minutes);
+                }
+            },
+
+            created: function () {
+
+                this.loadCategories();
+                this.loadPackages();
+                this.loadAddons();
+                this.loadInclusions();
+                this.loadThemes();
+
+            },
+
+            methods: {
+                addAddon() {
+                    if (this.checkLimit(this.selected_addon))
+                        this.booking.addons.push(this.selected_addon)
+                },
+                checkLimit(addon) {
+                    var count = this.booking.addons.filter(inclusion => inclusion.addon_id == addon.addon_id).length;
+                    return (count < addon.addon_max)
+                },
+                submitBooking() {
+                    var formData = new FormData();
+                    formData.append('package', JSON.stringify(this.booking.package));
+                    formData.append('booking_addons', JSON.stringify(this.booking.addons));
+                    formData.append('booking_themes', JSON.stringify(this.booking.theme_ids));
+                    formData.append('booking_date', this.booking.booking_date);
+                    formData.append('booking_time', this.booking.booking_time);
+                    formData.append('subject_name', this.booking.subject_name);
+                    formData.append('subject_age', this.booking.subject_age);
+                    formData.append('account_id', this.account.account_id);
+                    formData.append('token', this.account.token);
+                    formData.append('payment_method', this.booking.payment_method);
+                    formData.append('booking_total_price', this.booking_total_price);
+
+                    Vue.http.post('/_system/php/api/booking/add.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    window.location.href="/app/bookings"
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+
+
+
+
+                }
+            }
+
+
+        })
+    </script>
+
+</body>
+
+</html>

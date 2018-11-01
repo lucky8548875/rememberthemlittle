@@ -76,7 +76,7 @@ Vue.component('account-button',{
                         <img class="profile_pic" :src="$root.account.picture_url" style="border-radius: 50%; width: 26px; margin-right: 0.5rem">
                         <span>{{$root.account.display_name}}</span>
                     </a>
-                    <a href="/app/dashboard/index.html">
+                    <a href="/app/bookings">
                         <i class="fas fa-calendar-check"></i>
                         <span>My Bookings</span>
                     </a>
@@ -93,4 +93,33 @@ Vue.component('account-button',{
             </div>
     </div>
     `
+})
+
+Vue.component('stepper',{
+
+    props: ['steps'],
+
+    data: function() {
+        return {
+
+            step : 1
+        }
+    },
+
+    methods: {
+
+        next: function(){
+
+            if(this.step < this.steps ){
+                this.step++;
+            }
+        },
+
+        previous: function(){
+            if(this.step > 1){
+                this.step--;
+            }
+        }
+    }
+
 })
