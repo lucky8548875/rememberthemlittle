@@ -60,6 +60,8 @@ var accountMixin = {
                 this.account.picture_url = "";
                 this.account.status = "DISCONNECTED";
 
+                this.fbInit();
+
             } else {
                 console.log('Sorry, no web storage support.')
             }
