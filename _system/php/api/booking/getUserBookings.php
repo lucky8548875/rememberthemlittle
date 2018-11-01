@@ -44,6 +44,8 @@ else{
     echo json_encode((object)[
         'success' => false,
         'status' => 'UNAUTHORIZED',
+        'account_id' => $account_id,
+        'token' => $token
     ]);
 }
 ?>

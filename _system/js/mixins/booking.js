@@ -16,6 +16,9 @@ var bookingMixin = {
                         }
                         else if (response.body.status == "UNAUTHORIZED") {
                             console.log('Unauthorized Request')
+                            console.log(this.account.account_id)
+                            console.log(this.account.token)
+                            console.log(response.body);
                             this.clearAccountFromCache();
                         }
                         else
