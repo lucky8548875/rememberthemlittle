@@ -43,7 +43,11 @@ try {
         echo json_encode((object)[
             'success' => false,
             'status' => 'UNAUTHORIZED',
-            'data' => $result
+            'data' => $result,
+            'account_id' => $account_id,
+            'token' => $token,
+            'remote_addr' => $remote_addr,
+            'http_user_agent' => $http_user_agent
         ],JSON_NUMERIC_CHECK);
     }
 
