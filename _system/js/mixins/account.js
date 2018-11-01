@@ -18,7 +18,10 @@ var accountMixin = {
             this.verifyToken();
         }
         else {
-            this.fbInit();
+            if (typeof FB === "undefined"){
+                this.fbInit();
+            }
+                
         }
         
     },
@@ -60,8 +63,6 @@ var accountMixin = {
                 this.account.picture_url = "";
                 this.account.status = "DISCONNECTED";
 
-                this.fbInit();
-
             } else {
                 console.log('Sorry, no web storage support.')
             }
@@ -93,6 +94,9 @@ var accountMixin = {
 
         signOut: function(){
             this.clearAccountFromCache();
+            this.account.status = "LOADING";
+            window.location.href="/"
+            
         }
     }
 

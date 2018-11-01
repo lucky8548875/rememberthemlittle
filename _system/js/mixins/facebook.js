@@ -1,8 +1,20 @@
 var facebookMixin = {
 
+    data:{
+        facebook:{
+            status: null, // fbinit status: NULL, LOADING, LOADED,
+            api_status: null // fb.me status
+        }
+
+    },
+
     methods: {
 
         fbInit: function() {
+
+            // Set fb status to loading
+            this.facebook.status = 'LOADING';
+
             window.fbAsyncInit = function () {
 
                 FB.init({
@@ -14,6 +26,8 @@ var facebookMixin = {
                 });
     
                 FB.AppEvents.logPageView();
+
+                app.facebook.status = 'LOADED';
     
             };
     
@@ -51,6 +65,7 @@ var facebookMixin = {
                                     localStorage.token = response.body.data.token;
                                     localStorage.picture_url = picture_url;
                                     app.loadAccountFromCache();
+                                    app.facebook.api_status = "LOADED";
 
                                 }   
                                 else
@@ -68,6 +83,7 @@ var facebookMixin = {
         },
 
         facebook_login(){
+            this.facebook.api_status = 'LOADING';
             FB.login(app.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
         }
 

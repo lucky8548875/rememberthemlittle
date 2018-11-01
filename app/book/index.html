@@ -37,11 +37,12 @@
                             <fieldset>
                                 <legend>Step 1</legend>
                                 <label>Choose a Category</label>
-                                <select v-model="$root.selected_category_id">
+                                <select v-model="$root.selected_category_id" v-if="$root.categories.length>0">
                                     <option v-for="category in $root.categories" :value="category.category_id">
                                         {{category.category_name}}
                                     </option>
                                 </select>
+                                <i v-else class="fas fa-spinner fa-pulse"></i>
                                 <button type="submit">Next</button>
                             </fieldset>
                         </form>
@@ -129,9 +130,10 @@
                                 <input type="date" v-model="$root.selected_date">
 
                                 <label>Choose a Time</label>
-                                <select v-model="$root.booking.booking_time">
+                                <select v-model="$root.booking.booking_time" v-if="$root.slots.length > 0 && $root.selected_date!=''">
                                     <option v-for="slot in $root.slots">{{slot}}</option>
                                 </select>
+                                <i v-else-if="$root.selected_date!=''" class="fas fa-spinner fa-pulse"></i>
                                 <button @click.prevent="previous()">Prev</button>
                                 <button type="submit">Next</button>
                             </fieldset>

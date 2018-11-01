@@ -50,19 +50,19 @@ Vue.component('account-button',{
     <!---------------------- CUSTOM FACEBOOK BUTTON ---------------------->
 
             <!-- Not Authorized / Not Connected-->
-            <a href="#" v-if="$root.account.status=='DISCONNECTED'" class="color-primary"
+            <a href="#" v-if="$root.account.status=='DISCONNECTED' && $root.facebook.status=='LOADED' && $root.facebook.api_status!='LOADING'" class="color-primary"
                 @click="$root.$refs.signin.show()" v-cloak>
                 <i class="fab fa-facebook-square"></i><span>Login</span></a>
 
             <!-- Authorized / Connected -->
-            <a href="#" v-else-if="$root.account.status=='CONNECTED'" class="flex align-items-center" @click.prevent="context_visible=true">
+            <a href="#" v-else-if="$root.account.status=='CONNECTED' && $root.facebook.api_status!='LOADING'" class="flex align-items-center" @click.prevent="context_visible=true">
                 <img class="profile_pic" :src="$root.account.picture_url" style="border-radius: 50%; width: 30px; margin-right: 0.25rem;">
                 <i class="fas fa-angle-down"></i>
             </a>
 
             <!-- For undetermined connection / loading -->
             <a v-else class="outline" disabled style="cursor: default">
-                <i class="fa fa-sync fa-spin" style="color: #ddd"></i>
+                <i class="fas fa-sync fa-spin" style="color: #ddd"></i>
             </a>
 
             <!-------------- END OF FACEBOOK ACCOUNT BUTTON ------------------>
@@ -84,7 +84,7 @@ Vue.component('account-button',{
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </a>
-                    <a @click="$root.clearAccountFromCache(); context_visible=false;">
+                    <a @click="$root.signOut(); context_visible=false;">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Sign Out</span>
                     </a>
