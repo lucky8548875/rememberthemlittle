@@ -36,7 +36,8 @@ function isTokenValid($account_id,$token){
             'status' => 'UNAUTHORIZED:: PDO EXCEPTION -> '.$e->getMessage(),
             'account_id' => $account_id,
             'token' => $token,
-            'query' => "SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true"
+            'query' => "SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true",
+            'connection' => "mysql:host=$servername;dbname=$dbname; $username, $password"
         ]);
     }
 
