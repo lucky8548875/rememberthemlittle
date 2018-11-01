@@ -75,8 +75,10 @@ var accountMixin = {
                             console.log('Valid Token');
                         }
                         else if (response.body.status == "UNAUTHORIZED") {
-                            console.log('Unauthorized. Account cache cleaned.')
+                            console.log(this.account.account_id);
+                            console.log(this.account.token);
                             this.clearAccountFromCache();
+                            console.log('Unauthorized. Account cache cleaned.');
                         }
                         else
                             console.error(response.body.message);
