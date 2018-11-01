@@ -16,11 +16,28 @@ function isTokenValid($account_id,$token){
 
     # Fetch Result
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return sizeof($result) == 1;
+    if(sizeof($result) == 1){
+        return true;
+    }
+    else{
+        echo json_encode((object)[
+            'success' => false,
+            'status' => 'UNAUTHORIZED:: Result is not 1 but '.sizeof($result),
+            'account_id' => $account_id,
+            'token' => $token,
+            'query' => "SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true"
+        ]);
+    }
 
     }
     catch(PDOException $e){
-        return false;
+        echo json_encode((object)[
+            'success' => false,
+            'status' => 'UNAUTHORIZED:: PDO EXCEPTION -> '.$e->getMessage(),
+            'account_id' => $account_id,
+            'token' => $token,
+            'query' => "SELECT * FROM tokens WHERE account_id='$account_id' AND token='$token' AND http_user_agent='$http_user_agent' AND token_valid=true"
+        ]);
     }
 
 }
