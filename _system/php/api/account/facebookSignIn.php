@@ -9,6 +9,7 @@ $facebook_name = $_GET['facebook_name'];
 
 # Declare account_id
 $account_id;
+$account_type;
 
 if(isset($facebook_id)){
 
@@ -27,6 +28,7 @@ if(isset($facebook_id)){
         
         if($result){
             $account_id = $result['account_id'];
+            $account_type = $result['account_type'];
         }
         else{
             $sql = "INSERT INTO accounts (account_fb_id, account_name) VALUES ('$facebook_id','$facebook_name')";
@@ -34,6 +36,7 @@ if(isset($facebook_id)){
             $stmt->execute();
 
             $account_id = $conn->lastInsertId();
+            $account_type = 'USER';
         }
 
         if(isset($account_id)){
@@ -59,6 +62,7 @@ if(isset($facebook_id)){
                     [
                         'display_name' => $result['account_name'],
                         'account_id' => $account_id,
+                        'account_type' => $account_type,
                         'token' => $token
                     ]
             ],JSON_NUMERIC_CHECK);

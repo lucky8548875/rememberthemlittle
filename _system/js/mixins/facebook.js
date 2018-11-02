@@ -63,6 +63,7 @@ var facebookMixin = {
                                     localStorage.display_name = display_name
                                     localStorage.account_id = response.body.data.account_id;
                                     localStorage.token = response.body.data.token;
+                                    localStorage.account_type = response.body.data.account_type;
                                     localStorage.picture_url = picture_url;
                                     app.loadAccountFromCache();
                                     app.facebook.api_status = "LOADED";

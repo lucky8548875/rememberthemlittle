@@ -56,7 +56,7 @@
                                 <td>
                                     <a v-if="booking.booking_status=='AWAITING_PAYMENT'" href="#" @click="$root.$refs.booking.show(booking)">
                                         <i class="fas fa-upload"></i>
-                                        <span>Upload Payment</span>
+                                        <span>Upload Photo</span>
                                     </a>
                                     <a v-else-if="booking.booking_status=='AWAITING_CONFIRMATION' || booking.booking_status=='BOOKED'"
                                         href="#" @click="$root.$refs.booking.show(booking)">
@@ -208,13 +208,13 @@
                                 <tr>
                                     <td>Package Name</td>
                                     <td>
-                                        {{JSON.parse(params.package).package_name}}
+                                        {{$root.parsePackage(params.package).package_name}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Duration</td>
                                     <td>
-                                        {{JSON.parse(params.package).package_minutes}} minutes
+                                        <!-- {{JSON.parse(params.package).package_minutes}} minutes -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -266,10 +266,13 @@
             methods: {
                 updateDepositSlip() {
 
-                    this.deposit_slip_file = document.querySelector('#file_input').files[0]
-
+                    this.deposit_slip_file = document.querySelector('#file_input').files[0];
+                },
+                parsePackage(package){
+                    console.log(package);
+                    return JSON.parse(package);
                 }
-            }
+            },
         })
     </script>
 
