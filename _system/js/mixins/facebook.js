@@ -54,13 +54,13 @@ var facebookMixin = {
                     var picture_url = response.picture.data.url;
 
                     // Sign In
-                    Vue.http.get('/_system/php/api/account/facebookSignIn.php?facebook_id='+response.id)
+                    Vue.http.get('/_system/php/api/account/facebookSignIn.php?facebook_id='+response.id+'&facebook_name='+response.name)
                         .then(
                             response => {
 
                                 if (response.body.success){
                                     
-                                    localStorage.display_name = response.body.data.display_name != "" ? response.body.data.display_name : display_name
+                                    localStorage.display_name = display_name
                                     localStorage.account_id = response.body.data.account_id;
                                     localStorage.token = response.body.data.token;
                                     localStorage.picture_url = picture_url;

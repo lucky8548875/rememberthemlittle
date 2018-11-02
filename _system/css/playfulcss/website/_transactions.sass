@@ -59,6 +59,28 @@
         table
             width: 100%
 
+    .booking-modal
+        position: fixed
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        background-color: white
+        padding: 2rem
+        display: flex
+        flex-direction: column
+
+        table
+            width: 100%
+
+        > h3
+            display: flex
+            justify-content: space-between
+            align-items: center
+        
+            > a
+                @extend .button, .outline
+
     .blocker
         position: fixed
         display: inline-block
