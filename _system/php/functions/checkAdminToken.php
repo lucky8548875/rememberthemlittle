@@ -19,16 +19,29 @@ function isAdminTokenValid($account_id,$token){
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $conn->prepare("SELECT * FROM tokens INNER JOIN accounts WHERE tokens.account_id='$account_id' AND tokens.token='$token' AND tokens.http_user_agent='$http_user_agent' AND tokens.token_valid=true AND accounts.account_type='ADMIN'");
+    $stmt = $conn->prepare("SELECT * FROM tokens INNER JOIN accounts WHERE tokens.account_id='$account_id' AND accounts.account_id='$account_id' AND tokens.token='$token' AND tokens.http_user_agent='$http_user_agent' AND tokens.token_valid=true AND accounts.account_type='ADMIN'");
     $stmt->execute();
 
     # Fetch Result
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return sizeof($result) == 1;
+    if(sizeof($result) == 1){
+        return true;
+    }
+    else{
+        echo json_encode((object)[
+            'success' => false,
+            'message' => "Not Authorized",
+            'query' => "SELECT * FROM tokens INNER JOIN accounts WHERE tokens.account_id='$account_id' AND accounts.account_id='$account_id' AND tokens.token='$token' AND tokens.http_user_agent='$http_user_agent' AND tokens.token_valid=true AND accounts.account_type='ADMIN'"
+        ]);
+    }
 
     }
     catch(PDOException $e){
-        return false;
+        echo json_encode((object)[
+            'success' => false,
+            'message' => "Connection Error: " . $e->getMessage(),
+            'query' => "SELECT * FROM tokens INNER JOIN accounts WHERE tokens.account_id='$account_id' AND accounts.account_id='$account_id' AND tokens.token='$token' AND tokens.http_user_agent='$http_user_agent' AND tokens.token_valid=true AND accounts.account_type='ADMIN'",
+        ]);
     }
 
 }

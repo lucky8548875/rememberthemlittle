@@ -36,10 +36,10 @@ catch(PDOException $e)
         ]);
     }
 }
-else{
-    echo json_encode((object)[
-        'success' => false,
-        'message' => "Not Authorized"
-    ]);
-}
+// else{
+//     echo json_encode((object)[
+//         'success' => false,
+//         'message' => "Not Authorized"
+//     ]);
+// }
 ?>

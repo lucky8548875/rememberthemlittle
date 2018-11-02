@@ -56,7 +56,7 @@
                                 <td>
                                     <a v-if="booking.booking_status=='AWAITING_PAYMENT'" href="#" @click="$root.$refs.booking.show(booking)">
                                         <i class="fas fa-upload"></i>
-                                        <span>Upload Photo</span>
+                                        <span>Payment</span>
                                     </a>
                                     <a v-else-if="booking.booking_status=='AWAITING_CONFIRMATION' || booking.booking_status=='BOOKED'"
                                         href="#" @click="$root.$refs.booking.show(booking)">
@@ -214,7 +214,7 @@
                                 <tr>
                                     <td>Duration</td>
                                     <td>
-                                        <!-- {{JSON.parse(params.package).package_minutes}} minutes -->
+                                        {{JSON.parse(params.package).package_minutes}} minutes
                                     </td>
                                 </tr>
                                 <tr>
@@ -232,7 +232,7 @@
                                     <td>
                                         <ul>
                                             <li v-for="theme in JSON.parse(params.booking_themes)">
-                                                {{theme}} <i style="color:red">Fix this!</i>
+                                                {{theme}}
                                             </li>
                                         </ul>
                                     </td>

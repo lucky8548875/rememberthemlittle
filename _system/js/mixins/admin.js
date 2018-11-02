@@ -13,7 +13,7 @@ var adminMixin = {
             if (response.body.success)
               this.bookings = response.body.data;
             else
-              console.error(response.body.message);
+              console.error(response.body);
           },
           response => {
             console.log('fail');
