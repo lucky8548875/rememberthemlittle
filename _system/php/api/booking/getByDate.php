@@ -21,7 +21,12 @@ if (isset($booking_date))
         # Fetch Result
         $result = $stmt->fetchAll();
         echo "<table border=2>";
-        for($i = 0, $now = strtotime("8:00"), $stop = strtotime("20:00"), $step = "+30 minutes", $reserved_start = strtotime($result[$i]['booking_time']), $reserved_duration = "+".json_decode($result[$i]['package'])->package_minutes." minutes", $reserved_finish = strtotime($reserved_duration, $reserved_start); $now < $stop; $now = strtotime($step, $now))
+
+        $now = strtotime("8:00");
+        $stop = strtotime("20:00");
+        $step = "+30 minutes";
+
+        for($i = 0, $reserved_start = strtotime($result[$i]['booking_time']), $reserved_duration = "+".json_decode($result[$i]['package'])->package_minutes." minutes", $reserved_finish = strtotime($reserved_duration, $reserved_start); $now < $stop; $now = strtotime($step, $now))
         {
             echo "<tr>";
            
