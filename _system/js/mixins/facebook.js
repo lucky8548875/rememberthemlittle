@@ -12,6 +12,7 @@ var facebookMixin = {
 
         fbInit: function() {
 
+
             // Set fb status to loading
             this.facebook.status = 'LOADING';
 
@@ -38,6 +39,8 @@ var facebookMixin = {
                 js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
+        
+
 
         },
 

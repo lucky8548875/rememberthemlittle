@@ -715,7 +715,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-right: 0.25rem;
 }
 
-.admin nav {
+.calendar nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -731,7 +731,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   z-index: 1;
 }
 
-.admin nav > a {
+.calendar nav > a {
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -741,15 +741,15 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
 }
 
-.admin nav > a > i {
+.calendar nav > a > i {
   font-size: 1.2rem;
 }
 
-.admin nav > a:nth-child(2) {
+.calendar nav > a:nth-child(2) {
   color: #228be6;
 }
 
-.admin main {
+.calendar main {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -764,7 +764,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-top: 1rem;
 }
 
-.admin main .control {
+.calendar main .control {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -780,7 +780,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-bottom: 3rem;
 }
 
-.admin main .control .filter {
+.calendar main .control .filter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -789,47 +789,47 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
 }
 
-.admin main .control .filter i {
+.calendar main .control .filter i {
   margin-left: 0.5rem;
 }
 
-.admin main .control .group {
+.calendar main .control .group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.admin main .control .group a {
+.calendar main .control .group a {
   padding: 0.5rem 1rem;
   background-color: #f8f9fa;
   color: #919599;
 }
 
-.admin main .control .group a.active {
+.calendar main .control .group a.active {
   background-color: #228be6;
   color: #ffffff;
 }
 
-.admin main .control .group a:first-child {
+.calendar main .control .group a:first-child {
   border-radius: 2rem 0rem 0rem 2rem;
 }
 
-.admin main .control .group a:last-child {
+.calendar main .control .group a:last-child {
   border-radius: 0rem 2rem 2rem 0rem;
 }
 
-.admin main table {
+.calendar main table {
   margin-bottom: 2rem;
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
-.admin main table tbody tr td:first-child {
+.calendar main table tbody tr td:first-child {
   width: 4rem;
 }
 
-.admin main table tbody tr td.booking {
+.calendar main table tbody tr td.booking {
   background-color: #f8f9fa;
   border-bottom: 0;
   border: 1px solid #e9ecef;
@@ -837,7 +837,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   padding: 1rem;
 }
 
-.admin main table tbody tr td.booking div.booking-item {
+.calendar main table tbody tr td.booking div.booking-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -847,37 +847,37 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           flex-direction: column;
 }
 
-.admin main table tbody tr td.booking div.booking-item * > i {
+.calendar main table tbody tr td.booking div.booking-item * > i {
   width: 1rem;
   text-align: center;
   margin-right: 0.25rem;
 }
 
-.admin main table tbody tr td.booking div.booking-item * + * {
+.calendar main table tbody tr td.booking div.booking-item * + * {
   margin-top: 0.25rem;
 }
 
-.admin main table tbody tr td.booking div.booking-item .client-name {
+.calendar main table tbody tr td.booking div.booking-item .client-name {
   font-weight: bold;
   margin-bottom: 0.25rem;
 }
 
-.admin main table tbody tr td.booking div.booking-item .package {
+.calendar main table tbody tr td.booking div.booking-item .package {
   font-size: 0.9rem;
 }
 
-.admin main table tbody tr td.booking div.booking-item .themes {
+.calendar main table tbody tr td.booking div.booking-item .themes {
   font-size: 0.9rem;
 }
 
-.admin main .week-table-container {
+.calendar main .week-table-container {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.admin main .week-table-container > div {
+.calendar main .week-table-container > div {
   overflow-x: auto;
   height: 100%;
   width: 100%;
@@ -886,45 +886,45 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           flex-grow: 1;
 }
 
-.admin main .week-table-container > div > table {
+.calendar main .week-table-container > div > table {
   margin-left: 0;
   padding-left: 0;
   width: 100%;
 }
 
-.admin main .week-table-container > table:first-child {
+.calendar main .week-table-container > table:first-child {
   margin-right: 0;
   padding-right: 0;
 }
 
-.admin main .week-table-container table {
+.calendar main .week-table-container table {
   width: initial;
   height: 100%;
 }
 
-.admin main .week-table-container table th {
+.calendar main .week-table-container table th {
   text-align: center;
 }
 
-.admin main .week-table-container table th span {
+.calendar main .week-table-container table th span {
   display: block;
   font-weight: lighter;
   font-size: 0.8rem;
 }
 
-.admin main .week-table-container table tr td {
+.calendar main .week-table-container table tr td {
   min-width: 4rem;
 }
 
-.admin main .month-table td {
+.calendar main .month-table td {
   padding: 0.25rem;
 }
 
-.admin main .month-table td.today {
+.calendar main .month-table td.today {
   background-color: #f8f9fa;
 }
 
-.admin main .month-table td div {
+.calendar main .month-table td div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -934,11 +934,11 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           flex-direction: column;
 }
 
-.admin main .month-table td div .date {
+.calendar main .month-table td div .date {
   font-size: 0.8rem;
 }
 
-.admin main .month-table td div .bookings-completed {
+.calendar main .month-table td div .bookings-completed {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -951,11 +951,11 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   border-radius: 1rem;
 }
 
-.admin main .month-table td div .bookings-completed i {
+.calendar main .month-table td div .bookings-completed i {
   margin-right: 0.25rem;
 }
 
-.admin main .month-table td div .bookings {
+.calendar main .month-table td div .bookings {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -967,11 +967,11 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   border-radius: 1rem;
 }
 
-.admin main .month-table td div .bookings i {
+.calendar main .month-table td div .bookings i {
   margin-right: 0.25rem;
 }
 
-.admin .blocker {
+.calendar .blocker {
   position: fixed;
   display: inline-block;
   width: 100%;
@@ -982,7 +982,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   z-index: 2;
 }
 
-.admin .drawer {
+.calendar .drawer {
   position: fixed;
   top: 0;
   left: 0;
@@ -1002,7 +1002,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   z-index: 3;
 }
 
-.admin .drawer a {
+.calendar .drawer a {
   border-radius: 0 2rem 2rem 0;
   padding: 1rem 2rem;
   position: relative;
@@ -1012,32 +1012,32 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   color: #ffffff;
 }
 
-.admin .drawer a i {
+.calendar .drawer a i {
   width: 1rem;
   text-align: center;
   margin-right: 0.5rem;
 }
 
-.admin .drawer > a + div a {
+.calendar .drawer > a + div a {
   font-weight: lighter;
 }
 
-.admin .drawer > a + div a.active {
+.calendar .drawer > a + div a.active {
   color: #ffffff;
   font-weight: bold;
   position: relative;
 }
 
-.admin .drawer > a + div a:hover {
+.calendar .drawer > a + div a:hover {
   color: #ffffff;
 }
 
-.admin .drawer > a.active {
+.calendar .drawer > a.active {
   color: #228be6;
   background-color: #ffffff;
 }
 
-.admin .drawer > a:not(.active):hover {
+.calendar .drawer > a:not(.active):hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 

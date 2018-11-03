@@ -8,6 +8,7 @@ $account_id = $_POST['account_id'];
 $token = $_POST['token'];
 
 if(isAdminTokenValid($account_id,$token)){
+// if(true){
 try {
 
     # Connect to Database

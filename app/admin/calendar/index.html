@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="calendar">
+
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <a href="#" @click="$root.$refs.drawer.show()">
+                <i class="fas fa-bars"></i>
+            </a>
+            <h3>Calendar</h3>
+            <a href="#">
+                <i class="fas fa-search"></i>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main v-cloak>
+            <div class="control">
+                <a class="filter">
+                    <span>Today</span>
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="group">
+                    <a href="#" class="active">Day</a>
+                    <a href="#">Week</a>
+                    <a href="#">Month</a>
+                </div>
+            </div>
+
+            <table>
+                    <tbody>
+                        <tr>
+                            <td>8:00</td>
+                            <td class="booking" rowspan="2">
+                                <div class="booking-item">
+    
+                                    <span class="client-name">
+                                        Stephen John Raymundo
+                                    </span>
+                                    <span class="package">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Newborn Package 1</span>
+                                    </span>
+                                    <span class="themes">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>Booking Confirmed</span>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8:30</td>
+                        </tr>
+                        <tr>
+                            <td>9:00</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>9:30</td>
+                            <td class="booking" rowspan="2">
+                                <div class="booking-item">
+    
+                                    <span class="client-name">
+                                        Stephen John Raymundo
+                                    </span>
+                                    <span class="package">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Newborn Package 1</span>
+                                    </span>
+                                    <span class="themes">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span>Booking Confirmed</span>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>10:30</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>11:00</td>
+                            <td></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            
+        </main>
+
+
+
+        <modal inline-template ref="booking" v-cloak>
+                <transition name="zoom-out">
+                    <div class="booking-modal" v-if="visible">
+    
+                        <h3>
+                            <span>Booking Details</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
+    
+                        </h3>
+                        <div class="overflow-container">
+                            <table>
+                                <tr>
+                                    <td>Schedule</td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                        <i class="fas fa-clock"></i>
+                                        <span>{{params.booking_time}}</span><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{params.booking_status}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td>Php {{params.booking_total_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Deposit Slip</td>
+                                    <td style="text-align:center">
+                                        <img :src="params.booking_deposit_slip" width="50%">
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center" v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                                <span>Confirm Booking</span>
+                            </button>
+                        </div>
+                    </div>
+                </transition>
+            </modal>
+
+        <!-- Sliding Drawer -->
+        <toggle inline-template ref="drawer" v-cloak>
+
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+
+                        <a href="#" class="active">
+                            <i class="fas fa-th"></i>
+                            <span>Transactions</span>
+                        </a>
+                        <div class="subitems">
+                                <a href="#" class="active">
+                                    <span>Bookings</span>
+                                </a>
+                                <a href="#">
+                                    <span>Orders</span>
+                                </a>
+                            </div>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-file"></i>
+                            <span>Reports</span>
+                        </a>
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin,adminMixin, facebookMixin],
+            data: {
+                bookings: [],
+            },
+            mounted: function () {
+                this.fbInit();
+                this.getAllBookings();
+            },
+        })
+    </script>
+
+</body>
+
+</html>
