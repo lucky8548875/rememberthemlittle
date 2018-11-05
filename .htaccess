@@ -29,11 +29,7 @@
   BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   Header append Vary User-Agent
   
-<<<<<<< HEAD
-  # Or, compress certain file types by extension:
-=======
     # Or, compress certain file types by extension:
->>>>>>> 18dfc658cb12c857e1ef1bae4688c5d8ff1a0c6a
   <files *.html>
   SetOutputFilter DEFLATE
   </files>
@@ -43,11 +39,5 @@
   <files *.js>
     SetOutputFilter DEFLATE
   </files>
-<<<<<<< HEAD
-
-
-
-=======
   
->>>>>>> 18dfc658cb12c857e1ef1bae4688c5d8ff1a0c6a
 </IfModule>
