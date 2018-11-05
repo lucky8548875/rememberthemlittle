@@ -12,147 +12,178 @@
     <title>Remember Them Little</title>
 </head>
 
-<body class="calendar">
+<body class="admin calendar">
 
     <!-- Vue App -->
     <div id="app">
         <!-- App bar-->
         <nav>
-            <a href="#" @click="$root.$refs.drawer.show()">
-                <i class="fas fa-bars"></i>
-            </a>
-            <h3>Calendar</h3>
-            <a href="#">
-                <i class="fas fa-search"></i>
-            </a>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Calendar</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar" class="active">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
         </nav>
 
-        <!-- Main Content -->
-        <main v-cloak>
-            <div class="control">
-                <a class="filter">
-                    <span>Today</span>
-                    <i class="fas fa-angle-down"></i>
-                </a>
-                <div class="group">
-                    <a href="#" class="active">Day</a>
-                    <a href="#">Week</a>
-                    <a href="#">Month</a>
-                </div>
-            </div>
+        <div class="sidebar">
+            <a href="#">Overview</a>
+            <a href="#" class="active">Bookings Calendar</a>
+        </div>
 
-            <table>
+        <!-- Main Content -->
+        <transition name="slide-left" appear v-cloak>
+            <main>
+                <div class="control">
+                    <a class="filter color-primary">
+                        <span>Today</span>
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+                    <div class="group">
+                        <a href="#" class="active">Day</a>
+                        <a href="#">Week</a>
+                        <a href="#">Month</a>
+                    </div>
+                </div>
+                <table>
                     <tbody>
-                        <tr>
-                            <td>8:00</td>
-                            <td class="booking" rowspan="2">
+                        <tr v-for="row in calendarBookingsByDate">
+                            <td>{{row.time}}</td>
+                            <td @click="$root.$refs.booking.show(JSON.parse(cell.data))" v-for="cell in row.cell" v-if="cell.data!='Open'"
+                                :rowspan="cell.rowspan" class="booking">
                                 <div class="booking-item">
-    
                                     <span class="client-name">
-                                        Stephen John Raymundo
+                                        {{JSON.parse(cell.data).account_name}}
                                     </span>
                                     <span class="package">
                                         <i class="fas fa-info-circle"></i>
-                                        <span>Newborn Package 1</span>
+                                        <span>{{JSON.parse(JSON.parse(cell.data).package).package_name}}</span>
                                     </span>
                                     <span class="themes">
-                                        <i class="fas fa-calendar-check"></i>
-                                        <span>Booking Confirmed</span>
+                                        <i class="far fa-clock"></i>
+                                        <span>{{JSON.parse(cell.data).booking_time}}, {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
                                     </span>
                                 </div>
                             </td>
+                            <td v-else></td>
                         </tr>
-                        <tr>
-                            <td>8:30</td>
-                        </tr>
-                        <tr>
-                            <td>9:00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>9:30</td>
-                            <td class="booking" rowspan="2">
-                                <div class="booking-item">
-    
-                                    <span class="client-name">
-                                        Stephen John Raymundo
-                                    </span>
-                                    <span class="package">
-                                        <i class="fas fa-info-circle"></i>
-                                        <span>Newborn Package 1</span>
-                                    </span>
-                                    <span class="themes">
-                                        <i class="fas fa-calendar-check"></i>
-                                        <span>Booking Confirmed</span>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10:00</td>
-                        </tr>
-                        <tr>
-                            <td>10:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>11:00</td>
-                            <td></td>
-                        </tr>
-    
                     </tbody>
                 </table>
-            
-        </main>
+
+            </main>
+        </transition>
 
 
 
         <modal inline-template ref="booking" v-cloak>
-                <transition name="zoom-out">
-                    <div class="booking-modal" v-if="visible">
-    
-                        <h3>
-                            <span>Booking Details</span>
-                            <a href="#" @click="visible=false">
-                                <i class="fas fa-times"></i>
-                                <span>Close</span>
-                            </a>
-    
-                        </h3>
-                        <div class="overflow-container">
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+
+                    <h3>
+                        <span>Booking Details</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+
+                    </h3>
+                    <div class="overflow-container">
+                        <table>
+                            <tr>
+                                <td>Schedule</td>
+                                <td>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{params.booking_time}}</span><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{params.booking_status}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Price</td>
+                                <td>Php {{params.booking_total_price}}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <details>
+                            <summary>
+                                <h3 style="display: inline-block">Package Details</h3>
+                            </summary>
+
                             <table>
                                 <tr>
-                                    <td>Schedule</td>
+                                    <td>Package Name</td>
                                     <td>
-                                        <i class="fas fa-calendar-alt"></i>
-                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                        <i class="fas fa-clock"></i>
-                                        <span>{{params.booking_time}}</span><br>
+                                        {{JSON.parse(params.package).package_name}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Status</td>
-                                    <td>{{params.booking_status}}</td>
+                                    <td>Duration</td>
+                                    <td>
+                                        {{JSON.parse(params.package).package_minutes}} minutes
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Total Price</td>
-                                    <td>Php {{params.booking_total_price}}</td>
+                                    <td>Addons</td>
+                                    <td>
+                                        <ul>
+                                            <li v-for="addon in JSON.parse(params.booking_addons)">
+                                                {{addon.addon_type}} - {{addon.addon_description}}
+                                            </li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Deposit Slip</td>
-                                    <td style="text-align:center">
-                                        <img :src="params.booking_deposit_slip" width="50%">
+                                    <td>Themes</td>
+                                    <td>
+                                        <ul>
+                                            <li v-for="theme in JSON.parse(params.booking_themes)">
+                                                {{theme}}
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                             </table>
-                            <br>
-                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center" v-if="params.booking_status=='AWAITING_CONFIRMATION'">
-                                <span>Confirm Booking</span>
-                            </button>
-                        </div>
+                        </details>
+                        <br>
+                        <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                            v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                            <span>Confirm Booking</span>
+                        </button>
                     </div>
-                </transition>
-            </modal>
+                </div>
+            </transition>
+        </modal>
 
         <!-- Sliding Drawer -->
         <toggle inline-template ref="drawer" v-cloak>
@@ -176,13 +207,13 @@
                             <span>Transactions</span>
                         </a>
                         <div class="subitems">
-                                <a href="#" class="active">
-                                    <span>Bookings</span>
-                                </a>
-                                <a href="#">
-                                    <span>Orders</span>
-                                </a>
-                            </div>
+                            <a href="#" class="active">
+                                <span>Bookings</span>
+                            </a>
+                            <a href="#">
+                                <span>Orders</span>
+                            </a>
+                        </div>
                         <a href="#">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
@@ -208,13 +239,13 @@
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin,adminMixin, facebookMixin],
+            mixins: [accountMixin, adminMixin, facebookMixin],
             data: {
-                bookings: [],
+                calendarBookingsByDate: [],
             },
             mounted: function () {
                 this.fbInit();
-                this.getAllBookings();
+                this.getCalendarBookingsByDate();
             },
         })
     </script>

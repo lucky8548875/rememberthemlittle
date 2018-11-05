@@ -15,12 +15,13 @@ if (isset($booking_date))
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         # Perform SQL Query
-        $sql = "SELECT * FROM bookings WHERE booking_date = '$booking_date' ORDER BY booking_time ASC";
+        $sql = "SELECT * FROM bookings INNER JOIN accounts WHERE bookings.account_id = accounts.account_id AND bookings.booking_date = '$booking_date' ORDER BY bookings.booking_time ASC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         # Fetch Result
         $result = $stmt->fetchAll();
-        echo "<table border=2>";
+        
+        $availables = array();
 
         $now = strtotime("8:00");
         $stop = strtotime("20:00");
@@ -28,14 +29,18 @@ if (isset($booking_date))
 
         for($i = 0, $reserved_start = strtotime($result[$i]['booking_time']), $reserved_duration = "+".json_decode($result[$i]['package'])->package_minutes." minutes", $reserved_finish = strtotime($reserved_duration, $reserved_start); $now < $stop; $now = strtotime($step, $now))
         {
-            echo "<tr>";
+            
            
-            echo "<td>".date("H:i", $now)."</td>";
+            $time = date("H:i", $now);
+            $cell = array();
            
             if($now == $reserved_start)
             {
                 $rowspan = json_decode($result[$i]['package'])->package_minutes / 30;
-                echo "<td rowspan=$rowspan>".json_decode($result[$i]['package'])->package_minutes."</td>";
+                $cell[] = ((object)[
+                    'rowspan' => $rowspan,
+                    'data' => json_encode($result[$i])
+                ]);
             }
             else if($now >= $reserved_start && $now < $reserved_finish)
             {
@@ -43,7 +48,9 @@ if (isset($booking_date))
             }
             else if($now == $reserved_finish)
             {
-                echo "<td>Open</td>";
+                $cell[] = ((object)[
+                    'data' => "Open"
+                ]);
                 $i = $i + 1;
                 $reserved_start = strtotime($result[$i]['booking_time']);
                 $reserved_duration = "+".json_decode($result[$i]['package'])->package_minutes." minutes";
@@ -51,11 +58,19 @@ if (isset($booking_date))
             }
             else
             {
-                echo "<td>Open</td>";
+                $cell[] = ((object)[
+                    'data' => "Open"
+                ]);
             }
-            echo "</tr>";
+            $availables[] = ((object)[
+                'time' => $time,
+                'cell' => $cell
+            ]);
         }
-        echo "$i</table>";
+        echo json_encode((object)[
+            'success' => true,
+            'data' => $availables
+        ]);
     }
     catch(PDOException $e)
     {

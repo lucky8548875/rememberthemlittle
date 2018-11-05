@@ -19,6 +19,20 @@ var adminMixin = {
             console.log('fail');
           });
     },
+    getCalendarBookingsByDate(){
+      Vue.http.post('/_system/php/api/booking/getByDate.php',)
+        .then(
+          response => {
+
+            if (response.body.success)
+              this.calendarBookingsByDate = response.body.data;
+            else
+              console.error(response.body);
+          },
+          response => {
+            console.log('fail');
+          });
+    },
     approveBooking(booking_id) {
       var formData = new FormData();
       formData.append('account_id', this.account.account_id);

@@ -1,29 +1,9 @@
-.pacifico {
-  font-family: 'Pacifico', cursive;
-}
-
-.fredoka {
-  font-family: 'Fredoka One', cursive;
-}
-
-.grand_hotel {
-  font-family: 'Grand Hotel', cursive;
-}
-
-.yeseva {
-  font-family: 'Yeseva One', cursive;
-}
-
-.sail {
-  font-family: 'Sail', cursive;
-}
-
 .font-primary, body {
   font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
 }
 
 .color-primary, .index main div:first-child > a:first-of-type, .dashboard main .bookings table td a {
-  color: #228be6;
+  color: #5252FF;
 }
 
 .color-dark {
@@ -180,7 +160,7 @@
   max-width: 100%;
 }
 
-button, a.button, .index main div:first-child div:first-of-type a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a {
+button, a.button, .index main div:first-child div:first-of-type a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a {
   color: #495057;
   font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   font-weight: 600;
@@ -201,52 +181,52 @@ button, a.button, .index main div:first-child div:first-of-type a, .dashboard ma
   transition: 0.2s background-color, 0.2s border-color;
 }
 
-button:hover, a.button:hover, .index main div:first-child div:first-of-type a:hover, .dashboard main .bookings table td a:hover, .dashboard .notification-modal > h3 > a:hover, .dashboard .booking-modal > h3 > a:hover, .transactions .booking-modal > h3 > a:hover {
+button:hover, a.button:hover, .index main div:first-child div:first-of-type a:hover, .calendar .booking-modal > h3 > a:hover, .dashboard main .bookings table td a:hover, .dashboard .notification-modal > h3 > a:hover, .dashboard .booking-modal > h3 > a:hover, .transactions .booking-modal > h3 > a:hover {
   background-color: #dae0e5;
   border-color: #dae0e5;
 }
 
-button:active, a.button:active, .index main div:first-child div:first-of-type a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active, .transactions .booking-modal > h3 > a:active {
+button:active, a.button:active, .index main div:first-child div:first-of-type a:active, .calendar .booking-modal > h3 > a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active, .transactions .booking-modal > h3 > a:active {
   background-color: #bdc6d0;
 }
 
-button:focus, a.button:focus, .index main div:first-child div:first-of-type a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus, .transactions .booking-modal > h3 > a:focus {
+button:focus, a.button:focus, .index main div:first-child div:first-of-type a:focus, .calendar .booking-modal > h3 > a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus, .transactions .booking-modal > h3 > a:focus {
   border: 2px solid #cbd3da;
 }
 
-button.primary, a.primary.button, .index main div:first-child div:first-of-type a.primary, .index main div:first-child div:first-of-type a:first-of-type, .dashboard main .bookings table td a.primary, .dashboard .notification-modal > h3 > a.primary, .dashboard .booking-modal > h3 > a.primary, .transactions .booking-modal > h3 > a.primary, .index .signin > div > button:first-of-type, .index .signin > div > a.button:first-of-type, .index .dashboard main .bookings table td .signin > div > a:first-of-type, .dashboard main .bookings table td .index .signin > div > a:first-of-type, .dashboard main .control button, .dashboard main .control a.button, .dashboard .index main .control div:first-child div:first-of-type a, .index .dashboard main .control div:first-child div:first-of-type a, .dashboard .index main div:first-child div:first-of-type .control a, .index .dashboard main div:first-child div:first-of-type .control a, .dashboard main .control .bookings table td a, .dashboard main .bookings table td .control a, .dashboard main .control .notification-modal > h3 > a, .dashboard main .control .booking-modal > h3 > a, .dashboard main .control .transactions .booking-modal > h3 > a {
+button.primary, a.primary.button, .index main div:first-child div:first-of-type a.primary, .index main div:first-child div:first-of-type a:first-of-type, .calendar .booking-modal > h3 > a.primary, .dashboard main .bookings table td a.primary, .dashboard .notification-modal > h3 > a.primary, .dashboard .booking-modal > h3 > a.primary, .transactions .booking-modal > h3 > a.primary, .index .signin > div > button:first-of-type, .index .signin > div > a.button:first-of-type, .index .dashboard main .bookings table td .signin > div > a:first-of-type, .dashboard main .bookings table td .index .signin > div > a:first-of-type, .dashboard main .control button, .dashboard main .control a.button, .dashboard .index main .control div:first-child div:first-of-type a, .index .dashboard main .control div:first-child div:first-of-type a, .dashboard .index main div:first-child div:first-of-type .control a, .index .dashboard main div:first-child div:first-of-type .control a, .dashboard main .control .calendar .booking-modal > h3 > a, .dashboard main .control .bookings table td a, .dashboard main .bookings table td .control a, .dashboard main .control .notification-modal > h3 > a, .dashboard main .control .booking-modal > h3 > a, .dashboard main .control .transactions .booking-modal > h3 > a {
   color: #ffffff;
-  background-color: #228be6;
-  border-color: #228be6;
+  background-color: #5252FF;
+  border-color: #5252FF;
 }
 
-button.primary:hover, a.primary.button:hover, .index main div:first-child div:first-of-type a.primary:hover, .index main div:first-child div:first-of-type a:hover:first-of-type, .dashboard main .bookings table td a.primary:hover, .dashboard .notification-modal > h3 > a.primary:hover, .dashboard .booking-modal > h3 > a.primary:hover, .transactions .booking-modal > h3 > a.primary:hover, .index .signin > div > button:hover:first-of-type, .index .signin > div > a.button:hover:first-of-type, .index .dashboard main .bookings table td .signin > div > a:hover:first-of-type, .dashboard main .bookings table td .index .signin > div > a:hover:first-of-type, .dashboard main .control button:hover, .dashboard main .control a.button:hover, .dashboard .index main .control div:first-child div:first-of-type a:hover, .index .dashboard main .control div:first-child div:first-of-type a:hover, .dashboard .index main div:first-child div:first-of-type .control a:hover, .index .dashboard main div:first-child div:first-of-type .control a:hover, .dashboard main .control .bookings table td a:hover, .dashboard main .bookings table td .control a:hover, .dashboard main .control .notification-modal > h3 > a:hover, .dashboard main .control .booking-modal > h3 > a:hover, .dashboard main .control .transactions .booking-modal > h3 > a:hover {
-  background-color: #187ed6;
-  border-color: #187ed6;
+button.primary:hover, a.primary.button:hover, .index main div:first-child div:first-of-type a.primary:hover, .index main div:first-child div:first-of-type a:hover:first-of-type, .calendar .booking-modal > h3 > a.primary:hover, .dashboard main .bookings table td a.primary:hover, .dashboard .notification-modal > h3 > a.primary:hover, .dashboard .booking-modal > h3 > a.primary:hover, .transactions .booking-modal > h3 > a.primary:hover, .index .signin > div > button:hover:first-of-type, .index .signin > div > a.button:hover:first-of-type, .index .dashboard main .bookings table td .signin > div > a:hover:first-of-type, .dashboard main .bookings table td .index .signin > div > a:hover:first-of-type, .dashboard main .control button:hover, .dashboard main .control a.button:hover, .dashboard .index main .control div:first-child div:first-of-type a:hover, .index .dashboard main .control div:first-child div:first-of-type a:hover, .dashboard .index main div:first-child div:first-of-type .control a:hover, .index .dashboard main div:first-child div:first-of-type .control a:hover, .dashboard main .control .calendar .booking-modal > h3 > a:hover, .dashboard main .control .bookings table td a:hover, .dashboard main .bookings table td .control a:hover, .dashboard main .control .notification-modal > h3 > a:hover, .dashboard main .control .booking-modal > h3 > a:hover, .dashboard main .control .transactions .booking-modal > h3 > a:hover {
+  background-color: #3939ff;
+  border-color: #3939ff;
 }
 
-button.primary:active, a.primary.button:active, .index main div:first-child div:first-of-type a.primary:active, .index main div:first-child div:first-of-type a:active:first-of-type, .dashboard main .bookings table td a.primary:active, .dashboard .notification-modal > h3 > a.primary:active, .dashboard .booking-modal > h3 > a.primary:active, .transactions .booking-modal > h3 > a.primary:active, .index .signin > div > button:active:first-of-type, .index .signin > div > a.button:active:first-of-type, .index .dashboard main .bookings table td .signin > div > a:active:first-of-type, .dashboard main .bookings table td .index .signin > div > a:active:first-of-type, .dashboard main .control button:active, .dashboard main .control a.button:active, .dashboard .index main .control div:first-child div:first-of-type a:active, .index .dashboard main .control div:first-child div:first-of-type a:active, .dashboard .index main div:first-child div:first-of-type .control a:active, .index .dashboard main div:first-child div:first-of-type .control a:active, .dashboard main .control .bookings table td a:active, .dashboard main .bookings table td .control a:active, .dashboard main .control .notification-modal > h3 > a:active, .dashboard main .control .booking-modal > h3 > a:active, .dashboard main .control .transactions .booking-modal > h3 > a:active {
-  background-color: #105692;
+button.primary:active, a.primary.button:active, .index main div:first-child div:first-of-type a.primary:active, .index main div:first-child div:first-of-type a:active:first-of-type, .calendar .booking-modal > h3 > a.primary:active, .dashboard main .bookings table td a.primary:active, .dashboard .notification-modal > h3 > a.primary:active, .dashboard .booking-modal > h3 > a.primary:active, .transactions .booking-modal > h3 > a.primary:active, .index .signin > div > button:active:first-of-type, .index .signin > div > a.button:active:first-of-type, .index .dashboard main .bookings table td .signin > div > a:active:first-of-type, .dashboard main .bookings table td .index .signin > div > a:active:first-of-type, .dashboard main .control button:active, .dashboard main .control a.button:active, .dashboard .index main .control div:first-child div:first-of-type a:active, .index .dashboard main .control div:first-child div:first-of-type a:active, .dashboard .index main div:first-child div:first-of-type .control a:active, .index .dashboard main div:first-child div:first-of-type .control a:active, .dashboard main .control .calendar .booking-modal > h3 > a:active, .dashboard main .control .bookings table td a:active, .dashboard main .bookings table td .control a:active, .dashboard main .control .notification-modal > h3 > a:active, .dashboard main .control .booking-modal > h3 > a:active, .dashboard main .control .transactions .booking-modal > h3 > a:active {
+  background-color: #0000eb;
 }
 
-button.primary:focus, a.primary.button:focus, .index main div:first-child div:first-of-type a.primary:focus, .index main div:first-child div:first-of-type a:focus:first-of-type, .dashboard main .bookings table td a.primary:focus, .dashboard .notification-modal > h3 > a.primary:focus, .dashboard .booking-modal > h3 > a.primary:focus, .transactions .booking-modal > h3 > a.primary:focus, .index .signin > div > button:focus:first-of-type, .index .signin > div > a.button:focus:first-of-type, .index .dashboard main .bookings table td .signin > div > a:focus:first-of-type, .dashboard main .bookings table td .index .signin > div > a:focus:first-of-type, .dashboard main .control button:focus, .dashboard main .control a.button:focus, .dashboard .index main .control div:first-child div:first-of-type a:focus, .index .dashboard main .control div:first-child div:first-of-type a:focus, .dashboard .index main div:first-child div:first-of-type .control a:focus, .index .dashboard main div:first-child div:first-of-type .control a:focus, .dashboard main .control .bookings table td a:focus, .dashboard main .bookings table td .control a:focus, .dashboard main .control .notification-modal > h3 > a:focus, .dashboard main .control .booking-modal > h3 > a:focus, .dashboard main .control .transactions .booking-modal > h3 > a:focus {
-  border: 2px solid #1671bf;
+button.primary:focus, a.primary.button:focus, .index main div:first-child div:first-of-type a.primary:focus, .index main div:first-child div:first-of-type a:focus:first-of-type, .calendar .booking-modal > h3 > a.primary:focus, .dashboard main .bookings table td a.primary:focus, .dashboard .notification-modal > h3 > a.primary:focus, .dashboard .booking-modal > h3 > a.primary:focus, .transactions .booking-modal > h3 > a.primary:focus, .index .signin > div > button:focus:first-of-type, .index .signin > div > a.button:focus:first-of-type, .index .dashboard main .bookings table td .signin > div > a:focus:first-of-type, .dashboard main .bookings table td .index .signin > div > a:focus:first-of-type, .dashboard main .control button:focus, .dashboard main .control a.button:focus, .dashboard .index main .control div:first-child div:first-of-type a:focus, .index .dashboard main .control div:first-child div:first-of-type a:focus, .dashboard .index main div:first-child div:first-of-type .control a:focus, .index .dashboard main div:first-child div:first-of-type .control a:focus, .dashboard main .control .calendar .booking-modal > h3 > a:focus, .dashboard main .control .bookings table td a:focus, .dashboard main .bookings table td .control a:focus, .dashboard main .control .notification-modal > h3 > a:focus, .dashboard main .control .booking-modal > h3 > a:focus, .dashboard main .control .transactions .booking-modal > h3 > a:focus {
+  border: 2px solid #1f1fff;
 }
 
-button.outline, a.outline.button, .index main div:first-child div:first-of-type a.outline, .index main div:first-child div:first-of-type a:nth-of-type(2), .index .dashboard main div:first-child div:first-of-type .bookings table td a, .dashboard .index main div:first-child div:first-of-type .bookings table td a, .index .dashboard main .bookings table td div:first-child div:first-of-type a, .dashboard .index main .bookings table td div:first-child div:first-of-type a, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a, .index .signin > div > button:last-of-type, .index .signin > div > a.button:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:last-of-type, .index .dashboard main .bookings table td .signin > div > a:last-of-type, .dashboard main .bookings table td .index .signin > div > a:last-of-type {
+button.outline, a.outline.button, .index main div:first-child div:first-of-type a.outline, .index main div:first-child div:first-of-type a:nth-of-type(2), .index main div:first-child div:first-of-type .calendar .booking-modal > h3 > a, .calendar .index main div:first-child div:first-of-type .booking-modal > h3 > a, .index .dashboard main div:first-child div:first-of-type .bookings table td a, .dashboard .index main div:first-child div:first-of-type .bookings table td a, .index .dashboard main .bookings table td div:first-child div:first-of-type a, .dashboard .index main .bookings table td div:first-child div:first-of-type a, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a, .index .signin > div > button:last-of-type, .index .signin > div > a.button:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:last-of-type, .index .dashboard main .bookings table td .signin > div > a:last-of-type, .dashboard main .bookings table td .index .signin > div > a:last-of-type {
   background-color: transparent;
 }
 
-button.outline:active, a.outline.button:active, .index main div:first-child div:first-of-type a.outline:active, .index main div:first-child div:first-of-type a:active:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:active, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:active, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:active, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:active, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a:active, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active, .transactions .booking-modal > h3 > a:active, .index .signin > div > button:active:last-of-type, .index .signin > div > a.button:active:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:active:last-of-type {
+button.outline:active, a.outline.button:active, .index main div:first-child div:first-of-type a.outline:active, .index main div:first-child div:first-of-type a:active:nth-of-type(2), .index main div:first-child div:first-of-type .calendar .booking-modal > h3 > a:active, .calendar .index main div:first-child div:first-of-type .booking-modal > h3 > a:active, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:active, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:active, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:active, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:active, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a:active, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a:active, .calendar .booking-modal > h3 > a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active, .transactions .booking-modal > h3 > a:active, .index .signin > div > button:active:last-of-type, .index .signin > div > a.button:active:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:active:last-of-type {
   background-color: #dae0e5;
 }
 
-button.outline:focus, a.outline.button:focus, .index main div:first-child div:first-of-type a.outline:focus, .index main div:first-child div:first-of-type a:focus:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:focus, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:focus, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:focus, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a:focus, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus, .transactions .booking-modal > h3 > a:focus, .index .signin > div > button:focus:last-of-type, .index .signin > div > a.button:focus:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:focus:last-of-type {
+button.outline:focus, a.outline.button:focus, .index main div:first-child div:first-of-type a.outline:focus, .index main div:first-child div:first-of-type a:focus:nth-of-type(2), .index main div:first-child div:first-of-type .calendar .booking-modal > h3 > a:focus, .calendar .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:focus, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:focus, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:focus, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus, .index main div:first-child div:first-of-type .transactions .booking-modal > h3 > a:focus, .transactions .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus, .calendar .booking-modal > h3 > a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus, .transactions .booking-modal > h3 > a:focus, .index .signin > div > button:focus:last-of-type, .index .signin > div > a.button:focus:last-of-type, .index main div:first-child div:first-of-type .signin > div > a:focus:last-of-type {
   border: 2px solid #cbd3da;
 }
 
-button.color-primary, a.color-primary.button, .index main div:first-child > a.button:first-of-type, .index main div:first-child div:first-of-type div:first-child > a:first-of-type, .index .dashboard main .bookings table td div:first-child > a:first-of-type, .dashboard .index main .bookings table td div:first-child > a:first-of-type, .index main div:first-child div:first-of-type a.color-primary, .index .dashboard main div:first-child div:first-of-type .bookings table td a, .dashboard .index main div:first-child div:first-of-type .bookings table td a, .index .dashboard main .bookings table td div:first-child div:first-of-type a, .dashboard .index main .bookings table td div:first-child div:first-of-type a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a.color-primary, .dashboard .booking-modal > h3 > a.color-primary, .transactions .booking-modal > h3 > a.color-primary {
-  color: #228be6 !important;
+button.color-primary, a.color-primary.button, .index main div:first-child > a.button:first-of-type, .index main div:first-child div:first-of-type div:first-child > a:first-of-type, .index .dashboard main .bookings table td div:first-child > a:first-of-type, .dashboard .index main .bookings table td div:first-child > a:first-of-type, .index main div:first-child div:first-of-type a.color-primary, .index .dashboard main div:first-child div:first-of-type .bookings table td a, .dashboard .index main div:first-child div:first-of-type .bookings table td a, .index .dashboard main .bookings table td div:first-child div:first-of-type a, .dashboard .index main .bookings table td div:first-child div:first-of-type a, .calendar .booking-modal > h3 > a.color-primary, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a.color-primary, .dashboard .booking-modal > h3 > a.color-primary, .transactions .booking-modal > h3 > a.color-primary {
+  color: #5252FF !important;
 }
 
 a {
@@ -262,7 +242,7 @@ a:hover {
   color: #495057;
 }
 
-a.button, .index main div:first-child div:first-of-type a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a {
+a.button, .index main div:first-child div:first-of-type a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a {
   text-decoration: none;
 }
 
@@ -433,7 +413,7 @@ a {
   outline: none;
 }
 
-a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:first-of-type a > * + *, .dashboard main .bookings table td a > * + *, .dashboard .notification-modal > h3 > a > * + *, .dashboard .booking-modal > h3 > a > * + *, .transactions .booking-modal > h3 > a > * + * {
+a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:first-of-type a > * + *, .calendar .booking-modal > h3 > a > * + *, .dashboard main .bookings table td a > * + *, .dashboard .notification-modal > h3 > a > * + *, .dashboard .booking-modal > h3 > a > * + *, .transactions .booking-modal > h3 > a > * + * {
   margin-left: 0.5rem;
 }
 
@@ -478,7 +458,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .index nav > a:nth-child(2) {
-  color: #228be6;
+  color: #5252FF;
 }
 
 .index nav .account_options {
@@ -649,7 +629,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 
 .index .drawer a.active {
   color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   border-radius: 0 2rem 2rem 0;
 }
 
@@ -715,7 +695,16 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-right: 0.25rem;
 }
 
-.calendar nav {
+.admin #app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #ffffff;
+}
+
+.admin nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -727,11 +716,20 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
   padding: 1rem;
   width: 100%;
-  background-color: white;
   z-index: 1;
 }
 
-.calendar nav > a {
+.admin nav > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.admin nav > span .brand {
+  display: none;
+}
+
+.admin nav > span a {
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -741,16 +739,128 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
 }
 
-.calendar nav > a > i {
+@media only screen and (min-width: 600px) {
+  .admin nav > span a {
+    padding: 2rem 1rem;
+  }
+}
+
+.admin nav > span a > i {
   font-size: 1.2rem;
 }
 
-.calendar nav > a:nth-child(2) {
-  color: #228be6;
+.admin nav .links {
+  display: none;
+}
+
+.admin nav .links .active {
+  color: #5252FF;
+  border-bottom: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 600px) {
+  .admin nav .section_title {
+    display: none;
+  }
+  .admin nav .links {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .admin nav {
+    -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    padding: 0rem 1rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .admin nav {
+    margin-bottom: 2rem;
+  }
+  .admin nav .brand {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+  }
+  .admin nav .bars {
+    display: none;
+  }
+  .admin nav .search {
+    display: none;
+  }
+  .admin nav .links {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+}
+
+.admin .sidebar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 13rem;
+}
+
+.admin .sidebar > * {
+  padding: 1rem 2rem;
+  border-radius: 0 2rem 2rem 0;
+  border-left: 4px solid transparent;
+}
+
+.admin .sidebar > *.active {
+  background-color: #5252FF;
+  color: #ffffff;
+  background-color: rgba(82, 82, 255, 0.1);
+  color: #5252FF;
+  border-left: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 1024px) {
+  .admin .sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.admin main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.admin main .control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5rem 0rem;
 }
 
 .calendar main {
-  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -761,7 +871,6 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 1rem;
 }
 
 .calendar main .control {
@@ -775,9 +884,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  margin-bottom: 3rem;
+  padding: 0.5rem 0rem;
 }
 
 .calendar main .control .filter {
@@ -806,7 +913,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .calendar main .control .group a.active {
-  background-color: #228be6;
+  background-color: #5252FF;
   color: #ffffff;
 }
 
@@ -821,8 +928,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 .calendar main table {
   margin-bottom: 2rem;
   width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  border-radius: 0.5rem;
 }
 
 .calendar main table tbody tr td:first-child {
@@ -830,11 +936,12 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .calendar main table tbody tr td.booking {
-  background-color: #f8f9fa;
-  border-bottom: 0;
-  border: 1px solid #e9ecef;
+  background-color: #ffffff;
+  border-left: 4px solid #5252FF;
   border-radius: 0.25rem;
   padding: 1rem;
+  cursor: pointer;
+  background-color: rgba(82, 82, 255, 0.1);
 }
 
 .calendar main table tbody tr td.booking div.booking-item {
@@ -860,14 +967,17 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 .calendar main table tbody tr td.booking div.booking-item .client-name {
   font-weight: bold;
   margin-bottom: 0.25rem;
+  color: #5252FF;
 }
 
 .calendar main table tbody tr td.booking div.booking-item .package {
   font-size: 0.9rem;
+  color: #6c6cff;
 }
 
 .calendar main table tbody tr td.booking div.booking-item .themes {
   font-size: 0.9rem;
+  color: #6c6cff;
 }
 
 .calendar main .week-table-container {
@@ -971,6 +1081,40 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-right: 0.25rem;
 }
 
+.calendar .booking-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 2;
+}
+
+.calendar .booking-modal table {
+  width: 100%;
+}
+
+.calendar .booking-modal > h3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .calendar .blocker {
   position: fixed;
   display: inline-block;
@@ -995,7 +1139,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   padding: 1rem 1rem 1rem 0rem;
@@ -1033,7 +1177,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .calendar .drawer > a.active {
-  color: #228be6;
+  color: #5252FF;
   background-color: #ffffff;
 }
 
@@ -1165,7 +1309,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
       -ms-flex-pack: center;
           justify-content: center;
   border-width: 1px;
-  border-color: #228be6;
+  border-color: #5252FF;
 }
 
 .dashboard main .bookings table td:last-child {
@@ -1247,7 +1391,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   font-weight: bold;
 }
 
-.dashboard .booking-modal .overflow-container table button, .dashboard .booking-modal .overflow-container table a.button, .dashboard .booking-modal .overflow-container table .index main div:first-child div:first-of-type a, .index main div:first-child div:first-of-type .dashboard .booking-modal .overflow-container table a, .dashboard .booking-modal .overflow-container main .bookings table td a, .dashboard main .bookings .booking-modal .overflow-container table td a, .dashboard .booking-modal .overflow-container table .notification-modal > h3 > a, .dashboard .booking-modal .overflow-container table .booking-modal > h3 > a, .dashboard .booking-modal .overflow-container table .transactions .booking-modal > h3 > a {
+.dashboard .booking-modal .overflow-container table button, .dashboard .booking-modal .overflow-container table a.button, .dashboard .booking-modal .overflow-container table .index main div:first-child div:first-of-type a, .index main div:first-child div:first-of-type .dashboard .booking-modal .overflow-container table a, .dashboard .booking-modal .overflow-container table .calendar .booking-modal > h3 > a, .dashboard .booking-modal .overflow-container main .bookings table td a, .dashboard main .bookings .booking-modal .overflow-container table td a, .dashboard .booking-modal .overflow-container table .notification-modal > h3 > a, .dashboard .booking-modal .overflow-container table .booking-modal > h3 > a, .dashboard .booking-modal .overflow-container table .transactions .booking-modal > h3 > a {
   width: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -1328,42 +1472,8 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 
 .dashboard .drawer a.active {
   color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   border-radius: 0 2rem 2rem 0;
-}
-
-.transactions nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem;
-  width: 100%;
-  background-color: white;
-  z-index: 1;
-}
-
-.transactions nav > a {
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.transactions nav > a > i {
-  font-size: 1.2rem;
-}
-
-.transactions nav > a:nth-child(2) {
-  color: #228be6;
 }
 
 .transactions main {
@@ -1382,7 +1492,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .transactions main .control .filter {
@@ -1411,7 +1521,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .transactions main .control .group a.active {
-  background-color: #228be6;
+  background-color: #5252FF;
   color: #ffffff;
 }
 
@@ -1428,6 +1538,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .transactions .booking-modal {
+  z-index: 2;
   position: fixed;
   left: 0;
   top: 0;
@@ -1484,7 +1595,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   padding: 1rem 1rem 1rem 0rem;
@@ -1522,7 +1633,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
 }
 
 .transactions .drawer > a.active {
-  color: #228be6;
+  color: #5252FF;
   background-color: #ffffff;
 }
 

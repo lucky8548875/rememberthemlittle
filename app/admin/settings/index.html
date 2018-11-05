@@ -12,11 +12,10 @@
     <title>Remember Them Little</title>
 </head>
 
-<body class="admin transactions">
+<body class="admin">
 
     <!-- Vue App -->
     <div id="app">
-
         <!-- App bar-->
         <nav>
             <span>
@@ -29,21 +28,21 @@
             </span>
             <span>
                 <a class="section_title">
-                    <h3>Bookings</h3>
+                    <h3>Settings</h3>
                 </a>
             </span>
             <span>
                 <span class="links">
-                    <a href="/app/admin/calendar/">
+                    <a href="/app/admin/calendar">
                         Dashboard
                     </a>
-                    <a href="/app/admin/transactions" class="active">
+                    <a href="/app/admin/transactions">
                         Transactions
                     </a>
                     <a href="/app/admin/reports">
                         Reports
                     </a>
-                    <a href="/app/admin/settings">
+                    <a href="/app/admin/settings" class="active">
                         Settings
                     </a>
                 </span>
@@ -55,84 +54,41 @@
         </nav>
 
         <div class="sidebar">
-            <a href="#" class="active">Bookings</a>
-            <a href="#">Orders</a>
+            <a href="#" class="active">Categories</a>
+            <a href="#">Packages</a>
+            <a href="#">Addons</a>
+            <a href="#">Themes</a>
         </div>
 
         <!-- Main Content -->
-        <transition name="slide-left" appear v-cloak>
-            <main>
-                <div class="control">
-                    <a class="filter color-primary">
-                        <span>Today</span>
-                        <i class="fas fa-angle-down"></i>
-                    </a>
-                    <div class="group">
-                        <a href="#" class="active">All</a>
-                        <a href="#">For Approval</a>
-                    </div>
-                </div>
-                <table>
-                    <tr v-for="booking in bookings">
-                        <td>
-                            <span>{{booking.account_name}}</span><br>
-                            <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
+        <main v-cloak>
+            <div class="control">
+                <h3>
+                    <span>Categories</span>
+                </h3>
+                <span>
+                    <button class="primary">
+                        <i class="fas fa-plus"></i>
+                        <span>New Category</span>
+                    </button>
+                </span>
+            </div>
+
+            <table style="width: 100%;">
+                <tbody>
+                    <tr v-for="category in categories">
+                        <td>  
+                            <h4>{{category.category_name}}</h4>
+                            <span>{{category.category_description}}</span>
                         </td>
-                        <td style="text-align: right; text-align: -webkit-right;">
-                            <button @click="$root.$refs.booking.show(booking)">View</button>
+                        <td style="text-align: -webkit-right">
+                            <button>Edit</button>
                         </td>
                     </tr>
-                </table>
-            </main>
-        </transition>
+                </tbody>
+            </table>
 
-        <modal inline-template ref="booking" v-cloak>
-            <transition name="zoom-out">
-                <div class="booking-modal" v-if="visible">
-
-                    <h3>
-                        <span>Booking Details</span>
-                        <a href="#" @click="visible=false">
-                            <i class="fas fa-times"></i>
-                            <span>Close</span>
-                        </a>
-
-                    </h3>
-                    <div class="overflow-container">
-                        <table>
-                            <tr>
-                                <td>Schedule</td>
-                                <td>
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                    <i class="fas fa-clock"></i>
-                                    <span>{{params.booking_time}}</span><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>{{params.booking_status}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Price</td>
-                                <td>Php {{params.booking_total_price}}</td>
-                            </tr>
-                            <tr>
-                                <td>Deposit Slip</td>
-                                <td style="text-align:center">
-                                    <img :src="params.booking_deposit_slip" width="50%">
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
-                        <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
-                            v-if="params.booking_status=='AWAITING_CONFIRMATION'">
-                            <span>Confirm Booking</span>
-                        </button>
-                    </div>
-                </div>
-            </transition>
-        </modal>
+        </main>
 
         <!-- Sliding Drawer -->
         <toggle inline-template ref="drawer" v-cloak>
@@ -184,17 +140,18 @@
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin, adminMixin, facebookMixin],
+            mixins: [accountMixin, adminMixin, facebookMixin, categoryMixin],
             data: {
-                bookings: [],
+                categories: []
             },
             mounted: function () {
                 this.fbInit();
-                this.getAllBookings();
+                this.loadCategories();
             },
         })
     </script>

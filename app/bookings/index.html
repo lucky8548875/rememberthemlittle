@@ -208,7 +208,7 @@
                                 <tr>
                                     <td>Package Name</td>
                                     <td>
-                                        {{$root.parsePackage(params.package).package_name}}
+                                        {{JSON.parse(params.package).package_name}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -268,10 +268,6 @@
 
                     this.deposit_slip_file = document.querySelector('#file_input').files[0];
                 },
-                parsePackage(package){
-                    console.log(package);
-                    return JSON.parse(package);
-                }
             },
         })
     </script>
