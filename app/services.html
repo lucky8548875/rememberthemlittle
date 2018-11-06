@@ -1,0 +1,74 @@
+<!--
+    The doctype declaration should be the very first thing in an HTML
+    document, before the tag. The doctype declaration is not an HTML tag;
+    it is an instruction to the web browser about what version of the
+    markup language the page is written in. In the case of <!DOCTYPE html>,
+    we are declaring that the version of HTML is HTML5.
+ -->
+ <!DOCTYPE html>
+ <!--
+     The HTML lang attribute can be used to declare the language of a Web page
+     or a portion of a Web page. This is meant to assist search engines and browsers.
+ -->
+ <html lang="en">
+ <!--
+     The <head> element is a container for metadata (data about data) and is
+     placed between the <html> tag and the <body> tag. HTML metadata is data
+     about the HTML document. Metadata is not displayed. Metadata typically
+     define the document title, character set, styles, links, scripts, and
+     other meta information.
+ -->
+ <head>
+     <!-- Specify the character encoding for the HTML document -->
+     <meta charset="UTF-8">
+     <!--
+         A <meta> viewport element gives the browser instructions on how to
+         control the page's dimensions and scaling.
+         The width=device-width part sets the width of the page to follow the screen-width
+         of the device (which will vary depending on the device).
+         The initial-scale=1.0 part sets the initial zoom level when the page is first loaded
+         by the browser.
+     -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!--
+         The X-UA-Compatible meta tag allows web authors to choose what version
+         of Internet Explorer the page should be rendered as.
+     -->
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <!--
+         Starting in version 39 of Chrome for Android on Lollipop, you'll now be
+         able to use the theme-color meta tag to set the toolbar color—this means
+         no more Seattle gray toolbars!
+     -->
+     <meta name="theme-color" content="#228be6">
+ 
+     <!-- Stylesheets.
+         The best practice is to put here the critical stylesheets (styles that need to
+         load first before rendering the page)
+         Other styles that are not critical should be lazy loaded to prevent the blocking
+         of initial page render.
+      -->
+     <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    
+ 
+     <!-- Page Title-->
+     <title>Remember Them Little</title>
+ 
+ </head>
+
+
+ <!-- The specific styles for this page (index.html) is stored in the class .index
+     in /_system/css/playfulcss/website/_index.sass -->
+ <body>
+ 
+        <div>
+            <h1>Heading</h1>
+            <p>The quick brown fox</p>
+            <button>Click me</button>
+        </div>
+
+ </body>
+ 
+ </html>
