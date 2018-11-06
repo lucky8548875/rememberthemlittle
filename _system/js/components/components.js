@@ -1,5 +1,5 @@
-Vue.component('toggle',{
-    data: function (){
+Vue.component('toggle', {
+    data: function () {
         return {
             visible: false
         }
@@ -38,14 +38,14 @@ Vue.component('modal', {
     }
 });
 
-Vue.component('account-button',{
-    data: function(){
+Vue.component('account-button', {
+    data: function () {
         return {
             context_visible: false
         }
     },
     template:
-    `
+        `
     <div>
     <!---------------------- CUSTOM FACEBOOK BUTTON ---------------------->
 
@@ -99,31 +99,92 @@ Vue.component('account-button',{
     `
 })
 
-Vue.component('stepper',{
+Vue.component('stepper', {
 
     props: ['steps'],
 
-    data: function() {
+    data: function () {
         return {
 
-            step : 1
+            step: 1
         }
     },
 
     methods: {
 
-        next: function(){
+        next: function () {
 
-            if(this.step < this.steps ){
+            if (this.step < this.steps) {
                 this.step++;
             }
         },
 
-        previous: function(){
-            if(this.step > 1){
+        previous: function () {
+            if (this.step > 1) {
                 this.step--;
             }
         }
     }
 
+})
+
+Vue.component('sliding-drawer', {
+
+    methods:{
+        show(){
+            this.$refs.toggle.show();
+        }
+    },
+    template: `
+    
+    <toggle v-cloak inline-template  ref="toggle">
+
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+
+                        <a href="#" :class="{'active':$root.pageCategory=='Dashboard'}">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+
+                        <div class="subitems">
+                            <a href="#" :class="{'active':$root.pageTitle=='Overview'}">Overview</a>
+                            <a href="/app/admin/calendar/" :class="{'active':$root.pageTitle=='Calendar'}">Calendar</a>
+                        </div>
+
+                        <a href="#" :class="{'active':$root.pageCategory=='Transactions'}">
+                            <i class="fas fa-th"></i>
+                            <span>Transactions</span>
+                        </a>
+                        <div class="subitems">
+                            <a href="/app/admin/transactions/" :class="{'active':$root.pageTitle=='Bookings'}">Bookings</a>
+                            <a href="#"  :class="{'active':$root.pageTitle=='Orders'}">Orders</a>
+                        </div>
+                        <a href="#" :class="{'active':$root.pageCategory=='Settings'}">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <div class="subitems">
+                            <a href="/app/admin/transactions/" :class="{'active':$root.pageTitle=='Categories'}">Categories</a>
+                            <a href="#" :class="{'active':$root.pageTitle=='Packages'}">Packages</a>
+                            <a href="#"  :class="{'active':$root.pageTitle=='Addons'}">Addons</a>
+                            <a href="#"  :class="{'active':$root.pageTitle=='Themes'}">Themes</a>
+                            </div>
+                        <a href="#" :class="{'active':$root.pageCategory=='Reports'}">
+                            <i class="fas fa-file"></i>
+                            <span>Reports</span>
+                        </a>
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+    
+    `
 })

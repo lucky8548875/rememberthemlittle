@@ -60,10 +60,6 @@
                 display: inline-flex
             margin-bottom: 2rem
 
-            
-
-
-
     .sidebar
         display: none
         flex-direction: column
@@ -99,3 +95,57 @@
             width: 100%
             justify-content: space-between
             padding: 0.5rem 0rem
+
+    .drawer
+        position: fixed
+        top: 0
+        left: 0
+        height: 100vh
+        display: flex
+        flex-direction: column
+        background-color: $color-white
+        background-color: $color-primary
+        box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0,0,0,0.05)
+        padding: 1rem 1rem 1rem 0rem
+        z-index: 3
+
+        a
+            border-radius: 0 2rem 2rem 0
+            padding: 1rem 2rem
+            position: relative
+            display: flex
+            color: $color-white
+
+            i
+                width: 1rem
+                text-align: center
+                margin-right: 0.5rem
+
+        > a:focus + div.subitems
+            display: block
+
+
+        > a + div.subitems
+            display: none
+ 
+            a
+                font-weight: lighter
+
+            a.active
+                color: $color-white
+                font-weight: bold
+                position: relative
+                background: linear-gradient(to right, rgba(255,255,255,0.3) , transparent)
+
+            a:hover
+                color: $color-white
+
+        > a.active + div.subitems
+            display: block
+
+        > a.active
+            color: $color-primary
+            background-color: $color-white
+
+        > a:not(.active):hover
+            background-color: transparentize($color-white,0.8)

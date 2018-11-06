@@ -860,6 +860,79 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   padding: 0.5rem 0rem;
 }
 
+.admin .drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #ffffff;
+  background-color: #5252FF;
+  -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+  padding: 1rem 1rem 1rem 0rem;
+  z-index: 3;
+}
+
+.admin .drawer a {
+  border-radius: 0 2rem 2rem 0;
+  padding: 1rem 2rem;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #ffffff;
+}
+
+.admin .drawer a i {
+  width: 1rem;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+.admin .drawer > a:focus + div.subitems {
+  display: block;
+}
+
+.admin .drawer > a + div.subitems {
+  display: none;
+}
+
+.admin .drawer > a + div.subitems a {
+  font-weight: lighter;
+}
+
+.admin .drawer > a + div.subitems a.active {
+  color: #ffffff;
+  font-weight: bold;
+  position: relative;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.3)), to(transparent));
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.admin .drawer > a + div.subitems a:hover {
+  color: #ffffff;
+}
+
+.admin .drawer > a.active + div.subitems {
+  display: block;
+}
+
+.admin .drawer > a.active {
+  color: #5252FF;
+  background-color: #ffffff;
+}
+
+.admin .drawer > a:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .calendar main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1124,65 +1197,6 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-}
-
-.calendar .drawer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #ffffff;
-  background-color: #5252FF;
-  -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
-  padding: 1rem 1rem 1rem 0rem;
-  z-index: 3;
-}
-
-.calendar .drawer a {
-  border-radius: 0 2rem 2rem 0;
-  padding: 1rem 2rem;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  color: #ffffff;
-}
-
-.calendar .drawer a i {
-  width: 1rem;
-  text-align: center;
-  margin-right: 0.5rem;
-}
-
-.calendar .drawer > a + div a {
-  font-weight: lighter;
-}
-
-.calendar .drawer > a + div a.active {
-  color: #ffffff;
-  font-weight: bold;
-  position: relative;
-}
-
-.calendar .drawer > a + div a:hover {
-  color: #ffffff;
-}
-
-.calendar .drawer > a.active {
-  color: #5252FF;
-  background-color: #ffffff;
-}
-
-.calendar .drawer > a:not(.active):hover {
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .dashboard nav {

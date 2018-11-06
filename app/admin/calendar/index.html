@@ -54,8 +54,8 @@
         </nav>
 
         <div class="sidebar">
-            <a href="#">Overview</a>
-            <a href="#" class="active">Bookings Calendar</a>
+            <a href="/">Overview</a>
+            <a href="/app/admin/calendar" class="active">Calendar</a>
         </div>
 
         <!-- Main Content -->
@@ -88,7 +88,8 @@
                                     </span>
                                     <span class="themes">
                                         <i class="far fa-clock"></i>
-                                        <span>{{JSON.parse(cell.data).booking_time}}, {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
+                                        <span>{{JSON.parse(cell.data).booking_time}},
+                                            {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
                                     </span>
                                 </div>
                             </td>
@@ -186,47 +187,7 @@
         </modal>
 
         <!-- Sliding Drawer -->
-        <toggle inline-template ref="drawer" v-cloak>
-
-
-            <div>
-                <transition name="fade" appear>
-                    <div class="blocker" @click="hide()" v-show="visible"></div>
-                </transition>
-
-                <transition name="slide-right">
-                    <div class="drawer" v-show="visible">
-
-                        <a href="#">
-                            <i class="fas fa-home"></i>
-                            <span>Dashboard</span>
-                        </a>
-
-                        <a href="#" class="active">
-                            <i class="fas fa-th"></i>
-                            <span>Transactions</span>
-                        </a>
-                        <div class="subitems">
-                            <a href="#" class="active">
-                                <span>Bookings</span>
-                            </a>
-                            <a href="#">
-                                <span>Orders</span>
-                            </a>
-                        </div>
-                        <a href="#">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-file"></i>
-                            <span>Reports</span>
-                        </a>
-                    </div>
-                </transition>
-            </div>
-
-        </toggle>
+        <sliding-drawer ref="drawer"></sliding-drawer>
 
     </div>
 
@@ -241,6 +202,8 @@
             el: '#app',
             mixins: [accountMixin, adminMixin, facebookMixin],
             data: {
+                pageCategory: 'Dashboard',
+                pageTitle: 'Calendar',
                 calendarBookingsByDate: [],
             },
             mounted: function () {
