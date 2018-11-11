@@ -6,7 +6,7 @@ Online Transaction Processing System for Remember Them Little
 HOMEPAGE (index.html)
     [] Create Home Page Design
     [] Setup AccountKit Login
-    [] Embed Messenger Chatbot
+    [x] Embed Messenger Chatbot
 
 SERVICES (services.html)
     [] Create Services Page Design
