@@ -1,9 +1,5 @@
 var bookingMixin = {
 
-    data: {
-        user_bookings: []
-    },
-
     methods: {
 
         getUserBookings() {
@@ -63,25 +59,25 @@ var bookingMixin = {
             formData.append('token', this.account.token);
             console.log(this.account.account_id)
             console.log(this.account.token)
-  
+
             Vue.http.post('/_system/php/api/booking/addDepositSlip.php', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
-              .then(
-                response => {
-                  if (response.body.success) {
-                    console.log(response.body.data);
-                    this.getUserBookings();
-                  }
-                  else
-                    console.error(response.body.message);
-                },
-                response => {
-                  console.error(response);
-                });
-          },
+                .then(
+                    response => {
+                        if (response.body.success) {
+                            console.log(response.body.data);
+                            this.getUserBookings();
+                        }
+                        else
+                            console.error(response.body.message);
+                    },
+                    response => {
+                        console.error(response);
+                    });
+        },
     }
 
 }

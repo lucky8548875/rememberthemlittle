@@ -83,8 +83,8 @@ var accountMixin = {
                         }
                         else if (response.body.status == "UNAUTHORIZED") {
                             console.log(response.body)
-                            this.clearAccountFromCache();
-                            console.log('Unauthorized. Account cache cleaned.');
+                          //  this.clearAccountFromCache();
+//                            console.log('Unauthorized. Account cache cleaned.');
                         }
                         else
                             console.error(response.body.message);

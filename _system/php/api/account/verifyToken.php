@@ -28,7 +28,7 @@ try {
     # Fetch Result
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (sizeof($result) == 1){
+    if (sizeof($result) >= 1){
 
         # Print Result in JSON Format
         echo json_encode((object)[

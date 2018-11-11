@@ -1,6 +1,23 @@
 var adminMixin = {
 
   methods: {
+    getAllOrders(){
+      var formData = new FormData();
+      formData.append('account_id', this.account.account_id);
+      formData.append('token', this.account.token);
+      Vue.http.post('/_system/php/api/orders/getAll.php', formData)
+        .then(
+          response => {
+
+            if (response.body.success)
+              this.orders = response.body.data;
+            else
+              console.error(response.body);
+          },
+          response => {
+            console.log('fail');
+          });
+    },
     getAllBookings() {
 
       var formData = new FormData();

@@ -12,10 +12,13 @@
         padding: 1rem
         width: 100%
         z-index: 1
+        position: fixed
+        background-color: $color-white
         
 
         > span
             display: flex
+            align-items: center
 
             .brand
                 display: none
@@ -30,6 +33,29 @@
 
                 > i
                     font-size: 1.2rem
+
+        .searchbar
+            display: none
+            background-color: $color-light
+            color: $color-gray
+            border-radius: 2rem
+            margin-left: 2rem
+            align-items: center
+
+            @include large
+                display: flex
+
+            > input
+                border-radius: 2rem
+                background-color: transparent
+                border-width: 0px
+                margin: 0
+                padding: 1rem
+                &:hover, &:focus
+                    border-width: 0px
+            > .fa-search
+                color: lighten($color-gray,15)
+                margin-right: 1rem
 
         .links
             display: none
@@ -64,6 +90,9 @@
         display: none
         flex-direction: column
         min-width: 13rem
+        padding-top: 5rem
+        @include medium
+            padding-top: 7rem
 
         > *
             padding: 1rem 2rem
@@ -88,13 +117,43 @@
         flex-direction: column
         padding-left: 2rem
         padding-right: 2rem
+        height: 100vh
+        overflow-y: auto
+        padding-top: 5rem
+        @include medium
+            padding-top: 7rem
 
         .control
-            display: flex
+            display: -webkit-box
             align-items: center
             width: 100%
             justify-content: space-between
             padding: 0.5rem 0rem
+
+            .filter
+                display: flex
+                align-items: center
+
+                i
+                    margin-left: 0.5rem
+
+            .group
+                display: flex
+                
+                a
+                    padding: 0.5rem 1rem
+                    background-color: $color-light
+                    color: $color-gray
+
+                a.active
+                    background-color: $color-primary
+                    color: $color-white
+                    
+                a:first-child
+                    border-radius: 2rem 0rem 0rem 2rem
+
+                a:last-child
+                    border-radius: 0rem 2rem 2rem 0rem
 
     .drawer
         position: fixed
@@ -115,6 +174,7 @@
             position: relative
             display: flex
             color: $color-white
+            font-weight: lighter
 
             i
                 width: 1rem
@@ -127,25 +187,31 @@
 
         > a + div.subitems
             display: none
- 
-            a
-                font-weight: lighter
 
             a.active
-                color: $color-white
+                background-color: $color-white
+                color: $color-primary
                 font-weight: bold
                 position: relative
-                background: linear-gradient(to right, rgba(255,255,255,0.3) , transparent)
 
-            a:hover
-                color: $color-white
+            a:not(.active):hover
+                background-color: transparentize($color-white,0.8)
 
         > a.active + div.subitems
             display: block
 
         > a.active
-            color: $color-primary
-            background-color: $color-white
+            font-weight: bolder
 
         > a:not(.active):hover
             background-color: transparentize($color-white,0.8)
+
+    .blocker
+        position: fixed
+        display: inline-block
+        width: 100%
+        height: 100vh
+        top: 0
+        left: 0
+        background-color: rgba(0,0,0,0.5)
+        z-index: 2

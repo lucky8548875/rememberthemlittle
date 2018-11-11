@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="admin transactions">
+
+    <!-- Vue App -->
+    <div id="app">
+
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Bookings</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar/">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html" class="active">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+                <a href="/app/admin/transactions/bookings.html" class="active">Bookings</a>
+                <a href="/app/admin/transactions/orders.html" >Orders</a>
+            </div>
+
+        <!-- Main Content -->
+        <transition name="slide-left" appear v-cloak>
+            <main>
+                <div class="control">
+                    <a class="filter color-primary">
+                        <span>All Time</span>
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+                    <div class="group">
+                        <a href="#" :class="{'active':filter=='ALL'}" @click="filter='ALL'">All
+                        </a>
+                        <a href="#" :class="{'active':filter=='FOR_APPROVAL'}" @click="filter='FOR_APPROVAL'">
+                            For Approval ({{forApprovalBookingsLength}})
+                        </a>
+                    </div>
+                </div>
+                <table>
+                    <tr v-for="booking in filteredBookings">
+                        <td>
+                            <span>{{booking.account_name}}</span><br>
+                            <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
+                        </td>
+                        <td style="text-align: right; text-align: -webkit-right;">
+                            <button @click="$root.$refs.booking.show(booking)">View</button>
+                        </td>
+                    </tr>
+                </table>
+            </main>
+           
+        </transition>
+
+        <modal inline-template ref="booking" v-cloak>
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+
+                    <h3>
+                        <span>Booking Details</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+
+                    </h3>
+                    <div class="overflow-container">
+                        <table>
+                            <tr>
+                                <td>Schedule</td>
+                                <td>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{params.booking_time}}</span><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{params.booking_status}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Price</td>
+                                <td>Php {{params.booking_total_price}}</td>
+                            </tr>
+                            <tr>
+                                <td>Deposit Slip</td>
+                                <td style="text-align:center">
+                                    <img :src="params.booking_deposit_slip" width="50%">
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                            v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                            <span>Confirm Booking</span>
+                        </button>
+                    </div>
+                </div>
+            </transition>
+        </modal>
+        
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin],
+            data: {
+                pageCategory: 'Transactions',
+                pageTitle: 'Bookings',
+                bookings: [],
+                filter: "ALL"
+            },
+            mounted: function () {
+                this.fbInit();
+                this.getAllBookings();
+            },
+            computed: {
+                filteredBookings: function () {
+                    if (this.filter == 'ALL') {
+                        return this.bookings;
+                    }
+                    else {
+                        return this.bookings.filter(booking => booking.booking_status == this.filter)
+                    }
+                },
+                forApprovalBookingsLength: function () {
+                    return this.bookings.filter(booking => booking.booking_status == 'FOR_APPROVAL').length
+                }
+            },
+
+
+        })
+    </script>
+
+</body>
+
+</html>

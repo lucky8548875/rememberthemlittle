@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="admin settings">
+    <!-- Vue App -->
+    <div id="app" v-cloak>
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Settings</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html" class="active">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+            <a href="#" class="active">Categories</a>
+            <a href="#">Packages</a>
+            <a href="#">Addons</a>
+            <a href="#">Themes</a>
+        </div>
+
+        <!-- Main Content -->
+        <main v-cloak>
+            <div class="control">
+                <h3>
+                    <span>Categories</span>
+                </h3>
+                <span>
+                    <button class="primary" @click="$root.$refs.newCategoryModal.show()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Category</span>
+                    </button>
+                </span>
+            </div>
+
+            <table style="width: 100%;">
+                <tbody>
+                    <tr v-for="category in categories">
+                        <td>
+                            <h4>{{category.category_name}}</h4>
+                            <span>{{category.category_description}}</span>
+                        </td>
+                        <td style="text-align: -webkit-right">
+                            <button @click="$root.$refs.editCategoryModal.show(category)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+        <modal inline-template ref="newCategoryModal">
+            <transition name="zoom-out">
+                <div class="settings-modal" v-if="visible">
+                    
+                        <div class="blocker" v-if="visible" @click="visible=false"></div>
+                    
+                    <div class="settings-modal-window" v-if="visible">
+
+                        <form @submit.prevent="$root.prepareAddCategory($event); hide()" enctype="multipart/form-data">
+                            <fieldset>
+                                <h2>
+                                    <span>New Category</span>
+                                    <button @click.prevent="hide()">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </button>
+                                </h2>
+                                <label>Category Name</label>
+                                <input type="text" name="category_name">
+                                <label>Category Description</label>
+                                <input type="text" name="category_description">
+                                <label>Image</label>
+                                <input type="file" name="category_image">
+                                <label class="checkbox_label">
+                                    <input type="checkbox" name="category_active" checked>
+                                    <span>Active</span>
+                                </label>
+                                <div class="button-container">
+                                    <button class="primary" type="submit">Add Category</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </transition>
+        </modal>
+    
+        <modal inline-template ref="editCategoryModal">
+                <transition name="zoom-out">
+                    <div class="settings-modal" v-if="visible">
+                        
+                            <div class="blocker" v-if="visible" @click="visible=false"></div>
+                        
+                        <div class="settings-modal-window" v-if="visible">
+    
+                            <form @submit.prevent="$root.prepareAddCategory($event)" enctype="multipart/form-data">
+                                <fieldset>
+                                    <h2>
+                                        <span>Edit Category</span>
+                                        <button @click.prevent="hide()">
+                                            <i class="fas fa-times"></i>
+                                            <span>Close</span>
+                                        </button>
+                                    </h2>
+                                    <label>Category Name</label>
+                                    <input type="text" name="category_name" :value="params.category_name">
+                                    <label>Category Description</label>
+                                    <input type="text" name="category_description" :value="params.category_description">
+                                    <label>Image</label>
+                                    <img :src="params.category_image" height="150px">
+                                    <label class="checkbox_label">
+                                        <input type="checkbox" name="category_active" :checked="params.category_active">
+                                        <span>Active</span>
+                                    </label>
+                                    <div class="button-container">
+                                        <button @click.prevent="$root.deleteCategory(params.category_id); hide()" class="outline" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            <span>Delete</span>
+                                        </button>
+                                        <button class="primary" type="submit">Update Category</button>
+                                    </div>
+    
+                                </fieldset>
+                            </form>
+    
+                        </div>
+                    </div>
+                </transition>
+            </modal>
+    
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin, categoryMixin],
+            data: {
+                pageCategory: 'Settings',
+                pageTitle: 'Categories',
+                categories: []
+            },
+            mounted: function () {
+                this.fbInit();
+                this.loadCategories();
+            },
+            methods:{
+                prepareAddCategory(submitEvent){
+                    var elements = submitEvent.target.elements;
+
+                    var category_name = elements.category_name.value;
+                    var category_description = elements.category_description.value;
+                    var category_image = elements.category_image.files[0];
+                    var category_active = elements.category_active.checked ? 1 : 0
+                    console.log(category_active)
+                    this.addCategory(category_name,category_description,category_image,category_active);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

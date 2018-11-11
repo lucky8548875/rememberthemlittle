@@ -34,14 +34,14 @@
 
         <!-- Main Content -->
         <transition name="slide-left" appear>
-        <main v-cloak>
-            <div class="control">
-                <h3>My Bookings</h3>
-                <button onclick="window.location.href='/app/book'">
-                    <i class="fas fa-plus"></i>
-                    <span>New Booking</span>
-                </button>
-            </div>
+            <main v-cloak>
+                <div class="control">
+                    <h3>My Bookings</h3>
+                    <button onclick="window.location.href='/app/book'">
+                        <i class="fas fa-plus"></i>
+                        <span>New Booking</span>
+                    </button>
+                </div>
                 <div class="bookings">
                     <table>
 
@@ -63,7 +63,7 @@
                                         <i class="fas fa-eye"></i>
                                         <span>View Details</span>
                                     </a>
-                                    <a v-else-if="booking.booking_status=='COMPLETED'" href="#" @click="$root.$refs.booking.show(booking)">
+                                    <a v-else-if="booking.booking_status=='COMPLETED'" href="#" @click="$root.$refs.order.show(booking)">
                                         <i class="fas fa-images"></i>
                                         <span>Order Prints</span>
                                     </a>
@@ -73,15 +73,34 @@
                     </table>
                 </div>
 
-            <br><br>
-            <div class="control">
-                <h3>My Orders</h3>
-            </div>
-            <div class="orders">
-                <span>You have no orders.</span>
-            </div>
-        </main>
-    </transition>
+                <br><br>
+                <div class="control">
+                    <h3>My Orders</h3>
+                </div>
+                <div class="bookings orders">
+                    <span v-if="orders.length == 0">You have no orders.</span>
+                    <table>
+
+                            <tbody>
+                                <tr v-for="order in orders">
+                                    <td>
+                                        <div>
+                                            <span>Order #{{order.order_id}}</span>
+                                            <span>Status: {{order.order_status}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="fas fa-eye"></i>
+                                            <span>View Details</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </main>
+        </transition>
 
         <!-- Sliding Drawer -->
         <toggle inline-template ref="drawer" v-cloak>
@@ -243,6 +262,50 @@
                 </div>
             </transition>
         </modal>
+
+        <modal inline-template ref="order" v-cloak>
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+
+                    <h3>
+                        <span>Order Prints</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+
+                    </h3>
+                    <div class="overflow-container">
+                        <form style="padding: 0" @submit.prevent="$root.placeOrder($event)">
+                            <input type="hidden" name="booking_id" value="params.booking_id">
+                            <table>
+                                <tr v-for="addon,index in JSON.parse(params.booking_addons)" v-if="addon.addon_type=='PRINT' && !((addon.addon_source=='PACKAGE' || addon.addon_source=='BOOKING') && params.booking_addons_isordered == 1)">
+                                    <td>
+                                        {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ? 'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' + addon.addon_price }})
+                                    </td>
+                                    <td>
+                                        <input type="text" :addon="JSON.stringify(addon)" placeholder="Filename of Photo"
+                                            style="padding-left: 1rem" :name="'addon' + index">
+                                    </td>
+                                </tr>
+                            </table><br>
+                            <div class="flex">
+                                <select ref="selectedPrint">
+                                    <option v-for="printAddon in $root.addons.filter(addon => addon.addon_type=='PRINT')"
+                                        :value="JSON.stringify(printAddon)">
+                                        {{printAddon.addon_description}}
+                                    </option>
+                                </select>
+                                <button @click.prevent="params.booking_addons = JSON.parse(params.booking_addons); params.booking_addons.push(JSON.parse($refs.selectedPrint.value)); params.booking_addons = JSON.stringify(params.booking_addons)">Add
+                                    more prints</button>
+                                Total: Php {{$root.getTotalPrice(params.booking_addons)}}
+                            </div><br>
+                            <button class="wide primary justify-center" type="submit">Place Order</button>
+                        </form>
+                    </div>
+                </div>
+            </transition>
+        </modal>
     </div>
 
     <script src="/_system/js/vendor/vue.js"></script>
@@ -251,23 +314,95 @@
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
     <script src="/_system/js/mixins/booking.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin, bookingMixin, facebookMixin],
+            mixins: [accountMixin, bookingMixin, facebookMixin, addonMixin],
             mounted: function () {
                 this.getUserBookings();
+                this.loadOrders();
+                this.loadAddons();
             },
             data: {
+                user_bookings: [],
                 deposit_slip_file: {
                     name: ""
-                }
+                },
+                addons: [],
+                orders:[],
+
             },
             methods: {
                 updateDepositSlip() {
-
                     this.deposit_slip_file = document.querySelector('#file_input').files[0];
                 },
+                getTotalPrice(params) {
+                    
+                    var array = JSON.parse(params).filter(addon => addon.addon_source != 'BOOKING' && addon.addon_source != 'PACKAGE' ).map(addon => addon.addon_price);
+                    var x = 0
+                    array.forEach(element => {
+                        x += element;
+                    });
+                    return x;
+                },
+                placeOrder(submitEvent) {
+
+                    var elements = [];
+                    for (key in submitEvent.target.elements) {
+                        if (submitEvent.target.elements[key].type == 'text')
+                            elements.push(submitEvent.target.elements[key]);
+                    }
+                    var order_list = elements.map(function (element) {
+                        return {
+                            filename: element.value,
+                            addon: JSON.parse(element.attributes.addon.nodeValue)
+                        }
+                    }
+                    );
+                    
+                    var formData = new FormData();
+                    formData.append('order_list',JSON.stringify(order_list))
+                    formData.append('account_id',this.account.account_id)
+                    formData.append('token',this.account.token)
+                    formData.append('booking_id',submitEvent.target.elements.booking_id.value)
+                    Vue.http.post('/_system/php/api/orders/add.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    this.loadOrders();
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+
+
+                },
+                loadOrders(){
+
+                    var formData = new FormData();
+                    formData.append('account_id',this.account.account_id)
+                    formData.append('token',this.account.token)
+                    Vue.http.post('/_system/php/api/orders/getUserOrders.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    this.orders = response.body.data
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+                }
             },
         })
     </script>

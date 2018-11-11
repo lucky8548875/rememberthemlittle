@@ -1,14 +1,16 @@
 .index
+    background-color: #F8F9FA
 
     nav
         display: flex
         justify-content: space-between
         align-items: center
-        padding: 1rem
+        padding: 0.75rem 1rem
         position: fixed
         width: 100%
         background-color: white
         z-index: 1
+        box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05)
 
         > *
             padding: 1rem
@@ -20,6 +22,27 @@
 
         > a:nth-child(2)
             color: $color-primary
+
+        .nav-logo
+            display: none
+            width: 15rem
+            @include large
+                display: inline-block
+
+        .links
+            display: none
+            margin-right: 2rem
+            
+            a
+                padding: 0.5rem 1rem
+                
+            @include large
+                display: flex
+
+        
+        .bars
+            @include large
+                display: none
 
         .account_options
             display: flex
@@ -45,13 +68,28 @@
         height: 100vh
         display: flex
         justify-content: center
-        align-items: center
+        align-items: center        
 
         div:first-child
             display: flex
             justify-content: center
             align-items: center
             flex-direction: column
+
+            .landing-brand
+                margin-bottom: 3rem
+                width: 60vw
+                @include medium
+                    display: none
+                    
+            .landing-brand-large
+                margin-bottom: 3rem
+                display: none
+                @include medium
+                    display: inline-block
+                    width: 50vw
+                @include large
+                    width: 30rem
 
             > i
                 font-size: 3rem
@@ -60,11 +98,16 @@
                 margin-bottom: 1rem
 
             > h1
+                margin-top: 3rem
                 display: flex
                 flex-wrap: wrap
                 justify-content: center
                 margin-bottom: 2rem
                 text-align: center
+                font-size: 3rem
+
+                @include large
+                    font-size: 4rem
 
                 span
                     margin-left: 0.3rem
@@ -95,6 +138,10 @@
 
                 a:nth-of-type(2)
                     @extend .outline
+
+            .construction
+                border-radius: 1rem
+                color: #eebb00
 
             
 

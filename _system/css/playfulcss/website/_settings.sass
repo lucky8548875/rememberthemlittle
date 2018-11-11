@@ -1,0 +1,60 @@
+.settings
+
+    .settings-modal
+        position: fixed
+        bottom: 0
+        left: 0
+        top: 0
+        right: 0
+        width: 100%
+        z-index: 2
+        display: flex
+        justify-content: center
+
+        .blocker
+            display: none
+            @include medium
+                display: initial
+
+        .settings-modal-window
+            background-color: $color-white
+            z-index: 5
+            margin: auto
+            height: 100%
+            max-height: 100%
+            width: 100%
+            overflow: auto
+
+            @include medium
+                height: auto
+                
+                width: auto
+                border-radius: 0.5rem
+
+        form
+            fieldset
+                h2
+                    width: 100%
+                    display: flex
+                    justify-content: space-between
+                    margin-bottom: 1rem
+
+                    button
+                        display: inline-flex
+                        @extend .outline
+                input
+                    width: 100%
+
+                .checkbox_label
+                    display: flex
+                    padding: 0.5rem 0rem
+                    input
+                        width: auto !important
+                        margin-right: 0.25rem
+
+                .button-container
+                    display: flex
+                    justify-content: flex-end
+
+
+        

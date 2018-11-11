@@ -34,9 +34,8 @@
                 <div @submit.prevent="next()" style="text-align: center">
                     <transition name="fade" mode="out-in">
                         <form v-if="step==1" key="1">
-                            <fieldset>
-                                <legend>Step 1</legend>
-                                <label>Choose a Category</label>
+                            <fieldset style="align-items: center; text-align: center">
+                                <label style="font-size: 2rem">Select a category</label>
                                 <select v-model="$root.selected_category_id" v-if="$root.categories.length>0">
                                     <option v-for="category in $root.categories" :value="category.category_id">
                                         {{category.category_name}}
@@ -297,7 +296,8 @@
                                 addon_id: fetched_addon.addon_id,
                                 addon_type: fetched_addon.addon_type,
                                 addon_description: fetched_addon.addon_description,
-                                addon_price: 0
+                                addon_price: 0,
+                                addon_source: 'PACKAGE', // 'AVAILED'
                             }
 
                             addonArray.push(free_addon);
@@ -329,8 +329,19 @@
 
             methods: {
                 addAddon() {
-                    if (this.checkLimit(this.selected_addon))
-                        this.booking.addons.push(this.selected_addon)
+                    if (this.checkLimit(this.selected_addon)){
+
+                        var selected_addon = this.selected_addon
+                        var availed_addon = {
+                            addon_id: selected_addon.addon_id,
+                            addon_type: selected_addon.addon_type,
+                            addon_description: selected_addon.addon_description,
+                            addon_price: selected_addon.addon_price,
+                            addon_source: 'BOOKING', // 'AVAILED'
+                        }
+                        this.booking.addons.push(availed_addon)
+                    }
+                        
                 },
                 checkLimit(addon) {
                     var count = this.booking.addons.filter(inclusion => inclusion.addon_id == addon.addon_id).length;

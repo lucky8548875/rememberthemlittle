@@ -13,6 +13,9 @@ Vue.component('toggle', {
         },
         toggle() {
             this.visible = !this.visible
+        },
+        goto(url){
+            window.location.href=url
         }
     }
 });
@@ -52,7 +55,7 @@ Vue.component('account-button', {
             <!-- Not Authorized / Not Connected-->
             <a href="#" v-if="$root.account.status=='DISCONNECTED' && $root.facebook.status=='LOADED' && $root.facebook.api_status!='LOADING'" class="color-primary"
                 @click="$root.$refs.signin.show()" v-cloak>
-                <i class="fab fa-facebook-square"></i><span>Login</span></a>
+                <i class="fab fa-facebook-square"></i><span>Sign In</span></a>
 
             <!-- Authorized / Connected -->
             <a href="#" v-else-if="$root.account.status=='CONNECTED' && $root.facebook.api_status!='LOADING'" class="flex align-items-center" @click.prevent="context_visible=true">
@@ -76,7 +79,7 @@ Vue.component('account-button', {
                         <img class="profile_pic" :src="$root.account.picture_url" style="border-radius: 50%; width: 26px; margin-right: 0.5rem">
                         <span>{{$root.account.display_name}}</span>
                     </a>
-                    <a v-if="$root.account.account_type='ADMIN'" href="/app/admin/transactions/index.html">
+                    <a v-if="$root.account.account_type='ADMIN'" href="/app/admin/calendar/index.html">
                         <i class="fas fa-toolbox"></i>
                         <span>Admin</span>
                     </a>
@@ -133,7 +136,8 @@ Vue.component('sliding-drawer', {
     methods:{
         show(){
             this.$refs.toggle.show();
-        }
+        },
+        
     },
     template: `
     
@@ -154,8 +158,8 @@ Vue.component('sliding-drawer', {
                         </a>
 
                         <div class="subitems">
-                            <a href="#" :class="{'active':$root.pageTitle=='Overview'}">Overview</a>
-                            <a href="/app/admin/calendar/" :class="{'active':$root.pageTitle=='Calendar'}">Calendar</a>
+                            <a @mousedown.prevent="goto('/app/admin/overview/')" :class="{'active':$root.pageTitle=='Overview'}">Overview</a>
+                            <a @mousedown.prevent="goto('/app/admin/calendar/')" :class="{'active':$root.pageTitle=='Calendar'}">Calendar</a>
                         </div>
 
                         <a href="#" :class="{'active':$root.pageCategory=='Transactions'}">
@@ -163,18 +167,18 @@ Vue.component('sliding-drawer', {
                             <span>Transactions</span>
                         </a>
                         <div class="subitems">
-                            <a href="/app/admin/transactions/" :class="{'active':$root.pageTitle=='Bookings'}">Bookings</a>
-                            <a href="#"  :class="{'active':$root.pageTitle=='Orders'}">Orders</a>
+                            <a @mousedown.prevent="goto('/app/admin/transactions/bookings.html')" :class="{'active':$root.pageTitle=='Bookings'}">Bookings</a>
+                            <a @mousedown.prevent="goto('/app/admin/transactions/orders.html')" href="#"  :class="{'active':$root.pageTitle=='Orders'}">Orders</a>
                         </div>
                         <a href="#" :class="{'active':$root.pageCategory=='Settings'}">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
                         <div class="subitems">
-                            <a href="/app/admin/transactions/" :class="{'active':$root.pageTitle=='Categories'}">Categories</a>
-                            <a href="#" :class="{'active':$root.pageTitle=='Packages'}">Packages</a>
-                            <a href="#"  :class="{'active':$root.pageTitle=='Addons'}">Addons</a>
-                            <a href="#"  :class="{'active':$root.pageTitle=='Themes'}">Themes</a>
+                            <a @mousedown.prevent="goto('/app/admin/settings/categories.html')" :class="{'active':$root.pageTitle=='Categories'}">Categories</a>
+                            <a @mousedown.prevent="goto('/app/admin/settings/packages.html')" :class="{'active':$root.pageTitle=='Packages'}">Packages</a>
+                            <a @mousedown.prevent="goto('/app/admin/settings/addons')"  :class="{'active':$root.pageTitle=='Addons'}">Addons</a>
+                            <a @mousedown.prevent="goto('/app/admin/settings/Themes')"  :class="{'active':$root.pageTitle=='Themes'}">Themes</a>
                             </div>
                         <a href="#" :class="{'active':$root.pageCategory=='Reports'}">
                             <i class="fas fa-file"></i>

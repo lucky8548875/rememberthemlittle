@@ -18,6 +18,7 @@
     define the document title, character set, styles, links, scripts, and
     other meta information.
 -->
+
 <head>
     <!-- Specify the character encoding for the HTML document -->
     <meta charset="UTF-8">
@@ -40,7 +41,7 @@
         able to use the theme-color meta tag to set the toolbar color—this means
         no more Seattle gray toolbars!
     -->
-    <meta name="theme-color" content="#228be6">
+    <meta name="theme-color" content="#5252FF">
 
     <!-- Stylesheets.
         The best practice is to put here the critical stylesheets (styles that need to
@@ -50,6 +51,7 @@
      -->
     <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/linear-icons.css">
     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
 
     <!-- Page Title-->
@@ -59,47 +61,95 @@
 
 <!-- The specific styles for this page (index.html) is stored in the class .index
     in /_system/css/playfulcss/website/_index.sass -->
+
 <body class="index">
+    <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="746988385642006"
+  theme_color="#0084ff">
+</div>
 
     <!-- Vue App. Mounts the new Vue({el:'#app'}) defined below, to this element -->
-    <div id="app">
+    <div id="app" v-cloak>
 
         <!-- App bar. What you see at the top. -->
         <nav>
             <!-- Button for Menu Drawer -->
-            <a href="#" @click="$root.$refs.drawer.show()">
-                <i class="fas fa-bars"></i>
-                <span>Menu</span>
-            </a>
-            <!-- Button for Login/Account Options -->
-            <account-button></account-button>
+            <span>
+                <a href="#" @click="$root.$refs.drawer.show()" class="bars">
+                    <i class="fas fa-bars"></i>
+                    <span>Menu</span>
+                </a>
+                <h3 class="nav-logo">
+                    <i class="fab fa-instagram" style="color: #5252ff"></i>
+                    <span>Remember Them Little</span>
+                </h3>
+
+            </span>
+            <span>
+                <div class="links">
+                    <a href="#" class="active color-dark">
+
+                        <span>Home</span>
+                    </a>
+                    <a href="#">
+
+                        <span>Services</span>
+                    </a>
+                    <a href="#">
+
+                        <span>Gallery</span>
+                    </a>
+                    <a href="#" class="button outline" style="margin-left: 1rem">
+                            <i class="fas fa-phone fa-flip-horizontal"></i>
+
+                        <span>Contact Us</span>
+                    </a>
+                </div>
+                <!-- Button for Login/Account Options -->
+                <account-button></account-button>
+            </span>
         </nav>
 
         <!-- Main Content -->
         <main>
             <div class="container">
-                <i class="fab fa-instagram icon"></i>
-                <h1>
-                    <span>Remember</span>
-                    <span>Them Little</span>
-                </h1>
 
+                <h1>
+                    Every picture tells a story.
+                </h1>
                 <div>
                     <a href="/app/book">
                         <span>Book Now</span>
                         <i class="fas fa-calendar-alt"></i>
                     </a>
-                    <a>
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-down"></i>
+                    <a v-if="account.status=='DISCONNECTED' && facebook.status=='LOADED'">
+                        <span>Sign in</span>
+                        <i class="fab fa-facebook-square"></i>
+                        <i class="fas fa-key"></i>
+                    </a>
+                    <a v-if="account.status=='CONNECTED'" href="/app/bookings">
+                        <span>Manage Bookings</span>
+                        <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
                 <br><br><br><br>
 
-                <a href="https://www.facebook.com/rememberthemlittle" target="_blank">
+                <!-- <a href="https://www.facebook.com/rememberthemlittle" target="_blank">
                     <i class="fab fa-facebook"></i>
-                    <span>Visit us on Facebook</span>
-                </a>
+                    <span>Remember Them Little</span>
+                </a> -->
 
             </div>
         </main>
@@ -123,21 +173,21 @@
                         </a>
 
                         <a href="#" class="active">
-                            <i class="fas fa-home"></i>
-                            <span>Home</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-camera"></i>
-                            <span>Services</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-th"></i>
-                            <span>Gallery</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-phone fa-flip-horizontal"></i>
-                            <span>Contact Us</span>
-                        </a>
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-camera"></i>
+                                <span>Services</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-th"></i>
+                                <span>Gallery</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-phone fa-flip-horizontal"></i>
+                                <span>Contact Us</span>
+                            </a>
                     </div>
                 </transition>
             </div>
@@ -145,23 +195,23 @@
         </toggle>
 
         <toggle inline-template ref="signin" v-cloak>
-                <transition name="zoom-out" appear>
-                    <div class="signin" v-show="visible" @click="hide()">
-                        <div>
-                            <i class="fas fa-user-circle"></i>
-                            
-                            <button @click="$root.facebook_login()">
-                                <i class="fab fa-facebook-square"></i>
-                                <span>Sign in with Facebook</span>
-                            </button>
+            <transition name="zoom-out" appear>
+                <div class="signin" v-show="visible" @click="hide()">
+                    <div>
+                        <i class="fas fa-user-circle"></i>
 
-                            <button>
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Sign in thru SMS</span>
-                            </button>
-                        </div>
+                        <button @click="$root.facebook_login()">
+                            <i class="fab fa-facebook-square"></i>
+                            <span>Sign in with Facebook</span>
+                        </button>
+
+                        <button>
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Sign in thru SMS</span>
+                        </button>
                     </div>
-                </transition>
+                </div>
+            </transition>
         </toggle>
 
     </div>
@@ -177,7 +227,7 @@
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin,facebookMixin]
+            mixins: [accountMixin, facebookMixin]
 
         })
     </script>
