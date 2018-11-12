@@ -1,13 +1,24 @@
 .dashboard
+    
+
+    #app
+        background-color: #F8F9FA
+        display: flex
+        flex-wrap: wrap
 
     nav
+        position: sticky
+        top: 0
         display: flex
         justify-content: space-between
         align-items: center
         padding: 1rem
         width: 100%
-        background-color: white
+    
         z-index: 1
+        @include large
+            background-color: white
+            box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05)
 
         a
             padding: 1rem
@@ -39,9 +50,33 @@
         > span
             display: flex
 
+    .sidebar
+        display: none
+        flex-direction: column
+        min-width: 13rem
+        padding-top: 2rem
+
+        > *
+            padding: 1rem 2rem
+            border-radius: 0 2rem 2rem 0
+            border-left: 4px solid transparent
+
+            &.active
+                background-color: $color-primary
+                color: $color-white
+                // Experiment
+                background-color: transparentize($color-primary,0.9)
+                color: $color-primary
+                border-left: 4px solid $color-primary
+        
+        @include large
+            display: flex
+
     main
+        flex-grow: 1
         padding-left: 2rem
         padding-right: 2rem
+        padding-top: 2rem
 
         .control
             display: flex
@@ -68,7 +103,8 @@
                             font-size: 0.8rem
                             margin-top: 0.25rem
 
-                td
+                td  
+
                     a
                         @extend .button, .outline, .color-primary
                         display: flex
@@ -76,9 +112,11 @@
                         justify-content: center
                         border-width: 1px
                         border-color: $color-primary
+                        max-width: 13rem
 
                 td:last-child
                     padding-right: 0
+                    text-align: -webkit-right
 
     .notification-modal
         position: fixed
@@ -90,6 +128,7 @@
         padding: 2rem
         display: flex
         flex-direction: column
+        z-index: 2
 
         > h3
             display: flex
@@ -109,6 +148,7 @@
         padding: 2rem
         display: flex
         flex-direction: column
+        z-index: 2
 
         > h3
             display: flex

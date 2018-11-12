@@ -1,3 +1,95 @@
+Vue.component('index-navigation',{
+    template:
+    `
+    <nav>
+            <!-- Button for Menu Drawer -->
+            <span>
+                <a href="#" @click="$root.$refs.drawer.show()" class="bars">
+                    <i class="fas fa-bars"></i>
+                    <span>Menu</span>
+                </a>
+                <h3 class="nav-logo">
+                    <i class="fab fa-instagram" style="color: #5252ff"></i>
+                    <span>Remember Them Little</span>
+                </h3>
+
+            </span>
+            <span>
+                <div class="links">
+                    <a href="#" class="active color-dark">
+
+                        <span>Home</span>
+                    </a>
+                    <a href="#">
+
+                        <span>Services</span>
+                    </a>
+                    <a href="#">
+
+                        <span>Gallery</span>
+                    </a>
+                    <a href="#" class="button outline" style="margin-left: 1rem">
+                            <i class="fas fa-phone fa-flip-horizontal"></i>
+
+                        <span>Contact Us</span>
+                    </a>
+                </div>
+                <!-- Button for Login/Account Options -->
+                <account-button></account-button>
+            </span>
+        </nav>
+    `
+})
+
+Vue.component('index-drawer',{
+    methods:{
+        show(){
+            this.$refs.toggle.show();
+        },
+    },
+    template: 
+    `
+    <toggle inline-template ref="toggle" v-cloak>
+
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+                        <a>
+                            <h2>
+                                <i class="fab fa-instagram"></i><br>
+                                <span>Remember<br>Them Little</span></span>
+                            </h2>
+                        </a>
+
+                        <a href="#" class="active">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-camera"></i>
+                                <span>Services</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-th"></i>
+                                <span>Gallery</span>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-phone fa-flip-horizontal"></i>
+                                <span>Contact Us</span>
+                            </a>
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+    `
+})
+
 Vue.component('toggle', {
     data: function () {
         return {

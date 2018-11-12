@@ -37,6 +37,16 @@ if (isset($package) && isset($booking_addons) && isset($booking_themes) && isset
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
+    
+        $date_today = strtotime('Now');
+        $date_tomorrow = strtotime('+1 day', $date_today);
+
+        $notification_message = "Your booking is now reserved for 24 hours. Please secure your payment of Php $booking_total_price at the following banks: etc. until " . date("m-d-Y H:i",$date_tomorrow);
+
+        $sql = "INSERT INTO notifications (account_id, notification_message) VALUES ('$account_id','$notification_message')";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
         # Print success
         echo json_encode((object)[
             'success' => true

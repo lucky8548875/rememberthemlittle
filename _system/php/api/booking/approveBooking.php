@@ -23,6 +23,12 @@ if (isset($booking_id) && isAdminTokenValid($account_id,$token)) {
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
+        $notification_message = "Your booking is now approved! Please review the following reminders for your booking: etc etc.";
+
+        $sql = "INSERT INTO notifications (account_id, notification_message) VALUES ('$account_id','$notification_message')";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
         # Print success
         echo json_encode((object)[
             'success' => true

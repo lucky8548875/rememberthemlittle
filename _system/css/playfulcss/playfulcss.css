@@ -1,5 +1,5 @@
 .font-primary, body {
-  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
+  font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
 }
 
 .color-primary, .index main div:first-child > a:first-of-type, .dashboard main .bookings table td a {
@@ -162,7 +162,7 @@
 
 button, a.button, .index main div:first-child div:first-of-type a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .transactions .booking-modal > h3 > a {
   color: #495057;
-  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
+  font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 1rem;
   -webkit-box-align: center;
@@ -264,7 +264,7 @@ a.button, .index main div:first-child div:first-of-type a, .calendar .booking-mo
 }
 
 input:not([type=checkbox]):not([type=radio]), select, textarea {
-  font-family: "Proxima Nova", "Segoe UI", "Roboto", "Open Sans", sans-serif;
+  font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   color: #495057;
   background-color: white;
   border: 2px solid #e9ecef;
@@ -443,10 +443,6 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   padding: 0.75rem 1rem;
   position: fixed;
   width: 100%;
-  background-color: white;
-  z-index: 1;
-  -webkit-box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05);
 }
 
 .index nav > * {
@@ -799,7 +795,9 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   padding: 1rem;
   width: 100%;
   z-index: 1;
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   background-color: #ffffff;
 }
 
@@ -930,13 +928,6 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
       -ms-flex-direction: column;
           flex-direction: column;
   min-width: 13rem;
-  padding-top: 5rem;
-}
-
-@media only screen and (min-width: 600px) {
-  .admin .sidebar {
-    padding-top: 7rem;
-  }
 }
 
 .admin .sidebar > * {
@@ -974,15 +965,6 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           flex-direction: column;
   padding-left: 2rem;
   padding-right: 2rem;
-  height: 100vh;
-  overflow-y: auto;
-  padding-top: 5rem;
-}
-
-@media only screen and (min-width: 600px) {
-  .admin main {
-    padding-top: 7rem;
-  }
 }
 
 .admin main .control {
@@ -1335,7 +1317,19 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
 }
 
+.dashboard #app {
+  background-color: #F8F9FA;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .dashboard nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1347,8 +1341,15 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           align-items: center;
   padding: 1rem;
   width: 100%;
-  background-color: white;
   z-index: 1;
+}
+
+@media only screen and (min-width: 1024px) {
+  .dashboard nav {
+    background-color: white;
+    -webkit-box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.05);
+  }
 }
 
 .dashboard nav a {
@@ -1403,9 +1404,45 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   display: flex;
 }
 
+.dashboard .sidebar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 13rem;
+  padding-top: 2rem;
+}
+
+.dashboard .sidebar > * {
+  padding: 1rem 2rem;
+  border-radius: 0 2rem 2rem 0;
+  border-left: 4px solid transparent;
+}
+
+.dashboard .sidebar > *.active {
+  background-color: #5252FF;
+  color: #ffffff;
+  background-color: rgba(82, 82, 255, 0.1);
+  color: #5252FF;
+  border-left: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 1024px) {
+  .dashboard .sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
 .dashboard main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-top: 2rem;
 }
 
 .dashboard main .control {
@@ -1460,10 +1497,12 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           justify-content: center;
   border-width: 1px;
   border-color: #5252FF;
+  max-width: 13rem;
 }
 
 .dashboard main .bookings table td:last-child {
   padding-right: 0;
+  text-align: -webkit-right;
 }
 
 .dashboard .notification-modal {
@@ -1481,6 +1520,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 2;
 }
 
 .dashboard .notification-modal > h3 {
@@ -1510,6 +1550,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 2;
 }
 
 .dashboard .booking-modal > h3 {

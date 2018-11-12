@@ -54,7 +54,7 @@
 
         <div class="sidebar">
             <a href="#" class="active">Categories</a>
-            <a href="#">Packages</a>
+            <a href="/app/admin/settings/packages.html">Packages</a>
             <a href="#">Addons</a>
             <a href="#">Themes</a>
         </div>
@@ -62,9 +62,9 @@
         <!-- Main Content -->
         <main v-cloak>
             <div class="control">
-                <h3>
+                <h2>
                     <span>Categories</span>
-                </h3>
+                </h2>
                 <span>
                     <button class="primary" @click="$root.$refs.newCategoryModal.show()">
                         <i class="fas fa-plus"></i>
@@ -92,7 +92,7 @@
         <!-- Sliding Drawer -->
         <sliding-drawer ref="drawer"></sliding-drawer>
 
-        <modal inline-template ref="newCategoryModal">
+        <modal inline-template ref="newCategoryModal" v-cloak>
             <transition name="zoom-out">
                 <div class="settings-modal" v-if="visible">
                     
@@ -131,7 +131,7 @@
             </transition>
         </modal>
     
-        <modal inline-template ref="editCategoryModal">
+        <modal inline-template ref="editCategoryModal" v-cloak>
                 <transition name="zoom-out">
                     <div class="settings-modal" v-if="visible">
                         
@@ -139,7 +139,7 @@
                         
                         <div class="settings-modal-window" v-if="visible">
     
-                            <form @submit.prevent="$root.prepareAddCategory($event)" enctype="multipart/form-data">
+                            <form @submit.prevent="$root.prepareUpdateCategory($event); hide();" enctype="multipart/form-data">
                                 <fieldset>
                                     <h2>
                                         <span>Edit Category</span>
@@ -148,12 +148,14 @@
                                             <span>Close</span>
                                         </button>
                                     </h2>
+                                    <input type="hidden" name="category_id" :value="params.category_id">
                                     <label>Category Name</label>
                                     <input type="text" name="category_name" :value="params.category_name">
                                     <label>Category Description</label>
                                     <input type="text" name="category_description" :value="params.category_description">
                                     <label>Image</label>
                                     <img :src="params.category_image" height="150px">
+                                    <input type="file" name="category_image">
                                     <label class="checkbox_label">
                                         <input type="checkbox" name="category_active" :checked="params.category_active">
                                         <span>Active</span>
@@ -206,6 +208,16 @@
                     var category_active = elements.category_active.checked ? 1 : 0
                     console.log(category_active)
                     this.addCategory(category_name,category_description,category_image,category_active);
+                },
+                prepareUpdateCategory(submitEvent){
+                    var elements = submitEvent.target.elements;
+                    var category_id = elements.category_id.value;
+                    var category_name = elements.category_name.value;
+                    var category_description = elements.category_description.value;
+                    var category_image = elements.category_image.files[0];
+                    var category_active = elements.category_active.checked ? 1 : 0
+                    console.log(category_active)
+                    this.updateCategory(category_id,category_name,category_description,category_image,category_active);
                 }
             }
         })

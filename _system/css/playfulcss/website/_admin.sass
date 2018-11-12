@@ -12,7 +12,8 @@
         padding: 1rem
         width: 100%
         z-index: 1
-        position: fixed
+        position: sticky
+        top: 0
         background-color: $color-white
         
 
@@ -90,9 +91,7 @@
         display: none
         flex-direction: column
         min-width: 13rem
-        padding-top: 5rem
-        @include medium
-            padding-top: 7rem
+
 
         > *
             padding: 1rem 2rem
@@ -117,11 +116,6 @@
         flex-direction: column
         padding-left: 2rem
         padding-right: 2rem
-        height: 100vh
-        overflow-y: auto
-        padding-top: 5rem
-        @include medium
-            padding-top: 7rem
 
         .control
             display: -webkit-box

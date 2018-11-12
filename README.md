@@ -14,7 +14,6 @@ SERVICES (services.html)
 GALLERY (gallery.html)
     [] Create Gallery Page Design
 
-
 FAQ (faq.html)
     [] Create FAQ Page Design
 
@@ -22,10 +21,10 @@ CONTACT US (contact.html)
     [] Create Contact Us Page Design
 
 BOOK (app/book/)
-    [] Create Booking Form Design
+    [] Create Booking Form Design .. // In Progress
 
 BOOKINGS
-    [] Create Bookings Responsive Layout (currently mobile view)
+    [x] Create Bookings Responsive Layout (currently mobile view)
     [] Create Notifications Modal
     [] Fix Deposit Slip Upload
     [] Adjust Modal size on medium-large screens

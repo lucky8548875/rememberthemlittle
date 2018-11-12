@@ -17,7 +17,7 @@ var addonMixin = {
 
     },
 
-    loadInclusions($package_id){
+    loadInclusions(){
 
       Vue.http.get(`/_system/php/api/addon/getInclusions.php`)
         .then(

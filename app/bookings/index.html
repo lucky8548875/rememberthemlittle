@@ -32,6 +32,27 @@
 
         </nav>
 
+        <div class="sidebar">
+
+
+            <a href="#" class="active">
+                <i class="fas fa-th-list"></i>
+                <span>My Bookings</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-user-circle"></i>
+                <span>My Account</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-life-ring"></i>
+                <span>Help</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+
         <!-- Main Content -->
         <transition name="slide-left" appear>
             <main v-cloak>
@@ -81,23 +102,23 @@
                     <span v-if="orders.length == 0">You have no orders.</span>
                     <table>
 
-                            <tbody>
-                                <tr v-for="order in orders">
-                                    <td>
-                                        <div>
-                                            <span>Order #{{order.order_id}}</span>
-                                            <span>Status: {{order.order_status}}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#">
-                                            <i class="fas fa-eye"></i>
-                                            <span>View Details</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <tbody>
+                            <tr v-for="order in orders">
+                                <td>
+                                    <div>
+                                        <span>Order #{{order.order_id}}</span>
+                                        <span>Status: {{order.order_status}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i class="fas fa-eye"></i>
+                                        <span>View Details</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </main>
         </transition>
@@ -123,10 +144,7 @@
                             <i class="fas fa-th-list"></i>
                             <span>My Bookings</span>
                         </a>
-                        <a href="#">
-                            <i class="fas fa-bell"></i>
-                            <span>Notifications</span>
-                        </a>
+
                         <a href="#">
                             <i class="fas fa-user-circle"></i>
                             <span>My Account</span>
@@ -156,11 +174,33 @@
                             <i class="fas fa-times"></i>
                             <span>Close</span>
                         </a>
-
                     </h3>
+                    <ul>
+                        <li v-for="notification in $root.notifications" style="display: flex; align-items: center">
+                            {{notification.notification_message}}
+                            <button @click.prevent="$root.$refs.notification.show(notification)">Read</button>
+                        </li>
+                    </ul>
                 </div>
             </transition>
         </toggle>
+
+        <modal inline-template ref="notification" v-cloak>
+                <transition name="zoom-out">
+                        <div class="notification-modal" v-if="visible">
+                            <h3>
+                                <span>Notification</span>
+                                <a href="#" @click="visible=false">
+                                    <i class="fas fa-times"></i>
+                                    <span>Close</span>
+                                </a>
+                            </h3>
+                            <span>
+                                {{params.notification_message}}
+                            </span>
+                        </div>
+                    </transition>
+                </modal>
 
         <modal inline-template ref="booking" v-cloak>
             <transition name="zoom-out">
@@ -281,7 +321,9 @@
                             <table>
                                 <tr v-for="addon,index in JSON.parse(params.booking_addons)" v-if="addon.addon_type=='PRINT' && !((addon.addon_source=='PACKAGE' || addon.addon_source=='BOOKING') && params.booking_addons_isordered == 1)">
                                     <td>
-                                        {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ? 'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' + addon.addon_price }})
+                                        {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ?
+                                        'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' +
+                                        addon.addon_price }})
                                     </td>
                                     <td>
                                         <input type="text" :addon="JSON.stringify(addon)" placeholder="Filename of Photo"
@@ -314,15 +356,17 @@
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
     <script src="/_system/js/mixins/booking.js"></script>
+    <script src="/_system/js/mixins/notification.js"></script>
     <script src="/_system/js/mixins/addon.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin, bookingMixin, facebookMixin, addonMixin],
+            mixins: [accountMixin, bookingMixin, facebookMixin, addonMixin, notificationMixin],
             mounted: function () {
                 this.getUserBookings();
                 this.loadOrders();
                 this.loadAddons();
+                this.getUserNotifications();
             },
             data: {
                 user_bookings: [],
@@ -330,7 +374,8 @@
                     name: ""
                 },
                 addons: [],
-                orders:[],
+                orders: [],
+                notifications: []
 
             },
             methods: {
@@ -338,8 +383,8 @@
                     this.deposit_slip_file = document.querySelector('#file_input').files[0];
                 },
                 getTotalPrice(params) {
-                    
-                    var array = JSON.parse(params).filter(addon => addon.addon_source != 'BOOKING' && addon.addon_source != 'PACKAGE' ).map(addon => addon.addon_price);
+
+                    var array = JSON.parse(params).filter(addon => addon.addon_source != 'BOOKING' && addon.addon_source != 'PACKAGE').map(addon => addon.addon_price);
                     var x = 0
                     array.forEach(element => {
                         x += element;
@@ -360,12 +405,12 @@
                         }
                     }
                     );
-                    
+
                     var formData = new FormData();
-                    formData.append('order_list',JSON.stringify(order_list))
-                    formData.append('account_id',this.account.account_id)
-                    formData.append('token',this.account.token)
-                    formData.append('booking_id',submitEvent.target.elements.booking_id.value)
+                    formData.append('order_list', JSON.stringify(order_list))
+                    formData.append('account_id', this.account.account_id)
+                    formData.append('token', this.account.token)
+                    formData.append('booking_id', submitEvent.target.elements.booking_id.value)
                     Vue.http.post('/_system/php/api/orders/add.php', formData)
                         .then(
                             response => {
@@ -383,11 +428,11 @@
 
 
                 },
-                loadOrders(){
+                loadOrders() {
 
                     var formData = new FormData();
-                    formData.append('account_id',this.account.account_id)
-                    formData.append('token',this.account.token)
+                    formData.append('account_id', this.account.account_id)
+                    formData.append('token', this.account.token)
                     Vue.http.post('/_system/php/api/orders/getUserOrders.php', formData)
                         .then(
                             response => {
