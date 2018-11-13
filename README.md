@@ -25,7 +25,7 @@ BOOK (app/book/)
 
 BOOKINGS
     [x] Create Bookings Responsive Layout (currently mobile view)
-    [] Create Notifications Modal
+    [x] Create Notifications Modal
     [] Fix Deposit Slip Upload
     [] Adjust Modal size on medium-large screens
 
@@ -83,4 +83,4 @@ CUSTOMERS
     [] Create Customer Listing Page
     [] Create Layout Page for Viewing Individual Customers
 
-OT
+OTHER

@@ -75,17 +75,19 @@
                         </a>
                     </div>
                 </div>
-                <table>
-                    <tr v-for="booking in filteredBookings">
-                        <td>
-                            <span>{{booking.account_name}}</span><br>
-                            <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
-                        </td>
-                        <td style="text-align: right; text-align: -webkit-right;">
-                            <button @click="$root.$refs.booking.show(booking)">View</button>
-                        </td>
-                    </tr>
-                </table>
+                <div class="bookings-container">
+                    <table>
+                            <tr v-for="booking in filteredBookings">
+                                <td>
+                                    <span>{{booking.account_name}}</span><br>
+                                    <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
+                                </td>
+                                <td style="text-align: right; text-align: -webkit-right;">
+                                    <button @click="$root.$refs.booking.show(booking)">View</button>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
             </main>
            
         </transition>

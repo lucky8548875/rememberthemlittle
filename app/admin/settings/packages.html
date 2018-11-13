@@ -120,6 +120,8 @@
                                         <input type="text" name="package_name">
                                         <label>Price</label>
                                         <input type="number" name="package_price">
+                                    </div>
+                                    <div>
                                         <label>Package Description</label>
                                         <textarea name="package_description"></textarea>
                                         <label>Minutes</label>
@@ -264,7 +266,7 @@
                     console.log(category_active)
                     this.updateCategory(category_id, category_name, category_description, category_image, category_active);
                 },
-                getAddonObject(addon_id){
+                getAddonObject(addon_id) {
                     return this.addons.find(addon => addon.addon_id == addon_id)
                 }
             }

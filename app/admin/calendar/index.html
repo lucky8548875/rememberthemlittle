@@ -29,7 +29,7 @@
                     <input type="text" placeholder="Search">
                     <i class="fas fa-search"></i>
                 </div>
-                
+
             </span>
             <span>
                 <a class="section_title">
@@ -78,313 +78,314 @@
                     </div>
                 </div>
 
-                <table v-if="calendarMode=='Day'" class="dayCalendar">
-                    <tbody>
-                        <tr v-for="row in calendarBookingsByDate">
-                            <td>{{row.time}}</td>
-                            <td @click="$root.$refs.booking.show(JSON.parse(cell.data))" v-for="cell in row.cell" v-if="cell.data!='Open'"
-                                :rowspan="cell.rowspan" class="booking">
-                                <div class="booking-item">
-                                    <span class="client-name">
-                                        {{JSON.parse(cell.data).account_name}}
-                                    </span>
-                                    <span class="package">
-                                        <i class="fas fa-info-circle"></i>
-                                        <span>{{JSON.parse(JSON.parse(cell.data).package).package_name}}</span>
-                                    </span>
-                                    <span class="themes">
-                                        <i class="far fa-clock"></i>
-                                        <span>{{JSON.parse(cell.data).booking_time}},
-                                            {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
-                                    </span>
-                                </div>
-                            </td>
-                            <td v-else></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div v-else-if="calendarMode=='Week'" class="week-table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th><span>&nbsp</span>&nbsp</th>
-                            </tr>
-                        </thead>
+                <transition name="fade" mode="out-in">
+                    <table v-if="calendarMode=='Day'" class="dayCalendar key=1">
                         <tbody>
-                            <tr>
-                                <td>8:00</td>
-                            </tr>
-                            <tr>
-                                <td>8:30</td>
-                            </tr>
-                            <tr>
-                                <td>9:00</td>
-                            </tr>
-                            <tr>
-                                <td>9:30</td>
-                            </tr>
-                            <tr>
-                                <td>10:00</td>
-                            </tr>
-                            <tr>
-                                <td>10:30</td>
-                            </tr>
-                            <tr>
-                                <td>11:00</td>
+                            <tr v-for="row in calendarBookingsByDate">
+                                <td>{{row.time}}</td>
+                                <td @click="$root.$refs.booking.show(JSON.parse(cell.data))" v-for="cell in row.cell"
+                                    v-if="cell.data!='Open'" :rowspan="cell.rowspan" class="booking">
+                                    <div class="booking-item">
+                                        <span class="client-name">
+                                            {{JSON.parse(cell.data).account_name}}
+                                        </span>
+                                        <span class="package">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>{{JSON.parse(JSON.parse(cell.data).package).package_name}}</span>
+                                        </span>
+                                        <span class="themes">
+                                            <i class="far fa-clock"></i>
+                                            <span>{{JSON.parse(cell.data).booking_time}},
+                                                {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td v-else></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div>
+                    <div v-else-if="calendarMode=='Week'" class="week-table-container" key=2>
                         <table>
                             <thead>
                                 <tr>
-                                    <th><span>Sun</span>21</th>
-                                    <th><span>Mon</span>22</th>
-                                    <th><span>Tue</span>23</th>
-                                    <th><span>Wed</span>24</th>
-                                    <th><span>Thu</span>25</th>
-                                    <th><span>Fri</span>26</th>
-                                    <th><span>Sat</span>27</th>
+                                    <th><span>&nbsp</span>&nbsp</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-
+                                    <td>8:00</td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
+                                    <td>8:30</td>
                                 </tr>
                                 <tr>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="booking" rowspan="2">
-                                        <div class="booking-item">
-                                            <span class="client-name">
-                                                Name
-                                            </span>
-                                            <span class="package">
-                                                <i class="fas fa-info-circle"></i>
-                                                <span>Package Name</span>
-                                            </span>
-                                            <span class="themes">
-                                                <i class="far fa-clock"></i>
-                                                <span>
-                                                    Minutes
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-
+                                    <td>9:00</td>
                                 </tr>
                                 <tr>
-
+                                    <td>9:30</td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
+                                    <td>10:00</td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
+                                    <td>10:30</td>
                                 </tr>
                                 <tr>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
-                                    <td>&nbsp</td>
+                                    <td>11:00</td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <table v-else-if="calendarMode=='Month'">
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                            <td>19</td>
-                            <td>20</td>
-                        </tr>
-                        <tr>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                            <td>26</td>
-                            <td>27</td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td>29</td>
-                            <td>30</td>
-                            <td>31</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><span>Sun</span>21</th>
+                                        <th><span>Mon</span>22</th>
+                                        <th><span>Tue</span>23</th>
+                                        <th><span>Wed</span>24</th>
+                                        <th><span>Thu</span>25</th>
+                                        <th><span>Fri</span>26</th>
+                                        <th><span>Sat</span>27</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
 
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="booking" rowspan="2">
+                                            <div class="booking-item">
+                                                <span class="client-name">
+                                                    Name
+                                                </span>
+                                                <span class="package">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span>Package Name</span>
+                                                </span>
+                                                <span class="themes">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>
+                                                        Minutes
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                        <td>&nbsp</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <table v-else-if="calendarMode=='Month'" key=3>
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>15</td>
+                                <td>16</td>
+                                <td>17</td>
+                                <td>18</td>
+                                <td>19</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td>22</td>
+                                <td>23</td>
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>29</td>
+                                <td>30</td>
+                                <td>31</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </transition>
             </main>
         </transition>
 
