@@ -16,88 +16,84 @@ var packageMixin = {
                     response => {
                         console.log('fail');
                     });
-        },
 
-        addPackage(submitEvent) {
-
-            var elements = submitEvent.target.elements;
-            var formData = new FormData();
-            formData.append('package_name', elements.package_name.value);
-            formData.append('package_description', elements.package_description.value);
-            formData.append('category_id', elements.category_id.value);
-            formData.append('package_price', elements.package_price.value);
-            formData.append('package_minutes', elements.package_minutes.value);
-            formData.append('package_themes', elements.package_themes.value);
-            formData.append('package_active', elements.package_active.checked ? 1 : 0);
-            formData.append('package_addons', JSON.stringify(this.chosen_addons));
-
-            Vue.http.post('/_system/php/api/packages/add.php', formData)
+            Vue.http.get('/_system/php/api/package/getInclusions.php')
                 .then(
-
-                    // If the server request is successful
                     response => {
 
-                        // If the PHP file has no errors
+                        if (response.body.success)
+                            this.inclusions = response.body.data;
+                        else
+                            console.error(response.body.message);
+                    },
+                    response => {
+                        console.log('fail');
+                    });
+        },
+
+        addPackage(package_name, package_description, category_id, package_price,
+            package_minutes, package_themes, package_active, package_inclusions) {
+
+            var formData = new FormData();
+            formData.append('package_name', package_name);
+            formData.append('package_description', package_description);
+            formData.append('category_id', category_id);
+            formData.append('package_price', package_price);
+            formData.append('package_minutes', package_minutes);
+            formData.append('package_themes', package_themes);
+            formData.append('package_active', package_active);
+            formData.append('package_inclusions', package_inclusions);
+            console.log(package_inclusions);
+            Vue.http.post('/_system/php/api/package/add.php', formData)
+                .then(
+                    response => {
                         if (response.body.success) {
                             this.loadPackages();
                         }
                         else
                             console.error(response.body.message)
-
                     },
 
-                    // If the server request is unsuccessful
                     response => {
-
                         console.error(response);
-
                     });
-
         },
 
-        updatePackage(package_id, submitEvent) {
+        updatePackage(package_id, package_name, package_description, category_id, package_price,
+            package_minutes, package_themes, package_active, package_inclusions) {
 
-            var elements = submitEvent.target.elements;
             var formData = new FormData();
             formData.append('package_id', package_id);
-            formData.append('package_name', elements.package_name.value);
-            formData.append('package_description', elements.package_description.value);
-            formData.append('category_id', elements.category_id.value);
-            formData.append('package_price', elements.package_price.value);
-            formData.append('package_minutes', elements.package_minutes.value);
-            formData.append('package_themes', elements.package_themes.value);
-            formData.append('package_active', elements.package_active.checked ? 1 : 0);
-
-            Vue.http.post('/_system/php/api/packages/update.php', formData)
+            formData.append('package_name', package_name);
+            formData.append('package_description', package_description);
+            formData.append('category_id', category_id);
+            formData.append('package_price', package_price);
+            formData.append('package_minutes', package_minutes);
+            formData.append('package_themes', package_themes);
+            formData.append('package_active', package_active);
+            formData.append('package_inclusions', package_inclusions);
+            console.log(package_inclusions);
+            Vue.http.post('/_system/php/api/package/update.php', formData)
                 .then(
-
-                    // If the server request is successful
                     response => {
-
-                        // If the PHP file has no errors
                         if (response.body.success) {
                             this.loadPackages();
                         }
                         else
                             console.error(response.body.message)
-
                     },
 
-                    // If the server request is unsuccessful
                     response => {
-
                         console.error(response);
-
                     });
-
         },
-
+        
         deletePackage(package_id) {
 
             var formData = new FormData();
             formData.append('package_id', package_id);
 
-            Vue.http.post('/_system/php/api/packages/delete.php', formData)
+            Vue.http.post('/_system/php/api/package/delete.php', formData)
                 .then(
 
                     // If the server request is successful
@@ -124,10 +120,10 @@ var packageMixin = {
         getPackage(package_id) {
 
             function checkPackageId(package) {
-              return package.package_id == package_id;
+                return package.package_id == package_id;
             }
-      
+
             return this.packages.find(checkPackageId);
-          }
+        }
     }
 }

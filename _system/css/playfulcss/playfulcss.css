@@ -1402,7 +1402,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
       -ms-flex-direction: column;
           flex-direction: column;
   min-width: 13rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .dashboard .sidebar > * {
@@ -1433,7 +1433,7 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
           flex-grow: 1;
   padding-left: 4rem;
   padding-right: 4rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .dashboard main .control {

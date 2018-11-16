@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="admin settings">
+    <!-- Vue App -->
+    <div id="app" v-cloak>
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Settings</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html" class="active">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+            <a href="/app/admin/settings/categories.html">Categories</a>
+            <a href="/app/admin/settings/packages.html">Packages</a>
+            <a href="/app/admin/settings/addons.html" class="active">Addons</a>
+            <a href="#">Themes</a>
+        </div>
+
+        <!-- Main Content -->
+        <main v-cloak>
+            <div class="control">
+                <h2>
+                    <span>Addons</span>
+                </h2>
+                <span>
+                    <button class="primary" @click="$root.$refs.newAddonModal.show()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Addon</span>
+                    </button>
+                </span>
+            </div>
+
+            <table style="width: 100%;">
+                <tbody>
+                    <tr v-for="addon in addons">
+                        <td>
+                            <span>{{addon.addon_type}}</span>
+                            <h4>{{addon.addon_description}}</h4>
+                        </td>
+                        <td style="text-align: -webkit-right">
+                            <button @click="$root.$refs.editAddonModal.show(addon)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+        <modal inline-template ref="newAddonModal" v-cloak>
+            <transition name="zoom-out">
+                <div class="settings-modal" v-if="visible">
+
+                    <div class="blocker" v-if="visible" @click="visible=false"></div>
+
+                    <div class="settings-modal-window" v-if="visible">
+
+                        <form @submit.prevent="$root.prepareAddAddon($event); hide()" enctype="multipart/form-data">
+                            <fieldset>
+                                <h2>
+                                    <span>New Addon</span>
+                                    <button @click.prevent="hide()">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </button>
+                                </h2>
+                                <label>Addon Type</label>
+                                <select name="addon_type">
+                                    <option value="PRINT">Print</option>
+                                    <option value="EXTRAS">Extras</option>
+                                    <option value="PRODUCT">Product</option>
+                                </select>
+                                <label>Addon Description</label>
+                                <input type="text" name="addon_description">
+                                <label>Price</label>
+                                <input type="number" name="addon_price">
+                                <label>Maximum Qty</label>
+                                <input type="number" name="addon_max">
+                                <label class="checkbox_label">
+                                    <input type="checkbox" name="addon_active" checked>
+                                    <span>Active</span>
+                                </label>
+                                <div class="button-container">
+                                    <button class="primary" type="submit">Create Addon</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </transition>
+        </modal>
+
+        <modal inline-template ref="editAddonModal" v-cloak>
+            <transition name="zoom-out">
+                <div class="settings-modal" v-if="visible">
+
+                    <div class="blocker" v-if="visible" @click="visible=false"></div>
+
+                    <div class="settings-modal-window" v-if="visible">
+
+                        <form @submit.prevent="$root.prepareUpdateAddon($event); hide();" enctype="multipart/form-data">
+                            <fieldset>
+                                <h2>
+                                    <span>Edit Addon</span>
+                                    <button @click.prevent="hide()">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </button>
+                                </h2>
+                                <input type="hidden" name="addon_id" :value="params.addon_id">
+                                <label>Addon Type</label>
+                                <select name="addon_type" >
+                                    <option value="PRINT" :selected="params.addon_type=='PRINT'">Print</option>
+                                    <option value="EXTRAS" :selected="params.addon_type=='EXTRAS'">Extras</option>
+                                    <option value="PRODUCT" :selected="params.addon_type=='PRODUCT'">Product</option>
+                                </select>
+                                <label>Addon Description</label>
+                                <input type="text" name="addon_description" :value="params.addon_description">
+                                <label>Price</label>
+                                <input type="number" name="addon_price" :value="params.addon_price">
+                                <label>Maximum Qty</label>
+                                <input type="number" name="addon_max" :value="params.addon_max">
+                                <label class="checkbox_label">
+                                    <input type="checkbox" name="addon_active"  :checked="params.addon_active == 1">
+                                    <span>Active</span>
+                                </label>
+                                <div class="button-container">
+                                    <button @click.prevent="$root.deleteAddon(params.addon_id); hide()" class="outline"
+                                        type="submit">
+                                        <i class="fas fa-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                    <button class="primary" type="submit">Update Addon</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </transition>
+        </modal>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin, addonMixin],
+            data: {
+                pageCategory: 'Settings',
+                pageTitle: 'Addon',
+                addons: []
+            },
+            mounted: function () {
+                this.fbInit();
+                this.loadAddons();
+            },
+            methods: {
+                prepareAddAddon(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var addon_type = elements.addon_type.value;
+                    var addon_description = elements.addon_description.value;
+                    var addon_price = elements.addon_price.value;
+                    var addon_max = elements.addon_max.value;
+                    var addon_active = elements.addon_active.checked ? 1 : 0
+                    this.addAddon(addon_type, addon_description, addon_price, addon_max, addon_active);
+                },
+                prepareUpdateAddon(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var addon_id = elements.addon_id.value;
+                    var addon_type = elements.addon_type.value;
+                    var addon_description = elements.addon_description.value;
+                    var addon_price = elements.addon_price.value;
+                    var addon_max = elements.addon_max.value;
+                    var addon_active = elements.addon_active.checked ? 1 : 0
+                    console.log(addon_active);
+                    this.updateAddon(addon_id, addon_type, addon_description, addon_price, addon_max, addon_active);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

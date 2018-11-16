@@ -83,7 +83,7 @@
                             {{package.package_name}}
                         </td>
                         <td style="text-align: -webkit-right">
-                            <button @click="$root.$refs.editPackageModal.show(category)">Edit</button>
+                            <button @click="$root.$refs.editPackageModal.show(package)">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -111,7 +111,7 @@
                                 <div style="display: flex; flex-wrap: wrap">
                                     <div>
                                         <label>Category</label>
-                                        <select>
+                                        <select name="category_id">
                                             <option v-for="category in $root.categories" :value="category.category_id">
                                                 {{category.category_name}}
                                             </option>
@@ -141,13 +141,13 @@
                                                     {{addon.addon_type}}: {{addon.addon_description}}
                                                 </option>
                                             </select>
-                                            <button @click.prevent="$root.chosen_addons.push($root.selectedAddon)">Add</button>
+                                            <button @click.prevent="$root.chosen_inclusions.push($root.selectedAddon)">Add</button>
                                         </div>
                                         <table style="margin-left: 1rem">
-                                            <tr v-for="addon_id,index in $root.chosen_addons">
+                                            <tr v-for="addon_id,index in $root.chosen_inclusions">
                                                 <td>{{$root.getAddonObject(addon_id).addon_type}}</td>
                                                 <td>{{$root.getAddonObject(addon_id).addon_description}}</td>
-                                                <td><a @click="$root.chosen_addons.splice(index,1)">Remove</a></td>
+                                                <td><a @click="$root.chosen_inclusions.splice(index,1)">Remove</a></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -167,12 +167,9 @@
         <modal inline-template ref="editPackageModal" v-cloak>
             <transition name="zoom-out">
                 <div class="settings-modal" v-if="visible">
-
                     <div class="blocker" v-if="visible" @click="visible=false"></div>
-
                     <div class="settings-modal-window" v-if="visible">
-
-                        <form @submit.prevent="$root.prepareUpdatePackage($event); hide();">
+                        <form @submit.prevent="$root.prepareUpdatePackage($event); hide()">
                             <fieldset>
                                 <h2>
                                     <span>Edit Package</span>
@@ -181,15 +178,52 @@
                                         <span>Close</span>
                                     </button>
                                 </h2>
-                                <input type="hidden" name="package_id" :value="params.package_id">
-                                <label>Package Name</label>
-                                <input type="text" name="package_name" :value="params.package_name">
-                                <label>Package Description</label>
-                                <input type="text" name="package_description" :value="params.package_description">
-                                <label class="checkbox_label">
-                                    <input type="checkbox" name="package_active" :checked="params.package_active">
-                                    <span>Active</span>
-                                </label>
+                                <div style="display: flex; flex-wrap: wrap">
+                                    <div>
+                                        <label>Category</label>
+                                        <select name="category_id">
+                                            <option v-for="category in $root.categories" :value="category.category_id"
+                                                :selected='category.category_id == params.category_id'>
+                                                {{category.category_name}}
+                                            </option>
+                                        </select>
+                                        <input type="hidden" name="package_id" :value="params.package_id">
+                                        <label>Package Name</label>
+                                        <input type="text" name="package_name" :value="params.package_name">
+                                        <label>Price</label>
+                                        <input type="number" name="package_price" :value="params.package_price">
+                                    </div>
+                                    <div>
+                                        <label>Package Description</label>
+                                        <textarea name="package_description" :value="params.package_description"></textarea>
+                                        <label>Minutes</label>
+                                        <input type="number" name="package_minutes" :value="params.package_minutes">
+                                        <label># of Themes</label>
+                                        <input type="number" name="package_themes" :value="params.package_themes">
+                                        <label class="checkbox_label">
+                                            <input type="checkbox" name="package_active" :checked="params.package_active == 1">
+                                            <span>Active</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Inclusions</label>
+                                        <div style="display: flex; align-items: center">
+                                            <select style="margin-bottom: 0" id="addon" v-model="$root.selectedAddon">
+                                                <option v-for="addon in $root.addons" :value="addon.addon_id">
+                                                    {{addon.addon_type}}: {{addon.addon_description}}
+                                                </option>
+                                            </select>
+                                            <button @click.prevent="$root.inclusions.push({addon_id: $root.selectedAddon, package_id: params.package_id})">Add</button>
+                                        </div>
+                                        <table style="margin-left: 1rem">
+                                            <tr v-for="inclusion,index in $root.inclusions" v-if="inclusion.package_id == params.package_id">
+                                                <td>{{$root.getAddonObject(inclusion.addon_id).addon_type}}</td>
+                                                <td>{{$root.getAddonObject(inclusion.addon_id).addon_description}}</td>
+                                                <td><a @click="$root.inclusions.splice(index,1)">Remove</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                                 <div class="button-container">
                                     <button @click.prevent="$root.deletePackage(params.package_id); hide()" class="outline"
                                         type="submit">
@@ -227,8 +261,9 @@
                 pageTitle: 'Packages',
                 categories: [],
                 packages: [],
+                inclusions: [],
                 selectedCategory: 0,
-                chosen_addons: [],
+                chosen_inclusions: [],
                 selectedAddon: '',
 
             },
@@ -239,8 +274,10 @@
                     }
                     else
                         return this.packages.filter(package => package.category_id == this.selectedCategory);
-                }
+                },
+
             },
+
             mounted: function () {
                 this.fbInit();
                 this.loadCategories();
@@ -250,25 +287,36 @@
             methods: {
                 prepareAddPackage(submitEvent) {
                     var elements = submitEvent.target.elements;
-
                     var package_name = elements.package_name.value;
                     var package_description = elements.package_description.value;
-                    var package_active = elements.package_active.checked ? 1 : 0
-                    this.addPackage(package_name, package_description, package_active);
-                },
-                prepareUpdateCategory(submitEvent) {
-                    var elements = submitEvent.target.elements;
                     var category_id = elements.category_id.value;
-                    var category_name = elements.category_name.value;
-                    var category_description = elements.category_description.value;
-                    var category_image = elements.category_image.files[0];
-                    var category_active = elements.category_active.checked ? 1 : 0
-                    console.log(category_active)
-                    this.updateCategory(category_id, category_name, category_description, category_image, category_active);
+                    var package_price = elements.package_price.value;
+                    var package_minutes = elements.package_minutes.value;
+                    var package_themes = elements.package_themes.value;
+                    var package_active = elements.package_active.checked ? 1 : 0
+                    var package_inclusions = JSON.stringify(this.chosen_inclusions);
+                    console.log(package_inclusions);
+                    this.addPackage(package_name, package_description, category_id, package_price,
+                        package_minutes, package_themes, package_active, package_inclusions);
+                },
+                prepareUpdatePackage(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var package_id = elements.package_id.value;
+                    var package_name = elements.package_name.value;
+                    var package_description = elements.package_description.value;
+                    var category_id = elements.category_id.value;
+                    var package_price = elements.package_price.value;
+                    var package_minutes = elements.package_minutes.value;
+                    var package_themes = elements.package_themes.value;
+                    var package_active = elements.package_active.checked ? 1 : 0
+                    var package_inclusions = JSON.stringify(this.inclusions.filter(inclusion => inclusion.package_id == package_id).map(inclusion => inclusion.addon_id));
+                    console.log(package_inclusions);
+                    this.updatePackage(package_id, package_name, package_description, category_id, package_price,
+                        package_minutes, package_themes, package_active, package_inclusions);
                 },
                 getAddonObject(addon_id) {
                     return this.addons.find(addon => addon.addon_id == addon_id)
-                }
+                },
             }
         })
     </script>
