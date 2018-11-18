@@ -66,16 +66,16 @@
                     <span>Themes</span>
                 </h2>
                 <span>
-                    <button class="primary" @click="$root.$refs.newAddonModal.show()">
+                    <button class="primary" @click="$root.$refs.newThemeModal.show()">
                         <i class="fas fa-plus"></i>
                         <span>New Theme</span>
                     </button>
                 </span>
             </div>
 
-            <div class="theme-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); grid-gap: 1rem">
+            <div class="theme-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); grid-gap: 1rem">
                     
-                <div v-for="theme in themes" >
+                <div v-for="theme in themes" @click="$root.$refs.editThemeModal.show(theme)">
                     <img :src="theme.theme_image" style="width: 100%; border-radius: 0.25rem">
                 </div>
             </div>
@@ -85,102 +85,77 @@
         <!-- Sliding Drawer -->
         <sliding-drawer ref="drawer"></sliding-drawer>
 
-        <modal inline-template ref="newAddonModal" v-cloak>
-            <transition name="zoom-out">
-                <div class="settings-modal" v-if="visible">
-
-                    <div class="blocker" v-if="visible" @click="visible=false"></div>
-
-                    <div class="settings-modal-window" v-if="visible">
-
-                        <form @submit.prevent="$root.prepareAddAddon($event); hide()" enctype="multipart/form-data">
-                            <fieldset>
-                                <h2>
-                                    <span>New Addon</span>
-                                    <button @click.prevent="hide()">
-                                        <i class="fas fa-times"></i>
-                                        <span>Close</span>
-                                    </button>
-                                </h2>
-                                <label>Addon Type</label>
-                                <select name="addon_type">
-                                    <option value="PRINT">Print</option>
-                                    <option value="EXTRAS">Extras</option>
-                                    <option value="PRODUCT">Product</option>
-                                </select>
-                                <label>Addon Description</label>
-                                <input type="text" name="addon_description">
-                                <label>Price</label>
-                                <input type="number" name="addon_price">
-                                <label>Maximum Qty</label>
-                                <input type="number" name="addon_max">
-                                <label class="checkbox_label">
-                                    <input type="checkbox" name="addon_active" checked>
-                                    <span>Active</span>
-                                </label>
-                                <div class="button-container">
-                                    <button class="primary" type="submit">Create Addon</button>
-                                </div>
-
-                            </fieldset>
-                        </form>
-
+        <modal inline-template ref="newThemeModal" v-cloak>
+                <transition name="zoom-out">
+                    <div class="settings-modal" v-if="visible">
+                        
+                            <div class="blocker" v-if="visible" @click="visible=false"></div>
+                        
+                        <div class="settings-modal-window" v-if="visible">
+    
+                            <form @submit.prevent="$root.prepareAddTheme($event); hide()" enctype="multipart/form-data">
+                                <fieldset>
+                                    <h2>
+                                        <span>New Theme</span>
+                                        <button @click.prevent="hide()">
+                                            <i class="fas fa-times"></i>
+                                            <span>Close</span>
+                                        </button>
+                                    </h2>
+                                    <label>Theme Description</label>
+                                    <input type="text" name="theme_description">
+                                    <label>Image</label>
+                                    <input type="file" name="theme_image">
+                                    <div class="button-container">
+                                        <button class="primary" type="submit">Add Theme</button>
+                                    </div>
+    
+                                </fieldset>
+                            </form>
+    
+                        </div>
                     </div>
-                </div>
-            </transition>
-        </modal>
+                </transition>
+            </modal>
 
-        <modal inline-template ref="editAddonModal" v-cloak>
-            <transition name="zoom-out">
-                <div class="settings-modal" v-if="visible">
-
-                    <div class="blocker" v-if="visible" @click="visible=false"></div>
-
-                    <div class="settings-modal-window" v-if="visible">
-
-                        <form @submit.prevent="$root.prepareUpdateAddon($event); hide();" enctype="multipart/form-data">
-                            <fieldset>
-                                <h2>
-                                    <span>Edit Addon</span>
-                                    <button @click.prevent="hide()">
-                                        <i class="fas fa-times"></i>
-                                        <span>Close</span>
-                                    </button>
-                                </h2>
-                                <input type="hidden" name="addon_id" :value="params.addon_id">
-                                <label>Addon Type</label>
-                                <select name="addon_type" >
-                                    <option value="PRINT" :selected="params.addon_type=='PRINT'">Print</option>
-                                    <option value="EXTRAS" :selected="params.addon_type=='EXTRAS'">Extras</option>
-                                    <option value="PRODUCT" :selected="params.addon_type=='PRODUCT'">Product</option>
-                                </select>
-                                <label>Addon Description</label>
-                                <input type="text" name="addon_description" :value="params.addon_description">
-                                <label>Price</label>
-                                <input type="number" name="addon_price" :value="params.addon_price">
-                                <label>Maximum Qty</label>
-                                <input type="number" name="addon_max" :value="params.addon_max">
-                                <label class="checkbox_label">
-                                    <input type="checkbox" name="addon_active"  :checked="params.addon_active == 1">
-                                    <span>Active</span>
-                                </label>
-                                <div class="button-container">
-                                    <button @click.prevent="$root.deleteAddon(params.addon_id); hide()" class="outline"
-                                        type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        <span>Delete</span>
-                                    </button>
-                                    <button class="primary" type="submit">Update Addon</button>
-                                </div>
-
-                            </fieldset>
-                        </form>
-
-                    </div>
-                </div>
-            </transition>
-        </modal>
-
+            <modal inline-template ref="editThemeModal" v-cloak>
+                    <transition name="zoom-out">
+                        <div class="settings-modal" v-if="visible">
+                            
+                                <div class="blocker" v-if="visible" @click="visible=false"></div>
+                            
+                            <div class="settings-modal-window" v-if="visible">
+        
+                                <form @submit.prevent="$root.prepareUpdateTheme($event); hide();" enctype="multipart/form-data">
+                                    <fieldset>
+                                        <h2>
+                                            <span>Edit Theme</span>
+                                            <button @click.prevent="hide()">
+                                                <i class="fas fa-times"></i>
+                                                <span>Close</span>
+                                            </button>
+                                        </h2>
+                                        <input type="hidden" name="theme_id" :value="params.theme_id">
+                                        <label>Theme Description</label>
+                                        <input type="text" name="theme_description" :value="params.theme_description">
+                                        <label>Image</label>
+                                        <img :src="params.theme_image" height="150px">
+                                        <input type="file" name="theme_image">
+                                        <div class="button-container">
+                                            <button @click.prevent="$root.deleteTheme(params.theme_id); hide()" class="outline" type="submit">
+                                                <i class="fas fa-trash"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                            <button class="primary" type="submit">Update Theme</button>
+                                        </div>
+        
+                                    </fieldset>
+                                </form>
+        
+                            </div>
+                        </div>
+                    </transition>
+                </modal>
     </div>
 
     <script src="/_system/js/vendor/vue.js"></script>
@@ -205,25 +180,19 @@
                 this.loadThemes();
             },
             methods: {
-                prepareAddAddon(submitEvent) {
+                prepareAddTheme(submitEvent) {
                     var elements = submitEvent.target.elements;
-                    var addon_type = elements.addon_type.value;
-                    var addon_description = elements.addon_description.value;
-                    var addon_price = elements.addon_price.value;
-                    var addon_max = elements.addon_max.value;
-                    var addon_active = elements.addon_active.checked ? 1 : 0
-                    this.addAddon(addon_type, addon_description, addon_price, addon_max, addon_active);
+                    var theme_description = elements.theme_description.value;
+                    var theme_image = elements.theme_image.files[0];
+                    this.addTheme(theme_description, theme_image);
                 },
-                prepareUpdateAddon(submitEvent) {
+                prepareUpdateTheme(submitEvent) {
+                    
                     var elements = submitEvent.target.elements;
-                    var addon_id = elements.addon_id.value;
-                    var addon_type = elements.addon_type.value;
-                    var addon_description = elements.addon_description.value;
-                    var addon_price = elements.addon_price.value;
-                    var addon_max = elements.addon_max.value;
-                    var addon_active = elements.addon_active.checked ? 1 : 0
-                    console.log(addon_active);
-                    this.updateAddon(addon_id, addon_type, addon_description, addon_price, addon_max, addon_active);
+                    var theme_id = elements.theme_id.value;
+                    var theme_description = elements.theme_description.value;
+                    var theme_image = elements.theme_image.files[0];
+                    this.updateTheme(theme_id, theme_description, theme_image);
                 }
             }
         })
