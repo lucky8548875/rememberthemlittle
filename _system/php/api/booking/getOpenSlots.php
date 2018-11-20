@@ -26,7 +26,7 @@ if (isset($date) && isset($duration))
         # Fetch Result
         $result = $stmt->fetchAll();
         // print_r($result);
-        $start = strtotime("5:00"); #opening time
+        $start = strtotime("8:00"); #opening time
         $stop = strtotime("20:00"); #closing time
         $step = "+30 minutes"; #preferred interval
         $reserved = $result; 
