@@ -92,9 +92,11 @@
         <!-- Main Content -->
         <main>
             <div class="container">
-                <h1>
-                    Every picture tells a story.
-                </h1>
+                <img src="/_system/images/page_profile.jpg" style="width: 8rem; border-radius: 50%">
+                <h3>
+                    <span>Remember</span>
+                    <span>Them Little</span>
+                </h3>
                 <div>
                     <a href="/app/book">
                         <span>Book Now</span>
@@ -105,7 +107,7 @@
                         <i class="fab fa-facebook-square"></i>
                         <i class="fas fa-key"></i>
                     </a>
-                    <a v-if="account.status=='CONNECTED'" href="/app/bookings">
+                    <a v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0">
                         <span>Manage Bookings</span>
                         <i class="fas fa-angle-right"></i>
                     </a>

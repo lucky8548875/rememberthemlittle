@@ -198,6 +198,11 @@ button.primary, a.primary.button, .index main div:first-child div:first-of-type 
   color: #ffffff;
   background-color: #5252FF;
   border-color: #5252FF;
+  background: -webkit-gradient(linear, left top, right top, from(#DF7EF6), color-stop(#009BFF), to(#42EAF6));
+  background: linear-gradient(to right, #DF7EF6, #009BFF, #42EAF6);
+  -webkit-box-shadow: -10px 10px 40px rgba(207, 119, 243, 0.3), 10px 10px 40px rgba(42, 201, 219, 0.3);
+          box-shadow: -10px 10px 40px rgba(207, 119, 243, 0.3), 10px 10px 40px rgba(42, 201, 219, 0.3);
+  border: 0;
 }
 
 button.primary:hover, a.primary.button:hover, .index main div:first-child div:first-of-type a.primary:hover, .index main div:first-child div:first-of-type a:hover:first-of-type, .calendar .booking-modal > h3 > a.primary:hover, .dashboard main .bookings table td a.primary:hover, .dashboard .notification-modal > h3 > a.primary:hover, .dashboard .booking-modal > h3 > a.primary:hover, .transactions .booking-modal > h3 > a.primary:hover, .index .signin > div > button:hover:first-of-type, .index .signin > div > a.button:hover:first-of-type, .index .dashboard main .bookings table td .signin > div > a:hover:first-of-type, .dashboard main .bookings table td .index .signin > div > a:hover:first-of-type, .dashboard main .control button:hover, .dashboard main .control a.button:hover, .dashboard .index main .control div:first-child div:first-of-type a:hover, .index .dashboard main .control div:first-child div:first-of-type a:hover, .dashboard .index main div:first-child div:first-of-type .control a:hover, .index .dashboard main div:first-child div:first-of-type .control a:hover, .dashboard main .control .calendar .booking-modal > h3 > a:hover, .dashboard main .control .bookings table td a:hover, .dashboard main .bookings table td .control a:hover, .dashboard main .control .notification-modal > h3 > a:hover, .dashboard main .control .booking-modal > h3 > a:hover, .dashboard main .control .transactions .booking-modal > h3 > a:hover {
@@ -396,6 +401,7 @@ rigid[small] {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: #495057;
+  text-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 a {
@@ -595,8 +601,12 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   margin-bottom: 1rem;
 }
 
-.index main div:first-child > h1 {
+.index main div:first-child > img {
   margin-top: 3rem;
+}
+
+.index main div:first-child > h3 {
+  margin-top: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -605,18 +615,18 @@ a > * + *, button > * + *, a.button > * + *, .index main div:first-child div:fir
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 @media only screen and (min-width: 1024px) {
-  .index main div:first-child > h1 {
+  .index main div:first-child > h3 {
     font-size: 4rem;
   }
 }
 
-.index main div:first-child > h1 span {
+.index main div:first-child > h3 span {
   margin-left: 0.3rem;
   margin-right: 0.3rem;
 }
