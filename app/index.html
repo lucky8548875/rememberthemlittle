@@ -90,26 +90,26 @@
         <index-navigation></index-navigation>
 
         <!-- Main Content -->
-        <main>
+        <main class="main-index">
             <div class="container">
-                <img src="/_system/images/page_profile.jpg" style="width: 8rem; border-radius: 50%">
-                <h3>
-                    <span>Remember</span>
-                    <span>Them Little</span>
+
+                <h3 class="banner-message">
+                    Every picture tells a story.
                 </h3>
-                <div>
-                    <a href="/app/book">
+
+                <div class="cta-row">
+                    <a href="/app/book" class="book-cta">
                         <span>Book Now</span>
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-angle-right"></i><div class="blur"></div>
                     </a>
                     <a v-if="account.status=='DISCONNECTED' && facebook.status=='LOADED'">
                         <span>Sign in</span>
                         <i class="fab fa-facebook-square"></i>
                         <i class="fas fa-key"></i>
                     </a>
-                    <a v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0">
-                        <span>Manage Bookings</span>
-                        <i class="fas fa-angle-right"></i>
+                    <a class="bookings-btn" v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0">
+                        <span>My Bookings</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <br><br><br><br>

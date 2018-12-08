@@ -60,78 +60,73 @@
                 i
                     margin-right: 0.25rem
 
-    main
+    main.main-index
         width: 100%
         height: 100vh
         display: flex
         justify-content: center
         align-items: center        
 
-        div:first-child
+        div.container
             display: flex
             justify-content: center
             align-items: center
             flex-direction: column
 
-            .landing-brand
-                margin-bottom: 3rem
-                width: 60vw
-                @include medium
-                    display: none
-                    
-            .landing-brand-large
-                margin-bottom: 3rem
-                display: none
-                @include medium
-                    display: inline-block
-                    width: 50vw
-                @include large
-                    width: 30rem
-
-            > i
-                font-size: 3rem
-                font-weight: lighter
-                color: #495057
-                margin-bottom: 1rem
-
-            > img
-                margin-top: 3rem
-
-            > h3
-                margin-top: 1rem
+            h3.banner-message
+                margin: 1.5rem
                 display: flex
                 flex-wrap: wrap
                 justify-content: center
-                margin-bottom: 4rem
                 text-align: center
                 font-size: 2.5rem
 
                 @include large
                     font-size: 4rem
 
-                span
-                    margin-left: 0.3rem
-                    margin-right: 0.3rem
-
-            > a:first-of-type
-                @extend .color-primary
+            .book-cta, .blur
+                position: relative
                 display: flex
                 align-items: center
-
+                color: white
+                background: linear-gradient(-45deg, #FFC85F, #FF5F99, #55ACFF, #5EF3E7)
+                background-size: 600%
+                animation: anime 16s linear infinite
+                    
                 i
                     font-size: 1.25rem
                 
-            div:first-of-type
+            .blur
+                width: 100%
+                height: 50%
+                position: absolute
+                z-index: -1
+                filter: blur(20px)
+                border-radius: 2rem
+                opacity: 0.8
+                bottom: -0.5rem
+                margin: 0 !important
+                left: 0
+                border-width: 0px !important
+
+                
+            div.cta-row
                 justify-content: center
                 display: flex
                 flex-wrap: wrap
                 
                 a
                     @extend .button
+                    display: flex
                     padding: 1rem 1.5rem
                     justify-content: center
+                    align-items: center
                     width: 13rem
                     margin: 0.5rem
+                    
+                    i
+                        margin-left: 1rem
+
 
                 a:first-of-type
                     @extend .primary
@@ -143,7 +138,6 @@
                 border-radius: 1rem
                 color: #eebb00
 
-            
 
     .blocker
         position: fixed
@@ -232,3 +226,11 @@
 
             > button:last-of-type
                 @extend .outline
+
+@keyframes anime 
+   0%
+     background-position: 0% 50%
+   50%
+     background-position: 100% 50%
+   100%
+     background-position: 0% 50%
