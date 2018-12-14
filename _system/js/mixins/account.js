@@ -16,7 +16,7 @@ var accountMixin = {
         this.loadAccountFromCache();
 
         if (this.account.status != "DISCONNECTED"){
-            this.verifyToken();
+            //this.verifyToken();
         }
         else {
             if (typeof FB === "undefined"){
