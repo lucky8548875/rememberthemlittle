@@ -4,9 +4,7 @@ Online Transaction Processing System for Remember Them Little
 # TODO
 
 HOMEPAGE (index.html)
-    [] Create Home Page Design
     [] Setup AccountKit Login
-    [x] Embed Messenger Chatbot
 
 SERVICES (services.html)
     [] Create Services Page Design
@@ -20,14 +18,8 @@ FAQ (faq.html)
 CONTACT US (contact.html)
     [] Create Contact Us Page Design
 
-BOOK (app/book/)
-    [] Create Booking Form Design .. // In Progress
-
 BOOKINGS
-    [x] Create Bookings Responsive Layout (currently mobile view)
-    [x] Create Notifications Modal
-    [] Fix Deposit Slip Upload
-    [] Adjust Modal size on medium-large screens
+    [] Fix Photo File Uploads
 
 ACCOUNT SETTINGS
     [] Create Account Settings Page
@@ -40,7 +32,6 @@ ADMIN
         - Customers
         - Bookings
         - etc
-    [] Adjust Modal size on medium-large screens
 
 DASHBOARD
     [] Create Overview page (inforgraphics/summary page)

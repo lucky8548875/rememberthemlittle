@@ -1,6 +1,6 @@
-Vue.component('index-navigation',{
+Vue.component('index-navigation', {
     template:
-    `
+        `
     <nav>
             <!-- Button for Menu Drawer -->
             <span>
@@ -41,14 +41,14 @@ Vue.component('index-navigation',{
     `
 })
 
-Vue.component('index-drawer',{
-    methods:{
-        show(){
+Vue.component('index-drawer', {
+    methods: {
+        show() {
             this.$refs.toggle.show();
         },
     },
-    template: 
-    `
+    template:
+        `
     <toggle inline-template ref="toggle" v-cloak>
 
 
@@ -106,8 +106,8 @@ Vue.component('toggle', {
         toggle() {
             this.visible = !this.visible
         },
-        goto(url){
-            window.location.href=url
+        goto(url) {
+            window.location.href = url
         }
     }
 });
@@ -225,11 +225,11 @@ Vue.component('stepper', {
 
 Vue.component('sliding-drawer', {
 
-    methods:{
-        show(){
+    methods: {
+        show() {
             this.$refs.toggle.show();
         },
-        
+
     },
     template: `
     
@@ -282,5 +282,104 @@ Vue.component('sliding-drawer', {
 
         </toggle>
     
+    `
+})
+
+Vue.component('calendar', {
+    mounted() {
+        app.selected_date = this.selected_date
+    },
+    data: function () {
+        return {
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            date: new Date().getDate(),
+            month: new Date().getMonth(),
+            year: new Date().getFullYear(),
+        }
+    },
+    computed: {
+        selected_date(){
+            return this.year + "-" + this.month + "-" + this.date
+        },
+        my_label() {
+            return this.months[this.month] + " " + this.year
+        },
+        date_array() {
+
+            var date = new Date(this.year, this.month, 1);
+            var days = [];
+            var temprow = [];
+
+            for (var i = 0; i < date.getDay(); i++) {
+                temprow.push({getDate(){return ""}})
+            }
+
+            while (date.getMonth() === this.month) {
+                temprow.push(new Date(date));
+                if (date.getDay() == 6) {
+                    days.push(temprow);
+                    temprow = [];
+                }
+                date.setDate(date.getDate() + 1);
+            }
+            days.push(temprow);
+
+            return days;
+
+
+        }
+    },
+    watch:{
+        selected_date(){
+            app.selected_date = this.selected_date
+        }
+    },
+    methods: {
+        nextMonth() {
+            if (this.month == 11) {
+                this.month = 0
+                this.year++
+            } else {
+                this.month++
+            }
+        },
+        previousMonth() {
+            if (this.month == 0) {
+                this.month = 11
+                this.year--
+            } else {
+                this.month--
+            }
+        }
+    },
+    template:
+        `
+    <div>
+    <div class="calendar_my_label">
+                <i class="fas fa-angle-left" @click="previousMonth"></i>
+                <span class="my_label">{{my_label}}</span>
+                <i class="fas fa-angle-right" @click="nextMonth"></i>
+            </div>
+            <table class="schedule_table" cellspacing=0>
+                <thead>
+                    <tr>
+                        <th>S</th>
+                        <th>M</th>
+                        <th>T</th>
+                        <th>W</th>
+                        <th>T</th>
+                        <th>F</th>
+                        <th>S</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="row in date_array">
+                        <td @click="date = cell.getDate()" v-for="cell in row" :class="{'active':date == cell.getDate()}">
+                            {{cell.getDate()}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
     `
 })

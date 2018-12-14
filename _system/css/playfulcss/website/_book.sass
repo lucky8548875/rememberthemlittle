@@ -1,0 +1,289 @@
+.booking_test
+    background-color: #f8f8f8
+    width: 100%
+    text-align: center
+
+    nav.nav
+        padding: 2rem
+
+    .progress
+        text-align: center
+
+    .progress_element
+        display: flex
+        align-items: center
+        justify-content: center
+
+    .progress_step
+        display: inline-block
+        width: 0.5rem
+        height: 0.5rem
+        background-color: #ccc
+        border-radius: 50%
+
+    .progress_step.active,.step_line.active
+        background-color: $color-primary
+
+    .step_line
+        display: inline-block
+        width: 1.5rem
+        height: 2px
+        background-color: #ccc
+
+    h4.h4, h1.h1
+        text-align: left
+        margin-left: 2rem
+        margin-bottom: 0.25rem
+    
+    .category_container
+        display: inline-flex
+        overflow-x: auto
+        padding: 4rem 2rem 4rem
+        box-sizing: border-box
+        max-width: 100%
+
+    .category
+        position: relative
+        min-width: 14rem
+        max-width: 14rem
+        min-height: 18rem
+        background-color: white
+        border-radius: 0.5rem
+        margin-right: 1rem
+        box-shadow: 0 1rem 5rem rgba(0,0,0,0.1)
+        text-align: left
+        transition: 0.2s background-color
+        
+
+    .category::after
+        content: ""
+        display: block
+        position: absolute
+        right: -2rem
+        width: 2rem
+        height: 1px
+
+    .category:active,.category.active
+        background-color: $color-primary
+        box-shadow: 0 1rem 5rem transparentize($color-primary,0.5)
+        color: white
+
+        .category_description, .category_title
+            color: white
+
+    h3.category_title
+        margin-top: 2rem
+        margin-left: 2rem
+        margin-right: 2rem
+        margin-bottom: 0.5rem
+
+    p.category_description
+        margin-left: 2rem
+        margin-right: 2rem
+        margin-bottom: 2rem
+        font-size: 0.9rem
+        color: #aaa
+
+    .category_image
+        width: 100%
+        height: 8rem
+        background-color: #eee
+
+    .cover_image
+        position: fixed
+        top: 0
+        width: 100%
+        img
+            width: 100%
+
+    .packages_container
+        position: absolute
+        top: 10rem
+        width: 80%
+        left: 50%
+        transform: translateX(-50%)
+
+    .package
+        background-color: white
+        border-radius: 0.5rem
+        margin-bottom: 1rem
+        box-shadow: 0 1rem 5rem rgba(0,0,0,0.1)
+        padding: 2rem
+        box-sizing: border-box
+
+    .package_name
+        color: #444
+        margin: 0
+
+    .package_price
+        color: #aaa
+        margin-top: 0.5rem
+
+    .package_description
+        padding-left: 0rem
+        list-style-type: none
+    
+    .package_description li:before
+        content: '✓'
+        margin-right: 1rem
+        color: #aaa
+
+    .choose_package
+        width: 100%
+        padding: 0.75rem 1rem
+        margin-top: 0.5rem
+        border-radius: 2rem
+        border: none
+        background-color: cornflowerblue
+        color: white
+        font-size: 1rem
+        box-shadow: 0 0.5rem 2rem transparentize($color-primary, 0.5)
+
+    .themes_container
+        padding: 2rem
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+        gap: 0.5rem
+        
+    .theme
+        position: relative
+        img
+            width: 100%
+            border-radius: 0.5rem
+            
+    .theme.active
+        img
+            filter: brightness(0.8) sepia(100%) hue-rotate(180deg) saturate(3)
+
+        &::after
+            font-family: 'Font Awesome 5 Free'
+            content: "\f00c"
+            font-weight: 900
+            position: absolute
+            left: 50%
+            top: 50%
+            transform: translateX(-50%) translateY(-50%)
+            font-size: 3rem
+            color: white
+
+    .bottom_bar
+        position: fixed
+        bottom: 0px
+        background-color: white
+        width: 100%
+        box-sizing: border-box
+        padding: 1rem
+        box-shadow: 0 -1rem 5rem rgba(0,0,0,0.1)
+        border-radius: 0.5rem 0.5rem 0 0
+        display: flex
+        flex-direction: column
+    
+    .selected_themes
+        display: flex
+        margin-bottom: 0.5rem
+        justify-content: center
+
+    .s_theme
+        min-width: 4rem
+        min-height: 3rem
+        max-width: 4rem
+        border-radius: 0.5rem
+        margin: 0.5rem
+        border: 2px dashed #ddd
+        position: relative
+        overflow: hidden
+
+        img
+            width: 100%
+
+        i
+            position: absolute
+            left: 70%
+            top: 30%
+            transform: translate(-70%,-40%)
+            color: white
+
+    .continue_button
+        width: 100%
+        padding: 0.75rem 1rem
+        margin-top: 0.5rem
+        border-radius: 2rem
+        border: none
+        background-color: cornflowerblue
+        color: white
+        font-size: 1rem
+        box-shadow: 0 0.5rem 2rem transparentize($color-primary, 0.5)
+
+    .addon_container
+        padding: 2rem
+
+    .addon_table
+        padding: 2rem
+        width: 100%
+        box-shadow: 0 1rem 5rem rgba(0,0,0,0.1)
+        border-radius: 0.5rem
+
+    .calendar_my_label
+        background-color: white
+        display: flex
+        justify-content: space-between
+        align-items: center
+        border-radius: 0.5rem
+        margin: 0 0.5rem
+
+        i
+            padding: 2rem
+            color: #aaa
+            color: cornflowerblue
+    
+    .my_label
+        font-size: 1.2rem
+        color: #444
+        font-weight: bold
+
+    .schedule_table
+        width: 100%
+        background-color: white
+        padding: 0rem 1rem 1rem
+        th
+            text-align: center !important
+            border-bottom: 1px solid #eee
+            height: 2rem
+            color: #888
+            padding: 0
+        td
+            text-align: center !important
+            padding: 0
+            height: 3rem
+            color: #444
+            border-bottom: none
+
+        td.active
+            background-color: cornflowerblue
+            color: white
+            border-radius: 2rem
+            font-weight: bold
+
+        td.inactive
+            color: #ccc
+    
+    .slots_container
+        padding: 2rem
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr))
+        gap: 0.5rem
+
+    .slot
+        padding: 0.5rem
+        background-color: white
+        display: inline-block
+        border-radius: 0.25rem
+        font-weight: bold
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1)
+        text-align: center
+
+    .slot.active
+        background-color: cornflowerblue
+        color: white
+            
+
