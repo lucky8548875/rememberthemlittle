@@ -2130,6 +2130,16 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
           transform: translateX(-50%);
 }
 
+@media only screen and (min-width: 1024px) {
+  .booking_test .packages_container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.5rem;
+  }
+}
+
 .booking_test .package {
   background-color: white;
   border-radius: 0.5rem;

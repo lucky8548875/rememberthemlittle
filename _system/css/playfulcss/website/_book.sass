@@ -103,6 +103,11 @@
         left: 50%
         transform: translateX(-50%)
 
+        @include large
+            display: grid
+            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr))
+            gap: 0.5rem
+
     .package
         background-color: white
         border-radius: 0.5rem
