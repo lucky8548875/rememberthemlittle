@@ -148,6 +148,19 @@
                             <div class="slots_container" v-if="$root.slots.length > 0">
                                 <span @click="$root.booking.booking_time = slot" class="slot" :class="{'active':$root.booking.booking_time==slot}" v-for="slot in $root.slots">{{slot}}</span>
                             </div>
+                            <a class="continue_button" @click="next">Continue</a>
+                        </div>
+                        <div v-if="step==6" key="6">
+                            <fieldset>
+                                <legend>Step 5</legend>
+                                <label>Tell us about your baby</label>
+                                <label>Name of baby</label>
+                                <input type="text" placeholder="e.g. Charlie" v-model="$root.booking.subject_name">
+                                <label>Age of baby (months or years)</label>
+                                <input type="text" placeholder="e.g. 5 months old" v-model="$root.booking.subject_age">
+                                <button @click.prevent="previous()">Prev</button>
+                                <button type="submit">Next</button>
+                            </fieldset>
                         </div>
                     </transition>
                 </div>
