@@ -25,7 +25,8 @@
 
                 <div v-cloak>
                     <nav class="nav">
-                        <i @click="step>1 ? step-- : step" class="fas fa-arrow-left"></i>
+                        <i v-if="step>1" @click="step>1 ? step-- : step" class="fas fa-arrow-left"></i>
+                        <span v-else></span>
                         <span class="progress">
                             <div class="progress_element">
                                 <span class="progress_step" :class="{'active':step >= 1}"></span>

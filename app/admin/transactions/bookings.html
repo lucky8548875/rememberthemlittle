@@ -55,41 +55,76 @@
         </nav>
 
         <div class="sidebar">
-                <a href="/app/admin/transactions/bookings.html" class="active">Bookings</a>
-                <a href="/app/admin/transactions/orders.html" >Orders</a>
-            </div>
+            <a href="/app/admin/transactions/bookings.html" class="active">Bookings</a>
+            <a href="/app/admin/transactions/orders.html">Orders</a>
+        </div>
 
         <!-- Main Content -->
         <transition name="slide-left" appear v-cloak>
             <main>
                 <div class="control">
-                    <a class="filter color-primary">
-                        <span>All Time</span>
-                        <i class="fas fa-angle-down"></i>
-                    </a>
+                    <div class="filter">
+                        <a @click="$root.$refs.date_filter.toggle()" class="filter color-primary">
+                            <span>All Time</span>
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                        <modal ref="date_filter" inline-template>
+                            <transition name="zoom-out" mode="out-in">
+                                <div class="date_filter_container" v-if="visible">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="date">
+                                            </td>
+                                            <td>
+                                                <input type="date">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    <input type="radio" name="" id="">
+                                                    <span>Single Date</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="" id="">
+                                                    <span>Date Range</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="" id="">
+                                                    <span>All Time</span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </transition>
+                        </modal>
+                    </div>
                     <div class="group">
                         <a href="#" :class="{'active':filter=='ALL'}" @click="filter='ALL'">All
                         </a>
-                        <a href="#" :class="{'active':filter=='FOR_APPROVAL'}" @click="filter='FOR_APPROVAL'">
+                        <a href="#" :class="{'active':filter=='AWAITING_CONFIRMATION'}" @click="filter='AWAITING_CONFIRMATION'">
                             For Approval ({{forApprovalBookingsLength}})
                         </a>
                     </div>
                 </div>
                 <div class="bookings-container">
                     <table>
-                            <tr v-for="booking in filteredBookings">
-                                <td>
-                                    <span>{{booking.account_name}}</span><br>
-                                    <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
-                                </td>
-                                <td style="text-align: right; text-align: -webkit-right;">
-                                    <button @click="$root.$refs.booking.show(booking)">View</button>
-                                </td>
-                            </tr>
-                        </table>
+                        <tr v-for="booking in filteredBookings">
+                            <td>
+                                <span>{{booking.account_name}}</span><br>
+                                <span style="font-size: 0.8rem">{{booking.booking_status}}</span>
+                            </td>
+                            <td style="text-align: right; text-align: -webkit-right;">
+                                <button @click="$root.$refs.booking.show(booking)">View</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </main>
-           
+
         </transition>
 
         <modal inline-template ref="booking" v-cloak>
@@ -139,7 +174,7 @@
                 </div>
             </transition>
         </modal>
-        
+
 
         <!-- Sliding Drawer -->
         <sliding-drawer ref="drawer"></sliding-drawer>
@@ -176,7 +211,7 @@
                     }
                 },
                 forApprovalBookingsLength: function () {
-                    return this.bookings.filter(booking => booking.booking_status == 'FOR_APPROVAL').length
+                    return this.bookings.filter(booking => booking.booking_status == 'AWAITING_CONFIRMATION').length
                 }
             },
 

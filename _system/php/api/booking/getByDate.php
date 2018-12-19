@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.ph
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.php';
 
 #Retrieve POST parameters
-$booking_date = "2018-10-20"; #$_POST['booking_date'];
+$booking_date = $_GET['date'];
 if (isset($booking_date))
 {
     # Convert to PHP recognized format

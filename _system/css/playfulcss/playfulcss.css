@@ -1130,6 +1130,28 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   max-width: 100%;
 }
 
+.calendar main #singledatepicker {
+  border: none;
+  position: relative;
+}
+
+.calendar main #singledatepicker:after {
+  position: absolute;
+  right: 0.1rem;
+  pointer-events: none;
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 600;
+  content: "\f107";
+}
+
+.calendar main #singledatepicker::-webkit-inner-spin-button {
+  display: none;
+}
+
+.calendar main #singledatepicker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
 .calendar main table.dayCalendar td:first-child {
   width: 4rem;
 }
@@ -1705,6 +1727,19 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+}
+
+.transactions main .control .filter .date_filter_container {
+  position: absolute;
+  background-color: white;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.1);
+  bottom: 0;
+  -webkit-transform: translate(70%, 100%);
+          transform: translate(70%, 100%);
+  right: 0;
+  padding: 1rem;
 }
 
 .transactions main .control .filter i {

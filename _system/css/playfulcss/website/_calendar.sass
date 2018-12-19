@@ -6,6 +6,23 @@
         flex-direction: column
         max-width: 100%
 
+        #singledatepicker
+            border: none
+            position: relative
+
+        #singledatepicker:after
+            position: absolute
+            right: 0.1rem
+            pointer-events: none
+            font-family: 'Font Awesome 5 Free' !important
+            font-weight: 600
+            content: "\f107"
+
+        #singledatepicker::-webkit-inner-spin-button
+            display: none
+        #singledatepicker::-webkit-calendar-picker-indicator
+            opacity: 0
+
         // Day Calendar Table
         table.dayCalendar
             td:first-child

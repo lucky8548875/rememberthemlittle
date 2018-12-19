@@ -36,8 +36,8 @@ var adminMixin = {
             console.log('fail');
           });
     },
-    getCalendarBookingsByDate(){
-      Vue.http.post('/_system/php/api/booking/getByDate.php',)
+    getCalendarBookingsByDate(date){
+      Vue.http.post('/_system/php/api/booking/getByDate.php?date=' + date,)
         .then(
           response => {
 
