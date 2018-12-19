@@ -1997,10 +1997,17 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   background-color: #f8f8f8;
   width: 100%;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .booking_test nav.nav {
   padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .booking_test .progress {
@@ -2044,6 +2051,13 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   margin-bottom: 0.25rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .booking_test h4.h4, .booking_test h1.h1 {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
 .booking_test .category_container {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -2053,6 +2067,12 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   max-width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .category_container {
+    margin-left: 1rem;
+  }
 }
 
 .booking_test .category {
@@ -2149,6 +2169,13 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   padding: 2rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .booking_test .package_name {
@@ -2183,6 +2210,7 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   font-size: 1rem;
   -webkit-box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
           box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
+  margin-top: auto;
 }
 
 .booking_test .themes_container {
@@ -2192,6 +2220,14 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   -ms-grid-columns: (minmax(8rem, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
   gap: 0.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .themes_container {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .booking_test .theme {
@@ -2281,7 +2317,7 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   margin-top: 0.5rem;
   border-radius: 2rem;
   border: none;
-  background-color: cornflowerblue;
+  background-color: #5252FF;
   color: white;
   font-size: 1rem;
   -webkit-box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
@@ -2292,12 +2328,58 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   padding: 2rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .booking_test .addon_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .booking_test .addon_table {
   padding: 2rem;
   width: 100%;
   -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
           box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .addon_table {
+    margin-right: 1rem;
+    width: 50%;
+  }
+}
+
+.booking_test .addon_buttons_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .calendar_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .calendar_my, .booking_test .slots_wrapper {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+  }
 }
 
 .booking_test .calendar_my_label {
@@ -2311,14 +2393,16 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
   margin: 0 0.5rem;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .booking_test .calendar_my_label i {
   padding: 2rem;
   color: #aaa;
-  color: cornflowerblue;
+  color: #5252FF;
 }
 
 .booking_test .my_label {
@@ -2328,9 +2412,13 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 }
 
 .booking_test .schedule_table {
-  width: 100%;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 1rem);
   background-color: white;
   padding: 0rem 1rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .booking_test .schedule_table th {
@@ -2350,7 +2438,7 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 }
 
 .booking_test .schedule_table td.active {
-  background-color: cornflowerblue;
+  background-color: #5252FF;
   color: white;
   border-radius: 2rem;
   font-weight: bold;
@@ -2383,5 +2471,60 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 .booking_test .slot.active {
   background-color: cornflowerblue;
   color: white;
+}
+
+.booking_test .summary_container {
+  padding: 2rem;
+}
+
+.booking_test .summary_container fieldset + fieldset {
+  margin-top: 1rem;
+}
+
+.booking_test .summary_container fieldset {
+  border: 2px solid #e9ecef;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.booking_test .summary_container fieldset legend {
+  padding: 0 1rem;
+}
+
+.booking_test .summary_container fieldset table {
+  width: 100%;
+}
+
+.booking_test .summary_container fieldset table td:last-child {
+  text-align: right;
+}
+
+.payment_container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 25rem;
+  padding: 1rem;
+}
+
+.payment_options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.payment_option {
+  padding: 1rem;
 }
 /*# sourceMappingURL=playfulcss.css.map */

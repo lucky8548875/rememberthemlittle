@@ -354,7 +354,7 @@ Vue.component('calendar', {
     },
     template:
         `
-    <div>
+    <div class="calendar_my">
     <div class="calendar_my_label">
                 <i class="fas fa-angle-left" @click="previousMonth"></i>
                 <span class="my_label">{{my_label}}</span>

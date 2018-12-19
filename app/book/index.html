@@ -12,9 +12,9 @@
     <title>Book a Pictorial | Remember Them Little</title>
 </head>
 
-<body>
+<body class="booking_test">
     <div id="app">
-        <main class="booking_test">
+        <main>
 
 
 
@@ -24,7 +24,8 @@
             <stepper steps=7 ref="stepper" inline-template>
 
                 <div v-cloak>
-                    <nav class="nav">
+                    <nav class="nav" style="position: sticky; z-index: 3; top: 0">
+                        <i @click="step>1 ? step-- : step" class="fas fa-arrow-left"></i>
                         <span class="progress">
                             <div class="progress_element">
                                 <span class="progress_step" :class="{'active':step >= 1}"></span>
@@ -41,7 +42,7 @@
                     </nav>
 
                     <!-- Step 1: Choose a Category -->
-                    <transition name="fade" mode="out-in">
+                    <transition name="slide-left" mode="out-in">
                         <div v-if="step==1" key="1">
 
                             <h4 class="h4">Step 1</h4>
@@ -63,16 +64,18 @@
                             </div>
 
                         </div>
-                        <div v-if="step==2" key="2">
+                        <div v-if="step==2" key="2" style="position: fixed; width: 100%; top: 0">
                             <div class="cover_image">
                                 <img :src="$root.categories.find(category => category.category_id == $root.selected_category_id).category_image">
                             </div>
+                            <h4 class="h4"></h4>
+                            <h1 class="h1"></h1>
                             <div class="packages_container">
                                 <div class="package" v-for="package in $root.filteredPackages">
                                     <h3 class="package_name">{{package.package_name}}</h3>
                                     <h4 class="package_price">P {{package.package_price}}</h4>
-                                    <ul class="package_description">
-                                        {{package.package_description}}
+                                    <ul class="package_description" v-html="package.package_description">
+
                                     </ul>
                                     <a class="choose_package" @click="$root.selected_package_id = package.package_id; next()">Choose</a>
                                 </div>
@@ -89,7 +92,6 @@
 
                             </div>
                             <div class="bottom_bar">
-                                <div class="actions">-</div>
                                 <div class="selected_themes">
                                     <a @click="$root.preparetheme($root.themes.find(theme => theme.theme_id == $root.booking.theme_ids[index]).theme_id)"
                                         class="s_theme" v-for="item,index in $root.booking.package.package_themes">
@@ -127,45 +129,121 @@
                                         </td>
                                     </tr>
                                 </table><br>
-                                <div style="display: flex; flex-direction: column">
+                                <div class="addon_buttons_container">
                                     <button v-show="$root.checkLimit(addon)" v-for="addon in $root.addons" @click="$root.addAddon(addon)">
                                         <i class="fas fa-plus"></i>&nbsp
                                         {{addon.addon_type}} - {{addon.addon_description}} (Php
                                         {{addon.addon_price}})</button>
                                 </div>
                                 <br>
-                                <a class="continue_button" @click="next">Continue</a>
                             </div>
+                            <a style="margin: 2rem; width: calc(100% - 4rem)" class="continue_button" @click="next">Continue</a>
                         </div>
                         <div v-if="step==5" key="5">
                             <h4 class="h4">Step 4</h4>
                             <h1 class="h1">Pick your Schedule</h1>
                             <br>
-                            <calendar ref="calendar"></calendar>
-                            <br>
-                            <h4 class="h4">Slots available</h4>
-                            
-                            <div class="slots_container" v-if="$root.slots.length > 0">
-                                <span @click="$root.booking.booking_time = slot" class="slot" :class="{'active':$root.booking.booking_time==slot}" v-for="slot in $root.slots">{{slot}}</span>
+                            <div class="calendar_container">
+                                <calendar ref="calendar"></calendar>
+                                <div class="slots_wrapper">
+                                    <h4 class="h4" style="margin-top: 2rem">Slots available</h4>
+
+                                    <div class="slots_container" v-if="$root.slots.length > 0">
+                                        <span @click="$root.booking.booking_time = slot" class="slot" :class="{'active':$root.booking.booking_time==slot}"
+                                            v-for="slot in $root.slots">{{slot}}</span>
+                                    </div>
+                                </div>
                             </div>
                             <a class="continue_button" @click="next">Continue</a>
                         </div>
                         <div v-if="step==6" key="6">
-                            <fieldset>
-                                <legend>Step 5</legend>
-                                <label>Tell us about your baby</label>
-                                <label>Name of baby</label>
-                                <input type="text" placeholder="e.g. Charlie" v-model="$root.booking.subject_name">
-                                <label>Age of baby (months or years)</label>
-                                <input type="text" placeholder="e.g. 5 months old" v-model="$root.booking.subject_age">
-                                <button @click.prevent="previous()">Prev</button>
-                                <button type="submit">Next</button>
-                            </fieldset>
+                            <h1 class="h1">Summary</h1>
+                            <div class="summary_container">
+                                <fieldset>
+                                    <legend>Schedule</legend>
+                                    <table>
+                                        <tr>
+                                            <td>Date:</td>
+                                            <td>{{new Date($root.booking.booking_date).toDateString().substr(3,12)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time:</td>
+                                            <td>{{$root.booking.booking_time}}</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Package Details</legend>
+                                    <table>
+                                        <tr>
+                                            <td style="border-bottom: none; padding-bottom: 0">
+                                                <span>{{$root.booking.package.package_name}}</span>
+                                            </td>
+                                            <td style="border-bottom: none; padding-bottom: 0">P
+                                                {{$root.booking.package.package_price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-bottom: none; text-align: left" colspan="2">
+                                                <details>
+                                                    <summary>Details</summary>
+                                                    <p style="margin-top: 1rem" v-html="$root.booking.package.package_description">
+                                                    </p>
+                                                </details>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Addons</legend>
+                                    <table>
+                                        <tr v-for="addon,index in $root.booking.addons">
+                                            <td>{{addon.addon_type}} {{addon.addon_description}}</td>
+                                            <td>{{addon.addon_price == 0 ? 'FREE' : 'P ' + addon.addon_price}}</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <a class="continue_button" @click.prevent="$root.facebook_login()" v-if="$root.account.status == 'DISCONNECTED'">
+                                    Sign in and Finish Booking
+                                </a>
+                                <a v-else @click="$root.$refs.payment.show()" class="continue_button" style="margin-top: 2rem">Pay
+                                    Php ({{$root.booking_total_price}})</a>
+                            </div>
                         </div>
                     </transition>
                 </div>
             </stepper>
         </main>
+
+        <modal inline-template ref="payment" v-cloak>
+            <transition name="zoom-out">
+                <div class="payment_container" v-if="visible">
+                        <stepper steps=1 ref="stepper" inline-template>
+                            <transition name="slide-left" mode="out-in">
+                                <div class="payment_options" v-if="step==1" key="1">
+                                        <a href="#" @click="step=3" class="payment_option">
+                                                <i class="far fa-credit-card"></i>
+                                                <span>
+                                                    Pay with Debit/Credit Card
+                                                </span>
+                                            </a>
+                                            <a @click="step=2" class="payment_option">
+                                                <i class="fas fa-university"></i>
+                                                <span>
+                                                    Pay thru Bank Deposit
+                                                </span>
+                                        </a>
+                                </div>
+                                <div v-if="step==2">
+                                    Payment instructions...
+                                    <a class="continue_button" @click="$root.submitBooking()">Confirm</a>
+                                </div>
+                                <div v-if="step==3">
+                                    Debit/Credit card
+                                </div>
+                        </stepper>
+                </div>
+            </transition>
+        </modal>
 
 
 
@@ -219,7 +297,13 @@
             computed: {
 
                 filteredPackages: function () {
-                    return this.packages.filter(package => package.category_id == app.selected_category_id)
+                    var filteredPackage = this.packages.filter(package => package.category_id == app.selected_category_id)
+
+                    var breakify = function (package) {
+                        package.package_description = package.package_description.replace(new RegExp("\n", "g"), '<br>')
+                        return package
+                    }
+                    return filteredPackage.map(breakify)
                 },
                 booking_total_price: function () {
                     var package_price = this.booking.package.package_price;
