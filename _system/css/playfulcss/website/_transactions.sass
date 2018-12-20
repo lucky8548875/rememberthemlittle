@@ -69,18 +69,33 @@
         padding: 2rem
         display: flex
         flex-direction: column
-            
+        @include medium
+            align-items: center
+            justify-content: center
+            background-color: rgba(0,0,0,0.2)
 
+    .booking-mobile
+        background-color: white
+            
         table
             width: 100%
 
-        > h3
+        h3
+            width: 100%
             display: flex
             justify-content: space-between
             align-items: center
+            margin-right: 3rem
         
             > a
                 @extend .button, .outline
+        @include medium
+            padding: 2rem
+            width: 100%
+            max-width: 30rem
+            box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0,0,0,0.2)
+            height: auto
+            
 
     .blocker
         position: fixed
