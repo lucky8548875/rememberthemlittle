@@ -50,6 +50,20 @@ var adminMixin = {
             console.log('fail');
           });
     },
+    getSalesReportsByDate(){
+      Vue.http.post('/_system/php/api/salesreport/getByDate.php',)
+        .then(
+          response => {
+
+            if (response.body.success)
+              this.salesReportsByDate = response.body.data;
+            else
+              console.error(response.body);
+          },
+          response => {
+            console.log('fail');
+          });
+    },
     approveBooking(booking_id) {
       var formData = new FormData();
       formData.append('account_id', this.account.account_id);

@@ -33,18 +33,18 @@
             </span>
             <span>
                 <a class="section_title">
-                    <h3>Calendar</h3>
+                    <h3>Reports</h3>
                 </a>
             </span>
             <span>
                 <span class="links">
-                    <a href="/app/admin/calendar" class="active">
+                    <a href="/app/admin/calendar">
                         Dashboard
                     </a>
                     <a href="/app/admin/transactions/bookings.html">
                         Transactions
                     </a>
-                    <a href="/app/admin/reports">
+                    <a href="/app/admin/reports" class="active">
                         Reports
                     </a>
                     <a href="/app/admin/settings/categories.html">
@@ -60,7 +60,7 @@
 
         <div class="sidebar">
             <a href="/">Overview</a>
-            <a href="/app/admin/calendar" class="active">Calendar</a>
+            <a href="/app/admin/reports" class="active">Sales Report</a>
         </div>
 
         <!-- Main Content -->
@@ -81,21 +81,21 @@
                 <transition name="fade" mode="out-in">
                     <table v-if="calendarMode=='Day'" class="dayCalendar key=1">
                         <tbody>
-                            <tr v-for="row in calendarBookingsByDate">
+                            <tr v-for="row in salesReportsByDate">
                                 <td>{{row.time}}</td>
-                                <td @click="$root.$refs.booking.show(JSON.parse(cell.data))" v-for="cell in row.cell"
-                                    v-if="cell.data!='Open'" :rowspan="cell.rowspan" class="booking">
+                                <td @click="$root.$refs.salesreport.show(JSON.parse(cell.data))" v-for="cell in row.cell"
+                                    v-if="cell.data!='Open'" :rowspan="cell.rowspan" class="salesreport">
                                     <div class="booking-item">
                                         <span class="client-name">
                                             {{JSON.parse(cell.data).account_name}}
                                         </span>
-                                        <span class="package">
+                                        <span class="total-price">
                                             <i class="fas fa-info-circle"></i>
                                             <span>{{JSON.parse(JSON.parse(cell.data).package).package_name}}</span>
                                         </span>
-                                        <span class="themes">
+                                        <span class="something3">
                                             <i class="far fa-clock"></i>
-                                            <span>{{JSON.parse(cell.data).booking_time}},
+                                            <span>{{JSON.parse(cell.data).sales_time}},
                                                 {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
                                         </span>
                                     </div>
@@ -357,6 +357,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <table v-else-if="calendarMode=='All'" key=4>
+
+                    </table>
                 </transition>
             </main>
         </transition>
@@ -463,13 +466,14 @@
             mixins: [accountMixin, adminMixin, facebookMixin],
             data: {
                 pageCategory: 'Dashboard',
-                pageTitle: 'Calendar',
+                pageTitle: 'Sales Report',
                 calendarBookingsByDate: [],
-                calendarMode: 'Day'
+                calendarMode: 'Day',
+                salesReportsByDate: []
             },
             mounted: function () {
                 this.fbInit();
-                this.getCalendarBookingsByDate();
+                this.getSalesReportsByDate();
             },
         })
     </script>

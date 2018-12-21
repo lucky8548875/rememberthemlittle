@@ -20,6 +20,7 @@ if (isset($booking_id) && isAdminTokenValid($account_id,$token)) {
 
         # Perform SQL Query
         $sql = "UPDATE bookings SET booking_status='BOOKED' WHERE booking_id='$booking_id'";
+        //$sql = "INSERT INTO sales (account_id, package, booking_addons, booking_themes, booking_date, booking_time, subject_name, subject_age, payment_method, booking_total_price) VALUES ('$account_id','$package', '$booking_addons', '$booking_themes', '$booking_date', '$booking_time', '$subject_name', '$subject_age','$payment_method','$booking_total_price')";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
