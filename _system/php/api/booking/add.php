@@ -60,7 +60,7 @@ if (isset($package) && isset($booking_addons) && isset($booking_themes) && isset
         \n\n
         To verify the deposit payment please send us a copy of the deposit slip through message in our FACEBOOK page. circumstance, we will adjust the scheduled time based on the availability of the studio on the day of the pictorial.
         \n
-        Please be advised to come 30 minutes earlier than your scheduled time. Thanks.
+        Please be advised to come 30 minutes earlier than your scheduled time. Thanks.`
         
         
 
