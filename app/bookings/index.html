@@ -177,7 +177,7 @@
                     </h3>
                     <ul>
                         <li v-for="notification in $root.notifications" style="display: flex; align-items: center">
-                            {{notification.notification_message}}
+                            {{notification.notification_message.replace(new RegExp("\n", "g"), '<br>')}}
                             <button @click.prevent="$root.$refs.notification.show(notification)">Read</button>
                         </li>
                     </ul>
