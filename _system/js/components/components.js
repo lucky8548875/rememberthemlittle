@@ -299,7 +299,7 @@ Vue.component('calendar', {
     },
     computed: {
         selected_date(){
-            return this.year + "-" + this.month + "-" + this.date
+            return this.year + "-" + (this.month + 1) + "-" + this.date
         },
         my_label() {
             return this.months[this.month] + " " + this.year
@@ -383,3 +383,35 @@ Vue.component('calendar', {
             </div>
     `
 })
+
+Vue.component('fileupload', {
+    data: function() {
+      return {
+        file: '',
+        publishedfile: ''
+      }
+    },
+    watch: {
+      file(){
+        var file_image = document.querySelector('#fileupload').files[0];
+        var formData = new FormData();
+        formData.append('file_image', file_image);
+        
+        Vue.http.post('http://rtl.epizy.com/fileupload.php',formData).then(
+            response => {
+              this.publishedfile = response.body.filename
+            },
+            response => {
+              this.publishedfile = 'error'
+            }
+            
+          )
+      }
+    },
+    template:
+    `
+    <span>
+    <input type="file" name="file_image" id="fileupload" v-model="file">{{publishedfile}}
+    </span>
+    `
+  })

@@ -106,8 +106,12 @@
                         <a href="#" :class="{'active':filter=='ALL'}" @click="filter='ALL'">All
                         </a>
                         <a href="#" :class="{'active':filter=='AWAITING_CONFIRMATION'}" @click="filter='AWAITING_CONFIRMATION'">
-                            For Approval ({{forApprovalBookingsLength}})
+                            Paid ({{forApprovalBookingsLength}})
                         </a>
+                        <a href="#" :class="{'active':filter=='PAYMENT_DUE'}" @click="filter='PAYMENT_DUE'">
+                            Due ({{paymentDueLength}})
+                        </a>
+
                     </div>
                 </div>
                 <div class="bookings-container">
@@ -131,46 +135,49 @@
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
                     <div class="booking-mobile">
-                            <h3>
-                                    <span>Booking Details</span>
-                                    <a href="#" @click="visible=false">
-                                        <i class="fas fa-times"></i>
-                                        <span>Close</span>
-                                    </a>
-            
-                                </h3>
-                                <div class="overflow-container">
-                                    <table>
-                                        <tr>
-                                            <td>Schedule</td>
-                                            <td>
-                                                <i class="fas fa-calendar-alt"></i>
-                                                <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                                <i class="fas fa-clock"></i>
-                                                <span>{{params.booking_time}}</span><br>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>{{params.booking_status}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Price</td>
-                                            <td>Php {{params.booking_total_price}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deposit Slip</td>
-                                            <td style="text-align:center">
-                                                <img :src="params.booking_deposit_slip" width="50%">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
-                                        v-if="params.booking_status=='AWAITING_CONFIRMATION'">
-                                        <span>Confirm Booking</span>
-                                    </button>
-                                </div>
+                        <h3>
+                            <span>Booking Details</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
+
+                        </h3>
+                        <div class="overflow-container">
+                            <table>
+                                <tr>
+                                    <td>Schedule</td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                        <i class="fas fa-clock"></i>
+                                        <span>{{params.booking_time}}</span><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{params.booking_status}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td>Php {{params.booking_total_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Deposit Slip</td>
+                                    <td style="text-align:center">
+                                        <img :src="params.booking_deposit_slip" width="50%">
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                                v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                                <span>Confirm Booking</span>
+                            </button>
+                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                                <span>Cancel Booking</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </transition>
@@ -207,12 +214,36 @@
                     if (this.filter == 'ALL') {
                         return this.bookings;
                     }
+                    else if (this.filter == 'PAYMENT_DUE') {
+                        return this.bookings.filter(function (booking) {
+                            if (booking.booking_status != 'AWAITING_PAYMENT') {
+                                return false
+                            }
+                            var created = new Date(booking.booking_created);
+                            var now = new Date()
+                            var milihours = now - created
+                            var hour = milihours / 3.6e+6
+                            return hour > 24
+                        })
+                    }
                     else {
                         return this.bookings.filter(booking => booking.booking_status == this.filter)
                     }
                 },
                 forApprovalBookingsLength: function () {
                     return this.bookings.filter(booking => booking.booking_status == 'AWAITING_CONFIRMATION').length
+                },
+                paymentDueLength: function () {
+                    return this.bookings.filter(function (booking) {
+                        if (booking.booking_status != 'AWAITING_PAYMENT') {
+                            return false
+                        }
+                        var created = new Date(booking.booking_created);
+                        var now = new Date()
+                        var milihours = now - created
+                        var hour = milihours / 3.6e+6
+                        return hour > 24
+                    }).length
                 }
             },
 

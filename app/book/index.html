@@ -148,14 +148,17 @@
                                 <calendar ref="calendar"></calendar>
                                 <div class="slots_wrapper">
                                     <h4 class="h4" style="margin-top: 2rem">Slots available</h4>
-
+                                    <br>
                                     <div class="slots_container" v-if="$root.slots.length > 0">
                                         <span @click="$root.booking.booking_time = slot" class="slot" :class="{'active':$root.booking.booking_time==slot}"
                                             v-for="slot in $root.slots">{{slot}}</span>
                                     </div>
                                 </div>
+                                <br>
+                                
                             </div>
-                            <a class="continue_button" @click="next">Continue</a>
+                            <a class="continue_button" style="width: calc(100% - 4rem); margin-bottom: 2rem" @click="next">Continue</a>
+                            
                         </div>
                         <div v-if="step==6" key="6">
                             <h1 class="h1">Summary</h1>
@@ -235,7 +238,9 @@
                                         </a>
                                 </div>
                                 <div v-if="step==2">
-                                    <p>
+                                    <h2>Payment Instructions</h2>
+                                    <br>
+                                    <p style="font-size: 0.95rem">
                                         For blocking of the date and time schedule we need a FULL PAYMENT to be DEPOSITED TO ANY BRANCH or BANK TRANSFER / ONLINE<br>
                                         <br>
                                         BPI Acct No. : 2859-1133-65<br>
@@ -250,9 +255,7 @@
                                         <br>
                                         To verify the deposit payment please send us a copy of the deposit slip through message in our FACEBOOK page. circumstance, we will adjust the scheduled time based on the availability of the studio on the day of the pictorial.<br>
                                         <br>
-                                        Please be advised to come 30 minutes earlier than your scheduled time.<br>
-                                        <br>
-                                        Thanks
+                                        Please be advised to come 30 minutes earlier than your scheduled time. Thanks!
                                     </p>
                                     <a class="continue_button" @click="$root.submitBooking()">Confirm</a>
                                 </div>

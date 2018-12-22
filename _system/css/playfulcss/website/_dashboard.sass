@@ -71,8 +71,8 @@
 
     main
         flex-grow: 1
-        padding-left: 4rem
-        padding-right: 4rem
+        padding-left: 2rem
+        padding-right: 2rem
         padding-top: 1rem
 
         .control
@@ -126,6 +126,7 @@
         display: flex
         flex-direction: column
         z-index: 2
+        overflow: auto
 
         > h3
             display: flex
@@ -134,6 +135,22 @@
         
             > a
                 @extend .button, .outline
+
+    .notification-list-item
+        display: flex
+        align-items: center
+        padding: 1rem 0rem
+        border-bottom: 1px solid #eee
+
+    .notification-shorttext
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        height: 1.2rem
+        -webkit-line-clamp: 1
+        -webkit-box-orient: vertical
+        max-width: 20rem
+        line-height: 1rem
                         
     .booking-modal
         position: fixed
@@ -147,13 +164,27 @@
         flex-direction: column
         z-index: 2
 
-        > h3
-            display: flex
-            justify-content: space-between
+        @include medium
             align-items: center
-        
-            > a
-                @extend .button, .outline
+            justify-content: center
+            background-color: rgba(0,0,0,0.2)
+
+        .booking-container
+            background-color: white
+            @include medium
+                padding: 2rem
+                width: 100%
+                max-width: 30rem
+                box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0,0,0,0.2)
+                height: auto
+
+            > h3
+                display: flex
+                justify-content: space-between
+                align-items: center
+            
+                > a
+                    @extend .button, .outline
 
         .overflow-container
             overflow: auto

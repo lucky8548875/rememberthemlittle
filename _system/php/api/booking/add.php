@@ -42,8 +42,7 @@ if (isset($package) && isset($booking_addons) && isset($booking_themes) && isset
         $date_tomorrow = strtotime('+1 day', $date_today);
 
 
-        $notification_message = "
-        Thank you for booking your pictorial with us.\n
+        $notification_message = "Thank you for booking your pictorial with us.\n
         Your booking is now reserved for 24 hours. Please secure your payment of Php $booking_total_price at the following banks: etc. until " . date("m-d-Y H:i",$date_tomorrow)."\n
         \n
         For blocking of the date and time schedule we need a FULL PAYMENT to be DEPOSITED TO ANY BRANCH or BANK TRANSFER / ONLINE\n
