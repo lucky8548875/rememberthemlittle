@@ -67,10 +67,9 @@
         <transition name="slide-left" appear v-cloak>
             <main>
                 <div class="control">
-                    <a class="filter color-primary">
-                        <span>Today</span>
-                        <i class="fas fa-angle-down"></i>
-                    </a>
+                    <span>
+                        <input type="date" id="singledatepicker" v-model="singledate">
+                    </span>
                     <div class="group">
                         <a href="#" :class="{'active':calendarMode=='Day'}" @click="calendarMode='Day'">Day</a>
                         <a href="#" :class="{'active':calendarMode=='Week'}" @click="calendarMode='Week'">Week</a>
@@ -465,12 +464,18 @@
                 pageCategory: 'Dashboard',
                 pageTitle: 'Calendar',
                 calendarBookingsByDate: [],
-                calendarMode: 'Day'
+                calendarMode: 'Day',
+                singledate: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate()
             },
             mounted: function () {
                 this.fbInit();
-                this.getCalendarBookingsByDate();
+                this.getCalendarBookingsByDate(this.singledate);
             },
+            watch: {
+                singledate: function(){
+                    this.getCalendarBookingsByDate(this.singledate);
+                }
+            }
         })
     </script>
 

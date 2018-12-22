@@ -8,8 +8,9 @@ var packageMixin = {
                 .then(
                     response => {
 
-                        if (response.body.success)
+                        if (response.body.success){
                             this.packages = response.body.data;
+                        }
                         else
                             console.error(response.body.message);
                     },

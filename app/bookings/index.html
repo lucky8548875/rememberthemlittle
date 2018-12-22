@@ -175,9 +175,11 @@
                             <span>Close</span>
                         </a>
                     </h3>
+                    <br><br>
                     <ul>
-                        <li v-for="notification in $root.notifications" style="display: flex; align-items: center">
-                            {{notification.notification_message}}
+                        <li class="notification-list-item" v-for="notification in $root.notifications">
+                            <!-- {{notification.notification_message.replace(new RegExp("\n", "g"), "<br>")}} -->
+                            <span class="notification-shorttext" v-html="notification.notification_message.replace(new RegExp('\n', 'g'), '<br>')"></span>
                             <button @click.prevent="$root.$refs.notification.show(notification)">Read</button>
                         </li>
                     </ul>
@@ -195,8 +197,9 @@
                                     <span>Close</span>
                                 </a>
                             </h3>
-                            <span>
-                                {{params.notification_message}}
+                            <br><br>
+                            <span v-html="params.notification_message.replace(new RegExp('\n', 'g'), '<br>')">
+                                
                             </span>
                         </div>
                     </transition>
@@ -205,100 +208,102 @@
         <modal inline-template ref="booking" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
-
-                    <h3>
-                        <span>Booking Details</span>
-                        <a href="#" @click="visible=false">
-                            <i class="fas fa-times"></i>
-                            <span>Close</span>
-                        </a>
-
-                    </h3>
-                    <div class="overflow-container">
-                        <table>
-                            <tr>
-                                <td>Schedule</td>
-                                <td>
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                    <i class="fas fa-clock"></i>
-                                    <span>{{params.booking_time}}</span><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>{{params.booking_status}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Price</td>
-                                <td>Php {{params.booking_total_price}}</td>
-                            </tr>
-                            <tr v-if="params.booking_status == 'AWAITING_PAYMENT'">
-                                <td>Deposit Slip</td>
-                                <td>
-                                    <label for="file_input">
-                                        <a class="button" :class="$root.deposit_slip_file.name == '' ? 'primary' : 'outline'">
-                                            <i class="fas fa-upload"></i>
-                                            <span>{{$root.deposit_slip_file.name == '' ? 'Upload' :
-                                                $root.deposit_slip_file.name.length > 15 ? ("..." +
-                                                $root.deposit_slip_file.name.slice(-15,$root.deposit_slip_file.name.length))
-                                                : $root.deposit_slip_file.name}}</span>
-                                        </a>
-                                    </label>
-                                    <input type="file" id="file_input" ref="test1" @change="$root.updateDepositSlip()"
-                                        style="display: none" accept="image/x-png,image/gif,image/jpeg">
-                                </td>
-                            </tr>
-                        </table>
-
-                        <br>
-                        <button @click="$root.uploadPayment(params.booking_id,$root.deposit_slip_file); visible=false"
-                            v-if="params.booking_status == 'AWAITING_PAYMENT' && $root.deposit_slip_file.name.length>0"
-                            class="primary wide justify-center" style="padding: 1rem">
-                            <span>Submit Payment</span>
-                        </button>
-                        <br>
-                        <details>
-                            <summary>
-                                <h3>Package Details</h3>
-                            </summary>
-
-                            <table>
-                                <tr>
-                                    <td>Package Name</td>
-                                    <td>
-                                        {{JSON.parse(params.package).package_name}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Duration</td>
-                                    <td>
-                                        {{JSON.parse(params.package).package_minutes}} minutes
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Addons</td>
-                                    <td>
-                                        <ul>
-                                            <li v-for="addon in JSON.parse(params.booking_addons)">
-                                                {{addon.addon_type}} - {{addon.addon_description}}
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Themes</td>
-                                    <td>
-                                        <ul>
-                                            <li v-for="theme in JSON.parse(params.booking_themes)">
-                                                {{theme}}
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </details>
+                    <div class="booking-container">
+                            <h3>
+                                    <span>Booking Details</span>
+                                    <a href="#" @click="visible=false">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </a>
+            
+                                </h3>
+                                <div class="overflow-container">
+                                    <table>
+                                        <tr>
+                                            <td>Schedule</td>
+                                            <td>
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                                <i class="fas fa-clock"></i>
+                                                <span>{{params.booking_time}}</span><br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>{{params.booking_status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Price</td>
+                                            <td>Php {{params.booking_total_price}}</td>
+                                        </tr>
+                                        <tr v-if="params.booking_status == 'AWAITING_PAYMENT'">
+                                            <td>Deposit Slip</td>
+                                            <td>
+                                                <label for="file_input">
+                                                    <a class="button" :class="$root.deposit_slip_file.name == '' ? 'primary' : 'outline'">
+                                                        <i class="fas fa-upload"></i>
+                                                        <span>{{$root.deposit_slip_file.name == '' ? 'Upload' :
+                                                            $root.deposit_slip_file.name.length > 15 ? ("..." +
+                                                            $root.deposit_slip_file.name.slice(-15,$root.deposit_slip_file.name.length))
+                                                            : $root.deposit_slip_file.name}}</span>
+                                                    </a>
+                                                </label>
+                                                <input type="file" id="file_input" ref="test1" @change="$root.updateDepositSlip()"
+                                                    style="display: none" accept="image/x-png,image/gif,image/jpeg">
+                                            </td>
+                                        </tr>
+                                    </table>
+            
+                                    <br>
+                                    <button @click="$root.uploadPayment(params.booking_id,$root.deposit_slip_file); visible=false"
+                                        v-if="params.booking_status == 'AWAITING_PAYMENT' && $root.deposit_slip_file.name.length>0"
+                                        class="primary wide justify-center" style="padding: 1rem">
+                                        <span>Submit Payment</span>
+                                    </button>
+                                    <br>
+                                    <details>
+                                        <summary>
+                                            <h3>Package Details</h3>
+                                        </summary>
+            
+                                        <table>
+                                            <tr>
+                                                <td>Package Name</td>
+                                                <td>
+                                                    {{JSON.parse(params.package).package_name}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Duration</td>
+                                                <td>
+                                                    {{JSON.parse(params.package).package_minutes}} minutes
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Addons</td>
+                                                <td>
+                                                    <ul>
+                                                        <li v-for="addon in JSON.parse(params.booking_addons)">
+                                                            {{addon.addon_type}} - {{addon.addon_description}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Themes</td>
+                                                <td>
+                                                    <ul>
+                                                        <li v-for="theme in JSON.parse(params.booking_themes)">
+                                                            {{theme}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </details>
+                                </div>
                     </div>
+                    
                 </div>
             </transition>
         </modal>

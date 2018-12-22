@@ -18,7 +18,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare("SELECT * FROM bookings WHERE account_id='$account_id'");
+    $stmt = $conn->prepare("SELECT * FROM bookings WHERE account_id='$account_id' ORDER BY booking_created DESC");
     $stmt->execute();
 
     # Fetch Result
