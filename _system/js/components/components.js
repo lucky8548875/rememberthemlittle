@@ -415,3 +415,34 @@ Vue.component('fileupload', {
     </span>
     `
   })
+
+Vue.component('admin-searchbar', {
+    data: function() {
+        return {
+            subject: '',
+            search: '',
+            items: [
+
+            ]
+        }
+    },
+    computed: {
+        matches: function() {
+            
+        },
+        typing: function() {
+            return search != ''
+        }
+    },
+    template:
+    `
+    <div class="admin-searchbar-container">
+        <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="search">
+        <ul class="admin-searchbar-matchlist" v-if="typing">
+            <li class="matchlist-item" v-for="match in matches">
+                {{match}}
+            </li>
+        </ul>
+    </div>
+    `
+})
