@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="admin settings">
+    <!-- Vue App -->
+    <div id="app" v-cloak>
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Settings</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html" class="active">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+            <a href="/app/admin/settings/categories.html">Categories</a>
+            <a href="/app/admin/settings/packages.html">Packages</a>
+            <a href="/app/admin/settings/addons.html">Addons</a>
+            <a href="/app/admin/settings/themes.html" class="active">Themes</a>
+        </div>
+
+        <!-- Main Content -->
+        <main v-cloak>
+            <div class="control">
+                <h2>
+                    <span>Themes</span>
+                </h2>
+                <span>
+                    <button class="primary" @click="$root.$refs.newThemeModal.show()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Theme</span>
+                    </button>
+                </span>
+            </div>
+
+            <div class="theme-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); grid-gap: 1rem">
+                    
+                <div v-for="theme in themes" @click="$root.$refs.editThemeModal.show(theme)">
+                    <img :src="theme.theme_image" style="width: 100%; border-radius: 0.25rem">
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+        <modal inline-template ref="newThemeModal" v-cloak>
+                <transition name="zoom-out">
+                    <div class="settings-modal" v-if="visible">
+                        
+                            <div class="blocker" v-if="visible" @click="visible=false"></div>
+                        
+                        <div class="settings-modal-window" v-if="visible">
+    
+                            <form @submit.prevent="$root.prepareAddTheme($event); hide()" enctype="multipart/form-data">
+                                <fieldset>
+                                    <h2>
+                                        <span>New Theme</span>
+                                        <button @click.prevent="hide()">
+                                            <i class="fas fa-times"></i>
+                                            <span>Close</span>
+                                        </button>
+                                    </h2>
+                                    <label>Theme Description</label>
+                                    <input type="text" name="theme_description">
+                                    <label>Image</label>
+                                    <input type="file" name="theme_image">
+                                    <div class="button-container">
+                                        <button class="primary" type="submit">Add Theme</button>
+                                    </div>
+    
+                                </fieldset>
+                            </form>
+    
+                        </div>
+                    </div>
+                </transition>
+            </modal>
+
+            <modal inline-template ref="editThemeModal" v-cloak>
+                    <transition name="zoom-out">
+                        <div class="settings-modal" v-if="visible">
+                            
+                                <div class="blocker" v-if="visible" @click="visible=false"></div>
+                            
+                            <div class="settings-modal-window" v-if="visible">
+        
+                                <form @submit.prevent="$root.prepareUpdateTheme($event); hide();" enctype="multipart/form-data">
+                                    <fieldset>
+                                        <h2>
+                                            <span>Edit Theme</span>
+                                            <button @click.prevent="hide()">
+                                                <i class="fas fa-times"></i>
+                                                <span>Close</span>
+                                            </button>
+                                        </h2>
+                                        <input type="hidden" name="theme_id" :value="params.theme_id">
+                                        <label>Theme Description</label>
+                                        <input type="text" name="theme_description" :value="params.theme_description">
+                                        <label>Image</label>
+                                        <img :src="params.theme_image" height="150px">
+                                        <input type="file" name="theme_image">
+                                        <div class="button-container">
+                                            <button @click.prevent="$root.deleteTheme(params.theme_id); hide()" class="outline" type="submit">
+                                                <i class="fas fa-trash"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                            <button class="primary" type="submit">Update Theme</button>
+                                        </div>
+        
+                                    </fieldset>
+                                </form>
+        
+                            </div>
+                        </div>
+                    </transition>
+                </modal>
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/themes.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin, themeMixin],
+            data: {
+                pageCategory: 'Settings',
+                pageTitle: 'Themes',
+                themes: []
+            },
+            mounted: function () {
+                this.fbInit();
+                this.loadThemes();
+            },
+            methods: {
+                prepareAddTheme(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var theme_description = elements.theme_description.value;
+                    var theme_image = elements.theme_image.files[0];
+                    this.addTheme(theme_description, theme_image);
+                },
+                prepareUpdateTheme(submitEvent) {
+                    
+                    var elements = submitEvent.target.elements;
+                    var theme_id = elements.theme_id.value;
+                    var theme_description = elements.theme_description.value;
+                    var theme_image = elements.theme_image.files[0];
+                    this.updateTheme(theme_id, theme_description, theme_image);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

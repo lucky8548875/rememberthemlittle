@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#5252FF">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Book a Pictorial | Remember Them Little</title>
+</head>
+
+<body class="booking_test">
+    <div id="app">
+        <main>
+
+
+
+
+
+
+            <stepper steps=7 ref="stepper" inline-template>
+
+                <div v-cloak>
+                    <nav class="nav">
+                        <i v-if="step>1" @click="step>1 ? step-- : step" class="fas fa-arrow-left"></i>
+                        <span v-else></span>
+                        <span class="progress">
+                            <div class="progress_element">
+                                <span class="progress_step" :class="{'active':step >= 1}"></span>
+                                <span class="step_line" :class="{'active':step >= 3}"></span>
+                                <span class="progress_step" :class="{'active':step >= 3}"></span>
+                                <span class="step_line" :class="{'active':step >= 4}"></span>
+                                <span class="progress_step" :class="{'active':step >= 4}"></span>
+                                <span class="step_line" :class="{'active':step >= 5}"></span>
+                                <span class="progress_step" :class="{'active':step >= 5}"></span>
+                                <span class="step_line" :class="{'active':step >= 6}"></span>
+                                <span class="progress_step" :class="{'active':step >= 6}"></span>
+                            </div>
+                        </span>
+                    </nav>
+
+                    <!-- Step 1: Choose a Category -->
+                    <transition name="slide-left" mode="out-in">
+                        <div v-if="step==1" key="1">
+
+                            <h4 class="h4">Step 1</h4>
+                            <h1 class="h1">Choose a Package</h1>
+
+
+                            <div class="category_container">
+                                <a class="category" :class="{'active':$root.selected_category_id==category.category_id}"
+                                    v-for="category in $root.categories" @click="$root.selected_category_id=category.category_id; next()">
+                                    <img class="category_image" :src="category.category_image">
+                                    <h3 class="category_title">{{category.category_name}}
+
+                                    </h3>
+                                    <p class="category_description">{{category.category_description}}
+                                    </p>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+                        <div v-if="step==2" key="2" style="position: fixed; width: 100%; height: 100%; top: 0; overflow: auto">
+                            <div class="cover_image">
+                                <img :src="$root.categories.find(category => category.category_id == $root.selected_category_id).category_image">
+                            </div>
+                            <h4 class="h4"></h4>
+                            <h1 class="h1"></h1>
+                            <div class="packages_container">
+                                <div class="package" v-for="package in $root.filteredPackages">
+                                    <h3 class="package_name">{{package.package_name}}</h3>
+                                    <h4 class="package_price">P {{package.package_price}}</h4>
+                                    <ul class="package_description" v-html="package.package_description">
+
+                                    </ul>
+                                    <a class="choose_package" @click="$root.selected_package_id = package.package_id; next()">Choose</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="step==3" key="3">
+                            <h4 class="h4">Step 2</h4>
+                            <h1 class="h1">Pick {{$root.booking.package.package_themes}} Theme(s)</h1>
+                            <div class="themes_container">
+                                <a @click="$root.preparetheme(theme.theme_id)" class="theme" :class="{'active':$root.booking.theme_ids.includes(theme.theme_id)}"
+                                    v-for="theme in $root.themes">
+                                    <img :src="theme.theme_image">
+                                </a>
+
+                            </div>
+                            <div class="bottom_bar">
+                                <div class="selected_themes">
+                                    <a @click="$root.preparetheme($root.themes.find(theme => theme.theme_id == $root.booking.theme_ids[index]).theme_id)"
+                                        class="s_theme" v-for="item,index in $root.booking.package.package_themes">
+                                        <img v-if="$root.booking.theme_ids[index]!=null" :src="$root.themes.find(theme => theme.theme_id == $root.booking.theme_ids[index]).theme_image"><i
+                                            v-if="$root.booking.theme_ids[index]!=null" class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                                <a class="continue_button" v-if="$root.booking.theme_ids.length == $root.booking.package.package_themes"
+                                    @click="next">Continue</a>
+                            </div>
+                        </div>
+                        <div v-if="step==4" key="4">
+                            <h4 class="h4">Step 3</h4>
+                            <h1 class="h1">Choose Addons</h1>
+
+                            <div class="addon_container">
+                                <table class="addon_table">
+                                    <tr v-for="addon,index in $root.booking.addons">
+                                        <td>{{addon.addon_type}}</td>
+                                        <td>{{addon.addon_description}}</td>
+                                        <td>{{addon.addon_price == 0 ? 'FREE' : 'P' + addon.addon_price}}</td>
+                                        <td>
+                                            <a v-if="addon.addon_price != 0 && addon.addon_description!='Upgraded to 12x16'"
+                                                href="#" @click="$root.booking.addons.splice(index,1)">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                            <a v-if="addon.addon_price == 0 && addon.addon_type == 'PRINT' && addon.addon_description == '8x10'"
+                                                href="#" @click="$root.booking.addons[index].addon_description='Upgraded to 12x16';$root.booking.addons[index].addon_price=250;">
+                                                Upgrade
+                                            </a>
+                                            <a v-if="addon.addon_price == 250 && addon.addon_type == 'PRINT' && addon.addon_description == 'Upgraded to 12x16'"
+                                                href="#" @click="$root.booking.addons[index].addon_description='8x10';$root.booking.addons[index].addon_price=0;">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table><br>
+                                <div class="addon_buttons_container">
+                                    <button v-show="$root.checkLimit(addon)" v-for="addon in $root.addons" @click="$root.addAddon(addon)">
+                                        <i class="fas fa-plus"></i>&nbsp
+                                        {{addon.addon_type}} - {{addon.addon_description}} (Php
+                                        {{addon.addon_price}})</button>
+                                </div>
+                                <br>
+                            </div>
+                            <a style="margin: 2rem; width: calc(100% - 4rem)" class="continue_button" @click="next">Continue</a>
+                        </div>
+                        <div v-if="step==5" key="5">
+                            <h4 class="h4">Step 4</h4>
+                            <h1 class="h1">Pick your Schedule</h1>
+                            <br>
+                            <div class="calendar_container">
+                                <calendar ref="calendar"></calendar>
+                                <div class="slots_wrapper">
+                                    <h4 class="h4" style="margin-top: 2rem">Slots available</h4>
+                                    <br>
+                                    <div class="slots_container" v-if="$root.slots.length > 0">
+                                        <span @click="$root.booking.booking_time = slot" class="slot" :class="{'active':$root.booking.booking_time==slot}"
+                                            v-for="slot in $root.slots">{{slot}}</span>
+                                    </div>
+                                </div>
+                                <br>
+                                
+                            </div>
+                            <a class="continue_button" style="width: calc(100% - 4rem); margin-bottom: 2rem" @click="next">Continue</a>
+                            
+                        </div>
+                        <div v-if="step==6" key="6">
+                            <h1 class="h1">Summary</h1>
+                            <div class="summary_container">
+                                <fieldset>
+                                    <legend>Schedule</legend>
+                                    <table>
+                                        <tr>
+                                            <td>Date:</td>
+                                            <td>{{new Date($root.booking.booking_date).toDateString().substr(3,12)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time:</td>
+                                            <td>{{$root.booking.booking_time}}</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Package Details</legend>
+                                    <table>
+                                        <tr>
+                                            <td style="border-bottom: none; padding-bottom: 0">
+                                                <span>{{$root.booking.package.package_name}}</span>
+                                            </td>
+                                            <td style="border-bottom: none; padding-bottom: 0">P
+                                                {{$root.booking.package.package_price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-bottom: none; text-align: left" colspan="2">
+                                                <details>
+                                                    <summary>Details</summary>
+                                                    <p style="margin-top: 1rem" v-html="$root.booking.package.package_description">
+                                                    </p>
+                                                </details>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Addons</legend>
+                                    <table>
+                                        <tr v-for="addon,index in $root.booking.addons">
+                                            <td>{{addon.addon_type}} {{addon.addon_description}}</td>
+                                            <td>{{addon.addon_price == 0 ? 'FREE' : 'P ' + addon.addon_price}}</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <a class="continue_button" @click.prevent="$root.facebook_login()" v-if="$root.account.status == 'DISCONNECTED'">
+                                    Sign in and Finish Booking
+                                </a>
+                                <a v-else @click="$root.$refs.payment.show()" class="continue_button" style="margin-top: 2rem">Pay
+                                    Php ({{$root.booking_total_price}})</a>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </stepper>
+        </main>
+
+        <modal inline-template ref="payment" v-cloak>
+            <transition name="zoom-out">
+                <div class="payment_container" v-if="visible">
+                        <stepper steps=1 ref="stepper" inline-template>
+                            <transition name="slide-left" mode="out-in">
+                                <div class="payment_options" v-if="step==1" key="1">
+                                        <a href="#" @click="step=3" class="payment_option">
+                                                <i class="far fa-credit-card"></i>
+                                                <span>
+                                                    Pay with Debit/Credit Card
+                                                </span>
+                                            </a>
+                                            <a @click="step=2" class="payment_option">
+                                                <i class="fas fa-university"></i>
+                                                <span>
+                                                    Pay thru Bank Deposit
+                                                </span>
+                                        </a>
+                                </div>
+                                <div v-if="step==2">
+                                    <h2>Payment Instructions</h2>
+                                    <br>
+                                    <p style="font-size: 0.95rem">
+                                        For blocking of the date and time schedule we need a FULL PAYMENT to be DEPOSITED TO ANY BRANCH or BANK TRANSFER / ONLINE<br>
+                                        <br>
+                                        BPI Acct No. : 2859-1133-65<br>
+                                        ISLAND ACCOUNT<br>
+                                        BPI Acct Name: Emelyn D.Mayuga<br>
+                                        <br>
+                                        Val E. Mayuga / Emelyn D. Mayuga<br>
+                                        BDO: 001900082320<br>
+                                        Branch: SM Dasmarinas<br>
+                                        <br>
+                                        Deposit is NON-REDUNDABLE in the case of No Show on the pictorial schedule. Re-Schedule will be allowed as long as we are informed a day before or on the day of the schedule.<br>
+                                        <br>
+                                        To verify the deposit payment please send us a copy of the deposit slip through message in our FACEBOOK page. circumstance, we will adjust the scheduled time based on the availability of the studio on the day of the pictorial.<br>
+                                        <br>
+                                        Please be advised to come 30 minutes earlier than your scheduled time. Thanks!
+                                    </p>
+                                    <a class="continue_button" @click="$root.submitBooking()">Confirm</a>
+                                </div>
+                                <div v-if="step==3">
+                                    Debit/Credit card
+                                </div>
+                        </stepper>
+                </div>
+            </transition>
+        </modal>
+
+
+
+    </div>
+    <!--External Scripts -->
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
+    <script src="/_system/js/mixins/package.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
+    <script src="/_system/js/mixins/themes.js"></script>
+    <script src="/_system/js/mixins/booking.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+
+
+    <!-- Internal Scripts -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, categoryMixin, packageMixin, addonMixin, themeMixin, bookingMixin, facebookMixin],
+
+            data: {
+
+                categories: [],
+                packages: [],
+                addons: [],
+                themes: [],
+
+                selected_category_id: "",
+                selected_package_id: "",
+                selected_addon: "",
+                selected_date: "",
+
+                inclusions: [], // All inclusions from packages
+                slots: [],
+
+                booking: {
+                    package: {},
+                    addons: [], // For selected package only
+                    theme_ids: [],
+                    booking_date: "",
+                    booking_time: "",
+                    subject_name: "",
+                    subject_age: "",
+                    payment_method: ""
+                },
+            },
+
+            computed: {
+
+                filteredPackages: function () {
+                    var filteredPackage = this.packages.filter(package => package.category_id == app.selected_category_id)
+
+                    var breakify = function (package) {
+                        package.package_description = package.package_description.replace(new RegExp("\n", "g"), '<br>')
+                        return package
+                    }
+                    return filteredPackage.map(breakify)
+                },
+                booking_total_price: function () {
+                    var package_price = this.booking.package.package_price;
+                    var addons_price = 0;
+                    for (x in this.booking.addons) {
+                        addons_price += this.booking.addons[x].addon_price
+                    }
+                    return package_price + addons_price;
+                }
+            },
+
+            watch: {
+                selected_package_id: function () {
+
+                    var addonArray = [];
+                    for (x in this.inclusions) {
+                        if (this.inclusions[x].package_id == this.selected_package_id) {
+
+                            var fetched_addon = this.getAddon(this.inclusions[x].addon_id);
+                            var free_addon = {
+                                addon_id: fetched_addon.addon_id,
+                                addon_type: fetched_addon.addon_type,
+                                addon_description: fetched_addon.addon_description,
+                                addon_price: 0,
+                                addon_source: 'PACKAGE', // 'AVAILED'
+                            }
+
+                            addonArray.push(free_addon);
+
+
+                        }
+                    }
+                    this.booking.addons = addonArray;
+                    this.booking.package = this.packages.find(package => package.package_id == app.selected_package_id)
+
+                }
+                ,
+                selected_date: function () {
+                    this.booking.booking_date = this.selected_date;
+                    console.log('D: ' + this.selected_date + " M: " + this.booking.package.package_minutes);
+                    this.getOpenSlots(this.selected_date, this.booking.package.package_minutes);
+                }
+            },
+
+            created: function () {
+
+                this.loadCategories();
+                this.loadPackages();
+                this.loadAddons();
+                this.loadInclusions();
+                this.loadThemes();
+
+            },
+
+            methods: {
+                preparetheme(id) {
+                    if (this.booking.theme_ids.includes(id)) {
+                        var index = this.booking.theme_ids.indexOf(id);
+                        this.booking.theme_ids.splice(index, 1);
+                    }
+                    else
+                        if (this.booking.theme_ids.length < this.booking.package.package_themes) {
+                            this.booking.theme_ids.push(id)
+                        }
+
+                },
+                addAddon(addon) {
+                    if (this.checkLimit(addon)) {
+
+                        var availed_addon = {
+                            addon_id: addon.addon_id,
+                            addon_type: addon.addon_type,
+                            addon_description: addon.addon_description,
+                            addon_price: addon.addon_price,
+                            addon_source: 'BOOKING', // 'AVAILED'
+                        }
+                        this.booking.addons.push(availed_addon)
+                    }
+
+                },
+                checkLimit(addon) {
+                    var count = this.booking.addons.filter(inclusion => inclusion.addon_id == addon.addon_id).length;
+                    return (count < addon.addon_max)
+                },
+                submitBooking() {
+                    var formData = new FormData();
+                    formData.append('package', JSON.stringify(this.booking.package));
+                    formData.append('booking_addons', JSON.stringify(this.booking.addons));
+                    formData.append('booking_themes', JSON.stringify(this.booking.theme_ids));
+                    formData.append('booking_date', this.booking.booking_date);
+                    formData.append('booking_time', this.booking.booking_time);
+                    formData.append('subject_name', this.booking.subject_name);
+                    formData.append('subject_age', this.booking.subject_age);
+                    formData.append('account_id', this.account.account_id);
+                    formData.append('token', this.account.token);
+                    formData.append('payment_method', this.booking.payment_method);
+                    formData.append('booking_total_price', this.booking_total_price);
+
+                    Vue.http.post('/_system/php/api/booking/add.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    window.location.href = "/app/bookings"
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

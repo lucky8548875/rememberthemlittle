@@ -1,8 +1,21 @@
 var facebookMixin = {
 
+    data:{
+        facebook:{
+            status: null, // fbinit status: NULL, LOADING, LOADED,
+            api_status: null // fb.me status
+        }
+
+    },
+
     methods: {
 
         fbInit: function() {
+
+
+            // Set fb status to loading
+            this.facebook.status = 'LOADING';
+
             window.fbAsyncInit = function () {
 
                 FB.init({
@@ -14,15 +27,8 @@ var facebookMixin = {
                 });
     
                 FB.AppEvents.logPageView();
-    
-                // FB.getLoginStatus(function (response) {
-                //     app.statusChangeCallback(response);
-                // });
-                FB.login(this.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
-    
-                FB.Event.subscribe('auth.login', function (response) {
-                    app.statusChangeCallback(response);
-                })
+
+                app.facebook.status = 'LOADED';
     
             };
     
@@ -33,6 +39,8 @@ var facebookMixin = {
                 js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=736479600033096&autoLogAppEvents=1';
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
+        
+
 
         },
 
@@ -49,17 +57,19 @@ var facebookMixin = {
                     var picture_url = response.picture.data.url;
 
                     // Sign In
-                    Vue.http.get('/_system/php/api/account/facebookSignIn.php?facebook_id='+response.id)
+                    Vue.http.get('/_system/php/api/account/facebookSignIn.php?facebook_id='+response.id+'&facebook_name='+response.name)
                         .then(
                             response => {
 
                                 if (response.body.success){
                                     
-                                    localStorage.display_name = response.body.data.display_name != "" ? response.body.data.display_name : display_name
+                                    localStorage.display_name = display_name
                                     localStorage.account_id = response.body.data.account_id;
                                     localStorage.token = response.body.data.token;
+                                    localStorage.account_type = response.body.data.account_type;
                                     localStorage.picture_url = picture_url;
                                     app.loadAccountFromCache();
+                                    app.facebook.api_status = "LOADED";
 
                                 }   
                                 else
@@ -75,6 +85,11 @@ var facebookMixin = {
             }
 
         },
+
+        facebook_login(){
+            this.facebook.api_status = 'LOADING';
+            FB.login(app.statusChangeCallback, { scope: 'public_profile', return_scopes: true });
+        }
 
     }
 

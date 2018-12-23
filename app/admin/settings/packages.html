@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+</head>
+
+<body class="admin settings">
+    <!-- Vue App -->
+    <div id="app" v-cloak>
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Settings</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html" class="active">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+        </nav>
+
+        <div class="sidebar">
+            <a href="/app/admin/settings/categories.html">Categories</a>
+            <a href="/app/admin/settings/packages.html" class="active">Packages</a>
+            <a href="/app/admin/settings/addons.html">Addons</a>
+            <a href="/app/admin/settings/themes.html">Themes</a>
+        </div>
+
+        <!-- Main Content -->
+        <main v-cloak>
+
+            <div class="control">
+                <h2>
+                    <select v-model="selectedCategory">
+                        <option value="0">All Packages</option>
+                        <option v-for="category in categories" :value="category.category_id">{{category.category_name}}</option>
+                    </select>
+                </h2>
+                <span>
+                    <button class="primary" @click="$root.$refs.newPackageModal.show()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Package</span>
+                    </button>
+                </span>
+            </div>
+
+            <table style="width: 100%;">
+                <tbody>
+                    <tr v-for="package in filteredPackages">
+                        <td>
+                            {{package.package_name}}
+                        </td>
+                        <td style="text-align: -webkit-right">
+                            <button @click="$root.$refs.editPackageModal.show(package)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+        <modal inline-template ref="newPackageModal" v-cloak>
+            <transition name="zoom-out">
+                <div class="settings-modal" v-if="visible">
+                    <div class="blocker" v-if="visible" @click="visible=false"></div>
+                    <div class="settings-modal-window" v-if="visible">
+                        <form @submit.prevent="$root.prepareAddPackage($event); hide()">
+                            <fieldset>
+                                <h2>
+                                    <span>New Package</span>
+                                    <button @click.prevent="hide()">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </button>
+                                </h2>
+                                <div style="display: flex; flex-wrap: wrap">
+                                    <div>
+                                        <label>Category</label>
+                                        <select name="category_id">
+                                            <option v-for="category in $root.categories" :value="category.category_id">
+                                                {{category.category_name}}
+                                            </option>
+                                        </select>
+                                        <label>Package Name</label>
+                                        <input type="text" name="package_name">
+                                        <label>Price</label>
+                                        <input type="number" name="package_price">
+                                    </div>
+                                    <div>
+                                        <label>Package Description</label>
+                                        <textarea name="package_description"></textarea>
+                                        <label>Minutes</label>
+                                        <input type="number" name="package_minutes">
+                                        <label># of Themes</label>
+                                        <input type="number" name="package_themes">
+                                        <label class="checkbox_label">
+                                            <input type="checkbox" name="package_active" checked>
+                                            <span>Active</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Inclusions</label>
+                                        <div style="display: flex; align-items: center">
+                                            <select style="margin-bottom: 0" id="addon" v-model="$root.selectedAddon">
+                                                <option v-for="addon in $root.addons" :value="addon.addon_id">
+                                                    {{addon.addon_type}}: {{addon.addon_description}}
+                                                </option>
+                                            </select>
+                                            <button @click.prevent="$root.chosen_inclusions.push($root.selectedAddon)">Add</button>
+                                        </div>
+                                        <table style="margin-left: 1rem">
+                                            <tr v-for="addon_id,index in $root.chosen_inclusions">
+                                                <td>{{$root.getAddonObject(addon_id).addon_type}}</td>
+                                                <td>{{$root.getAddonObject(addon_id).addon_description}}</td>
+                                                <td><a @click="$root.chosen_inclusions.splice(index,1)">Remove</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <button class="primary" type="submit">Add Package</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </transition>
+        </modal>
+
+        <modal inline-template ref="editPackageModal" v-cloak>
+            <transition name="zoom-out">
+                <div class="settings-modal" v-if="visible">
+                    <div class="blocker" v-if="visible" @click="visible=false"></div>
+                    <div class="settings-modal-window" v-if="visible">
+                        <form @submit.prevent="$root.prepareUpdatePackage($event); hide()">
+                            <fieldset>
+                                <h2>
+                                    <span>Edit Package</span>
+                                    <button @click.prevent="hide()">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </button>
+                                </h2>
+                                <div style="display: flex; flex-wrap: wrap">
+                                    <div>
+                                        <label>Category</label>
+                                        <select name="category_id">
+                                            <option v-for="category in $root.categories" :value="category.category_id"
+                                                :selected='category.category_id == params.category_id'>
+                                                {{category.category_name}}
+                                            </option>
+                                        </select>
+                                        <input type="hidden" name="package_id" :value="params.package_id">
+                                        <label>Package Name</label>
+                                        <input type="text" name="package_name" :value="params.package_name">
+                                        <label>Price</label>
+                                        <input type="number" name="package_price" :value="params.package_price">
+                                    </div>
+                                    <div>
+                                        <label>Package Description</label>
+                                        <textarea name="package_description" :value="params.package_description"></textarea>
+                                        <label>Minutes</label>
+                                        <input type="number" name="package_minutes" :value="params.package_minutes">
+                                        <label># of Themes</label>
+                                        <input type="number" name="package_themes" :value="params.package_themes">
+                                        <label class="checkbox_label">
+                                            <input type="checkbox" name="package_active" :checked="params.package_active == 1">
+                                            <span>Active</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Inclusions</label>
+                                        <div style="display: flex; align-items: center">
+                                            <select style="margin-bottom: 0" id="addon" v-model="$root.selectedAddon">
+                                                <option v-for="addon in $root.addons" :value="addon.addon_id">
+                                                    {{addon.addon_type}}: {{addon.addon_description}}
+                                                </option>
+                                            </select>
+                                            <button @click.prevent="$root.inclusions.push({addon_id: $root.selectedAddon, package_id: params.package_id})">Add</button>
+                                        </div>
+                                        <table style="margin-left: 1rem">
+                                            <tr v-for="inclusion,index in $root.inclusions" v-if="inclusion.package_id == params.package_id">
+                                                <td>{{$root.getAddonObject(inclusion.addon_id).addon_type}}</td>
+                                                <td>{{$root.getAddonObject(inclusion.addon_id).addon_description}}</td>
+                                                <td><a @click="$root.inclusions.splice(index,1)">Remove</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <button @click.prevent="$root.deletePackage(params.package_id); hide()" class="outline"
+                                        type="submit">
+                                        <i class="fas fa-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                    <button class="primary" type="submit">Update Package</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </transition>
+        </modal>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/category.js"></script>
+    <script src="/_system/js/mixins/package.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin, categoryMixin, packageMixin, addonMixin],
+            data: {
+                pageCategory: 'Settings',
+                pageTitle: 'Packages',
+                categories: [],
+                packages: [],
+                inclusions: [],
+                selectedCategory: 0,
+                chosen_inclusions: [],
+                selectedAddon: '',
+
+            },
+            computed: {
+                filteredPackages() {
+                    if (this.selectedCategory == 0) {
+                        return this.packages
+                    }
+                    else
+                        return this.packages.filter(package => package.category_id == this.selectedCategory);
+                },
+
+            },
+
+            mounted: function () {
+                this.fbInit();
+                this.loadCategories();
+                this.loadPackages();
+                this.loadAddons();
+            },
+            methods: {
+                prepareAddPackage(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var package_name = elements.package_name.value;
+                    var package_description = elements.package_description.value;
+                    var category_id = elements.category_id.value;
+                    var package_price = elements.package_price.value;
+                    var package_minutes = elements.package_minutes.value;
+                    var package_themes = elements.package_themes.value;
+                    var package_active = elements.package_active.checked ? 1 : 0
+                    var package_inclusions = JSON.stringify(this.chosen_inclusions);
+                    console.log(package_inclusions);
+                    this.addPackage(package_name, package_description, category_id, package_price,
+                        package_minutes, package_themes, package_active, package_inclusions);
+                },
+                prepareUpdatePackage(submitEvent) {
+                    var elements = submitEvent.target.elements;
+                    var package_id = elements.package_id.value;
+                    var package_name = elements.package_name.value;
+                    var package_description = elements.package_description.value;
+                    var category_id = elements.category_id.value;
+                    var package_price = elements.package_price.value;
+                    var package_minutes = elements.package_minutes.value;
+                    var package_themes = elements.package_themes.value;
+                    var package_active = elements.package_active.checked ? 1 : 0
+                    var package_inclusions = JSON.stringify(this.inclusions.filter(inclusion => inclusion.package_id == package_id).map(inclusion => inclusion.addon_id));
+                    console.log(package_inclusions);
+                    this.updatePackage(package_id, package_name, package_description, category_id, package_price,
+                        package_minutes, package_themes, package_active, package_inclusions);
+                },
+                getAddonObject(addon_id) {
+                    return this.addons.find(addon => addon.addon_id == addon_id)
+                },
+            }
+        })
+    </script>
+
+</body>
+
+</html>

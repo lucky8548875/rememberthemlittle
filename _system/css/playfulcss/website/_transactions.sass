@@ -1,25 +1,5 @@
 .transactions
 
-    nav
-        display: flex
-        justify-content: space-between
-        align-items: center
-        padding: 1rem
-        width: 100%
-        background-color: white
-        z-index: 1
-
-        > a
-            padding: 1rem
-            display: flex
-            align-items: center
-
-            > i
-                font-size: 1.2rem
-
-        > a:nth-child(2)
-            color: $color-primary
-
     main
         padding-left: 2rem
         padding-right: 2rem
@@ -29,11 +9,21 @@
             align-items: center
             width: 100%
             justify-content: space-between
-            margin-bottom: 2rem
+            margin-bottom: 1rem
 
             .filter
                 display: flex
                 align-items: center
+                position: relative
+
+                .date_filter_container
+                    position: absolute
+                    background-color: white
+                    box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,0.1)
+                    bottom: 0
+                    transform: translate(70%,100%)
+                    right: 0
+                    padding: 1rem
 
                 i
                     margin-left: 0.5rem
@@ -56,8 +46,57 @@
 
                 a:last-child
                     border-radius: 0rem 2rem 2rem 0rem
+        .bookings-container
+            border-top: 2px solid $color-light
+            border-bottom: 2px solid $color-light
+            border-left: 2px solid $color-light
+            border-radius: 1rem
+            padding-left: 1rem
+
+            max-height: 60vh
+            overflow: auto
+            table
+                width: 100%
+
+    .booking-modal
+        z-index: 2
+        position: fixed
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        background-color: white
+        padding: 2rem
+        display: flex
+        flex-direction: column
+        @include medium
+            align-items: center
+            justify-content: center
+            background-color: rgba(0,0,0,0.2)
+
+    .booking-mobile
+        background-color: white
+            
         table
             width: 100%
+
+        h3
+            width: 100%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-right: 3rem
+        
+            > a
+                @extend .button, .outline
+                
+        @include medium
+            padding: 2rem
+            width: 100%
+            max-width: 30rem
+            box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0,0,0,0.2)
+            height: auto
+            
 
     .blocker
         position: fixed

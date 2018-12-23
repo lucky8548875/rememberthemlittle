@@ -1,29 +1,10 @@
-.pacifico {
-  font-family: 'Pacifico', cursive;
-}
-
-.fredoka {
-  font-family: 'Fredoka One', cursive;
-}
-
-.grand_hotel {
-  font-family: 'Grand Hotel', cursive;
-}
-
-.yeseva {
-  font-family: 'Yeseva One', cursive;
-}
-
-.sail {
-  font-family: 'Sail', cursive;
-}
-
+@charset "UTF-8";
 .font-primary, body {
   font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
 }
 
-.color-primary, .index main div:first-child > a:first-of-type, .dashboard main .bookings table td a {
-  color: #228be6;
+.color-primary, .dashboard main .bookings table td a {
+  color: #5252FF;
 }
 
 .color-dark {
@@ -180,7 +161,7 @@
   max-width: 100%;
 }
 
-button, a.button, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a {
+button, a.button, .index main.main-index div.container div.cta-row a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal .booking-container > h3 > a, .transactions .booking-mobile h3 > a {
   color: #495057;
   font-family: "Proxima Soft", "Segoe UI", "Roboto", "Open Sans", sans-serif;
   font-weight: 600;
@@ -201,52 +182,53 @@ button, a.button, .dashboard main .bookings table td a, .dashboard .notification
   transition: 0.2s background-color, 0.2s border-color;
 }
 
-button:hover, a.button:hover, .dashboard main .bookings table td a:hover, .dashboard .notification-modal > h3 > a:hover, .dashboard .booking-modal > h3 > a:hover {
+button:hover, a.button:hover, .index main.main-index div.container div.cta-row a:hover, .calendar .booking-modal > h3 > a:hover, .dashboard main .bookings table td a:hover, .dashboard .notification-modal > h3 > a:hover, .dashboard .booking-modal .booking-container > h3 > a:hover, .transactions .booking-mobile h3 > a:hover {
   background-color: #dae0e5;
   border-color: #dae0e5;
 }
 
-button:active, a.button:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active {
+button:active, a.button:active, .index main.main-index div.container div.cta-row a:active, .calendar .booking-modal > h3 > a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal .booking-container > h3 > a:active, .transactions .booking-mobile h3 > a:active {
   background-color: #bdc6d0;
 }
 
-button:focus, a.button:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus {
+button:focus, a.button:focus, .index main.main-index div.container div.cta-row a:focus, .calendar .booking-modal > h3 > a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal .booking-container > h3 > a:focus, .transactions .booking-mobile h3 > a:focus {
   border: 2px solid #cbd3da;
 }
 
-button.primary, a.primary.button, .dashboard main .bookings table td a.primary, .dashboard .notification-modal > h3 > a.primary, .dashboard .booking-modal > h3 > a.primary, .index main div:first-child div:first-of-type button:first-of-type, .index main div:first-child div:first-of-type a.button:first-of-type, .index .dashboard main div:first-child div:first-of-type .bookings table td a:first-of-type, .dashboard .index main div:first-child div:first-of-type .bookings table td a:first-of-type, .index .dashboard main .bookings table td div:first-child div:first-of-type a:first-of-type, .dashboard .index main .bookings table td div:first-child div:first-of-type a:first-of-type, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:first-of-type, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:first-of-type, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:first-of-type, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:first-of-type, .index .signin > div > button:first-of-type, .index .signin > div > a.button:first-of-type, .index .dashboard main .bookings table td .signin > div > a:first-of-type, .dashboard main .bookings table td .index .signin > div > a:first-of-type, .dashboard main .control button, .dashboard main .control a.button, .dashboard main .control .bookings table td a, .dashboard main .bookings table td .control a, .dashboard main .control .notification-modal > h3 > a, .dashboard main .control .booking-modal > h3 > a {
+button.primary, a.primary.button, .index main.main-index div.container div.cta-row a.primary, .index main.main-index div.container div.cta-row a:first-of-type, .calendar .booking-modal > h3 > a.primary, .dashboard main .bookings table td a.primary, .dashboard .notification-modal > h3 > a.primary, .dashboard .booking-modal .booking-container > h3 > a.primary, .transactions .booking-mobile h3 > a.primary, .index .signin > div > button:first-of-type, .index .signin > div > a.button:first-of-type, .index .dashboard main .bookings table td .signin > div > a:first-of-type, .dashboard main .bookings table td .index .signin > div > a:first-of-type, .dashboard main .control button, .dashboard main .control a.button, .dashboard .index main.main-index .control div.container div.cta-row a, .index .dashboard main.main-index .control div.container div.cta-row a, .dashboard .index main.main-index div.container div.cta-row .control a, .index .dashboard main.main-index div.container div.cta-row .control a, .dashboard main .control .calendar .booking-modal > h3 > a, .calendar .dashboard main .control .booking-modal > h3 > a, .dashboard main .control .bookings table td a, .dashboard main .bookings table td .control a, .dashboard main .control .notification-modal > h3 > a, .dashboard main .control .booking-modal .booking-container > h3 > a, .dashboard .booking-modal main .control .booking-container > h3 > a, .dashboard main .control .transactions .booking-mobile h3 > a, .transactions .booking-mobile .dashboard main .control h3 > a {
   color: #ffffff;
-  background-color: #228be6;
-  border-color: #228be6;
+  background-color: #5252FF;
+  border-color: #5252FF;
+  border: 0;
 }
 
-button.primary:hover, a.primary.button:hover, .dashboard main .bookings table td a.primary:hover, .dashboard .notification-modal > h3 > a.primary:hover, .dashboard .booking-modal > h3 > a.primary:hover, .index main div:first-child div:first-of-type button:hover:first-of-type, .index main div:first-child div:first-of-type a.button:hover:first-of-type, .index .dashboard main div:first-child div:first-of-type .bookings table td a:hover:first-of-type, .dashboard .index main div:first-child div:first-of-type .bookings table td a:hover:first-of-type, .index .dashboard main .bookings table td div:first-child div:first-of-type a:hover:first-of-type, .dashboard .index main .bookings table td div:first-child div:first-of-type a:hover:first-of-type, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:hover:first-of-type, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:hover:first-of-type, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:hover:first-of-type, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:hover:first-of-type, .index .signin > div > button:hover:first-of-type, .index .signin > div > a.button:hover:first-of-type, .index .dashboard main .bookings table td .signin > div > a:hover:first-of-type, .dashboard main .bookings table td .index .signin > div > a:hover:first-of-type, .dashboard main .control button:hover, .dashboard main .control a.button:hover, .dashboard main .control .bookings table td a:hover, .dashboard main .bookings table td .control a:hover, .dashboard main .control .notification-modal > h3 > a:hover, .dashboard main .control .booking-modal > h3 > a:hover {
-  background-color: #187ed6;
-  border-color: #187ed6;
+button.primary:hover, a.primary.button:hover, .index main.main-index div.container div.cta-row a.primary:hover, .index main.main-index div.container div.cta-row a:hover:first-of-type, .calendar .booking-modal > h3 > a.primary:hover, .dashboard main .bookings table td a.primary:hover, .dashboard .notification-modal > h3 > a.primary:hover, .dashboard .booking-modal .booking-container > h3 > a.primary:hover, .transactions .booking-mobile h3 > a.primary:hover, .index .signin > div > button:hover:first-of-type, .index .signin > div > a.button:hover:first-of-type, .index .dashboard main .bookings table td .signin > div > a:hover:first-of-type, .dashboard main .bookings table td .index .signin > div > a:hover:first-of-type, .dashboard main .control button:hover, .dashboard main .control a.button:hover, .dashboard .index main.main-index .control div.container div.cta-row a:hover, .index .dashboard main.main-index .control div.container div.cta-row a:hover, .dashboard .index main.main-index div.container div.cta-row .control a:hover, .index .dashboard main.main-index div.container div.cta-row .control a:hover, .dashboard main .control .calendar .booking-modal > h3 > a:hover, .calendar .dashboard main .control .booking-modal > h3 > a:hover, .dashboard main .control .bookings table td a:hover, .dashboard main .bookings table td .control a:hover, .dashboard main .control .notification-modal > h3 > a:hover, .dashboard main .control .booking-modal .booking-container > h3 > a:hover, .dashboard .booking-modal main .control .booking-container > h3 > a:hover, .dashboard main .control .transactions .booking-mobile h3 > a:hover, .transactions .booking-mobile .dashboard main .control h3 > a:hover {
+  background-color: #3939ff;
+  border-color: #3939ff;
 }
 
-button.primary:active, a.primary.button:active, .dashboard main .bookings table td a.primary:active, .dashboard .notification-modal > h3 > a.primary:active, .dashboard .booking-modal > h3 > a.primary:active, .index main div:first-child div:first-of-type button:active:first-of-type, .index main div:first-child div:first-of-type a.button:active:first-of-type, .index .dashboard main div:first-child div:first-of-type .bookings table td a:active:first-of-type, .dashboard .index main div:first-child div:first-of-type .bookings table td a:active:first-of-type, .index .dashboard main .bookings table td div:first-child div:first-of-type a:active:first-of-type, .dashboard .index main .bookings table td div:first-child div:first-of-type a:active:first-of-type, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:active:first-of-type, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:active:first-of-type, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:active:first-of-type, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:active:first-of-type, .index .signin > div > button:active:first-of-type, .index .signin > div > a.button:active:first-of-type, .index .dashboard main .bookings table td .signin > div > a:active:first-of-type, .dashboard main .bookings table td .index .signin > div > a:active:first-of-type, .dashboard main .control button:active, .dashboard main .control a.button:active, .dashboard main .control .bookings table td a:active, .dashboard main .bookings table td .control a:active, .dashboard main .control .notification-modal > h3 > a:active, .dashboard main .control .booking-modal > h3 > a:active {
-  background-color: #105692;
+button.primary:active, a.primary.button:active, .index main.main-index div.container div.cta-row a.primary:active, .index main.main-index div.container div.cta-row a:active:first-of-type, .calendar .booking-modal > h3 > a.primary:active, .dashboard main .bookings table td a.primary:active, .dashboard .notification-modal > h3 > a.primary:active, .dashboard .booking-modal .booking-container > h3 > a.primary:active, .transactions .booking-mobile h3 > a.primary:active, .index .signin > div > button:active:first-of-type, .index .signin > div > a.button:active:first-of-type, .index .dashboard main .bookings table td .signin > div > a:active:first-of-type, .dashboard main .bookings table td .index .signin > div > a:active:first-of-type, .dashboard main .control button:active, .dashboard main .control a.button:active, .dashboard .index main.main-index .control div.container div.cta-row a:active, .index .dashboard main.main-index .control div.container div.cta-row a:active, .dashboard .index main.main-index div.container div.cta-row .control a:active, .index .dashboard main.main-index div.container div.cta-row .control a:active, .dashboard main .control .calendar .booking-modal > h3 > a:active, .calendar .dashboard main .control .booking-modal > h3 > a:active, .dashboard main .control .bookings table td a:active, .dashboard main .bookings table td .control a:active, .dashboard main .control .notification-modal > h3 > a:active, .dashboard main .control .booking-modal .booking-container > h3 > a:active, .dashboard .booking-modal main .control .booking-container > h3 > a:active, .dashboard main .control .transactions .booking-mobile h3 > a:active, .transactions .booking-mobile .dashboard main .control h3 > a:active {
+  background-color: #0000eb;
 }
 
-button.primary:focus, a.primary.button:focus, .dashboard main .bookings table td a.primary:focus, .dashboard .notification-modal > h3 > a.primary:focus, .dashboard .booking-modal > h3 > a.primary:focus, .index main div:first-child div:first-of-type button:focus:first-of-type, .index main div:first-child div:first-of-type a.button:focus:first-of-type, .index .dashboard main div:first-child div:first-of-type .bookings table td a:focus:first-of-type, .dashboard .index main div:first-child div:first-of-type .bookings table td a:focus:first-of-type, .index .dashboard main .bookings table td div:first-child div:first-of-type a:focus:first-of-type, .dashboard .index main .bookings table td div:first-child div:first-of-type a:focus:first-of-type, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:focus:first-of-type, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:focus:first-of-type, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:focus:first-of-type, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus:first-of-type, .index .signin > div > button:focus:first-of-type, .index .signin > div > a.button:focus:first-of-type, .index .dashboard main .bookings table td .signin > div > a:focus:first-of-type, .dashboard main .bookings table td .index .signin > div > a:focus:first-of-type, .dashboard main .control button:focus, .dashboard main .control a.button:focus, .dashboard main .control .bookings table td a:focus, .dashboard main .bookings table td .control a:focus, .dashboard main .control .notification-modal > h3 > a:focus, .dashboard main .control .booking-modal > h3 > a:focus {
-  border: 2px solid #1671bf;
+button.primary:focus, a.primary.button:focus, .index main.main-index div.container div.cta-row a.primary:focus, .index main.main-index div.container div.cta-row a:focus:first-of-type, .calendar .booking-modal > h3 > a.primary:focus, .dashboard main .bookings table td a.primary:focus, .dashboard .notification-modal > h3 > a.primary:focus, .dashboard .booking-modal .booking-container > h3 > a.primary:focus, .transactions .booking-mobile h3 > a.primary:focus, .index .signin > div > button:focus:first-of-type, .index .signin > div > a.button:focus:first-of-type, .index .dashboard main .bookings table td .signin > div > a:focus:first-of-type, .dashboard main .bookings table td .index .signin > div > a:focus:first-of-type, .dashboard main .control button:focus, .dashboard main .control a.button:focus, .dashboard .index main.main-index .control div.container div.cta-row a:focus, .index .dashboard main.main-index .control div.container div.cta-row a:focus, .dashboard .index main.main-index div.container div.cta-row .control a:focus, .index .dashboard main.main-index div.container div.cta-row .control a:focus, .dashboard main .control .calendar .booking-modal > h3 > a:focus, .calendar .dashboard main .control .booking-modal > h3 > a:focus, .dashboard main .control .bookings table td a:focus, .dashboard main .bookings table td .control a:focus, .dashboard main .control .notification-modal > h3 > a:focus, .dashboard main .control .booking-modal .booking-container > h3 > a:focus, .dashboard .booking-modal main .control .booking-container > h3 > a:focus, .dashboard main .control .transactions .booking-mobile h3 > a:focus, .transactions .booking-mobile .dashboard main .control h3 > a:focus {
+  border: 2px solid #1f1fff;
 }
 
-button.outline, a.outline.button, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a, .index main div:first-child div:first-of-type button:nth-of-type(2), .index main div:first-child div:first-of-type a.button:nth-of-type(2), .index .dashboard main div:first-child div:first-of-type .bookings table td a:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .bookings table td a:nth-of-type(2), .index .dashboard main .bookings table td div:first-child div:first-of-type a:nth-of-type(2), .dashboard .index main .bookings table td div:first-child div:first-of-type a:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:nth-of-type(2), .index .signin > div > button:last-of-type, .index .signin > div > a.button:last-of-type, .index .dashboard main .bookings table td .signin > div > a:last-of-type, .dashboard main .bookings table td .index .signin > div > a:last-of-type {
+button.outline, a.outline.button, .index main.main-index div.container div.cta-row a.outline, .index main.main-index div.container div.cta-row a:nth-of-type(2), .index main.main-index div.container div.cta-row .calendar .booking-modal > h3 > a, .calendar .index main.main-index div.container div.cta-row .booking-modal > h3 > a, .index .dashboard main.main-index div.container div.cta-row .bookings table td a, .dashboard .index main.main-index div.container div.cta-row .bookings table td a, .index .dashboard main.main-index .bookings table td div.container div.cta-row a, .dashboard .index main.main-index .bookings table td div.container div.cta-row a, .index main.main-index div.container div.cta-row .dashboard .notification-modal > h3 > a, .dashboard .index main.main-index div.container div.cta-row .notification-modal > h3 > a, .index main.main-index div.container div.cta-row .dashboard .booking-modal .booking-container > h3 > a, .dashboard .booking-modal .index main.main-index div.container div.cta-row .booking-container > h3 > a, .index main.main-index div.container div.cta-row .transactions .booking-mobile h3 > a, .transactions .booking-mobile .index main.main-index div.container div.cta-row h3 > a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal .booking-container > h3 > a, .transactions .booking-mobile h3 > a, .index .signin > div > button:last-of-type, .index .signin > div > a.button:last-of-type, .index main.main-index div.container div.cta-row .signin > div > a:last-of-type, .index .dashboard main .bookings table td .signin > div > a:last-of-type, .dashboard main .bookings table td .index .signin > div > a:last-of-type, .settings .settings-modal form fieldset h2 button, .settings .settings-modal form fieldset h2 a.button, .settings .settings-modal form fieldset h2 .index main.main-index div.container div.cta-row a, .index main.main-index div.container div.cta-row .settings .settings-modal form fieldset h2 a, .settings .settings-modal form fieldset h2 .calendar .booking-modal > h3 > a, .calendar .settings .settings-modal form fieldset h2 .booking-modal > h3 > a, .settings .settings-modal form fieldset h2 .dashboard .notification-modal > h3 > a, .dashboard .settings .settings-modal form fieldset h2 .notification-modal > h3 > a, .dashboard .booking-modal .settings .settings-modal form fieldset h2 .booking-container > h3 > a, .settings .settings-modal form fieldset h2 .transactions .booking-mobile h3 > a, .transactions .booking-mobile .settings .settings-modal form fieldset h2 h3 > a {
   background-color: transparent;
 }
 
-button.outline:active, a.outline.button:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal > h3 > a:active, .index main div:first-child div:first-of-type button:active:nth-of-type(2), .index main div:first-child div:first-of-type a.button:active:nth-of-type(2), .index .dashboard main div:first-child div:first-of-type .bookings table td a:active:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .bookings table td a:active:nth-of-type(2), .index .dashboard main .bookings table td div:first-child div:first-of-type a:active:nth-of-type(2), .dashboard .index main .bookings table td div:first-child div:first-of-type a:active:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:active:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:active:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:active:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:active:nth-of-type(2), .index .signin > div > button:active:last-of-type, .index .signin > div > a.button:active:last-of-type {
+button.outline:active, a.outline.button:active, .index main.main-index div.container div.cta-row a.outline:active, .index main.main-index div.container div.cta-row a:active:nth-of-type(2), .index main.main-index div.container div.cta-row .calendar .booking-modal > h3 > a:active, .calendar .index main.main-index div.container div.cta-row .booking-modal > h3 > a:active, .index .dashboard main.main-index div.container div.cta-row .bookings table td a:active, .dashboard .index main.main-index div.container div.cta-row .bookings table td a:active, .index .dashboard main.main-index .bookings table td div.container div.cta-row a:active, .dashboard .index main.main-index .bookings table td div.container div.cta-row a:active, .index main.main-index div.container div.cta-row .dashboard .notification-modal > h3 > a:active, .dashboard .index main.main-index div.container div.cta-row .notification-modal > h3 > a:active, .index main.main-index div.container div.cta-row .dashboard .booking-modal .booking-container > h3 > a:active, .dashboard .booking-modal .index main.main-index div.container div.cta-row .booking-container > h3 > a:active, .index main.main-index div.container div.cta-row .transactions .booking-mobile h3 > a:active, .transactions .booking-mobile .index main.main-index div.container div.cta-row h3 > a:active, .calendar .booking-modal > h3 > a:active, .dashboard main .bookings table td a:active, .dashboard .notification-modal > h3 > a:active, .dashboard .booking-modal .booking-container > h3 > a:active, .transactions .booking-mobile h3 > a:active, .index .signin > div > button:active:last-of-type, .index .signin > div > a.button:active:last-of-type, .index main.main-index div.container div.cta-row .signin > div > a:active:last-of-type, .settings .settings-modal form fieldset h2 button:active, .settings .settings-modal form fieldset h2 a.button:active, .settings .settings-modal form fieldset h2 .index main.main-index div.container div.cta-row a:active, .index main.main-index div.container div.cta-row .settings .settings-modal form fieldset h2 a:active, .calendar .settings .settings-modal form fieldset h2 .booking-modal > h3 > a:active, .dashboard .settings .settings-modal form fieldset h2 .notification-modal > h3 > a:active, .dashboard .booking-modal .settings .settings-modal form fieldset h2 .booking-container > h3 > a:active, .transactions .booking-mobile .settings .settings-modal form fieldset h2 h3 > a:active {
   background-color: #dae0e5;
 }
 
-button.outline:focus, a.outline.button:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal > h3 > a:focus, .index main div:first-child div:first-of-type button:focus:nth-of-type(2), .index main div:first-child div:first-of-type a.button:focus:nth-of-type(2), .index .dashboard main div:first-child div:first-of-type .bookings table td a:focus:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .bookings table td a:focus:nth-of-type(2), .index .dashboard main .bookings table td div:first-child div:first-of-type a:focus:nth-of-type(2), .dashboard .index main .bookings table td div:first-child div:first-of-type a:focus:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a:focus:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a:focus:nth-of-type(2), .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a:focus:nth-of-type(2), .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a:focus:nth-of-type(2), .index .signin > div > button:focus:last-of-type, .index .signin > div > a.button:focus:last-of-type {
+button.outline:focus, a.outline.button:focus, .index main.main-index div.container div.cta-row a.outline:focus, .index main.main-index div.container div.cta-row a:focus:nth-of-type(2), .index main.main-index div.container div.cta-row .calendar .booking-modal > h3 > a:focus, .calendar .index main.main-index div.container div.cta-row .booking-modal > h3 > a:focus, .index .dashboard main.main-index div.container div.cta-row .bookings table td a:focus, .dashboard .index main.main-index div.container div.cta-row .bookings table td a:focus, .index .dashboard main.main-index .bookings table td div.container div.cta-row a:focus, .dashboard .index main.main-index .bookings table td div.container div.cta-row a:focus, .index main.main-index div.container div.cta-row .dashboard .notification-modal > h3 > a:focus, .dashboard .index main.main-index div.container div.cta-row .notification-modal > h3 > a:focus, .index main.main-index div.container div.cta-row .dashboard .booking-modal .booking-container > h3 > a:focus, .dashboard .booking-modal .index main.main-index div.container div.cta-row .booking-container > h3 > a:focus, .index main.main-index div.container div.cta-row .transactions .booking-mobile h3 > a:focus, .transactions .booking-mobile .index main.main-index div.container div.cta-row h3 > a:focus, .calendar .booking-modal > h3 > a:focus, .dashboard main .bookings table td a:focus, .dashboard .notification-modal > h3 > a:focus, .dashboard .booking-modal .booking-container > h3 > a:focus, .transactions .booking-mobile h3 > a:focus, .index .signin > div > button:focus:last-of-type, .index .signin > div > a.button:focus:last-of-type, .index main.main-index div.container div.cta-row .signin > div > a:focus:last-of-type, .settings .settings-modal form fieldset h2 button:focus, .settings .settings-modal form fieldset h2 a.button:focus, .settings .settings-modal form fieldset h2 .index main.main-index div.container div.cta-row a:focus, .index main.main-index div.container div.cta-row .settings .settings-modal form fieldset h2 a:focus, .calendar .settings .settings-modal form fieldset h2 .booking-modal > h3 > a:focus, .dashboard .settings .settings-modal form fieldset h2 .notification-modal > h3 > a:focus, .dashboard .booking-modal .settings .settings-modal form fieldset h2 .booking-container > h3 > a:focus, .transactions .booking-mobile .settings .settings-modal form fieldset h2 h3 > a:focus {
   border: 2px solid #cbd3da;
 }
 
-button.color-primary, a.color-primary.button, .index main div:first-child > a.button:first-of-type, .index .dashboard main .bookings table td div:first-child > a:first-of-type, .dashboard .index main .bookings table td div:first-child > a:first-of-type, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a.color-primary, .dashboard .booking-modal > h3 > a.color-primary {
-  color: #228be6 !important;
+button.color-primary, a.color-primary.button, .index main.main-index div.container div.cta-row a.color-primary, .index .dashboard main.main-index div.container div.cta-row .bookings table td a, .dashboard .index main.main-index div.container div.cta-row .bookings table td a, .index .dashboard main.main-index .bookings table td div.container div.cta-row a, .dashboard .index main.main-index .bookings table td div.container div.cta-row a, .calendar .booking-modal > h3 > a.color-primary, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a.color-primary, .dashboard .booking-modal .booking-container > h3 > a.color-primary, .dashboard .booking-modal main .bookings table td .booking-container > h3 > a, .dashboard main .bookings table td .booking-modal .booking-container > h3 > a, .transactions .booking-mobile h3 > a.color-primary {
+  color: #5252FF !important;
 }
 
 a {
@@ -262,7 +244,7 @@ a:hover {
   color: #495057;
 }
 
-a.button, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal > h3 > a {
+a.button, .index main.main-index div.container div.cta-row a, .calendar .booking-modal > h3 > a, .dashboard main .bookings table td a, .dashboard .notification-modal > h3 > a, .dashboard .booking-modal .booking-container > h3 > a, .transactions .booking-mobile h3 > a {
   text-decoration: none;
 }
 
@@ -388,7 +370,6 @@ form fieldset legend {
 }
 
 table {
-  width: 70%;
   border-spacing: 0;
 }
 
@@ -417,6 +398,7 @@ rigid[small] {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: #495057;
+  text-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 a {
@@ -431,15 +413,28 @@ a {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td a > * + *, .dashboard .notification-modal > h3 > a > * + *, .dashboard .booking-modal > h3 > a > * + * {
+*:not(.fas) {
+  font-weight: lighter !important;
+}
+
+a > * + *, button > * + *, a.button > * + *, .index main.main-index div.container div.cta-row a > * + *, .calendar .booking-modal > h3 > a > * + *, .dashboard main .bookings table td a > * + *, .dashboard .notification-modal > h3 > a > * + *, .dashboard .booking-modal .booking-container > h3 > a > * + *, .transactions .booking-mobile h3 > a > * + * {
   margin-left: 0.5rem;
 }
 
 .container {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+*[v-cloak] {
+  visibility: hidden;
+}
+
+.index {
+  background-color: #F8F9FA;
 }
 
 .index nav {
@@ -452,11 +447,9 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   position: fixed;
   width: 100%;
-  background-color: white;
-  z-index: 1;
 }
 
 .index nav > * {
@@ -474,7 +467,41 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 }
 
 .index nav > a:nth-child(2) {
-  color: #228be6;
+  color: #5252FF;
+}
+
+.index nav .nav-logo {
+  display: none;
+  width: 15rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .index nav .nav-logo {
+    display: inline-block;
+  }
+}
+
+.index nav .links {
+  display: none;
+  margin-right: 2rem;
+}
+
+.index nav .links a {
+  padding: 0.5rem 1rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .index nav .links {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .index nav .bars {
+    display: none;
+  }
 }
 
 .index nav .account_options {
@@ -509,7 +536,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   margin-right: 0.25rem;
 }
 
-.index main {
+.index main.main-index {
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -523,7 +550,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           align-items: center;
 }
 
-.index main div:first-child {
+.index main.main-index div.container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -539,14 +566,8 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           flex-direction: column;
 }
 
-.index main div:first-child > i {
-  font-size: 3rem;
-  font-weight: lighter;
-  color: #495057;
-  margin-bottom: 1rem;
-}
-
-.index main div:first-child > h1 {
+.index main.main-index div.container h3.banner-message {
+  margin: 1.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -555,29 +576,51 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 2rem;
   text-align: center;
+  font-size: 2.5rem;
 }
 
-.index main div:first-child > h1 span {
-  margin-left: 0.3rem;
-  margin-right: 0.3rem;
+@media only screen and (min-width: 1024px) {
+  .index main.main-index div.container h3.banner-message {
+    font-size: 4rem;
+  }
 }
 
-.index main div:first-child > a:first-of-type {
+.index main.main-index div.container .book-cta, .index main.main-index div.container .blur {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: white;
+  background: linear-gradient(-45deg, #FFC85F, #FF5F99, #55ACFF, #5EF3E7);
+  background-size: 600%;
+  -webkit-animation: anime 16s linear infinite;
+          animation: anime 16s linear infinite;
 }
 
-.index main div:first-child > a:first-of-type i {
+.index main.main-index div.container .book-cta i, .index main.main-index div.container .blur i {
   font-size: 1.25rem;
 }
 
-.index main div:first-child div:first-of-type {
+.index main.main-index div.container .blur {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  z-index: -1;
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+  border-radius: 2rem;
+  opacity: 0.8;
+  bottom: -0.5rem;
+  margin: 0 !important;
+  left: 0;
+  border-width: 0px !important;
+}
+
+.index main.main-index div.container div.cta-row {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -588,13 +631,28 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
       flex-wrap: wrap;
 }
 
-.index main div:first-child div:first-of-type button, .index main div:first-child div:first-of-type a.button, .index .dashboard main div:first-child div:first-of-type .bookings table td a, .dashboard .index main div:first-child div:first-of-type .bookings table td a, .index .dashboard main .bookings table td div:first-child div:first-of-type a, .dashboard .index main .bookings table td div:first-child div:first-of-type a, .index main div:first-child div:first-of-type .dashboard .notification-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .notification-modal > h3 > a, .index main div:first-child div:first-of-type .dashboard .booking-modal > h3 > a, .dashboard .index main div:first-child div:first-of-type .booking-modal > h3 > a {
+.index main.main-index div.container div.cta-row a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding: 1rem 1.5rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 13rem;
   margin: 0.5rem;
+}
+
+.index main.main-index div.container div.cta-row a i {
+  margin-left: 1rem;
+}
+
+.index main.main-index div.container .construction {
+  border-radius: 1rem;
+  color: #eebb00;
 }
 
 .index .blocker {
@@ -645,7 +703,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 
 .index .drawer a.active {
   color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   border-radius: 0 2rem 2rem 0;
 }
 
@@ -697,7 +755,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   margin-bottom: 1.5rem;
 }
 
-.index .signin > div > button, .index .signin > div > a.button, .index .dashboard main .bookings table td .signin > div > a, .dashboard main .bookings table td .index .signin > div > a {
+.index .signin > div > button, .index .signin > div > a.button, .index main.main-index div.container div.cta-row .signin > div > a, .index .dashboard main .bookings table td .signin > div > a, .dashboard main .bookings table td .index .signin > div > a {
   width: 15rem;
   margin: 0.5rem;
   padding: 1rem;
@@ -706,9 +764,42 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           justify-content: center;
 }
 
-.index .signin > div > button i, .index .signin > div > a.button i, .index .dashboard main .bookings table td .signin > div > a i, .dashboard main .bookings table td .index .signin > div > a i {
+.index .signin > div > button i, .index .signin > div > a.button i, .index main.main-index div.container div.cta-row .signin > div > a i, .index .dashboard main .bookings table td .signin > div > a i, .dashboard main .bookings table td .index .signin > div > a i {
   font-size: 1.2rem;
   margin-right: 0.25rem;
+}
+
+@-webkit-keyframes anime {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes anime {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.admin #app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #ffffff;
 }
 
 .admin nav {
@@ -723,11 +814,27 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           align-items: center;
   padding: 1rem;
   width: 100%;
-  background-color: white;
   z-index: 1;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
 }
 
-.admin nav > a {
+.admin nav > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin nav > span .brand {
+  display: none;
+}
+
+.admin nav > span a {
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -737,19 +844,138 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           align-items: center;
 }
 
-.admin nav > a > i {
+@media only screen and (min-width: 600px) {
+  .admin nav > span a {
+    padding: 2rem 1rem;
+  }
+}
+
+.admin nav > span a > i {
   font-size: 1.2rem;
 }
 
-.admin nav > a:nth-child(2) {
-  color: #228be6;
+.admin nav .searchbar {
+  display: none;
+  background-color: #f8f9fa;
+  color: #919599;
+  border-radius: 2rem;
+  margin-left: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .admin nav .searchbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.admin nav .searchbar > input {
+  border-radius: 2rem;
+  background-color: transparent;
+  border-width: 0px;
+  margin: 0;
+  padding: 1rem;
+}
+
+.admin nav .searchbar > input:hover, .admin nav .searchbar > input:focus {
+  border-width: 0px;
+}
+
+.admin nav .searchbar > .fa-search {
+  color: #b9bbbe;
+  margin-right: 1rem;
+}
+
+.admin nav .links {
+  display: none;
+}
+
+.admin nav .links .active {
+  color: #5252FF;
+  border-bottom: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 600px) {
+  .admin nav .section_title {
+    display: none;
+  }
+  .admin nav .links {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .admin nav {
+    -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    padding: 0rem 1rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .admin nav {
+    margin-bottom: 2rem;
+  }
+  .admin nav .brand {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+  }
+  .admin nav .bars {
+    display: none;
+  }
+  .admin nav .search {
+    display: none;
+  }
+  .admin nav .links {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+}
+
+.admin .sidebar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 13rem;
+}
+
+.admin .sidebar > * {
+  padding: 1rem 2rem;
+  border-radius: 0 2rem 2rem 0;
+  border-left: 4px solid transparent;
+}
+
+.admin .sidebar > *.active {
+  background-color: #5252FF;
+  color: #ffffff;
+  background-color: rgba(82, 82, 255, 0.1);
+  color: #5252FF;
+  border-left: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 1024px) {
+  .admin .sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .admin main {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -757,13 +983,12 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .admin main .control {
   display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -771,9 +996,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  margin-bottom: 3rem;
+  padding: 0.5rem 0rem;
 }
 
 .admin main .control .filter {
@@ -802,7 +1025,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 }
 
 .admin main .control .group a.active {
-  background-color: #228be6;
+  background-color: #5252FF;
   color: #ffffff;
 }
 
@@ -812,170 +1035,6 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 
 .admin main .control .group a:last-child {
   border-radius: 0rem 2rem 2rem 0rem;
-}
-
-.admin main table {
-  margin-bottom: 2rem;
-  width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.admin main table tbody tr td:first-child {
-  width: 4rem;
-}
-
-.admin main table tbody tr td.booking {
-  background-color: #f8f9fa;
-  border-bottom: 0;
-  border: 1px solid #e9ecef;
-  border-radius: 0.25rem;
-  padding: 1rem;
-}
-
-.admin main table tbody tr td.booking div.booking-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.admin main table tbody tr td.booking div.booking-item * > i {
-  width: 1rem;
-  text-align: center;
-  margin-right: 0.25rem;
-}
-
-.admin main table tbody tr td.booking div.booking-item * + * {
-  margin-top: 0.25rem;
-}
-
-.admin main table tbody tr td.booking div.booking-item .client-name {
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-}
-
-.admin main table tbody tr td.booking div.booking-item .package {
-  font-size: 0.9rem;
-}
-
-.admin main table tbody tr td.booking div.booking-item .themes {
-  font-size: 0.9rem;
-}
-
-.admin main .week-table-container {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.admin main .week-table-container > div {
-  overflow-x: auto;
-  height: 100%;
-  width: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-
-.admin main .week-table-container > div > table {
-  margin-left: 0;
-  padding-left: 0;
-  width: 100%;
-}
-
-.admin main .week-table-container > table:first-child {
-  margin-right: 0;
-  padding-right: 0;
-}
-
-.admin main .week-table-container table {
-  width: initial;
-  height: 100%;
-}
-
-.admin main .week-table-container table th {
-  text-align: center;
-}
-
-.admin main .week-table-container table th span {
-  display: block;
-  font-weight: lighter;
-  font-size: 0.8rem;
-}
-
-.admin main .week-table-container table tr td {
-  min-width: 4rem;
-}
-
-.admin main .month-table td {
-  padding: 0.25rem;
-}
-
-.admin main .month-table td.today {
-  background-color: #f8f9fa;
-}
-
-.admin main .month-table td div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.admin main .month-table td div .date {
-  font-size: 0.8rem;
-}
-
-.admin main .month-table td div .bookings-completed {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-  color: green;
-  border-radius: 1rem;
-}
-
-.admin main .month-table td div .bookings-completed i {
-  margin-right: 0.25rem;
-}
-
-.admin main .month-table td div .bookings {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-  border-radius: 1rem;
-}
-
-.admin main .month-table td div .bookings i {
-  margin-right: 0.25rem;
-}
-
-.admin .blocker {
-  position: fixed;
-  display: inline-block;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
 }
 
 .admin .drawer {
@@ -991,11 +1050,11 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   padding: 1rem 1rem 1rem 0rem;
-  z-index: 3;
+  z-index: 4;
 }
 
 .admin .drawer a {
@@ -1006,6 +1065,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   display: -ms-flexbox;
   display: flex;
   color: #ffffff;
+  font-weight: lighter;
 }
 
 .admin .drawer a i {
@@ -1014,30 +1074,304 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   margin-right: 0.5rem;
 }
 
-.admin .drawer > a + div a {
-  font-weight: lighter;
+.admin .drawer > a:focus + div.subitems {
+  display: block;
 }
 
-.admin .drawer > a + div a.active {
-  color: #ffffff;
+.admin .drawer > a + div.subitems {
+  display: none;
+}
+
+.admin .drawer > a + div.subitems a.active {
+  background-color: #ffffff;
+  color: #5252FF;
   font-weight: bold;
   position: relative;
 }
 
-.admin .drawer > a + div a:hover {
-  color: #ffffff;
+.admin .drawer > a + div.subitems a:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin .drawer > a.active + div.subitems {
+  display: block;
 }
 
 .admin .drawer > a.active {
-  color: #228be6;
-  background-color: #ffffff;
+  font-weight: bolder;
 }
 
 .admin .drawer > a:not(.active):hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.admin .blocker {
+  position: fixed;
+  display: inline-block;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.calendar main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 100%;
+}
+
+.calendar main #singledatepicker {
+  border: none;
+  position: relative;
+}
+
+.calendar main #singledatepicker:after {
+  position: absolute;
+  right: 0.1rem;
+  pointer-events: none;
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 600;
+  content: "\f107";
+}
+
+.calendar main #singledatepicker::-webkit-inner-spin-button {
+  display: none;
+}
+
+.calendar main #singledatepicker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.calendar main table.dayCalendar td:first-child {
+  width: 4rem;
+}
+
+.calendar main table {
+  margin-bottom: 2rem;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.calendar main table tbody tr td.booking {
+  background-color: #ffffff;
+  border-left: 4px solid #5252FF;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: rgba(82, 82, 255, 0.1);
+}
+
+.calendar main table tbody tr td.booking div.booking-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.calendar main table tbody tr td.booking div.booking-item * > i {
+  width: 1rem;
+  text-align: center;
+  margin-right: 0.25rem;
+}
+
+.calendar main table tbody tr td.booking div.booking-item * + * {
+  margin-top: 0.25rem;
+}
+
+.calendar main table tbody tr td.booking div.booking-item .client-name {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: #5252FF;
+}
+
+.calendar main table tbody tr td.booking div.booking-item .package {
+  font-size: 0.9rem;
+  color: #6c6cff;
+}
+
+.calendar main table tbody tr td.booking div.booking-item .themes {
+  font-size: 0.9rem;
+  color: #6c6cff;
+}
+
+.calendar main .week-table-container {
+  max-width: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.calendar main .week-table-container > div {
+  height: 100%;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-x: auto;
+}
+
+.calendar main .week-table-container > div > table {
+  margin-left: 0;
+  padding-left: 0;
+  width: 100%;
+}
+
+.calendar main .week-table-container > table:first-child {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.calendar main .week-table-container > table:first-child td {
+  min-width: auto;
+  padding-right: 1rem;
+}
+
+.calendar main .week-table-container table {
+  width: initial;
+  height: 100%;
+}
+
+.calendar main .week-table-container table th {
+  text-align: center;
+}
+
+.calendar main .week-table-container table th span {
+  display: block;
+  font-weight: lighter;
+  font-size: 0.8rem;
+}
+
+.calendar main .week-table-container table tr {
+  height: 4rem;
+}
+
+.calendar main .week-table-container table tr td {
+  min-width: 10rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .calendar main .week-table-container table tr td {
+    min-width: auto;
+    width: 2rem;
+  }
+}
+
+.calendar main .month-table td {
+  padding: 0.25rem;
+}
+
+.calendar main .month-table td.today {
+  background-color: #f8f9fa;
+}
+
+.calendar main .month-table td div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.calendar main .month-table td div .date {
+  font-size: 0.8rem;
+}
+
+.calendar main .month-table td div .bookings-completed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  color: green;
+  border-radius: 1rem;
+}
+
+.calendar main .month-table td div .bookings-completed i {
+  margin-right: 0.25rem;
+}
+
+.calendar main .month-table td div .bookings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  border-radius: 1rem;
+}
+
+.calendar main .month-table td div .bookings i {
+  margin-right: 0.25rem;
+}
+
+.calendar .booking-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 2;
+}
+
+.calendar .booking-modal table {
+  width: 100%;
+}
+
+.calendar .booking-modal > h3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboard #app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .dashboard nav {
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: white;
+  top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1049,7 +1383,6 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
           align-items: center;
   padding: 1rem;
   width: 100%;
-  background-color: white;
   z-index: 1;
 }
 
@@ -1067,15 +1400,83 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   font-size: 1.2rem;
 }
 
+.dashboard nav .account_options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+  background-color: white;
+}
+
+.dashboard nav .account_options > a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.dashboard nav .account_options > a i {
+  margin-right: 0.25rem;
+}
+
 .dashboard nav > span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
+.dashboard .sidebar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-width: 13rem;
+  padding-top: 1rem;
+}
+
+.dashboard .sidebar > * {
+  padding: 1rem 2rem;
+  border-radius: 0 2rem 2rem 0;
+  border-left: 4px solid transparent;
+}
+
+.dashboard .sidebar > *.active {
+  background-color: #5252FF;
+  color: #ffffff;
+  background-color: rgba(82, 82, 255, 0.1);
+  color: #5252FF;
+  border-left: 4px solid #5252FF;
+}
+
+@media only screen and (min-width: 1024px) {
+  .dashboard .sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
 .dashboard main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-top: 1rem;
 }
 
 .dashboard main .control {
@@ -1129,11 +1530,13 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
       -ms-flex-pack: center;
           justify-content: center;
   border-width: 1px;
-  border-color: #228be6;
+  border-color: #5252FF;
+  max-width: 13rem;
 }
 
 .dashboard main .bookings table td:last-child {
   padding-right: 0;
+  text-align: -webkit-right;
 }
 
 .dashboard .notification-modal {
@@ -1151,6 +1554,8 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 2;
+  overflow: auto;
 }
 
 .dashboard .notification-modal > h3 {
@@ -1163,6 +1568,28 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.dashboard .notification-list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0rem;
+  border-bottom: 1px solid #eee;
+}
+
+.dashboard .notification-shorttext {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 1.2rem;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  max-width: 20rem;
+  line-height: 1rem;
 }
 
 .dashboard .booking-modal {
@@ -1180,9 +1607,37 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 2;
 }
 
-.dashboard .booking-modal > h3 {
+@media only screen and (min-width: 600px) {
+  .dashboard .booking-modal {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.dashboard .booking-modal .booking-container {
+  background-color: white;
+}
+
+@media only screen and (min-width: 600px) {
+  .dashboard .booking-modal .booking-container {
+    padding: 2rem;
+    width: 100%;
+    max-width: 30rem;
+    -webkit-box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+    height: auto;
+  }
+}
+
+.dashboard .booking-modal .booking-container > h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1211,7 +1666,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   font-weight: bold;
 }
 
-.dashboard .booking-modal .overflow-container table button, .dashboard .booking-modal .overflow-container table a.button, .dashboard .booking-modal .overflow-container main .bookings table td a, .dashboard main .bookings .booking-modal .overflow-container table td a, .dashboard .booking-modal .overflow-container table .notification-modal > h3 > a, .dashboard .booking-modal .overflow-container table .booking-modal > h3 > a {
+.dashboard .booking-modal .overflow-container table button, .dashboard .booking-modal .overflow-container table a.button, .dashboard .booking-modal .overflow-container table .index main.main-index div.container div.cta-row a, .index main.main-index div.container div.cta-row .dashboard .booking-modal .overflow-container table a, .dashboard .booking-modal .overflow-container table .calendar .booking-modal > h3 > a, .calendar .dashboard .booking-modal .overflow-container table .booking-modal > h3 > a, .dashboard .booking-modal .overflow-container main .bookings table td a, .dashboard main .bookings .booking-modal .overflow-container table td a, .dashboard .booking-modal .overflow-container table .notification-modal > h3 > a, .dashboard .booking-modal .overflow-container table .booking-container > h3 > a, .dashboard .booking-modal .overflow-container table .transactions .booking-mobile h3 > a, .transactions .booking-mobile .dashboard .booking-modal .overflow-container table h3 > a {
   width: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -1292,42 +1747,8 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 
 .dashboard .drawer a.active {
   color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   border-radius: 0 2rem 2rem 0;
-}
-
-.transactions nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem;
-  width: 100%;
-  background-color: white;
-  z-index: 1;
-}
-
-.transactions nav > a {
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.transactions nav > a > i {
-  font-size: 1.2rem;
-}
-
-.transactions nav > a:nth-child(2) {
-  color: #228be6;
 }
 
 .transactions main {
@@ -1346,7 +1767,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .transactions main .control .filter {
@@ -1356,6 +1777,19 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+}
+
+.transactions main .control .filter .date_filter_container {
+  position: absolute;
+  background-color: white;
+  -webkit-box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.1);
+  bottom: 0;
+  -webkit-transform: translate(70%, 100%);
+          transform: translate(70%, 100%);
+  right: 0;
+  padding: 1rem;
 }
 
 .transactions main .control .filter i {
@@ -1375,7 +1809,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 }
 
 .transactions main .control .group a.active {
-  background-color: #228be6;
+  background-color: #5252FF;
   color: #ffffff;
 }
 
@@ -1387,8 +1821,81 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   border-radius: 0rem 2rem 2rem 0rem;
 }
 
-.transactions main table {
+.transactions main .bookings-container {
+  border-top: 2px solid #f8f9fa;
+  border-bottom: 2px solid #f8f9fa;
+  border-left: 2px solid #f8f9fa;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.transactions main .bookings-container table {
   width: 100%;
+}
+
+.transactions .booking-modal {
+  z-index: 2;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media only screen and (min-width: 600px) {
+  .transactions .booking-modal {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.transactions .booking-mobile {
+  background-color: white;
+}
+
+.transactions .booking-mobile table {
+  width: 100%;
+}
+
+.transactions .booking-mobile h3 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 3rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .transactions .booking-mobile {
+    padding: 2rem;
+    width: 100%;
+    max-width: 30rem;
+    -webkit-box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0rem 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+    height: auto;
+  }
 }
 
 .transactions .blocker {
@@ -1415,7 +1922,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #ffffff;
-  background-color: #228be6;
+  background-color: #5252FF;
   -webkit-box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0.25rem 0rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   padding: 1rem 1rem 1rem 0rem;
@@ -1453,7 +1960,7 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
 }
 
 .transactions .drawer > a.active {
-  color: #228be6;
+  color: #5252FF;
   background-color: #ffffff;
 }
 
@@ -1493,5 +2000,662 @@ a > * + *, button > * + *, a.button > * + *, .dashboard main .bookings table td 
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
   opacity: 0;
+}
+
+.slide-left-enter-active, .slide-left-leave-active {
+  -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+  transition: opacity 0.2s, -webkit-transform 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s, -webkit-transform 0.2s;
+}
+
+.slide-left-enter {
+  -webkit-transform: translateX(3rem);
+          transform: translateX(3rem);
+  opacity: 0;
+}
+
+.slide-left-leave-to {
+  -webkit-transform: translateX(-3rem);
+          transform: translateX(-3rem);
+  opacity: 0;
+}
+
+.settings .settings-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.settings .settings-modal .blocker {
+  display: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .settings .settings-modal .blocker {
+    display: initial;
+  }
+}
+
+.settings .settings-modal .settings-modal-window {
+  background-color: #ffffff;
+  z-index: 5;
+  margin: auto;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .settings .settings-modal .settings-modal-window {
+    height: auto;
+    width: auto;
+    border-radius: 0.5rem;
+  }
+}
+
+.settings .settings-modal form fieldset h2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.settings .settings-modal form fieldset h2 button, .settings .settings-modal form fieldset h2 a.button, .settings .settings-modal form fieldset h2 .index main.main-index div.container div.cta-row a, .index main.main-index div.container div.cta-row .settings .settings-modal form fieldset h2 a, .settings .settings-modal form fieldset h2 .calendar .booking-modal > h3 > a, .calendar .settings .settings-modal form fieldset h2 .booking-modal > h3 > a, .settings .settings-modal form fieldset h2 .dashboard main .bookings table td a, .dashboard main .bookings table td .settings .settings-modal form fieldset h2 a, .settings .settings-modal form fieldset h2 .dashboard .notification-modal > h3 > a, .dashboard .settings .settings-modal form fieldset h2 .notification-modal > h3 > a, .settings .settings-modal form fieldset h2 .dashboard .booking-modal .booking-container > h3 > a, .dashboard .booking-modal .settings .settings-modal form fieldset h2 .booking-container > h3 > a, .settings .settings-modal form fieldset h2 .transactions .booking-mobile h3 > a, .transactions .booking-mobile .settings .settings-modal form fieldset h2 h3 > a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.settings .settings-modal form fieldset input {
+  width: 100%;
+}
+
+.settings .settings-modal form fieldset .checkbox_label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.5rem 0rem;
+}
+
+.settings .settings-modal form fieldset .checkbox_label input {
+  width: auto !important;
+  margin-right: 0.25rem;
+}
+
+.settings .settings-modal form fieldset .button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.booking_test {
+  background-color: #f8f8f8;
+  width: 100%;
+  text-align: center;
+  overflow-x: hidden;
+  padding-top: 5rem;
+}
+
+.booking_test nav.nav {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.booking_test .progress {
+  text-align: center;
+}
+
+.booking_test .progress_element {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.booking_test .progress_step {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.booking_test .progress_step.active, .booking_test .step_line.active {
+  background-color: #5252FF;
+}
+
+.booking_test .step_line {
+  display: inline-block;
+  width: 1.5rem;
+  height: 2px;
+  background-color: #ccc;
+}
+
+.booking_test h4.h4, .booking_test h1.h1 {
+  text-align: left;
+  margin-left: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test h4.h4, .booking_test h1.h1 {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+.booking_test .category_container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  overflow-x: auto;
+  padding: 4rem 2rem 4rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  max-width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .category_container {
+    margin-left: 1rem;
+  }
+}
+
+.booking_test .category {
+  position: relative;
+  min-width: 14rem;
+  max-width: 14rem;
+  min-height: 18rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+  text-align: left;
+  -webkit-transition: 0.2s background-color;
+  transition: 0.2s background-color;
+}
+
+.booking_test .category::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -2rem;
+  width: 2rem;
+  height: 1px;
+}
+
+.booking_test .category:active, .booking_test .category.active {
+  background-color: #5252FF;
+  -webkit-box-shadow: 0 1rem 5rem rgba(82, 82, 255, 0.5);
+          box-shadow: 0 1rem 5rem rgba(82, 82, 255, 0.5);
+  color: white;
+}
+
+.booking_test .category:active .category_description, .booking_test .category:active .category_title, .booking_test .category.active .category_description, .booking_test .category.active .category_title {
+  color: white;
+}
+
+.booking_test h3.category_title {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.booking_test p.category_description {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.booking_test .category_image {
+  width: 100%;
+  height: 8rem;
+  background-color: #eee;
+}
+
+.booking_test .cover_image {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.booking_test .cover_image img {
+  width: 100%;
+}
+
+.booking_test .packages_container {
+  position: absolute;
+  top: 10rem;
+  width: 80%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .packages_container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+.booking_test .package {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.booking_test .package_name {
+  color: #444;
+  margin: 0;
+}
+
+.booking_test .package_price {
+  color: #aaa;
+  margin-top: 0.5rem;
+}
+
+.booking_test .package_description {
+  padding-left: 0rem;
+  list-style-type: none;
+}
+
+.booking_test .package_description li:before {
+  content: '✓';
+  margin-right: 1rem;
+  color: #aaa;
+}
+
+.booking_test .choose_package {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 2rem;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  font-size: 1rem;
+  -webkit-box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
+          box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
+  margin-top: auto;
+}
+
+.booking_test .themes_container {
+  padding: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(8rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .themes_container {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.booking_test .theme {
+  position: relative;
+}
+
+.booking_test .theme img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.booking_test .theme.active img {
+  -webkit-filter: brightness(0.8) sepia(100%) hue-rotate(180deg) saturate(3);
+          filter: brightness(0.8) sepia(100%) hue-rotate(180deg) saturate(3);
+}
+
+.booking_test .theme.active::after {
+  font-family: 'Font Awesome 5 Free';
+  content: "\f00c";
+  font-weight: 900;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  font-size: 3rem;
+  color: white;
+}
+
+.booking_test .bottom_bar {
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem;
+  -webkit-box-shadow: 0 -1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 -1rem 5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.booking_test .selected_themes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.booking_test .s_theme {
+  min-width: 4rem;
+  min-height: 3rem;
+  max-width: 4rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  border: 2px dashed #ddd;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking_test .s_theme img {
+  width: 100%;
+}
+
+.booking_test .s_theme i {
+  position: absolute;
+  left: 70%;
+  top: 30%;
+  -webkit-transform: translate(-70%, -40%);
+          transform: translate(-70%, -40%);
+  color: white;
+}
+
+.booking_test .continue_button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 2rem;
+  border: none;
+  background-color: #5252FF;
+  color: white;
+  font-size: 1rem;
+  -webkit-box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
+          box-shadow: 0 0.5rem 2rem rgba(82, 82, 255, 0.5);
+}
+
+.booking_test .addon_container {
+  padding: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .addon_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.booking_test .addon_table {
+  padding: 2rem;
+  width: 100%;
+  -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .addon_table {
+    margin-right: 1rem;
+    width: 50%;
+  }
+}
+
+.booking_test .addon_buttons_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.booking_test .calendar_container {
+  padding: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .calendar_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .booking_test .calendar_my, .booking_test .slots_wrapper {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+    margin-left: 2rem;
+  }
+}
+
+.booking_test .calendar_my_label {
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0.5rem 0.5rem 0 0;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking_test .calendar_my_label i {
+  padding: 2rem;
+  color: #aaa;
+  color: #5252FF;
+}
+
+.booking_test .my_label {
+  font-size: 1.2rem;
+  color: #444;
+  font-weight: bold;
+}
+
+.booking_test .schedule_table {
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background-color: white;
+  padding: 0rem 1rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.booking_test .schedule_table th {
+  text-align: center !important;
+  border-bottom: 1px solid #eee;
+  height: 2rem;
+  color: #888;
+  padding: 0;
+}
+
+.booking_test .schedule_table td {
+  text-align: center !important;
+  padding: 0;
+  height: 3rem;
+  color: #444;
+  border-bottom: none;
+}
+
+.booking_test .schedule_table td.active {
+  background-color: #5252FF;
+  color: white;
+  border-radius: 2rem;
+  font-weight: bold;
+}
+
+.booking_test .schedule_table td.inactive {
+  color: #ccc;
+}
+
+.booking_test .slots_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(4rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  gap: 0.5rem;
+}
+
+.booking_test .slot {
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  display: inline-block;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.booking_test .slot.active {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.booking_test .summary_container {
+  padding: 2rem;
+}
+
+.booking_test .summary_container fieldset + fieldset {
+  margin-top: 1rem;
+}
+
+.booking_test .summary_container fieldset {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: white;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.booking_test .summary_container fieldset legend {
+  padding: 0 1rem;
+  position: relative;
+  top: 1.5rem;
+}
+
+.booking_test .summary_container fieldset table {
+  width: 100%;
+}
+
+.booking_test .summary_container fieldset table td:last-child {
+  text-align: right;
+}
+
+.payment_container {
+  z-index: 3;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 25rem;
+  padding: 1rem;
+}
+
+.payment_options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.payment_option {
+  padding: 1rem;
 }
 /*# sourceMappingURL=playfulcss.css.map */

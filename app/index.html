@@ -1,120 +1,148 @@
+<!--
+    The doctype declaration should be the very first thing in an HTML
+    document, before the tag. The doctype declaration is not an HTML tag;
+    it is an instruction to the web browser about what version of the
+    markup language the page is written in. In the case of <!DOCTYPE html>,
+    we are declaring that the version of HTML is HTML5.
+ -->
 <!DOCTYPE html>
+<!--
+    The HTML lang attribute can be used to declare the language of a Web page
+    or a portion of a Web page. This is meant to assist search engines and browsers.
+-->
 <html lang="en">
+<!--
+    The <head> element is a container for metadata (data about data) and is
+    placed between the <html> tag and the <body> tag. HTML metadata is data
+    about the HTML document. Metadata is not displayed. Metadata typically
+    define the document title, character set, styles, links, scripts, and
+    other meta information.
+-->
 
 <head>
+    <!-- Specify the character encoding for the HTML document -->
     <meta charset="UTF-8">
+    <!--
+        A <meta> viewport element gives the browser instructions on how to
+        control the page's dimensions and scaling.
+        The width=device-width part sets the width of the page to follow the screen-width
+        of the device (which will vary depending on the device).
+        The initial-scale=1.0 part sets the initial zoom level when the page is first loaded
+        by the browser.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        The X-UA-Compatible meta tag allows web authors to choose what version
+        of Internet Explorer the page should be rendered as.
+    -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#228be6">
+    <!--
+        Starting in version 39 of Chrome for Android on Lollipop, you'll now be
+        able to use the theme-color meta tag to set the toolbar color—this means
+        no more Seattle gray toolbars!
+    -->
+    <meta name="theme-color" content="#5252FF">
+
+    <!-- Stylesheets.
+        The best practice is to put here the critical stylesheets (styles that need to
+        load first before rendering the page)
+        Other styles that are not critical should be lazy loaded to prevent the blocking
+        of initial page render.
+     -->
     <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+
+    <!-- Page Title-->
     <title>Remember Them Little</title>
 
 </head>
 
+<!-- The specific styles for this page (index.html) is stored in the class .index
+    in /_system/css/playfulcss/website/_index.sass -->
+
 <body class="index">
 
-    <!-- Vue App -->
-    <div id="app">
-        <!-- App bar-->
-        <nav>
-            <a href="#" @click="$root.$refs.drawer.show()">
-                <i class="fas fa-bars"></i>
-                <span>Menu</span>
-            </a>
-            <account-button></account-button>
-            
-        </nav>
+    <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+
+<!-- Load Facebook Customer Chat Plugin -->
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="746988385642006"
+  theme_color="#5252FF">
+</div>
+
+    <!-- Vue App. Mounts the new Vue({el:'#app'}) defined below, to this element -->
+    <div id="app" v-cloak>
+
+        <!-- App bar. What you see at the top. -->
+        <index-navigation></index-navigation>
 
         <!-- Main Content -->
-        <main>
+        <main class="main-index">
             <div class="container">
 
-                <i class="fab fa-instagram icon"></i>
-                <h1>
-                    <span>Remember</span>
-                    <span>Them Little</span>
-                </h1>
+                <h3 class="banner-message">
+                    Every picture tells a story.
+                </h3>
 
-                <div>
-                    <button>
+                <div class="cta-row">
+                    <a href="/app/book" class="book-cta">
                         <span>Book Now</span>
-                        <i class="fas fa-calendar-alt"></i>
-                    </button>
-                    <button>
-                        <span>Explore</span>
-                        <i class="fas fa-arrow-down"></i>
-                    </button>
+                        <i class="fas fa-angle-right"></i><div class="blur"></div>
+                    </a>
+                    <a v-if="account.status=='DISCONNECTED' && facebook.status=='LOADED'">
+                        <span>Sign in</span>
+                        <i class="fab fa-facebook-square"></i>
+                        <i class="fas fa-key"></i>
+                    </a>
+                    <a class="bookings-btn" v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0">
+                        <span>My Bookings</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <br><br><br><br>
 
-                <a href="https://www.facebook.com/rememberthemlittle" target="_blank">
+                <!-- <a href="https://www.facebook.com/rememberthemlittle" target="_blank">
                     <i class="fab fa-facebook"></i>
-                    <span>Visit us on Facebook</span>
-                </a>
+                    <span>Remember Them Little</span>
+                </a> -->
 
             </div>
         </main>
 
         <!-- Sliding Drawer -->
-        <toggle inline-template ref="drawer">
+        <index-drawer ref="drawer"></index-drawer>
 
+        <!-- Sign in modal -->
+        <toggle inline-template ref="signin" v-cloak>
+            <transition name="zoom-out" appear>
+                <div class="signin" v-show="visible" @click="hide()">
+                    <div>
+                        <i class="fas fa-user-circle"></i>
 
-            <div>
-                <transition name="fade" appear>
-                    <div class="blocker" @click="hide()" v-show="visible"></div>
-                </transition>
+                        <button @click="$root.facebook_login()">
+                            <i class="fab fa-facebook-square"></i>
+                            <span>Sign in with Facebook</span>
+                        </button>
 
-                <transition name="slide-right">
-                    <div class="drawer" v-show="visible">
-                        <a>
-                            <h2>
-                                <i class="fab fa-instagram"></i><br>
-                                <span>Remember<br>Them Little</span></span>
-                            </h2>
-                        </a>
-
-                        <a href="#" class="active">
-                            <i class="fas fa-home"></i>
-                            <span>Home</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-camera"></i>
-                            <span>Services</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-th"></i>
-                            <span>Gallery</span>
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-phone fa-flip-horizontal"></i>
-                            <span>Contact Us</span>
-                        </a>
+                        <button>
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Sign in thru SMS</span>
+                        </button>
                     </div>
-                </transition>
-            </div>
-
-        </toggle>
-
-        <toggle inline-template ref="signin">
-                <transition name="zoom-out" appear>
-                    <div class="signin" v-show="visible" @click="hide()">
-                        <div>
-                            <i class="fas fa-user-circle"></i>
-                            
-                            <button @click="$root.fbInit()">
-                                <i class="fab fa-facebook-square"></i>
-                                <span>Sign in with Facebook</span>
-                            </button>
-
-                            <button>
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Sign in thru SMS</span>
-                            </button>
-                        </div>
-                    </div>
-                </transition>
+                </div>
+            </transition>
         </toggle>
 
     </div>
@@ -122,16 +150,15 @@
     <!--External Scripts -->
     <script src="/_system/js/vendor/vue.js"></script>
     <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
-    <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
+    <script src="/_system/js/components/components.js"></script>
 
     <!-- Internal Scripts -->
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin,facebookMixin]
-
+            mixins: [accountMixin, facebookMixin]
         })
     </script>
 

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+
+</head>
+
+<body class="dashboard">
+
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <a href="#" @click="$root.$refs.drawer.show()">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+            <span>
+                <a href="#" @click="$root.$refs.notifications.show()">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <account-button></account-button>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+
+
+            <a href="#" class="active">
+                <i class="fas fa-th-list"></i>
+                <span>My Bookings</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-user-circle"></i>
+                <span>My Account</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-life-ring"></i>
+                <span>Help</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <transition name="slide-left" appear>
+            <main v-cloak>
+                <div class="control">
+                    <h2>My Bookings</h2>
+                    <button onclick="window.location.href='/app/book'">
+                        <i class="fas fa-plus"></i>
+                        <span>New Booking</span>
+                    </button>
+                </div>
+                <div class="bookings">
+                    <table>
+
+                        <tbody>
+                            <tr v-for="booking in user_bookings">
+                                <td>
+                                    <div>
+                                        <span>{{new Date(booking.booking_date).toDateString().substr(3,12)}}</span>
+                                        <span>{{booking.booking_status}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a v-if="booking.booking_status=='AWAITING_PAYMENT'" href="#" @click="$root.$refs.booking.show(booking)">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Payment</span>
+                                    </a>
+                                    <a v-else-if="booking.booking_status=='AWAITING_CONFIRMATION' || booking.booking_status=='BOOKED'"
+                                        href="#" @click="$root.$refs.booking.show(booking)">
+                                        <i class="fas fa-eye"></i>
+                                        <span>View Details</span>
+                                    </a>
+                                    <a v-else-if="booking.booking_status=='COMPLETED'" href="#" @click="$root.$refs.order.show(booking)">
+                                        <i class="fas fa-images"></i>
+                                        <span>Order Prints</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br><br>
+                <div class="control">
+                    <h3>My Orders</h3>
+                </div>
+                <div class="bookings orders">
+                    <span v-if="orders.length == 0">You have no orders.</span>
+                    <table>
+
+                        <tbody>
+                            <tr v-for="order in orders">
+                                <td>
+                                    <div>
+                                        <span>Order #{{order.order_id}}</span>
+                                        <span>Status: {{order.order_status}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i class="fas fa-eye"></i>
+                                        <span>View Details</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </transition>
+
+        <!-- Sliding Drawer -->
+        <toggle inline-template ref="drawer" v-cloak>
+
+            <div>
+                <transition name="fade" appear>
+                    <div class="blocker" @click="hide()" v-show="visible"></div>
+                </transition>
+
+                <transition name="slide-right">
+                    <div class="drawer" v-show="visible">
+                        <a>
+                            <h2>
+                                <i class="fas fa-user-circle"></i>
+                                <span>Stephen John</span>
+                            </h2>
+                        </a>
+
+                        <a href="#" class="active">
+                            <i class="fas fa-th-list"></i>
+                            <span>My Bookings</span>
+                        </a>
+
+                        <a href="#">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Account</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-life-ring"></i>
+                            <span>Help</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Back to Home</span>
+                        </a>
+
+
+                    </div>
+                </transition>
+            </div>
+
+        </toggle>
+
+        <toggle inline-template ref="notifications" v-cloak>
+            <transition name="zoom-out">
+                <div class="notification-modal" v-if="visible">
+                    <h3>
+                        <span>Notifications</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+                    </h3>
+                    <br><br>
+                    <ul>
+                        <li class="notification-list-item" v-for="notification in $root.notifications">
+                            <!-- {{notification.notification_message.replace(new RegExp("\n", "g"), "<br>")}} -->
+                            <span class="notification-shorttext" v-html="notification.notification_message.replace(new RegExp('\n', 'g'), '<br>')"></span>
+                            <button @click.prevent="$root.$refs.notification.show(notification)">Read</button>
+                        </li>
+                    </ul>
+                </div>
+            </transition>
+        </toggle>
+
+        <modal inline-template ref="notification" v-cloak>
+                <transition name="zoom-out">
+                        <div class="notification-modal" v-if="visible">
+                            <h3>
+                                <span>Notification</span>
+                                <a href="#" @click="visible=false">
+                                    <i class="fas fa-times"></i>
+                                    <span>Close</span>
+                                </a>
+                            </h3>
+                            <br><br>
+                            <span v-html="params.notification_message.replace(new RegExp('\n', 'g'), '<br>')">
+                                
+                            </span>
+                        </div>
+                    </transition>
+                </modal>
+
+        <modal inline-template ref="booking" v-cloak>
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+                    <div class="booking-container">
+                            <h3>
+                                    <span>Booking Details</span>
+                                    <a href="#" @click="visible=false">
+                                        <i class="fas fa-times"></i>
+                                        <span>Close</span>
+                                    </a>
+            
+                                </h3>
+                                <div class="overflow-container">
+                                    <table>
+                                        <tr>
+                                            <td>Schedule</td>
+                                            <td>
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                                <i class="fas fa-clock"></i>
+                                                <span>{{params.booking_time}}</span><br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>{{params.booking_status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Price</td>
+                                            <td>Php {{params.booking_total_price}}</td>
+                                        </tr>
+                                        <tr v-if="params.booking_status == 'AWAITING_PAYMENT'">
+                                            <td>Deposit Slip</td>
+                                            <td>
+                                                <label for="file_input">
+                                                    <a class="button" :class="$root.deposit_slip_file.name == '' ? 'primary' : 'outline'">
+                                                        <i class="fas fa-upload"></i>
+                                                        <span>{{$root.deposit_slip_file.name == '' ? 'Upload' :
+                                                            $root.deposit_slip_file.name.length > 15 ? ("..." +
+                                                            $root.deposit_slip_file.name.slice(-15,$root.deposit_slip_file.name.length))
+                                                            : $root.deposit_slip_file.name}}</span>
+                                                    </a>
+                                                </label>
+                                                <input type="file" id="file_input" ref="test1" @change="$root.updateDepositSlip()"
+                                                    style="display: none" accept="image/x-png,image/gif,image/jpeg">
+                                            </td>
+                                        </tr>
+                                    </table>
+            
+                                    <br>
+                                    <button @click="$root.uploadPayment(params.booking_id,$root.deposit_slip_file); visible=false"
+                                        v-if="params.booking_status == 'AWAITING_PAYMENT' && $root.deposit_slip_file.name.length>0"
+                                        class="primary wide justify-center" style="padding: 1rem">
+                                        <span>Submit Payment</span>
+                                    </button>
+                                    <br>
+                                    <details>
+                                        <summary>
+                                            <h3>Package Details</h3>
+                                        </summary>
+            
+                                        <table>
+                                            <tr>
+                                                <td>Package Name</td>
+                                                <td>
+                                                    {{JSON.parse(params.package).package_name}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Duration</td>
+                                                <td>
+                                                    {{JSON.parse(params.package).package_minutes}} minutes
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Addons</td>
+                                                <td>
+                                                    <ul>
+                                                        <li v-for="addon in JSON.parse(params.booking_addons)">
+                                                            {{addon.addon_type}} - {{addon.addon_description}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Themes</td>
+                                                <td>
+                                                    <ul>
+                                                        <li v-for="theme in JSON.parse(params.booking_themes)">
+                                                            {{theme}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </details>
+                                </div>
+                    </div>
+                    
+                </div>
+            </transition>
+        </modal>
+
+        <modal inline-template ref="order" v-cloak>
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+
+                    <h3>
+                        <span>Order Prints</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+
+                    </h3>
+                    <div class="overflow-container">
+                        <form style="padding: 0" @submit.prevent="$root.placeOrder($event)">
+                            <input type="hidden" name="booking_id" value="params.booking_id">
+                            <table>
+                                <tr v-for="addon,index in JSON.parse(params.booking_addons)" v-if="addon.addon_type=='PRINT' && !((addon.addon_source=='PACKAGE' || addon.addon_source=='BOOKING') && params.booking_addons_isordered == 1)">
+                                    <td>
+                                        {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ?
+                                        'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' +
+                                        addon.addon_price }})
+                                    </td>
+                                    <td>
+                                        <input type="text" :addon="JSON.stringify(addon)" placeholder="Filename of Photo"
+                                            style="padding-left: 1rem" :name="'addon' + index">
+                                    </td>
+                                </tr>
+                            </table><br>
+                            <div class="flex">
+                                <select ref="selectedPrint">
+                                    <option v-for="printAddon in $root.addons.filter(addon => addon.addon_type=='PRINT')"
+                                        :value="JSON.stringify(printAddon)">
+                                        {{printAddon.addon_description}}
+                                    </option>
+                                </select>
+                                <button @click.prevent="params.booking_addons = JSON.parse(params.booking_addons); params.booking_addons.push(JSON.parse($refs.selectedPrint.value)); params.booking_addons = JSON.stringify(params.booking_addons)">Add
+                                    more prints</button>
+                                Total: Php {{$root.getTotalPrice(params.booking_addons)}}
+                            </div><br>
+                            <button class="wide primary justify-center" type="submit">Place Order</button>
+                        </form>
+                    </div>
+                </div>
+            </transition>
+        </modal>
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script src="/_system/js/mixins/booking.js"></script>
+    <script src="/_system/js/mixins/notification.js"></script>
+    <script src="/_system/js/mixins/addon.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, bookingMixin, facebookMixin, addonMixin, notificationMixin],
+            mounted: function () {
+                this.getUserBookings();
+                this.loadOrders();
+                this.loadAddons();
+                this.getUserNotifications();
+            },
+            data: {
+                user_bookings: [],
+                deposit_slip_file: {
+                    name: ""
+                },
+                addons: [],
+                orders: [],
+                notifications: []
+
+            },
+            methods: {
+                updateDepositSlip() {
+                    this.deposit_slip_file = document.querySelector('#file_input').files[0];
+                },
+                getTotalPrice(params) {
+
+                    var array = JSON.parse(params).filter(addon => addon.addon_source != 'BOOKING' && addon.addon_source != 'PACKAGE').map(addon => addon.addon_price);
+                    var x = 0
+                    array.forEach(element => {
+                        x += element;
+                    });
+                    return x;
+                },
+                placeOrder(submitEvent) {
+
+                    var elements = [];
+                    for (key in submitEvent.target.elements) {
+                        if (submitEvent.target.elements[key].type == 'text')
+                            elements.push(submitEvent.target.elements[key]);
+                    }
+                    var order_list = elements.map(function (element) {
+                        return {
+                            filename: element.value,
+                            addon: JSON.parse(element.attributes.addon.nodeValue)
+                        }
+                    }
+                    );
+
+                    var formData = new FormData();
+                    formData.append('order_list', JSON.stringify(order_list))
+                    formData.append('account_id', this.account.account_id)
+                    formData.append('token', this.account.token)
+                    formData.append('booking_id', submitEvent.target.elements.booking_id.value)
+                    Vue.http.post('/_system/php/api/orders/add.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    this.loadOrders();
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+
+
+                },
+                loadOrders() {
+
+                    var formData = new FormData();
+                    formData.append('account_id', this.account.account_id)
+                    formData.append('token', this.account.token)
+                    Vue.http.post('/_system/php/api/orders/getUserOrders.php', formData)
+                        .then(
+                            response => {
+                                if (response.body.success) {
+                                    console.log(response.body)
+                                    this.orders = response.body.data
+                                }
+                                else
+                                    console.error(response.body.message)
+                            },
+                            response => {
+                                console.error(response)
+                            }
+                        );
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>
