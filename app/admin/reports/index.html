@@ -78,7 +78,13 @@
                     </div>
                 </div>
 
-                <transition name="fade" mode="out-in">
+                <table>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+
+                <!-- <transition name="fade" mode="out-in">
                     <table v-if="calendarMode=='Day'" class="dayCalendar key=1">
                         <tbody>
                             <tr v-for="row in salesReportsByDate">
@@ -362,11 +368,11 @@
                     </table>
                 </transition>
             </main>
-        </transition>
+        </transition> -->
 
 
 
-        <modal inline-template ref="booking" v-cloak>
+        <!-- <modal inline-template ref="booking" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
 
@@ -447,7 +453,7 @@
                     </div>
                 </div>
             </transition>
-        </modal>
+        </modal> -->
 
         <!-- Sliding Drawer -->
         <sliding-drawer ref="drawer"></sliding-drawer>

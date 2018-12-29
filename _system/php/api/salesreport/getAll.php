@@ -16,7 +16,11 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare('SELECT * FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id');
+    $sql = "INSERT INTO sales (booking_id, sales_date, sales_time, sales_total_price) SELECT booking_id, booking_date, booking_time, booking_total_price FROM bookings WHERE booking_status='BOOKED' AND WHERE NOT EXISTS (SELECT * FROM sales)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $stmt = $conn->prepare('SELECT * FROM sales');
     $stmt->execute();
 
     # Fetch Result
