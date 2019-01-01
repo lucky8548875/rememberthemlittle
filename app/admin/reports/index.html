@@ -80,7 +80,11 @@
 
                 <table>
                     <tbody>
-                        
+                        <tr v-for="sale in sales">
+                            <td>
+                                <span>{{sale.account_name}}</span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -475,11 +479,11 @@
                 pageTitle: 'Sales Report',
                 calendarBookingsByDate: [],
                 calendarMode: 'Day',
-                salesReportsByDate: []
+                sales: []
             },
             mounted: function () {
                 this.fbInit();
-                this.getSalesReportsByDate();
+                this.getAllSales();
             },
         })
     </script>
