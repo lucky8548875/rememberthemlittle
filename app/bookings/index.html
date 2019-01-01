@@ -188,122 +188,122 @@
         </toggle>
 
         <modal inline-template ref="notification" v-cloak>
-                <transition name="zoom-out">
-                        <div class="notification-modal" v-if="visible">
-                            <h3>
-                                <span>Notification</span>
-                                <a href="#" @click="visible=false">
-                                    <i class="fas fa-times"></i>
-                                    <span>Close</span>
-                                </a>
-                            </h3>
-                            <br><br>
-                            <span v-html="params.notification_message.replace(new RegExp('\n', 'g'), '<br>')">
-                                
-                            </span>
-                        </div>
-                    </transition>
-                </modal>
+            <transition name="zoom-out">
+                <div class="notification-modal" v-if="visible">
+                    <h3>
+                        <span>Notification</span>
+                        <a href="#" @click="visible=false">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </a>
+                    </h3>
+                    <br><br>
+                    <span v-html="params.notification_message.replace(new RegExp('\n', 'g'), '<br>')">
+
+                    </span>
+                </div>
+            </transition>
+        </modal>
 
         <modal inline-template ref="booking" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
                     <div class="booking-container">
-                            <h3>
-                                    <span>Booking Details</span>
-                                    <a href="#" @click="visible=false">
-                                        <i class="fas fa-times"></i>
-                                        <span>Close</span>
-                                    </a>
-            
-                                </h3>
-                                <div class="overflow-container">
-                                    <table>
-                                        <tr>
-                                            <td>Schedule</td>
-                                            <td>
-                                                <i class="fas fa-calendar-alt"></i>
-                                                <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                                <i class="fas fa-clock"></i>
-                                                <span>{{params.booking_time}}</span><br>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>{{params.booking_status}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Price</td>
-                                            <td>Php {{params.booking_total_price}}</td>
-                                        </tr>
-                                        <tr v-if="params.booking_status == 'AWAITING_PAYMENT'">
-                                            <td>Deposit Slip</td>
-                                            <td>
-                                                <label for="file_input">
-                                                    <a class="button" :class="$root.deposit_slip_file.name == '' ? 'primary' : 'outline'">
-                                                        <i class="fas fa-upload"></i>
-                                                        <span>{{$root.deposit_slip_file.name == '' ? 'Upload' :
-                                                            $root.deposit_slip_file.name.length > 15 ? ("..." +
-                                                            $root.deposit_slip_file.name.slice(-15,$root.deposit_slip_file.name.length))
-                                                            : $root.deposit_slip_file.name}}</span>
-                                                    </a>
-                                                </label>
-                                                <input type="file" id="file_input" ref="test1" @change="$root.updateDepositSlip()"
-                                                    style="display: none" accept="image/x-png,image/gif,image/jpeg">
-                                            </td>
-                                        </tr>
-                                    </table>
-            
-                                    <br>
-                                    <button @click="$root.uploadPayment(params.booking_id,$root.deposit_slip_file); visible=false"
-                                        v-if="params.booking_status == 'AWAITING_PAYMENT' && $root.deposit_slip_file.name.length>0"
-                                        class="primary wide justify-center" style="padding: 1rem">
-                                        <span>Submit Payment</span>
-                                    </button>
-                                    <br>
-                                    <details>
-                                        <summary>
-                                            <h3>Package Details</h3>
-                                        </summary>
-            
-                                        <table>
-                                            <tr>
-                                                <td>Package Name</td>
-                                                <td>
-                                                    {{JSON.parse(params.package).package_name}}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Duration</td>
-                                                <td>
-                                                    {{JSON.parse(params.package).package_minutes}} minutes
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Addons</td>
-                                                <td>
-                                                    <ul>
-                                                        <li v-for="addon in JSON.parse(params.booking_addons)">
-                                                            {{addon.addon_type}} - {{addon.addon_description}}
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Themes</td>
-                                                <td>
-                                                    <ul>
-                                                        <li v-for="theme in JSON.parse(params.booking_themes)">
-                                                            {{theme}}
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </details>
-                                </div>
+                        <h3>
+                            <span>Booking Details</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
+
+                        </h3>
+                        <div class="overflow-container">
+                            <table>
+                                <tr>
+                                    <td>Schedule</td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                        <i class="fas fa-clock"></i>
+                                        <span>{{params.booking_time}}</span><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{params.booking_status}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td>Php {{params.booking_total_price}}</td>
+                                </tr>
+                                <tr v-if="params.booking_status == 'AWAITING_PAYMENT'">
+                                    <td>Deposit Slip</td>
+                                    <td>
+                                        <label for="file_input">
+                                            <a class="button" :class="$root.deposit_slip_file.name == '' ? 'primary' : 'outline'">
+                                                <i class="fas fa-upload"></i>
+                                                <span>{{$root.deposit_slip_file.name == '' ? 'Upload' :
+                                                    $root.deposit_slip_file.name.length > 15 ? ("..." +
+                                                    $root.deposit_slip_file.name.slice(-15,$root.deposit_slip_file.name.length))
+                                                    : $root.deposit_slip_file.name}}</span>
+                                            </a>
+                                        </label>
+                                        <input type="file" id="file_input" ref="test1" @change="$root.updateDepositSlip()"
+                                            style="display: none" accept="image/x-png,image/gif,image/jpeg">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <br>
+                            <button @click="$root.uploadPayment(params.booking_id,$root.deposit_slip_file); visible=false"
+                                v-if="params.booking_status == 'AWAITING_PAYMENT' && $root.deposit_slip_file.name.length>0"
+                                class="primary wide justify-center" style="padding: 1rem">
+                                <span>Submit Payment</span>
+                            </button>
+                            <br>
+                            <details>
+                                <summary>
+                                    <h3>Package Details</h3>
+                                </summary>
+
+                                <table>
+                                    <tr>
+                                        <td>Package Name</td>
+                                        <td>
+                                            {{JSON.parse(params.package).package_name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Duration</td>
+                                        <td>
+                                            {{JSON.parse(params.package).package_minutes}} minutes
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Addons</td>
+                                        <td>
+                                            <ul>
+                                                <li v-for="addon in JSON.parse(params.booking_addons)">
+                                                    {{addon.addon_type}} - {{addon.addon_description}}
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Themes</td>
+                                        <td>
+                                            <ul>
+                                                <li v-for="theme in JSON.parse(params.booking_themes)">
+                                                    {{theme}}
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </details>
+                        </div>
                     </div>
-                    
+
                 </div>
             </transition>
         </modal>
@@ -311,44 +311,45 @@
         <modal inline-template ref="order" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
+                    <div class="booking-container">
+                        <h3 style="display: flex; justify-content: space-between">
+                            <span>Order Prints</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
 
-                    <h3>
-                        <span>Order Prints</span>
-                        <a href="#" @click="visible=false">
-                            <i class="fas fa-times"></i>
-                            <span>Close</span>
-                        </a>
-
-                    </h3>
-                    <div class="overflow-container">
-                        <form style="padding: 0" @submit.prevent="$root.placeOrder($event)">
-                            <input type="hidden" name="booking_id" value="params.booking_id">
-                            <table>
-                                <tr v-for="addon,index in JSON.parse(params.booking_addons)" v-if="addon.addon_type=='PRINT' && !((addon.addon_source=='PACKAGE' || addon.addon_source=='BOOKING') && params.booking_addons_isordered == 1)">
-                                    <td>
-                                        {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ?
-                                        'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' +
-                                        addon.addon_price }})
-                                    </td>
-                                    <td>
-                                        <input type="text" :addon="JSON.stringify(addon)" placeholder="Filename of Photo"
-                                            style="padding-left: 1rem" :name="'addon' + index">
-                                    </td>
-                                </tr>
-                            </table><br>
-                            <div class="flex">
-                                <select ref="selectedPrint">
-                                    <option v-for="printAddon in $root.addons.filter(addon => addon.addon_type=='PRINT')"
-                                        :value="JSON.stringify(printAddon)">
-                                        {{printAddon.addon_description}}
-                                    </option>
-                                </select>
-                                <button @click.prevent="params.booking_addons = JSON.parse(params.booking_addons); params.booking_addons.push(JSON.parse($refs.selectedPrint.value)); params.booking_addons = JSON.stringify(params.booking_addons)">Add
-                                    more prints</button>
-                                Total: Php {{$root.getTotalPrice(params.booking_addons)}}
-                            </div><br>
-                            <button class="wide primary justify-center" type="submit">Place Order</button>
-                        </form>
+                        </h3>
+                        <div class="overflow-container">
+                            <form style="padding: 0" @submit.prevent="$root.placeOrder($event);visible=false">
+                                <input type="hidden" name="booking_id" value="params.booking_id">
+                                <table>
+                                    <tr v-for="addon,index in JSON.parse(params.booking_addons)" v-if="addon.addon_type=='PRINT' && !((addon.addon_source=='PACKAGE' || addon.addon_source=='BOOKING') && params.booking_addons_isordered == 1)">
+                                        <td>
+                                            {{addon.addon_description}} Print<br> ({{addon.addon_source == 'PACKAGE' ?
+                                            'Free from Package' : addon.addon_source == 'BOOKING' ? 'Addon' : 'P' +
+                                            addon.addon_price }})
+                                        </td>
+                                        <td>
+                                            <input type="text" :addon="JSON.stringify(addon)" placeholder="Filename of Photo"
+                                                style="padding-left: 1rem" :name="'addon' + index">
+                                        </td>
+                                    </tr>
+                                </table><br>
+                                <div class="flex">
+                                    <select ref="selectedPrint">
+                                        <option v-for="printAddon in $root.addons.filter(addon => addon.addon_type=='PRINT')"
+                                            :value="JSON.stringify(printAddon)">
+                                            {{printAddon.addon_description}}
+                                        </option>
+                                    </select>
+                                    <button @click.prevent="params.booking_addons = JSON.parse(params.booking_addons); params.booking_addons.push(JSON.parse($refs.selectedPrint.value)); params.booking_addons = JSON.stringify(params.booking_addons)">Add
+                                        more prints</button>
+                                    Total: Php {{$root.getTotalPrice(params.booking_addons)}}
+                                </div><br>
+                                <button class="wide primary justify-center" type="submit">Place Order</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </transition>

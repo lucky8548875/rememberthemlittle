@@ -16,7 +16,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare('SELECT * FROM orders INNER JOIN accounts ON orders.account_id = orders.account_id');
+    $stmt = $conn->prepare('SELECT * FROM orders INNER JOIN accounts ON orders.account_id = accounts.account_id');
     $stmt->execute();
 
     # Fetch Result
