@@ -419,28 +419,65 @@ Vue.component('fileupload', {
 Vue.component('admin-searchbar', {
     data: function() {
         return {
-            subject: '',
-            search: '',
-            items: [
+            query: '',
+            matches: [
 
-            ]
+            ],
+            styleSearchBarContainer: {
+                display: 'none',
+                'background-color': '$color-light',
+                color: '$color-gray',
+                'border-radius': '2rem',
+                'margin-left': '2rem',
+                'align-items': 'center'
+            },
+            styleSearchIcon: {
+                color: 'lighten($color-gray,15)',
+                'margin-right': '1rem'
+            },
+            styleSearchBarTextField: {
+                'border-radius': '2rem',
+                'background-color': 'transparent',
+                'border-width': '0px',
+                margin: 0,
+                padding: '1rem',
+                '&': 'hover', 
+                '&': 'focus',
+                'border-width': '0px'
+            },
+            styleSearchBarMatchList: {
+                
+            }
         }
     },
-    computed: {
-        matches: function() {
-            
-        },
-        typing: function() {
-            return search != ''
+    watch: {
+        query: function() {
+            Vue.http.get(`/_system/php/functions/adminSearch.php?query=${this.query}`)
+                .then(
+                    response => {
+                        if (response.body.success)
+                        {
+                            this.matches = response.body.data;
+                        }
+                        else
+                        {
+                            console.error(response.body.message);
+                        }
+                    },
+                    response => {
+                        console.error(response);
+                    }
+                );
         }
     },
     template:
     `
     <div class="admin-searchbar-container">
-        <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="search">
-        <ul class="admin-searchbar-matchlist" v-if="typing">
+        <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query" v-bind:style="styleSearchBarTextField">
+        <i class="fas fa-search" style="styleSearchIcon"></i>
+        <ul class="admin-searchbar-matchlist">
             <li class="matchlist-item" v-for="match in matches">
-                {{match}}
+                {{match.account_name}}
             </li>
         </ul>
     </div>
