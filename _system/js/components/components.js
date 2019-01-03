@@ -420,9 +420,7 @@ Vue.component('admin-searchbar', {
     data: function() {
         return {
             query: '',
-            matches: [
-
-            ],
+            matches: '',
             styleSearchBarContainer: {
                 display: 'none',
                 'background-color': '$color-light',
@@ -446,7 +444,15 @@ Vue.component('admin-searchbar', {
                 'border-width': '0px'
             },
             styleSearchBarMatchList: {
-                
+                position: 'absolute',
+                'background-color': 'l#bebebe',
+                'list-style-type': 'none'
+            },
+            styleMatchListGroupAccounts: {
+                'list-style-type': 'none'
+            },
+            styleMatchListGroupBookings: {
+                'list-style-type': 'none'
             }
         }
     },
@@ -475,10 +481,21 @@ Vue.component('admin-searchbar', {
     <div class="admin-searchbar-container">
         <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query" v-bind:style="styleSearchBarTextField">
         <i class="fas fa-search" style="styleSearchIcon"></i>
-        <ul class="admin-searchbar-matchlist">
-            <li class="matchlist-item" v-for="match in matches">
-                {{match.account_name}}
-            </li>
+        <ul class="admin-searchbar-matchlist" v-bind:style="styleSearchBarMatchList">
+            <ul class="matchlist-group-accounts" v-show="matches.accounts != null" v-bind:style="styleMatchListGroupAccounts">
+            <h3>Accounts</h3>
+                <li class="matchlist-item-accounts" v-for="match in matches.accounts">
+                    <h4>ID: {{match.account_id}}</h4>
+                    {{match.account_name}}
+                </li>
+            </ul>
+            <ul class="matchlist-group-bookings" v-show="matches.bookings != null" v-bind:style="styleMatchListGroupBookings">
+            <h3>Bookings</h3>
+                <li class="matchlist-item-bookings" v-for="match in matches.bookings">
+                    <h4>ID: {{match.booking_id}}</h4>
+                    {{match.account_name}}&nbsp:&nbsp{{match.booking_date}}
+                </li>
+            </ul>
         </ul>
     </div>
     `
