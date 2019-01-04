@@ -11,6 +11,66 @@
     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
     <title>Remember Them Little</title>
     <style>
+        .admin-searchbar-container {
+            background-color: lightgray;
+            color: gray;
+            border-radius: 2rem;
+        }
+
+        .admin-searchbar-query {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 212px;
+            min-height: 40px;
+        }
+
+        .admin-searchbar-textfield {
+            position: absolute;
+            border-radius: 2rem;
+            background-color: transparent;
+            border-width: 0px;
+            margin: 0;
+            padding: 1rem;
+            border-width: 0px;
+        }
+
+        .admin-searchbar-container .fa-search {
+            position: absolute;
+            right: 8px;
+            color: lightgray;
+        }
+
+        .admin-searchbar-matchlist {
+            position: absolute;
+            display: block;
+            background-color: gray;
+            list-style-type: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-width: 212px;
+            max-height: 500px;
+        }
+
+        .matchlist-group-container {
+            list-style-type: none;
+            margin: 2px 0 2px 0;
+            padding: 2px 0 2px 0;
+        }
+
+        .matchlist-group-heading {
+            margin-left: 3px;
+        }
+
+        .matchlist-item-container {
+            padding: 5px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .matchlist-item-container:hover {
+            background-color: aquamarine;
+        }
     </style>
 </head>
 

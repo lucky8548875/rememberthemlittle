@@ -420,40 +420,7 @@ Vue.component('admin-searchbar', {
     data: function() {
         return {
             query: '',
-            matches: '',
-            styleSearchBarContainer: {
-                display: 'none',
-                'background-color': '$color-light',
-                color: '$color-gray',
-                'border-radius': '2rem',
-                'margin-left': '2rem',
-                'align-items': 'center'
-            },
-            styleSearchIcon: {
-                color: 'lighten($color-gray,15)',
-                'margin-right': '1rem'
-            },
-            styleSearchBarTextField: {
-                'border-radius': '2rem',
-                'background-color': 'transparent',
-                'border-width': '0px',
-                margin: 0,
-                padding: '1rem',
-                '&': 'hover', 
-                '&': 'focus',
-                'border-width': '0px'
-            },
-            styleSearchBarMatchList: {
-                position: 'absolute',
-                'background-color': 'l#bebebe',
-                'list-style-type': 'none'
-            },
-            styleMatchListGroupAccounts: {
-                'list-style-type': 'none'
-            },
-            styleMatchListGroupBookings: {
-                'list-style-type': 'none'
-            }
+            matches: ''
         }
     },
     watch: {
@@ -479,21 +446,23 @@ Vue.component('admin-searchbar', {
     template:
     `
     <div class="admin-searchbar-container">
-        <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query" v-bind:style="styleSearchBarTextField">
-        <i class="fas fa-search" style="styleSearchIcon"></i>
-        <ul class="admin-searchbar-matchlist" v-bind:style="styleSearchBarMatchList">
-            <ul class="matchlist-group-accounts" v-show="matches.accounts != null" v-bind:style="styleMatchListGroupAccounts">
-            <h3>Accounts</h3>
-                <li class="matchlist-item-accounts" v-for="match in matches.accounts">
-                    <h4>ID: {{match.account_id}}</h4>
-                    {{match.account_name}}
+        <div class="admin-searchbar-query">
+            <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query">
+            <i class="fas fa-search"></i>
+        </div>
+        <ul class="admin-searchbar-matchlist">
+            <ul class="matchlist-group-container" v-show="matches.accounts != null">
+                <h3 class="matchlist-group-heading">Accounts</h3>
+                <li class="matchlist-item-container" v-for="match in matches.accounts">
+                    <h4 class="matchlist-item-text">ID: {{match.account_id}}</h4>
+                    <h5 class="matchlist-item-subtext">{{match.account_name}}</h5>
                 </li>
             </ul>
-            <ul class="matchlist-group-bookings" v-show="matches.bookings != null" v-bind:style="styleMatchListGroupBookings">
-            <h3>Bookings</h3>
-                <li class="matchlist-item-bookings" v-for="match in matches.bookings">
-                    <h4>ID: {{match.booking_id}}</h4>
-                    {{match.account_name}}&nbsp:&nbsp{{match.booking_date}}
+            <ul class="matchlist-group-container" v-show="matches.bookings != null">
+                <h3 class="matchlist-group-heading">Bookings</h3>
+                <li class="matchlist-item-container" v-for="match in matches.bookings">
+                    <h4 class="matchlist-item-text">ID: {{match.booking_id}}</h4>
+                    <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.booking_date}}</h5>
                 </li>
             </ul>
         </ul>
