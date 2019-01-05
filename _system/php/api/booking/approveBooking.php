@@ -10,7 +10,7 @@ $account_id = $_POST['account_id'];
 $token = $_POST['token'];
 
 # Check parameters if null
-if (isset($booking_id) && isAdminTokenValid($account_id,$token)) {
+if (isset($booking_id)) {
 
     try {
 
