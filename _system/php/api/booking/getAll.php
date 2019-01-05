@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *', false);
 # Set database parameters
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.php';
