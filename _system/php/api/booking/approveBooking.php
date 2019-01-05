@@ -1,7 +1,7 @@
 <?php
 
+
 header('Access-Control-Allow-Origin: *',false);
-header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept')
 
 # Set database parameters
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
