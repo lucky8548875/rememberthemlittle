@@ -1,5 +1,8 @@
 <?php
 
+
+header('Access-Control-Allow-Origin: *',false);
+
 # Set database parameters
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.php';
@@ -10,7 +13,7 @@ $account_id = $_POST['account_id'];
 $token = $_POST['token'];
 
 # Check parameters if null
-if (isset($booking_id) && isAdminTokenValid($account_id,$token)) {
+if (isset($booking_id)) {
 
     try {
 

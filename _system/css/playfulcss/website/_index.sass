@@ -1,5 +1,5 @@
 .index
-    background-color: #F8F9FA
+    background-color: white
 
     nav
         display: flex
@@ -61,17 +61,39 @@
                     margin-right: 0.25rem
 
     main.main-index
-        width: 100%
+        width: 95%
+        margin-left: auto
+        margin-right: auto
         height: 100vh
         display: flex
         justify-content: center
-        align-items: center        
+        align-items: center  
+
+        .banner-image
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 100VW
+            z-index: -10
+            border-radius: 5rem/2rem 0 0 
+
+            @include medium
+                position: relative                
+                width: 40vw
+                border-radius: 10rem 
+                margin-right: 3rem
 
         div.container
             display: flex
             justify-content: center
             align-items: center
             flex-direction: column
+
+            @include medium
+                justify-content: flex-start
+                align-items: flex-start
+
+            
 
             h3.banner-message
                 margin: 1.5rem
@@ -82,7 +104,11 @@
                 font-size: 2.5rem
 
                 @include large
-                    font-size: 4rem
+                    font-size: 4.5rem
+                    justify-content: flex-start
+                    text-align: left
+                    margin-left: 0.5rem
+                    max-width: 35vw
 
             .book-cta, .blur
                 position: relative
@@ -114,6 +140,9 @@
                 justify-content: center
                 display: flex
                 flex-wrap: wrap
+
+                @include large
+                    justify-content: flex-start
                 
                 a
                     @extend .button
