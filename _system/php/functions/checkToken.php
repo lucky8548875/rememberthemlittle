@@ -2,17 +2,10 @@
 
 function isTokenValid($account_id,$token){
 
-<<<<<<< HEAD
     $servername = "localhost:3307";
     $username = "root";
     $password = "usbw";
     $dbname = "rtl_v1";
-=======
-    // $servername = "localhost:3306";
-    // $username = "root";
-    // $password = "usbw";
-    // $dbname = "rtl_v1";
->>>>>>> c4e1a3c2d3c398394e634d4e394db3d64c93cb56
 
     $servername = "us-cdbr-iron-east-01.cleardb.net";
     $username = "bdae6583c4d8a6";
