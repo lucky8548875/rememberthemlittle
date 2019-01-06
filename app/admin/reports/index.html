@@ -66,9 +66,13 @@
         <!-- Main Content -->
         <transition name="slide-left" appear v-cloak>
             <main>
-                <div class="control">
-                    <a class="filter color-primary">
+                <!-- <div class="control">
+                    <a class="filter color-primary" v-if="calendarMode=='Day'">
                         <span>Today</span>
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+                    <a class="filter color-primary" v-if="calendarMode=='Week'">
+                        <span>This Week</span>
                         <i class="fas fa-angle-down"></i>
                     </a>
                     <div class="group">
@@ -76,390 +80,82 @@
                         <a href="#" :class="{'active':calendarMode=='Week'}" @click="calendarMode='Week'">Week</a>
                         <a href="#" :class="{'active':calendarMode=='Month'}" @click="calendarMode='Month'">Month</a>
                     </div>
-                </div>
+                </div> -->
 
                 <table>
+                    <thead>
+                        <tr>
+                            <th><span>Date</span></th>
+                            <th><span>Price</span></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr v-for="sale in sales">
                             <td>
-                                <span>{{sale.booking_id}}</span>
-                                <span>{{sale.booking_time}}</span>
+                                <span>{{sale.booking_date}}</span>
+                            </td>
+                            <td>
                                 <span>{{sale.booking_total_price}}</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- <transition name="fade" mode="out-in">
-                    <table v-if="calendarMode=='Day'" class="dayCalendar key=1">
-                        <tbody>
-                            <tr v-for="row in salesReportsByDate">
-                                <td>{{row.time}}</td>
-                                <td @click="$root.$refs.salesreport.show(JSON.parse(cell.data))" v-for="cell in row.cell"
-                                    v-if="cell.data!='Open'" :rowspan="cell.rowspan" class="salesreport">
-                                    <div class="booking-item">
-                                        <span class="client-name">
-                                            {{JSON.parse(cell.data).account_name}}
-                                        </span>
-                                        <span class="total-price">
-                                            <i class="fas fa-info-circle"></i>
-                                            <span>{{JSON.parse(JSON.parse(cell.data).package).package_name}}</span>
-                                        </span>
-                                        <span class="something3">
-                                            <i class="far fa-clock"></i>
-                                            <span>{{JSON.parse(cell.data).sales_time}},
-                                                {{JSON.parse(JSON.parse(cell.data).package).package_minutes}} minutes</span>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td v-else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div v-else-if="calendarMode=='Week'" class="week-table-container" key=2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th><span>&nbsp</span>&nbsp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>8:00</td>
-                                </tr>
-                                <tr>
-                                    <td>8:30</td>
-                                </tr>
-                                <tr>
-                                    <td>9:00</td>
-                                </tr>
-                                <tr>
-                                    <td>9:30</td>
-                                </tr>
-                                <tr>
-                                    <td>10:00</td>
-                                </tr>
-                                <tr>
-                                    <td>10:30</td>
-                                </tr>
-                                <tr>
-                                    <td>11:00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th><span>Sun</span>21</th>
-                                        <th><span>Mon</span>22</th>
-                                        <th><span>Tue</span>23</th>
-                                        <th><span>Wed</span>24</th>
-                                        <th><span>Thu</span>25</th>
-                                        <th><span>Fri</span>26</th>
-                                        <th><span>Sat</span>27</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="booking" rowspan="2">
-                                            <div class="booking-item">
-                                                <span class="client-name">
-                                                    Name
-                                                </span>
-                                                <span class="package">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <span>Package Name</span>
-                                                </span>
-                                                <span class="themes">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>
-                                                        Minutes
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td class="booking" rowspan="2">
-                                            <div class="booking-item">
-                                                <span class="client-name">
-                                                    Name
-                                                </span>
-                                                <span class="package">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <span>Package Name</span>
-                                                </span>
-                                                <span class="themes">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>
-                                                        Minutes
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="booking" rowspan="2">
-                                            <div class="booking-item">
-                                                <span class="client-name">
-                                                    Name
-                                                </span>
-                                                <span class="package">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <span>Package Name</span>
-                                                </span>
-                                                <span class="themes">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>
-                                                        Minutes
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="booking" rowspan="2">
-                                            <div class="booking-item">
-                                                <span class="client-name">
-                                                    Name
-                                                </span>
-                                                <span class="package">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <span>Package Name</span>
-                                                </span>
-                                                <span class="themes">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>
-                                                        Minutes
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="booking" rowspan="2">
-                                            <div class="booking-item">
-                                                <span class="client-name">
-                                                    Name
-                                                </span>
-                                                <span class="package">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    <span>Package Name</span>
-                                                </span>
-                                                <span class="themes">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>
-                                                        Minutes
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <table v-else-if="calendarMode=='Month'" key=3>
-                        <thead>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>8</td>
-                                <td>9</td>
-                                <td>10</td>
-                                <td>11</td>
-                                <td>12</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>15</td>
-                                <td>16</td>
-                                <td>17</td>
-                                <td>18</td>
-                                <td>19</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>21</td>
-                                <td>22</td>
-                                <td>23</td>
-                                <td>24</td>
-                                <td>25</td>
-                                <td>26</td>
-                                <td>27</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>29</td>
-                                <td>30</td>
-                                <td>31</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table v-else-if="calendarMode=='All'" key=4>
-
-                    </table>
-                </transition>
-            </main>
-        </transition> -->
-
-
-
-        <!-- <modal inline-template ref="booking" v-cloak>
+        <modal inline-template ref="sales-info" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
+                    <div class="booking-mobile">
+                        <h3>
+                            <span>Sales Details</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
 
-                    <h3>
-                        <span>Booking Details</span>
-                        <a href="#" @click="visible=false">
-                            <i class="fas fa-times"></i>
-                            <span>Close</span>
-                        </a>
-
-                    </h3>
-                    <div class="overflow-container">
-                        <table>
-                            <tr>
-                                <td>Schedule</td>
-                                <td>
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
-                                    <i class="fas fa-clock"></i>
-                                    <span>{{params.booking_time}}</span><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>{{params.booking_status}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Price</td>
-                                <td>Php {{params.booking_total_price}}</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <details>
-                            <summary>
-                                <h3 style="display: inline-block">Package Details</h3>
-                            </summary>
-
+                        </h3>
+                        <div class="overflow-container">
                             <table>
                                 <tr>
-                                    <td>Package Name</td>
+                                    <td>Schedule</td>
                                     <td>
-                                        {{JSON.parse(params.package).package_name}}
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                        <i class="fas fa-clock"></i>
+                                        <span>{{params.booking_time}}</span><br>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Duration</td>
-                                    <td>
-                                        {{JSON.parse(params.package).package_minutes}} minutes
-                                    </td>
+                                    <td>Status</td>
+                                    <td>{{params.booking_status}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Addons</td>
-                                    <td>
-                                        <ul>
-                                            <li v-for="addon in JSON.parse(params.booking_addons)">
-                                                {{addon.addon_type}} - {{addon.addon_description}}
-                                            </li>
-                                        </ul>
-                                    </td>
+                                    <td>Total Price</td>
+                                    <td>Php {{params.booking_total_price}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Themes</td>
-                                    <td>
-                                        <ul>
-                                            <li v-for="theme in JSON.parse(params.booking_themes)">
-                                                {{theme}}
-                                            </li>
-                                        </ul>
+                                    <td>Deposit Slip</td>
+                                    <td style="text-align:center">
+                                        <img :src="params.booking_deposit_slip" width="50%">
                                     </td>
                                 </tr>
                             </table>
-                        </details>
-                        <br>
-                        <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
-                            v-if="params.booking_status=='AWAITING_CONFIRMATION'">
-                            <span>Confirm Booking</span>
-                        </button>
+                            <br>
+                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                                v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                                <span>Confirm Booking</span>
+                            </button>
+                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                                <span>Cancel Booking</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </transition>
-        </modal> -->
+        </modal>
+
+
+            </main>
+        </transition>
 
         <!-- Sliding Drawer -->
         <sliding-drawer ref="drawer"></sliding-drawer>
@@ -468,11 +164,13 @@
 
     <script src="/_system/js/vendor/vue.js"></script>
     <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/admin.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
     <script>
+        Vue.component('paginate', VuejsPaginate)
         var app = new Vue({
             el: '#app',
             mixins: [accountMixin, adminMixin, facebookMixin],
@@ -482,6 +180,11 @@
                 calendarBookingsByDate: [],
                 calendarMode: 'Day',
                 sales: []
+            },
+            computed:{
+                filteredDate(){
+                    return this.bookings.filter(booking => (Date.parse(booking.booking_date) >= Date.parse(this.selected_date_from)) && (Date.parse(booking.booking_date) <= Date.parse(this.selected_date_to)) );
+                }
             },
             mounted: function () {
                 this.fbInit();

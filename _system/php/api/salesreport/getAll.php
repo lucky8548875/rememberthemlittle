@@ -20,7 +20,7 @@ try {
     // $stmt = $conn->prepare($sql);
     // $stmt->execute();
 
-    $stmt = $conn->prepare("SELECT booking_date, booking_total_price FROM bookings WHERE booking_status='BOOKED'");
+    $stmt = $conn->prepare("SELECT booking_date, booking_total_price FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id WHERE booking_status='BOOKED' ORDER BY booking_created DESC");
     $stmt->execute();
 
     # Fetch Result
