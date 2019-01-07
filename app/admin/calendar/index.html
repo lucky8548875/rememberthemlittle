@@ -48,7 +48,7 @@
             list-style-type: none;
             overflow-x: hidden;
             overflow-y: auto;
-            max-width: 212px;
+            min-width: 212px;
             max-height: 500px;
         }
 
@@ -70,6 +70,53 @@
 
         .matchlist-item-container:hover {
             background-color: aquamarine;
+        }
+        
+        .see-all-results {
+            color: white;
+            text-align: center;
+        }
+        
+        .see-all-results:hover {
+            background-color: blue;
+        }
+
+        .record-modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform:  translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            flex-flow: column wrap;
+            overflow: auto;
+            background-color: cadetblue;
+            min-width: 500px;
+            min-height: 300px;
+            max-width: 800px;
+            max-height: 500px;
+        }
+
+        .field-value-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 400px;
+            max-height: 50px;
+            margin: 10px;
+        }
+
+        .field-label {
+            width: 50%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .value-input {
+            width: 50%;
+            height: 30px;
         }
     </style>
 </head>

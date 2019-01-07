@@ -420,7 +420,33 @@ Vue.component('admin-searchbar', {
     data: function() {
         return {
             query: '',
-            matches: ''
+            record: '',
+            matches: '',
+            showModal: false
+        }
+    },
+    methods: {
+        viewAccount: function(account_id) {
+            Vue.http.get(`/_system/php/api/account/get.php?account_id=${account_id}`)
+                .then(
+                    response => {
+                        if (response.body.success)
+                        {
+                            this.record = response.body.data;
+                            this.showModal = true;
+                        }
+                        else
+                        {
+                            console.error(response.body.message);
+                        }
+                    },
+                    response => {
+                        console.error(response);
+                    }
+                );
+        },
+        seeAllResults: function() {
+            // window.location.href = "/app/admin/results.html"
         }
     },
     watch: {
@@ -453,19 +479,44 @@ Vue.component('admin-searchbar', {
         <ul class="admin-searchbar-matchlist">
             <ul class="matchlist-group-container" v-show="matches.accounts != null">
                 <h3 class="matchlist-group-heading">Accounts</h3>
-                <li class="matchlist-item-container" v-for="match in matches.accounts">
+                <li class="matchlist-item-container" v-for="match in matches.accounts" v-on:click="viewAccount(match.account_id)">
                     <h4 class="matchlist-item-text">ID: {{match.account_id}}</h4>
                     <h5 class="matchlist-item-subtext">{{match.account_name}}</h5>
                 </li>
             </ul>
             <ul class="matchlist-group-container" v-show="matches.bookings != null">
                 <h3 class="matchlist-group-heading">Bookings</h3>
-                <li class="matchlist-item-container" v-for="match in matches.bookings">
+                <li class="matchlist-item-container" v-for="match in matches.bookings" v-on:click="viewBooking(match.booking_id)">
                     <h4 class="matchlist-item-text">ID: {{match.booking_id}}</h4>
                     <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.booking_date}}</h5>
                 </li>
             </ul>
+            <li class="see-all-results" v-show="matches.length != 0" v-on:click="seeAllResults()">See all results...</li>
         </ul>
+
+        <div class="record-modal-container" v-show="showModal">
+            <div class="field-value-container" v-for="(value, key) in record">
+                <label class="field-label" v-bind:for="key">{{key}}:</label>
+                <input class="value-input" v-bind:id="key" type="text" v-bind:value="value" readonly>
+            </div>
+       </div>
     </div>
     `
 })
+
+// Vue.component('record-modal', {
+//     data: function() {
+//         return {
+//             record: '',
+//             isVisible: false
+//         }
+//     },
+//     template:
+//     `
+//     <div class="record-modal-container" v-show="isVisible">
+//         <div class="field-value-container" v-for="(value, key) in record">
+//             <label v-bind:for="key">{{key}}:</label><input v-bind:id="key" type="text" v-bind:value="value" readonly>
+//         </div>
+//     </div>
+//     `
+// })
