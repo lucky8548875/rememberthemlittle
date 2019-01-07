@@ -16,16 +16,6 @@ if(isset($account_id) && isset($account_type))
         # Perform SQL Query
         $stmt = $conn->prepare("UPDATE accounts SET account_type = $account_type WHERE account_id = $account_id");
         $stmt->execute();
-
-        # Fetch Result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        # Print Result in JSON Format
-        echo json_encode((object)[
-            'success' => true,
-            'data' => $result
-        ],JSON_NUMERIC_CHECK);
-
         }
     catch(PDOException $e)
     {
