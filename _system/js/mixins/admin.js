@@ -87,6 +87,25 @@ var adminMixin = {
             console.log('fail');
           });
 
+    },
+    completeBooking(booking_id) {
+      var formData = new FormData();
+      formData.append('account_id', this.account.account_id);
+      formData.append('token', this.account.token);
+      formData.append('booking_id', booking_id);
+      Vue.http.post('/_system/php/api/booking/completeBooking.php', formData)
+        .then(
+          response => {
+
+            if (response.body.success)
+              this.getAllBookings();
+            else
+              console.error(response.body.message);
+          },
+          response => {
+            console.log('fail');
+          });
+
     }
   }
 

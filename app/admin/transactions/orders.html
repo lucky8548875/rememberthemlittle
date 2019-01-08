@@ -55,13 +55,13 @@
         </nav>
 
         <div class="sidebar">
-            <a href="/app/admin/transactions/bookings.html" >Bookings</a>
+            <a href="/app/admin/transactions/bookings.html">Bookings</a>
             <a href="/app/admin/transactions/orders.html" class="active">Orders</a>
         </div>
 
         <!-- Main Content -->
         <transition name="slide-left" appear v-cloak>
-            
+
             <main>
                 <div class="control">
                     <a class="filter color-primary">
@@ -76,21 +76,23 @@
                         </a>
                     </div>
                 </div>
-                <table>
-                    <tr v-for="order in orders">
-                        <td>
-                            <span>{{order.account_name}}</span><br>
-                            <span style="font-size: 0.8rem">{{order.order_status}}</span>
-                        </td>
-                        <td style="text-align: right; text-align: -webkit-right;">
-                            <button @click="$root.$refs.orders.show(order)">View</button>
-                        </td>
-                    </tr>
-                </table>
+                <div class="bookings-container">
+                    <table>
+                        <tr v-for="order in orders">
+                            <td>
+                                <span>{{order.account_name}}</span><br>
+                                <span style="font-size: 0.8rem">{{order.order_status}}</span>
+                            </td>
+                            <td style="text-align: right; text-align: -webkit-right;">
+                                <button @click="$root.$refs.orders.show(order)">View</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </main>
         </transition>
 
-       
+
         <modal inline-template ref="orders" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
@@ -102,7 +104,7 @@
                             <span>Close</span>
                         </a>
                     </h3>
-                    
+
                     <table>
                         <thead>
                             <tr>
@@ -115,7 +117,9 @@
                             <tr v-for="item in JSON.parse(params.order_list)">
                                 <td>{{item.addon.addon_description}}</td>
                                 <td>{{item.filename}}</td>
-                                <td>{{item.addon.addon_source == 'PACKAGE' ? '(Included in Package)' : item.addon.addon_source == 'BOOKING' ? '(Paid during booking)' : 'Additional Php' + item.addon.addon_price }}</td>
+                                <td>{{item.addon.addon_source == 'PACKAGE' ? '(Included in Package)' :
+                                    item.addon.addon_source == 'BOOKING' ? '(Paid during booking)' : 'Additional Php' +
+                                    item.addon.addon_price }}</td>
                             </tr>
                         </tbody>
                     </table>

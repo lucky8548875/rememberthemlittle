@@ -51,7 +51,6 @@
      -->
     <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
-    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
 
     <!-- Page Title-->
     <title>Remember Them Little</title>
@@ -90,6 +89,9 @@
 
         <!-- Main Content -->
         <main class="main-index">
+            <div>
+                <image class="banner-image" src="/_system/images/newborn.jpg"></image>
+            </div>
             <div class="container">
 
                 <h3 class="banner-message">
@@ -101,12 +103,12 @@
                         <span>Book Now</span>
                         <i class="fas fa-angle-right"></i><div class="blur"></div>
                     </a>
-                    <a v-if="account.status=='DISCONNECTED' && facebook.status=='LOADED'">
+                    <!-- <a v-if="account.status=='DISCONNECTED' && facebook.status=='LOADED'">
                         <span>Sign in</span>
                         <i class="fab fa-facebook-square"></i>
                         <i class="fas fa-key"></i>
-                    </a>
-                    <a class="bookings-btn" v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0">
+                    </a> -->
+                    <a class="bookings-btn" v-if="account.status=='CONNECTED'" href="/app/bookings" style="border: 0; background-color: white">
                         <span>My Bookings</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>

@@ -174,7 +174,12 @@
                                 v-if="params.booking_status=='AWAITING_CONFIRMATION'">
                                 <span>Confirm Booking</span>
                             </button>
-                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                            <button @click="$root.completeBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                                v-if="params.booking_status=='BOOKED'">
+                                <span>Mark as Completed</span>
+                            </button>
+                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center"
+                            v-if="params.booking_status!='COMPLETED'">
                                 <span>Cancel Booking</span>
                             </button>
                         </div>
