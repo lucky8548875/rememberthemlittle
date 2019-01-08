@@ -41,15 +41,22 @@
             color: lightgray;
         }
 
-        .admin-searchbar-matchlist {
+        .results-dropdown-container {
             position: absolute;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 212px;
+            max-height: 500px;
+        }
+
+        .admin-searchbar-matchlist {
             background-color: gray;
             list-style-type: none;
             overflow-x: hidden;
             overflow-y: auto;
-            min-width: 212px;
-            max-height: 500px;
+            width: 100%;
         }
 
         .matchlist-group-container {
@@ -72,12 +79,14 @@
             background-color: aquamarine;
         }
         
-        .see-all-results {
+        .see-results-container {
+            background-color: blue;
             color: white;
             text-align: center;
+            width: 100%;
         }
         
-        .see-all-results:hover {
+        .see-results-container:hover {
             background-color: blue;
         }
 

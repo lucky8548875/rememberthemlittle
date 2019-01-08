@@ -416,13 +416,15 @@ Vue.component('fileupload', {
     `
   })
 
-Vue.component('admin-searchbar', {
+  Vue.component('admin-searchbar', {
     data: function() {
         return {
             query: '',
             record: '',
             matches: '',
-            showModal: false
+            showModal: false,
+            seeAll: false,
+            textForSeeResults: 'See all results'
         }
     },
     methods: {
@@ -445,13 +447,24 @@ Vue.component('admin-searchbar', {
                     }
                 );
         },
-        seeAllResults: function() {
-            // window.location.href = "/app/admin/results.html"
-        }
-    },
-    watch: {
-        query: function() {
-            Vue.http.get(`/_system/php/functions/adminSearch.php?query=${this.query}`)
+        toggleSeeAll: function() {
+            this.seeAll = !this.seeAll;
+            if(this.seeAll)
+                this.textForSeeResults = 'See limited results...';
+            else
+            {
+                this.textForSeeResults = 'See all results...';
+            }
+            this.adminSearch();
+
+        },
+        adminSearch: function() {
+            var toExecute = 'adminSearchWithLimit';
+            if(this.seeAll)
+            {
+                toExecute = 'adminSearch';
+            }
+            Vue.http.get(`/_system/php/functions/${toExecute}.php?query=${this.query}`)
                 .then(
                     response => {
                         if (response.body.success)
@@ -469,6 +482,11 @@ Vue.component('admin-searchbar', {
                 );
         }
     },
+    watch: {
+        query: function() {
+            this.adminSearch();
+        }
+    },
     template:
     `
     <div class="admin-searchbar-container">
@@ -476,23 +494,25 @@ Vue.component('admin-searchbar', {
             <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query">
             <i class="fas fa-search"></i>
         </div>
-        <ul class="admin-searchbar-matchlist">
-            <ul class="matchlist-group-container" v-show="matches.accounts != null">
-                <h3 class="matchlist-group-heading">Accounts</h3>
-                <li class="matchlist-item-container" v-for="match in matches.accounts" v-on:click="viewAccount(match.account_id)">
-                    <h4 class="matchlist-item-text">ID: {{match.account_id}}</h4>
-                    <h5 class="matchlist-item-subtext">{{match.account_name}}</h5>
-                </li>
+        <div class="results-dropdown-container">
+            <ul class="admin-searchbar-matchlist">
+                <ul class="matchlist-group-container" v-show="matches.accounts != null">
+                    <h3 class="matchlist-group-heading">Accounts</h3>
+                    <li class="matchlist-item-container" v-for="match in matches.accounts" v-on:click="viewAccount(match.account_id)">
+                        <h4 class="matchlist-item-text">ID: {{match.account_id}}</h4>
+                        <h5 class="matchlist-item-subtext">{{match.account_name}}</h5>
+                    </li>
+                </ul>
+                <ul class="matchlist-group-container" v-show="matches.bookings != null">
+                    <h3 class="matchlist-group-heading">Bookings</h3>
+                    <li class="matchlist-item-container" v-for="match in matches.bookings" v-on:click="viewBooking(match.booking_id)">
+                        <h4 class="matchlist-item-text">ID: {{match.booking_id}}</h4>
+                        <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.booking_date}}</h5>
+                    </li>
+                </ul>
             </ul>
-            <ul class="matchlist-group-container" v-show="matches.bookings != null">
-                <h3 class="matchlist-group-heading">Bookings</h3>
-                <li class="matchlist-item-container" v-for="match in matches.bookings" v-on:click="viewBooking(match.booking_id)">
-                    <h4 class="matchlist-item-text">ID: {{match.booking_id}}</h4>
-                    <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.booking_date}}</h5>
-                </li>
-            </ul>
-            <li class="see-all-results" v-show="matches.length != 0" v-on:click="seeAllResults()">See all results...</li>
-        </ul>
+            <div class="see-results-container" v-show="matches.length != 0" v-on:click="toggleSeeAll()">{{textForSeeResults}}</div>
+        </div>
 
         <div class="record-modal-container" v-show="showModal">
             <div class="field-value-container" v-for="(value, key) in record">
