@@ -424,7 +424,9 @@ Vue.component('fileupload', {
             matches: '',
             showModal: false,
             seeAll: false,
-            textForSeeResults: 'See all results'
+            textForSeeResults: 'See all results',
+            inputType: 'text',
+            inputIcon: 'fas fa-font'
         }
     },
     methods: {
@@ -480,6 +482,18 @@ Vue.component('fileupload', {
                         console.error(response);
                     }
                 );
+        },
+        toggleInputType: function() {
+            if (this.inputType == 'text')
+            {
+                this.inputType = 'date';
+                this.inputIcon = 'fas fa-calendar';
+            }
+            else if(this.inputType == 'date')
+            {
+                this.inputType = 'text';
+                this.inputIcon = 'fas fa-font';
+            }
         }
     },
     watch: {
@@ -491,8 +505,9 @@ Vue.component('fileupload', {
     `
     <div class="admin-searchbar-container">
         <div class="admin-searchbar-query">
-            <input class="admin-searchbar-textfield" type="text" placeholder="Search..." v-model="query">
-            <i class="fas fa-search"></i>
+            <input class="admin-searchbar-textfield" v-bind:type="inputType" placeholder="Search..." v-model="query">
+            <i class="fas fa-search" v-show="inputType == 'text'" v-on:click="adminSearch()"></i>
+            <i v-bind:class="inputIcon" v-on:click="toggleInputType()"></i>
         </div>
         <div class="results-dropdown-container">
             <ul class="admin-searchbar-matchlist">

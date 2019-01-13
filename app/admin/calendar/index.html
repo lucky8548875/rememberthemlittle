@@ -12,7 +12,7 @@
     <title>Remember Them Little</title>
     <style>
         .admin-searchbar-container {
-            background-color: lightgray;
+            /* background-color: lightgray; */
             color: gray;
             border-radius: 2rem;
         }
@@ -21,7 +21,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            min-width: 212px;
+            min-width: 250px;
             min-height: 40px;
         }
 
@@ -33,11 +33,29 @@
             margin: 0;
             padding: 1rem;
             border-width: 0px;
+            width: 90%;
+        }
+
+        .admin-searchbar-textfield::-webkit-inner-spin-button {
+            display: none;
+            -webkit-appearance: none;
         }
 
         .admin-searchbar-container .fa-search {
             position: absolute;
-            right: 8px;
+            right: 32px;
+            color: lightgray;
+        }
+
+        .admin-searchbar-container .fa-font {
+            position: absolute;
+            right: 6px;
+            color: lightgray;
+        }
+
+        .admin-searchbar-container .fa-calendar {
+            position: absolute;
+            right: 6px;
             color: lightgray;
         }
 
