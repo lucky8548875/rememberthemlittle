@@ -20,7 +20,7 @@ if(isset($start_date) && isset($end_date))
                 account_gender as gender, 
                 COUNT(account_id) as count 
             FROM accounts   
-            GROUP BY gender
+            GROUP BY gender"
         );
         $stmt->execute();
     
