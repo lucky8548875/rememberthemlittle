@@ -13,10 +13,10 @@ try
     // $stmt = $conn->prepare("SELECT DATE(account_created) as date, COUNT(account_id) as count FROM accounts WHERE account_created BETWEEN $start_date AND $end_date GROUP BY date");
     $stmt = $conn->prepare(
         "SELECT 
-            account_gender as gender, 
+            account_gender, 
             COUNT(account_id) as count 
         FROM accounts   
-        GROUP BY gender"
+        GROUP BY account_gender"
     );
     $stmt->execute();
 
