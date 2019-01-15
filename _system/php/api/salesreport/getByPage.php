@@ -6,6 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.p
 
 $account_id = $_POST['account_id'];
 $token = $_POST['token'];
+$pageNum = $_POST['pageNum'];
 
 //if(isAdminTokenValid($account_id,$token)){
  if(true){
@@ -16,7 +17,18 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # Perform SQL Query
-    $stmt = $conn->prepare("SELECT booking_date, booking_total_price, account_name FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id WHERE booking_status='BOOKED' ORDER BY booking_created DESC LIMIT 0,50");
+    if(isset($pageNum)){
+        //0 and 1 are in the same page
+        if($pageNum == 0 || $pageNum == 1){
+            $stmt = $conn->prepare("SELECT booking_date, booking_total_price, account_name FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id WHERE booking_status='BOOKED' ORDER BY booking_created DESC LIMIT 0, 50");
+        }else{
+            //calculation of rowstart per page is the result of records_display
+            $records_display_startcount = ($pageNum*50)-50;
+            $stmt = $conn->prepare("SELECT booking_date, booking_total_price, account_name FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id WHERE booking_status='BOOKED' ORDER BY booking_created DESC LIMIT $record_display_startcount, 50");
+        }
+    }else{
+        $stmt = $conn->prepare("SELECT booking_date, booking_total_price, account_name FROM bookings INNER JOIN accounts ON bookings.account_id = accounts.account_id WHERE booking_status='BOOKED' ORDER BY booking_created DESC");
+    }
     $stmt->execute();
 
     # Fetch Result

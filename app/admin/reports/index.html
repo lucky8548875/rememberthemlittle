@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
     <title>Remember Them Little</title>
+    <style>
+        .paginator a{
+            padding: 10px;
+            display: inline-block;
+
+        }
+    </style>
 </head>
 
 <body class="admin reports">
@@ -86,7 +93,9 @@
                     <thead>
                         <tr>
                             <th><span>Date</span></th>
+                            <th><span>Account</span></th>
                             <th><span>Price</span></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -95,13 +104,32 @@
                                 <span>{{sale.booking_date}}</span>
                             </td>
                             <td>
+                                <span>{{sale.account_name}}</span>
+                            <td>
                                 <span>{{sale.booking_total_price}}</span>
+                            </td>
+                            <td style="text-align: right; text-align: -webkit-right;">
+                                <button @click="$root.$refs.sales.show(sales)">View</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-        <modal inline-template ref="sales-info" v-cloak>
+        <template>
+            <paginate class="paginator" style="display: flex;
+            list-style-type: none;"
+                :page-count="pageCount"
+                :page-range="2"
+                :margin-pages="2"
+                :click-handler="goToPage"
+                :prev-text="'Prev'"
+                :next-text="'Next'"
+                :container-class="'className'"
+                :page-class="'page-item'">
+            </paginate>
+        </template>
+
+        <modal inline-template ref="sales" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
                     <div class="booking-mobile">
@@ -179,7 +207,9 @@
                 pageTitle: 'Sales Report',
                 calendarBookingsByDate: [],
                 calendarMode: 'Day',
-                sales: []
+                sales: [],
+                pageNum: 0,
+                pageCount: 0
             },
             computed:{
                 filteredDate(){
@@ -188,8 +218,15 @@
             },
             mounted: function () {
                 this.fbInit();
-                this.getAllSales();
+                this.getPageNumber();
+                this.getPageCount();
             },
+            methods: {
+                goToPage (pageNum) {
+                    console.log(pageNum);
+                    this.pageNum = pageNum;
+                }
+            }
         })
     </script>
 
