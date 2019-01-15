@@ -13,7 +13,7 @@ try
     $stmt = $conn->prepare(
         "SELECT 
             a.account_name, 
-            SUM(CASE WHEN b.booking_status = 'AWAITING_PAYMENT' THEN 0 ELSE b.booking_total_price END) as total_expenditure 
+            SUM(CASE WHEN b.booking_status NOT IN ('AWAITING_PAYMENT', 'CANCELLED') THEN 0 ELSE b.booking_total_price END) as total_expenditure 
         FROM accounts a 
         INNER JOIN bookings b 
         ON a.account_id = b.account_id  
