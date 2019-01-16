@@ -14,11 +14,11 @@ try
         "SELECT 
             a.account_name, 
             l.log_description, 
-            l.log_datetime   
+            l.log_created   
         FROM logs l
         INNER JOIN accounts a 
         ON l.account_id = a.account_id
-        ORDER BY l.log_datetime DESC"
+        ORDER BY l.log_created DESC"
     );
     $stmt->execute();
 

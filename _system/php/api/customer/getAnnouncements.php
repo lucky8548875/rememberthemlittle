@@ -14,12 +14,12 @@ try
         "SELECT 
             announcement_title, 
             announcement_description, 
-            announcement_date_posted, 
-            announcement_start_date, 
-            announcement_end_date    
+            announcement_created, 
+            announcement_start, 
+            announcement_end 
         FROM announcements
-        WHERE announcement_start_date > CURDATE()
-        ORDER BY announcement_date_posted DESC"
+        WHERE announcement_start > CURDATE()
+        ORDER BY announcement_created DESC"
     );
     $stmt->execute();
 
