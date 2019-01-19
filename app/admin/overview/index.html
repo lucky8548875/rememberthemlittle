@@ -131,7 +131,7 @@
     </style>
 </head>
 
-<body class="admin calendar">
+<body class="admin overview">
 
     <!-- Vue App -->
     <div id="app">
@@ -156,7 +156,7 @@
             </span>
             <span>
                 <a class="section_title">
-                    <h3>Calendar</h3>
+                    <h3>Overview</h3>
                 </a>
             </span>
             <span>
@@ -181,12 +181,6 @@
 
         </nav>
 
-        <!-- <div class="sidebar">
-            <p>Age</p>
-            <p>Gender</p>
-            <p>Location</p>
-        </div> -->
-
         <!-- Main Content -->
         <div class="overview-container">
             <div class="logs-container">
@@ -199,9 +193,9 @@
                 </ul>
             </div>
             <div class="revenues-chart-container">
-                <apexchart width="500" type="bar" :series="series.revenues" :options="options.revenues"></apexchart>
+                <apexchart width="400" type="bar" :series="series.revenues" :options="options.revenues"></apexchart>
             </div>
-            <div class="registrations-chart-container">
+            <div class="registrations-count-container">
                 <h2>Registrations Today ({{registration_count.today}}):</h2>
                 <h3>{{registration_count.count}}</h3>
             </div>
@@ -215,18 +209,18 @@
                 </ul>
             </div>
             <div class="bookings-chart-container">
-                <apexchart width="500" type="line" :series="series.bookings" :options="options.bookings"></apexchart>
+                <apexchart width="400" type="line" :series="series.bookings" :options="options.bookings"></apexchart>
             </div>
-            <!-- <div class="bookings-aprroval-container">
+            <div class="bookings-approval-container">
                 <ul class="bookings-approval-list">
-                    <li class="bookings-approval-item" v-for="booking in unapproved_bookings">
+                    <li class="bookings-approval-item" v-for="booking in bookings">
                         <span class="name-container">{{booking.account_name}}</span>
-                        <span class="date-container">{{booking.account_name}}</span>
+                        <span class="date-container">{{booking.booking_date}}</span>
                         <span class="approve-button" v-on:click="approveBooking()">Approve</span>
                         <span class="reject-button" v-on:click="rejectBooking()">Reject</span>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </div>
 
         <!-- Sliding Drawer -->
@@ -405,7 +399,7 @@
                         );
                 },
                 getUnapprovedBookings: function() {
-                    Vue.http.get(`/_system/php/api/customer/getRegistrationCountToday.php`)
+                    Vue.http.get(`/_system/php/api/customer/getUnapprovedBookings.php`)
                         .then(
                             response => {
                                 if (response.body.success)
