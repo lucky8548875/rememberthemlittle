@@ -3,7 +3,10 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.php';
 
+$start_date = $_GET['start_date'];
+$end_date = $_GET['end_date'];
 if(true)
+//if(isset($start_date) && isset($end_date))
 {
     try
     {
@@ -14,15 +17,26 @@ if(true)
         # Perform SQL Query
         $stmt = $conn->prepare(
             "SELECT 
-                COUNT(account_id) AS count 
-            FROM accounts 
-            WHERE account_last_interaction > NOW() - INTERVAL 2 MINUTE 
-            ORDER BY account_last_interaction DESC"
+                MONTHNAME(booking_created) as month, 
+                COUNT(booking_id) as count 
+            FROM bookings 
+            GROUP BY month 
+            ORDER BY booking_created ASC"
         );
         $stmt->execute();
     
         # Fetch Result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $months = array();
+        $counts = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($months, $row['month']);
+            array_push($counts, $row['count']);
+        }
+        $result = array(
+            'months' => $months,
+            'counts' => $counts
+        );
         
         # Print Result in JSON Format
         echo json_encode((object)[

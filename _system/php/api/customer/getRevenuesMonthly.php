@@ -5,7 +5,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.p
 
 $start_date = $_GET['start_date'];
 $end_date = $_GET['end_date'];
-if(isset($start_date) && isset($end_date))
+if(true)
+//if(isset($start_date) && isset($end_date))
 {
     try
     {
@@ -14,22 +15,46 @@ if(isset($start_date) && isset($end_date))
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
         # Perform SQL Query
-        // $stmt = $conn->prepare("SELECT DATE(account_created) as date, COUNT(account_id) as count FROM accounts WHERE account_created BETWEEN $start_date AND $end_date GROUP BY date");
+        // "SELECT 
+        //         MONTHNAME(booking_date) as month, 
+        //         SUM(booking_total_price) as sum 
+        //     FROM bookings b 
+        //     LEFT JOIN orders o
+        //     ON b.booking_id = o.booking_id
+        //     WHERE b.booking_status = 'BOOKED' AND o   
+        //     GROUP BY month 
+        //     ORDER BY booking_date ASC"
         $stmt = $conn->prepare(
             "SELECT 
-                MONTHNAME(booking_date) as month, 
-                SUM(booking_total_price) as sum 
+                MONTHNAME(b.booking_date) as month, 
+                SUM(b.booking_total_price + CASE
+                    WHEN o.order_total_price IS NOT NULL 
+                    THEN o.order_total_price 
+                    ELSE 0
+                END
+                ) AS total 
             FROM bookings b 
-            INNER JOIN orders o
-            ON b.booking_id = o.booking_id AND o.order_status = 'RELEASED'
-            WHERE b.booking_status = 'BOOKED'   
+            LEFT JOIN orders o 
+            ON b.booking_id = o.booking_id 
+                AND b.booking_status = 'BOOKED' 
+                AND (o.order_status = 'RELEASED' OR o.order_status IS NULL)
             GROUP BY month 
             ORDER BY booking_date ASC"
         );
         $stmt->execute();
     
         # Fetch Result
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $months = array();
+        $totals = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($months, $row['month']);
+            array_push($totals, $row['total']);
+        }
+        $result = array(
+            'months' => $months,
+            'totals' => $totals
+        );
         
         # Print Result in JSON Format
         echo json_encode((object)[

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+    <style>
+        /*Search bar styles -Place on _admin.sass next time*/
+        .admin-searchbar-container {
+            background-color: lightgray;
+            color: gray;
+            border-radius: 2rem;
+        }
+
+        .admin-searchbar-query {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 212px;
+            min-height: 40px;
+        }
+
+        .admin-searchbar-textfield {
+            position: absolute;
+            border-radius: 2rem;
+            background-color: transparent;
+            border-width: 0px;
+            margin: 0;
+            padding: 1rem;
+            border-width: 0px;
+        }
+
+        .admin-searchbar-container .fa-search {
+            position: absolute;
+            right: 8px;
+            color: lightgray;
+        }
+
+        .results-dropdown-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 212px;
+            max-height: 500px;
+        }
+
+        .admin-searchbar-matchlist {
+            background-color: gray;
+            list-style-type: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .matchlist-group-container {
+            list-style-type: none;
+            margin: 2px 0 2px 0;
+            padding: 2px 0 2px 0;
+        }
+
+        .matchlist-group-heading {
+            margin-left: 3px;
+        }
+
+        .matchlist-item-container {
+            padding: 5px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .matchlist-item-container:hover {
+            background-color: aquamarine;
+        }
+        
+        .see-results-container {
+            background-color: blue;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .see-results-container:hover {
+            background-color: blue;
+        }
+
+        .record-modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform:  translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            flex-flow: column wrap;
+            overflow: auto;
+            background-color: cadetblue;
+            min-width: 500px;
+            min-height: 300px;
+            max-width: 800px;
+            max-height: 500px;
+        }
+
+        .field-value-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 400px;
+            max-height: 50px;
+            margin: 10px;
+        }
+
+        .field-label {
+            width: 50%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .value-input {
+            width: 50%;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body class="admin calendar">
+
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+                <admin-searchbar>
+
+                </admin-searchbar>
+                <!--
+                <div class="searchbar">
+                    <input type="text" placeholder="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+                -->
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Calendar</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar" class="active">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <!-- <div class="sidebar">
+            <p>Age</p>
+            <p>Gender</p>
+            <p>Location</p>
+        </div> -->
+
+        <!-- Main Content -->
+        <div class="overview-container">
+            <div class="logs-container">
+                <h2>Recent Activities:</h2>
+                <ul class="logs-list">
+                    <li class="logs-item" v-for="log in logs">
+                        <span>{{log.account_name}} -- {{log.log_description}}</span>
+                        <span>{{log.log_created}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="revenues-chart-container">
+                <apexchart width="500" type="bar" :series="series.revenues" :options="options.revenues"></apexchart>
+            </div>
+            <div class="registrations-chart-container">
+                <h2>Registrations Today ({{registration_count.today}}):</h2>
+                <h3>{{registration_count.count}}</h3>
+            </div>
+            <div class="online-customers-container">
+                <h2>Online Customers: {{customers.size}}</h2>
+                <ul class="online-customers-list">
+                    <li class="online-customers-item" v-for="customer in customers">
+                        <h3>{{customer.account_name}}</h3>
+                        <h4>@{{customer.account_id}}</h4>
+                    </li>
+                </ul>
+            </div>
+            <div class="bookings-chart-container">
+                <apexchart width="500" type="line" :series="series.bookings" :options="options.bookings"></apexchart>
+            </div>
+            <!-- <div class="bookings-aprroval-container">
+                <ul class="bookings-approval-list">
+                    <li class="bookings-approval-item" v-for="booking in unapproved_bookings">
+                        <span class="name-container">{{booking.account_name}}</span>
+                        <span class="date-container">{{booking.account_name}}</span>
+                        <span class="approve-button" v-on:click="approveBooking()">Approve</span>
+                        <span class="reject-button" v-on:click="rejectBooking()">Reject</span>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <!-- Imports to make apexchart work-->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
+    
+    <script>
+        Vue.component('apexchart', VueApexCharts);
+
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin],
+            data: {
+                pageCategory: 'Dashboard',
+                pageTitle: 'Overview',
+                logs: '',
+                registration_count: '',
+                customers: '',
+                bookings: '',
+                options: {
+                    revenues: {
+                        chart: {
+                            id: 'chartRevenues'
+                        },
+                        title: {
+                            text: 'Monthly Revenues'
+                        }
+                    },
+                    bookings: {
+                        chart: {
+                            id: 'chartBookings'
+                        },
+                        title: {
+                            text: 'Monthly Bookings'
+                        }
+                    }
+                },
+                series: {
+                    revenues: [{
+                        name: 'Total Revenue',
+                        data: []
+                    }],
+                    bookings: [{
+                        name: 'Number of Bookings',
+                        data: []
+                    }]
+                }
+            },
+            created: function() {
+                this.getLogs();
+                this.getRegistrationCount();
+                this.getRevenues();
+                this.getOnlineCustomers();
+                this.getBookingCounts();
+                this.getUnapprovedBookings();
+            },
+            mounted: function () {
+                this.fbInit();
+            },
+            methods: {
+                getLogs: function() {
+                    Vue.http.get(`/_system/php/api/customer/getLogs.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    this.logs = response.body.data;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                },
+                getRevenues: function() {
+                    Vue.http.get(`/_system/php/api/customer/getRevenuesMonthly.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    //Update categories
+                                    //like srsly 3 statements needed just to do a simple thing >:(
+                                    var ops = {
+                                        xaxis: {
+                                            categories: []
+                                        }
+                                    };
+                                    ops.xaxis.categories = response.body.data.months;
+                                    ApexCharts.exec('chartRevenues', 'updateOptions', ops, false, true);
+
+                                    //Update data series
+                                    this.series.revenues[0].data = response.body.data.totals;
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        );
+                },
+                getRegistrationCount: function() {
+                    Vue.http.get(`/_system/php/api/customer/getRegistrationCountToday.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    this.registration_count = response.body.data;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                },
+                getOnlineCustomers: function() {
+                    Vue.http.get(`/_system/php/api/customer/getAllOnline.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    this.customers = response.body.data;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                },
+                getBookingCounts: function() {
+                    Vue.http.get(`/_system/php/api/customer/getBookingCounts.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    //Update categories
+                                    //like srsly 3 statements needed just to do a simple thing >:(
+                                    var ops = {
+                                        xaxis: {
+                                            categories: []
+                                        }
+                                    };
+                                    ops.xaxis.categories = response.body.data.months;
+                                    ApexCharts.exec('chartBookings', 'updateOptions', ops, false, true);
+
+                                    //Update data series
+                                    this.series.bookings[0].data = response.body.data.counts;
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        );
+                },
+                getUnapprovedBookings: function() {
+                    Vue.http.get(`/_system/php/api/customer/getRegistrationCountToday.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                    this.bookings = response.body.data;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
