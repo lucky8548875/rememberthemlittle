@@ -187,37 +187,38 @@
                 <h2>Recent Activities:</h2>
                 <ul class="logs-list">
                     <li class="logs-item" v-for="log in logs">
-                        <span>{{log.account_name}} -- {{log.log_description}}</span>
-                        <span>{{log.log_created}}</span>
+                        <span class="log-text">{{log.account_name}} -- {{log.log_description}}</span>
+                        <span class="log-date">{{log.log_created}}</span>
                     </li>
                 </ul>
             </div>
             <div class="revenues-chart-container">
-                <apexchart width="400" type="bar" :series="series.revenues" :options="options.revenues"></apexchart>
+                <apexchart width="500" type="bar" :series="series.revenues" :options="options.revenues"></apexchart>
             </div>
-            <div class="registrations-count-container">
-                <h2>Registrations Today ({{registration_count.today}}):</h2>
-                <h3>{{registration_count.count}}</h3>
+            <div class="registration-count-container">
+                <h2 class="registration-count-title">Registrations Today ({{registration_count.today}}):</h2>
+                <h3 class="registration-count-subtitle">{{registration_count.count}}</h3>
             </div>
             <div class="online-customers-container">
                 <h2>Online Customers: {{customers.size}}</h2>
                 <ul class="online-customers-list">
                     <li class="online-customers-item" v-for="customer in customers">
-                        <h3>{{customer.account_name}}</h3>
-                        <h4>@{{customer.account_id}}</h4>
+                        <h3 class="online-customers-name">{{customer.account_name}}</h3>
+                        <h4 class="online-customers-id">@{{customer.account_id}}</h4>
                     </li>
                 </ul>
             </div>
             <div class="bookings-chart-container">
-                <apexchart width="400" type="line" :series="series.bookings" :options="options.bookings"></apexchart>
+                <apexchart width="500" type="line" :series="series.bookings" :options="options.bookings"></apexchart>
             </div>
             <div class="bookings-approval-container">
+                <h2>Bookings Approval</h2>
                 <ul class="bookings-approval-list">
                     <li class="bookings-approval-item" v-for="booking in bookings">
-                        <span class="name-container">{{booking.account_name}}</span>
-                        <span class="date-container">{{booking.booking_date}}</span>
-                        <span class="approve-button" v-on:click="approveBooking()">Approve</span>
-                        <span class="reject-button" v-on:click="rejectBooking()">Reject</span>
+                        <span class="bookings-approval-name">{{booking.account_name}}</span>
+                        <span class="bookings-approval-date">{{booking.booking_date}}</span>
+                        <span class="bookings-approve-button" v-on:click="approveBooking()">Approve</span>
+                        <span class="bookings-reject-button" v-on:click="rejectBooking()">Reject</span>
                     </li>
                 </ul>
             </div>
@@ -415,7 +416,13 @@
                                 console.error(response);
                             }
                         );
-                }
+                },
+                approveBooking: function() {
+                    console.log('Approved!');
+                },
+                rejectBooking: function() {
+                    console.log('Rejected');
+                },
             }
         });
     </script>
