@@ -27,7 +27,17 @@ try
     $stmt->execute();
 
     # Fetch Result
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $age_ranges = array();
+    $counts = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        array_push($age_ranges, $row['age_range']);
+        array_push($counts, $row['count']);
+    }
+    $result = array(
+        'age_ranges' => $age_ranges,
+        'counts' => $counts
+    );
     
     # Print Result in JSON Format
     echo json_encode((object)[

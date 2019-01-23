@@ -21,7 +21,17 @@ try
     $stmt->execute();
 
     # Fetch Result
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $genders = array();
+    $counts = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        array_push($genders, $row['account_gender']);
+        array_push($counts, $row['count']);
+    }
+    $result = array(
+        'genders' => $genders,
+        'counts' => $counts
+    );
     
     # Print Result in JSON Format
     echo json_encode((object)[

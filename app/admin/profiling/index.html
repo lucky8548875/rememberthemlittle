@@ -187,18 +187,15 @@
         </div> -->
 
         <!-- Main Content -->
-        
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
         <div class="profiling-charts-container">
             <div class="age-chart-container">
-                
+                <apexchart width="500" type="bar" :series="series.ages" :options="options.ages"></apexchart>
             </div>
             <div class="gender-chart-container">
-            
+                <apexchart width="500" type="pie" :series="series.genders" :options="options.genders"></apexchart>
             </div>
             <div class="location-chart-container">
-            
+                <apexchart width="500" type="bar" :series="series.locations" :options="options.locations"></apexchart>
             </div>
         </div>
 
@@ -213,7 +210,12 @@
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/admin.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
+    <!-- Imports to make apexchart work-->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
     <script>
+        Vue.component('apexchart', VueApexCharts);
+
         var app = new Vue({
             el: '#app',
             mixins: [accountMixin, adminMixin, facebookMixin],
@@ -222,7 +224,49 @@
                 pageTitle: 'Calendar',
                 calendarBookingsByDate: [],
                 calendarMode: 'Day',
-                singledate: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate()
+                singledate: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate(),
+                options: {
+                    ages: {
+                        chart: {
+                            id: 'chartAge'
+                        },
+                        title: {
+                            text: 'Age Distribution'
+                        }
+                    },
+                    genders: {
+                        chart: {
+                            id: 'chartGender'
+                        },
+                        title: {
+                            text: 'Gender Distribution'
+                        },
+                    },
+                    locations: {
+                        chart: {
+                            id: 'chartLocation'
+                        },
+                        title: {
+                            text: 'Location Distribution'
+                        }
+                    }
+                },
+                series: {
+                    ages: [{
+                        name: '# of Customers',
+                        data: []
+                    }],
+                    genders: [],
+                    locations: [{
+                        name: '# of Customers',
+                        data: []
+                    }]
+                }
+            },
+            created: function() {
+                this.getAgeCounts();
+                this.getGenderCounts();
+                this.getLocationCounts();
             },
             mounted: function () {
                 this.fbInit();
@@ -231,6 +275,93 @@
             watch: {
                 singledate: function(){
                     this.getCalendarBookingsByDate(this.singledate);
+                }
+            },
+            methods: {
+                getAgeCounts: function() {
+                    Vue.http.get(`/_system/php/api/customer/getAgeCounts.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                     //Update categories
+                                    //like srsly 3 statements needed just to do a simple thing >:(
+                                    var ops = {
+                                        xaxis: {
+                                            categories: []
+                                        }
+                                    };
+                                    ops.xaxis.categories = response.body.data.age_ranges;
+                                    ApexCharts.exec('chartAge', 'updateOptions', ops, false, true);
+
+                                    //Update data series
+                                    this.series.ages[0].data = response.body.data.counts;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                },
+                getGenderCounts: function() {
+                    Vue.http.get(`/_system/php/api/customer/getGenderCounts.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                     //Update categories
+                                    //like srsly 3 statements needed just to do a simple thing >:(
+                                    var ops = {
+                                        labels: []
+                                    };
+                                    ops.labels = response.body.data.genders;
+                                    ApexCharts.exec('chartGender', 'updateOptions', ops, false, true);
+                                    
+                                    //Update data series
+                                    this.series.genders = response.body.data.counts;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
+                },
+                getLocationCounts: function() {
+                    Vue.http.get(`/_system/php/api/customer/getLocationCounts.php`)
+                        .then(
+                            response => {
+                                if (response.body.success)
+                                {
+                                     //Update categories
+                                    //like srsly 3 statements needed just to do a simple thing >:(
+                                    var ops = {
+                                        xaxis: {
+                                            categories: []
+                                        }
+                                    };
+                                    ops.xaxis.categories = response.body.data.locations;
+                                    ApexCharts.exec('chartLocation', 'updateOptions', ops, false, true);
+
+                                    //Update data series
+                                    this.series.locations[0].data = response.body.data.counts;
+                                }
+                                else
+                                {
+                                    console.error(response.body.message);
+                                }
+                            },
+                            response => {
+                                console.error(response);
+                            }
+                        );
                 }
             }
         })

@@ -15,7 +15,17 @@ try
     $stmt->execute();
 
     # Fetch Result
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $locations = array();
+    $counts = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+        array_push($locations, $row['account_location']);
+        array_push($counts, $row['count']);
+    }
+    $result = array(
+        'locations' => $locations,
+        'counts' => $counts
+    );
     
     # Print Result in JSON Format
     echo json_encode((object)[
