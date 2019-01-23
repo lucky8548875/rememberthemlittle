@@ -16,7 +16,7 @@ try
             b.booking_date  
         FROM bookings b
         INNER JOIN accounts a 
-        ON a.account_id = b.account_id AND b.booking_status IN ('AWAITING_PAYMENT', 'AWAITING_CONFIRMATION') 
+        ON a.account_id = b.account_id AND b.booking_status = 'AWAITING_CONFIRMATION'  
         ORDER BY b.booking_date ASC"
     );
     $stmt->execute();
