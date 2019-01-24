@@ -122,11 +122,15 @@
                         <tbody>
                             <tr v-for="sale in sales">
                                 <td>
-                                    <span>{{sale.WEEK}}</span>
+                                    <span>{{sale.weekstart}}</span>
+                                </td>
+                                <td>
+                                    <span>{{sale.weekend}}</span>
                                 </td>
                                 <td>
                                     <span>{{sale.bookings_total}}</span>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -244,6 +248,9 @@
                     this.pageNum = pageNum;
                     this.getPageNumber(this.pageNum,this.calendarMode);
                 },
+                changeMode (){
+                    this.getPageNumber(this.pageNum,this.calendarMode);
+                }
             }
         })
     </script>

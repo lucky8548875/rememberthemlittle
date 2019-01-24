@@ -4,10 +4,10 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/connection/db_connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkAdminToken.php';
 
-//$account_id = 0;$_POST['account_id'];
-//$token = 0;$_POST['token'];
-$pageNum = 0; //$_POST['pageNum'];
-$calendarMode = 'Week'; //$_POST['calendar_mode'];
+$account_id = 0;$_POST['account_id'];
+$token = 0;$_POST['token'];
+$pageNum = $_POST['pageNum'];
+$calendarMode = $_POST['calendar_mode'];
 
 //if(isAdminTokenValid($account_id,$token)){
  if(true){
@@ -25,7 +25,7 @@ try {
                 if($calendarMode=="Day"){
                     $stmt = $conn->prepare("SELECT booking_date, SUM(booking_total_price) as bookings_total, account_name FROM bookings b INNER JOIN accounts a ON b.account_id = a.account_id WHERE booking_status='BOOKED' GROUP BY account_name ORDER BY booking_created DESC LIMIT 0, 50");
                 }else if($calendarMode=="Week"){
-                    $stmt = $conn->prepare("SELECT WEEKOFYEAR(booking_date) as WEEK SUM(booking_total_price) as bookings_total FROM bookings b INNER JOIN accounts a ON b.account_id = a.account_id WHERE booking_status='BOOKED' GROUP BY WEEK ORDER BY booking_created DESC LIMIT 0, 50");
+                    $stmt = $conn->prepare("SELECT DATE_ADD(booking_date, INTERVAL(1-DAYOFWEEK(booking_date)) DAY) as weekstart, DATE_ADD(booking_date, INTERVAL(7-DAYOFWEEK(booking_date)) DAY) as weekend, SUM(booking_total_price) as bookings_total FROM bookings b INNER JOIN accounts a ON b.account_id = a.account_id WHERE booking_status='BOOKED' GROUP BY WEEK(booking_date) ORDER BY booking_created DESC LIMIT 0, 50");
                 }else if($calendarMode=="Month"){
 
                 }else if($calendarMode=="Year"){
