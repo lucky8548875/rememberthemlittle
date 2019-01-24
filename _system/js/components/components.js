@@ -415,3 +415,78 @@ Vue.component('fileupload', {
     </span>
     `
   })
+
+  Vue.component('slidestrip', {
+    props: ['pictexts'],
+    data: function() {
+        return {
+            myPictexts: this.pictexts,
+            scrollPosition: 0,
+            currentShow: 0
+        }
+    },
+    watch: {
+        scrollPosition: function() {
+            var imageRef = this.$refs['pictextImage' + this.currentShow][0];
+            console.log(imageRef)
+            var imagePosition = imageRef.offsetLeft;
+            console.log(this.scrollPosition + ' ? ' + imagePosition)
+            if (this.scrollPosition >= imagePosition + 800)
+            {
+                //imageRef.style.visibility = hidden;
+                this.toggleReveal(this.currentShow);
+                this.currentShow++;
+                //imageRef.style.visibility = visible;
+                this.toggleReveal(this.currentShow);
+            }
+            else if (this.scrollPosition <= imagePosition - 800)
+            {
+                //imageRef.style.visibility = hidden;
+                this.toggleReveal(this.currentShow);
+                this.currentShow--;
+                //imageRef.style.visibility = visible;
+                this.toggleReveal(this.currentShow);
+            }
+
+        }
+    },
+    methods: {
+        toggleReveal: function(index) {
+            this.myPictexts[index].shouldReveal = !this.myPictexts[index].shouldReveal;
+        },
+        trackScroll: function() {
+            //console.log("Scrolling");
+            //console.log(this.$refs.imageContainer.style.visibility);
+            this.scrollPosition = this.$refs.imageContainer.scrollLeft;
+        }
+    },
+    template:
+    `
+    <div class="slidestrip-container">
+        <div class="pictext-image-container" ref="imageContainer" v-on:scroll="trackScroll()">
+            <div>
+                <img class="pictext-image-picture" v-for="(pictext, index) in myPictexts" v-bind:src="pictext.image" v-bind:ref="'pictextImage' + index">
+            </div>
+        </div>
+        <div class="pictext-text-container" v-for="(pictext, index) in myPictexts" v-show="pictext.shouldReveal">
+            <h2 class="pictext-text-title">{{pictext.title}}</h2>
+            <p class="pictext-text-subtitle">{{pictext.subtitle}}</p>
+        </div>
+    </div>
+    `
+  })
+
+//   ,
+//         scrollIntoView: function(index) {
+//             console.log("Checking!")
+//             if (this.$refs['pictextImage' + index] != null)
+//             {
+//                 var imagePosition = this.$refs['pictextImage' + index].offsetLeft;
+//                 if (this.scrollPosition >= imagePosition && this.scrollPosition < imagePosition + 800)
+//                 {
+//                     console.log("Showing!")
+//                     return true;
+//                 }
+//             }
+//             return false;
+//         }

@@ -2724,4 +2724,49 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 .payment_option {
   padding: 1rem;
 }
+
+.slidestrip-container {
+  max-width: 800px;
+  max-height: 500px;
+  position: relative;
+}
+
+.slidestrip-container .pictext-image-container {
+  max-width: 800px;
+  max-height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.slidestrip-container .pictext-image-container > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.slidestrip-container .pictext-image-container > div .pictext-image-picture {
+  width: 800px;
+  height: 500px;
+}
+
+.slidestrip-container .pictext-text-container {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+}
 /*# sourceMappingURL=playfulcss.css.map */

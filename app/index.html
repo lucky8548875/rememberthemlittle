@@ -123,6 +123,11 @@
             </div>
         </main>
 
+        <!--Services-->
+        <section class="services">
+            <slidestrip v-bind:pictexts="pictexts"></slidestrip>
+        </section>
+
         <!-- Sliding Drawer -->
         <index-drawer ref="drawer"></index-drawer>
 
@@ -160,7 +165,37 @@
     <script>
         var app = new Vue({
             el: '#app',
-            mixins: [accountMixin, facebookMixin]
+            mixins: [accountMixin, facebookMixin],
+            data: {
+                pictexts: []
+            },
+            created: function() {
+                this.getPictexts();
+            },
+            methods: {
+                getPictexts: function() {
+                    this.pictexts = [
+                        {
+                            image: '/_system/images/maternity.jpg',
+                            title: 'Something to rememeber.',
+                            subtitle: '......',
+                            shouldReveal: true
+                        },
+                        {
+                            image: '/_system/images/newborn.jpg',
+                            title: 'Cherish them.',
+                            subtitle: '!!!!!!!!',
+                            shouldReveal: false
+                        },
+                        {
+                            image: '/_system/images/regular.jpg',
+                            title: 'While they are little...',
+                            subtitle: '????????????',
+                            shouldReveal: false
+                        }
+                    ]
+                }
+            }
         })
     </script>
 
