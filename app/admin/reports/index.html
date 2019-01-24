@@ -73,29 +73,28 @@
         <!-- Main Content -->
         <transition name="slide-left" appear v-cloak>
             <main>
-                <!-- <div class="control">
-                    <a class="filter color-primary" v-if="calendarMode=='Day'">
+                <div class="control">
+                    <!-- <a class="filter color-primary" v-if="calendarMode=='Day'">
                         <span>Today</span>
                         <i class="fas fa-angle-down"></i>
                     </a>
                     <a class="filter color-primary" v-if="calendarMode=='Week'">
                         <span>This Week</span>
                         <i class="fas fa-angle-down"></i>
-                    </a>
+                    </a> -->
                     <div class="group">
                         <a href="#" :class="{'active':calendarMode=='Day'}" @click="calendarMode='Day'">Day</a>
                         <a href="#" :class="{'active':calendarMode=='Week'}" @click="calendarMode='Week'">Week</a>
                         <a href="#" :class="{'active':calendarMode=='Month'}" @click="calendarMode='Month'">Month</a>
                     </div>
-                </div> -->
+                </div>
 
-                <table>
+                <table v-if="calendarMode=='Day'">
                     <thead>
                         <tr>
                             <th><span>Date</span></th>
                             <th><span>Account</span></th>
-                            <th><span>Price</span></th>
-
+                            <th><span>Total</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,17 +104,34 @@
                             </td>
                             <td>
                                 <span>{{sale.account_name}}</span>
-                            <td>
-                                <span>{{sale.booking_total_price}}</span>
                             </td>
-                            <td style="text-align: right; text-align: -webkit-right;">
-                                <button @click="$root.$refs.sales.show(sales)">View</button>
+                            <td>
+                                <span>{{sale.bookings_total}}</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-        <template>
+                <table v-if="calendarMode=='Week'">
+                        <thead>
+                            <tr>
+                                <th><span>Date</span></th>
+                                <th><span>Total</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="sale in sales">
+                                <td>
+                                    <span>{{sale.WEEK}}</span>
+                                </td>
+                                <td>
+                                    <span>{{sale.bookings_total}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+        <template v-if="pageCount>1">
             <paginate class="paginator" style="display: flex;
             list-style-type: none;"
                 :page-count="pageCount"
@@ -168,13 +184,13 @@
                                 </tr>
                             </table>
                             <br>
-                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                            <!-- <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
                                 v-if="params.booking_status=='AWAITING_CONFIRMATION'">
                                 <span>Confirm Booking</span>
-                            </button>
-                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                            </button> -->
+                            <!-- <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
                                 <span>Cancel Booking</span>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -192,13 +208,14 @@
 
     <script src="/_system/js/vendor/vue.js"></script>
     <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
-    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
     <script src="/_system/js/components/components.js"></script>
     <script src="/_system/js/mixins/account.js"></script>
     <script src="/_system/js/mixins/admin.js"></script>
     <script src="/_system/js/mixins/facebook.js"></script>
     <script>
         Vue.component('paginate', VuejsPaginate)
+
         var app = new Vue({
             el: '#app',
             mixins: [accountMixin, adminMixin, facebookMixin],
@@ -218,14 +235,15 @@
             },
             mounted: function () {
                 this.fbInit();
-                this.getPageNumber();
+                this.getPageNumber(this.pageNum,this.calendarMode);
                 this.getPageCount();
             },
             methods: {
                 goToPage (pageNum) {
                     console.log(pageNum);
                     this.pageNum = pageNum;
-                }
+                    this.getPageNumber(this.pageNum,this.calendarMode);
+                },
             }
         })
     </script>
