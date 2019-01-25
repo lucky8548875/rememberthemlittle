@@ -27,7 +27,7 @@ try {
                 }else if($calendarMode=="Week"){
                     $stmt = $conn->prepare("SELECT DATE_ADD(booking_date, INTERVAL(1-DAYOFWEEK(booking_date)) DAY) as weekstart, DATE_ADD(booking_date, INTERVAL(7-DAYOFWEEK(booking_date)) DAY) as weekend, SUM(booking_total_price) as bookings_total FROM bookings b INNER JOIN accounts a ON b.account_id = a.account_id WHERE booking_status='BOOKED' GROUP BY WEEK(booking_date) ORDER BY booking_created DESC LIMIT 0, 50");
                 }else if($calendarMode=="Month"){
-
+                    $stmt = $conn->prepare("SELECT DATEADD(month, DATEDIFF(month,0,booking_date), 0) as monthstart, EOMONTH(booking_date) as monthend, SUM(booking_total_price) as bookings_total FROM bookings b INNER JOIN accounts a ON b.account_id = a.account_id WHERE booking_status='BOOKED' GROUP BY extract(month from booking_date) ORDER BY booking_created DESC LIMIT 0, 50");
                 }else if($calendarMode=="Year"){
 
                 }
