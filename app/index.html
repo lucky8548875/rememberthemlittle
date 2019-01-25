@@ -125,9 +125,21 @@
 
         <!--Services-->
         <section class="services">
-            <slidestrip v-bind:pictexts="pictexts"></slidestrip>
+            <h1 class="services-section-title">SERVICES</h1>
+
+            <slidestrip v-bind:content="pictexts"></slidestrip>
+
+            <div class="why-choose-us">
+                <h2 class="why-choose-title">Why choose us?</h2>
+                <p class="why-choose-subtitle">Remember them little lorem ipsum dolor</p>
+            </div>
         </section>
 
+        <section class="faqs">
+            <h1 class="faqs-section-title">FAQS</h1>
+
+            <faqs-machine v-bind:content="faqs"></faqs-machine>
+        </section>
         <!-- Sliding Drawer -->
         <index-drawer ref="drawer"></index-drawer>
 
@@ -167,7 +179,21 @@
             el: '#app',
             mixins: [accountMixin, facebookMixin],
             data: {
-                pictexts: []
+                pictexts: [],
+                faqs: [
+                {
+                    question: "Q1",
+                    answer: "A1"
+                },
+                {
+                    question: "Q2",
+                    answer: "A2"
+                },
+                {
+                    question: "Q3",
+                    answer: "A3"
+                }
+                ]
             },
             created: function() {
                 this.getPictexts();
@@ -179,19 +205,16 @@
                             image: '/_system/images/maternity.jpg',
                             title: 'Something to rememeber.',
                             subtitle: '......',
-                            shouldReveal: true
                         },
                         {
                             image: '/_system/images/newborn.jpg',
                             title: 'Cherish them.',
                             subtitle: '!!!!!!!!',
-                            shouldReveal: false
                         },
                         {
                             image: '/_system/images/regular.jpg',
                             title: 'While they are little...',
                             subtitle: '????????????',
-                            shouldReveal: false
                         }
                     ]
                 }

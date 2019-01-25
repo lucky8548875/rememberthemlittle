@@ -417,46 +417,31 @@ Vue.component('fileupload', {
   })
 
   Vue.component('slidestrip', {
-    props: ['pictexts'],
+    props: ['content'],
     data: function() {
         return {
-            myPictexts: this.pictexts,
+            pictexts: this.content,
             scrollPosition: 0,
-            currentShow: 0
+            currentlyShown: 0
         }
     },
     watch: {
         scrollPosition: function() {
-            var imageRef = this.$refs['pictextImage' + this.currentShow][0];
-            console.log(imageRef)
+            var imageRef = this.$refs['pictextImage' + this.currentlyShown][0];
             var imagePosition = imageRef.offsetLeft;
-            console.log(this.scrollPosition + ' ? ' + imagePosition)
             if (this.scrollPosition >= imagePosition + 800)
             {
-                //imageRef.style.visibility = hidden;
-                this.toggleReveal(this.currentShow);
-                this.currentShow++;
-                //imageRef.style.visibility = visible;
-                this.toggleReveal(this.currentShow);
+                this.currentlyShown++;
             }
             else if (this.scrollPosition <= imagePosition - 800)
             {
-                //imageRef.style.visibility = hidden;
-                this.toggleReveal(this.currentShow);
-                this.currentShow--;
-                //imageRef.style.visibility = visible;
-                this.toggleReveal(this.currentShow);
+                this.currentlyShown--;
             }
 
         }
     },
     methods: {
-        toggleReveal: function(index) {
-            this.myPictexts[index].shouldReveal = !this.myPictexts[index].shouldReveal;
-        },
         trackScroll: function() {
-            //console.log("Scrolling");
-            //console.log(this.$refs.imageContainer.style.visibility);
             this.scrollPosition = this.$refs.imageContainer.scrollLeft;
         }
     },
@@ -465,17 +450,59 @@ Vue.component('fileupload', {
     <div class="slidestrip-container">
         <div class="pictext-image-container" ref="imageContainer" v-on:scroll="trackScroll()">
             <div>
-                <img class="pictext-image-picture" v-for="(pictext, index) in myPictexts" v-bind:src="pictext.image" v-bind:ref="'pictextImage' + index">
+                <img class="pictext-image-picture" v-for="(pictext, index) in pictexts" v-bind:src="pictext.image" v-bind:ref="'pictextImage' + index">
             </div>
         </div>
-        <div class="pictext-text-container" v-for="(pictext, index) in myPictexts" v-show="pictext.shouldReveal">
-            <h2 class="pictext-text-title">{{pictext.title}}</h2>
-            <p class="pictext-text-subtitle">{{pictext.subtitle}}</p>
+        <div class="pictext-text-container">
+            <h2 class="pictext-text-title">{{pictexts[currentlyShown].title}}</h2>
+            <p class="pictext-text-subtitle">{{pictexts[currentlyShown].subtitle}}</p>
         </div>
     </div>
     `
   })
 
+  Vue.component('faqs-machine', {
+    props: ['content'],
+    data: function() {
+        return {
+            faqs: this.content,
+            visibles: {}
+        }        
+    },
+    beforeMount: function() {
+        var obj = {}
+        for (i = 0; i < this.faqs.length; i++)
+        {
+            obj[i] = false;
+        }
+        this.visibles = obj
+    },
+    methods: {
+        toggleFAQ: function(index) {
+            this.visibles[index] = !this.visibles[index]
+            console.log(this.visibles[index])
+        }
+    },
+    template:
+    `
+    <div class="faqs-machine-container">
+        <input class="faqs-search" type="search" placeholder="Enter text to search for question...">
+
+        <ul class="faqs-list">
+            <li class="faqs-item" v-for="(faq, index) in faqs" v-bind:key="index">  
+                <div class="faqs-question" v-on:click="toggleFAQ(index)">
+                    {{faq.question}}
+                </div>
+                <transition name="slide-vertical" tag="p">
+                    <div class="faqs-answer" v-show="visibles[index]">
+                        {{faq.answer}}
+                    </div>
+                </transition>
+            </li>
+        </ul>
+    </div>
+    `
+  })
 //   ,
 //         scrollIntoView: function(index) {
 //             console.log("Checking!")
