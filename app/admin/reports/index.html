@@ -20,7 +20,6 @@
 </head>
 
 <body class="admin reports">
-
     <!-- Vue App -->
     <div id="app">
         <!-- App bar-->
@@ -86,8 +85,11 @@
                         <a href="#" :class="{'active':calendarMode=='Day'}" @click="calendarModeDay()">Day</a>
                         <a href="#" :class="{'active':calendarMode=='Week'}" @click="calendarModeWeek()">Week</a>
                         <a href="#" :class="{'active':calendarMode=='Month'}" @click="calendarModeMonth()">Month</a>
+                        <a href="#" :class="{'active':calendarMode=='Year'}" @click="calendarModeYear()">Year</a>
                     </div>
                 </div>
+
+                <input v-if="calendarMode=='Day'" type="text" v-model="$root.searchbar" @keyup.enter="searchMode()">
 
                 <table v-if="calendarMode=='Day'">
                     <thead>
@@ -159,6 +161,26 @@
                         </tr>
                     </tbody>
             </table>
+            <table v-if="calendarMode=='Year'">
+                <thead>
+                    <tr>
+                        <th><span>Year</span></th>
+                        <th><span>Total</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="sale in sales">
+                        <td>
+                            <span>{{sale.salesyear}}</span>
+                        </td>
+                        <td>
+                            <span>{{sale.bookings_total}}</span>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+        </table>
+
         <template v-if="pageCount>1">
             <paginate class="paginator" style="display: flex;
             list-style-type: none;"
@@ -173,7 +195,7 @@
             </paginate>
         </template>
 
-        <modal inline-template ref="sales" v-cloak>
+        <!-- <modal inline-template ref="sales" v-cloak>
             <transition name="zoom-out">
                 <div class="booking-modal" v-if="visible">
                     <div class="booking-mobile">
@@ -212,18 +234,18 @@
                                 </tr>
                             </table>
                             <br>
-                            <!-- <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
                                 v-if="params.booking_status=='AWAITING_CONFIRMATION'">
                                 <span>Confirm Booking</span>
-                            </button> -->
-                            <!-- <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                            </button>
+                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
                                 <span>Cancel Booking</span>
-                            </button> -->
+                            </button>
                         </div>
                     </div>
                 </div>
             </transition>
-        </modal>
+        </modal> -->
 
 
             </main>
@@ -254,38 +276,47 @@
                 calendarMode: 'Day',
                 sales: [],
                 pageNum: 0,
-                pageCount: 0
+                pageCount: 0,
+                searchbar: '',
+                totalprice: 0
             },
             computed:{
                 filteredDate(){
                     return this.bookings.filter(booking => (Date.parse(booking.booking_date) >= Date.parse(this.selected_date_from)) && (Date.parse(booking.booking_date) <= Date.parse(this.selected_date_to)) );
+                },
+                searchresult(){
+                    
                 }
             },
             mounted: function () {
                 this.fbInit();
-                this.getPageNumber(this.pageNum,this.calendarMode);
+                this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 this.getPageCount();
             },
             methods: {
                 goToPage (pageNum) {
                     console.log(pageNum);
                     this.pageNum = pageNum;
-                    this.getPageNumber(this.pageNum,this.calendarMode);
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 },
                 calendarModeDay(){
                     this.calendarMode='Day';
-                    this.getPageNumber(this.pageNum,this.calendarMode);
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 },
                 calendarModeWeek(){
                     this.calendarMode='Week';
-                    this.getPageNumber(this.pageNum,this.calendarMode);
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 },
                 calendarModeMonth(){
                     this.calendarMode='Month';
-                    this.getPageNumber(this.pageNum,this.calendarMode);
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 },
-                changeMode (){
-                    this.getPageNumber(this.pageNum,this.calendarMode);
+                calendarModeYear(){
+                    this.calendarMode='Year';
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                searchMode(){
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
                 }
             }
         })

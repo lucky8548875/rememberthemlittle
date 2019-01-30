@@ -76,12 +76,13 @@ var adminMixin = {
           console.log('fail');
         });
     },
-    getPageNumber(pageNum, calendarMode){
+    getPageNumber(pageNum, calendarMode, searchbar){
       var formData = new FormData();
       formData.append('account_id', this.account.account_id);
       formData.append('token', this.account.token);
       formData.append('pageNum', pageNum);
       formData.append('calendar_mode', calendarMode);
+      formData.append('searchbar', searchbar);
       Vue.http.post('/_system/php/api/salesreport/getByPage.php', formData)
       .then(
         response => {
