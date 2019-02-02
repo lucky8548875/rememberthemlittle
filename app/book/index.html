@@ -341,7 +341,7 @@
                 selected_package_id: function () {
 
                     var addonArray = [];
-                    for (x in this.inclusions) {
+                    for (var x in this.inclusions) {
                         if (this.inclusions[x].package_id == this.selected_package_id) {
 
                             var fetched_addon = this.getAddon(this.inclusions[x].addon_id);
