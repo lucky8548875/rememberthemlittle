@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.ec0936929373df8801d84217f167607c.js"
+  "/precache-manifest.053db931de71d683d38d6abfc1878d19.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "remember-them-little-pwa"});
