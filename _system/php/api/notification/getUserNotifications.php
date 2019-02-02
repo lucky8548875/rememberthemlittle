@@ -8,7 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/_system/php/functions/checkToken.php';
 $account_id = $_GET['account_id'];
 
 # Check token
-if (isset($account_id)){
+if (isset($account_id) && account_id!=null){
 
 try {
 
@@ -43,8 +43,7 @@ else{
     echo json_encode((object)[
         'success' => false,
         'status' => 'UNAUTHORIZED',
-        'account_id' => $account_id,
-        'token' => $token
+        
     ]);
 }
 ?>
