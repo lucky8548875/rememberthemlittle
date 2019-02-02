@@ -125,7 +125,7 @@
 
         <!--Services-->
         <section class="services">
-            <h1 class="services-section-title">SERVICES</h1>
+            <h1 id="services" class="services-section-title">SERVICES</h1>
 
             <slidestrip v-bind:content="pictexts"></slidestrip>
 
@@ -136,10 +136,67 @@
         </section>
 
         <section class="faqs">
-            <h1 class="faqs-section-title">FAQS</h1>
+            <h1 id="faqs" class="faqs-section-title">FAQS</h1>
 
             <faqs-machine v-bind:content="faqs"></faqs-machine>
+
+            <!--Send us a message on Facebook-->
         </section>
+
+        <footer>
+            <!--
+                Navigation Links
+                
+                Address
+
+                Email
+
+                Telephone Number
+                Cellphone Number
+
+                Copyright
+
+                Date last modified
+
+                Social Icons
+
+                Our Services
+            -->
+            <div class="navigation-subsection">
+                <h3 class="navigation-title">Navigation Links</h3>
+                <ul class="navigation-list">
+                    <li v-for="navigation in navigations">
+                        <a v-bind:href="navigation.link">{{navigation.text}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="services-subsection">
+                <h3 class="services-title">Our Services</h3>
+                <ul class="services-list">
+                    <li v-for="service in services">
+                        <a v-bind:href="service.link">{{service.text}}</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contacts-subsection">
+                <!--Address, Email, Tel, CP, FB--->
+                <h3 class="contacts-title">Contacts</h3>
+                <ul class="contacts-list">
+                    <li v-for="contact in contacts">
+                        <img v-bind:src="contact.icon">&nbsp;{{contact.info}}
+                    </li>
+                </ul>
+            </div>
+                
+            <div class="social-subsection">
+                <a v-for="social in socials" v-bind:href="social.link" target="_blank"><img v-bind:src="social.icon"></a>
+            </div>
+            
+            <p class="copyright-container">&copy; All Rights Reserved 2019<p>
+            <p class="last-modified-container">Date Last Modified: {{last_modified}}</p>
+        </footer>
         <!-- Sliding Drawer -->
         <index-drawer ref="drawer"></index-drawer>
 
@@ -182,18 +239,67 @@
                 pictexts: [],
                 faqs: [
                 {
-                    question: "Q1",
-                    answer: "A1"
+                    question: 'Q1',
+                    answer: 'A1'
                 },
                 {
-                    question: "Q2",
-                    answer: "A2"
+                    question: 'Q2',
+                    answer: 'A2'
                 },
                 {
-                    question: "Q3",
-                    answer: "A3"
+                    question: 'Q3',
+                    answer: 'A3'
                 }
-                ]
+                ],
+                navigations: [
+                    {
+                        link: '#faqs',
+                        text: 'Back to Top'
+                    },
+                    {
+                        link: '/app/book/index.html',
+                        text: 'Bookings'
+                    },
+                    {
+                        link: '#services',
+                        text: 'Services'
+                    },
+                    {
+                        link: '#faqs',
+                        text: 'FAQS'
+                    },
+                    {
+                        link: '/',
+                        text: 'Gallery'
+                    }
+                ],
+                services: [
+                    {
+                        link: '/app/index.html',
+                        text: 'Newborn'
+                    },
+                    {
+                        link: '',
+                        text: 'Regular'
+                    },
+                    {
+                        link: '',
+                        text: 'Maternity'
+                    }
+                ],
+                contacts: [
+                    {
+                        icon: '/_system/css/images/64x64.png',
+                        info: '09199999999'
+                    }
+                ],
+                socials: [
+                    {
+                        link: 'https://www.facebook.com/rememberthemlittle/',
+                        icon: '/_system/css/images/64x64.png'
+                    }
+                ],
+                last_modified: ''
             },
             created: function() {
                 this.getPictexts();

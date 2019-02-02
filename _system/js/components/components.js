@@ -466,7 +466,9 @@ Vue.component('fileupload', {
     data: function() {
         return {
             faqs: this.content,
-            visibles: {}
+            filteredFaqs: this.content,
+            visibles: {},
+            query: ''
         }        
     },
     beforeMount: function() {
@@ -477,19 +479,30 @@ Vue.component('fileupload', {
         }
         this.visibles = obj
     },
+    watch: {
+        query: function() {
+            this.filterFAQs();
+        }
+    },
     methods: {
         toggleFAQ: function(index) {
             this.visibles[index] = !this.visibles[index]
             console.log(this.visibles[index])
+        },
+        filterFAQs: function() {
+            this.filteredFaqs = this.faqs.filter(this.checkIfIncludes)
+        },
+        checkIfIncludes: function(faq) {
+            return faq.question.includes(this.query) || faq.answer.includes(this.query)
         }
     },
     template:
     `
     <div class="faqs-machine-container">
-        <input class="faqs-search" type="search" placeholder="Enter text to search for question...">
+        <input class="faqs-search" type="search" placeholder="Enter text to search for question..." v-model="query">
 
         <ul class="faqs-list">
-            <li class="faqs-item" v-for="(faq, index) in faqs" v-bind:key="index">  
+            <li class="faqs-item" v-for="(faq, index) in filteredFaqs" v-bind:key="index">  
                 <div class="faqs-question" v-on:click="toggleFAQ(index)">
                     {{faq.question}}
                 </div>
