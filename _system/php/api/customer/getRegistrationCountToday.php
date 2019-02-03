@@ -16,7 +16,7 @@ try
             CURDATE() as today, 
             COUNT(account_id) as count 
         FROM accounts 
-        WHERE account_created = CURDATE()"
+        WHERE DATE(account_created) = today"
     );
     $stmt->execute();
 
