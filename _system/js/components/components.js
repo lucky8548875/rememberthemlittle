@@ -449,6 +449,44 @@ Vue.component('fileupload', {
                     }
                 );
         },
+        viewBooking: function(booking_id) {
+            Vue.http.get(`/_system/php/api/booking/get.php?booking_id=${booking_id}`)
+                .then(
+                    response => {
+                        if (response.body.success)
+                        {
+                            this.record = response.body.data;
+                            this.showModal = true;
+                        }
+                        else
+                        {
+                            console.error(response.body.message);
+                        }
+                    },
+                    response => {
+                        console.error(response);
+                    }
+                );
+        },
+        viewOrder: function(order_id) {
+            Vue.http.get(`/_system/php/api/orders/get.php?order_id=${order_id}`)
+                .then(
+                    response => {
+                        if (response.body.success)
+                        {
+                            this.record = response.body.data;
+                            this.showModal = true;
+                        }
+                        else
+                        {
+                            console.error(response.body.message);
+                        }
+                    },
+                    response => {
+                        console.error(response);
+                    }
+                );
+        },
         toggleSeeAll: function() {
             this.seeAll = !this.seeAll;
             if(this.seeAll)
@@ -494,6 +532,9 @@ Vue.component('fileupload', {
                 this.inputType = 'text';
                 this.inputIcon = 'fas fa-font';
             }
+        },
+        closeModal: function() {
+            this.showModal = false;
         }
     },
     watch: {
@@ -525,14 +566,30 @@ Vue.component('fileupload', {
                         <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.booking_date}}</h5>
                     </li>
                 </ul>
+                <ul class="matchlist-group-container" v-show="matches.orders != null">
+                    <h3 class="matchlist-group-heading">Orders</h3>
+                    <li class="matchlist-item-container" v-for="match in matches.orders" v-on:click="viewOrder(match.order_id)">
+                        <h4 class="matchlist-item-text">ID: {{match.order_id}}</h4>
+                        <h5 class="matchlist-item-subtext">{{match.account_name}}&nbsp:&nbsp{{match.order_created}}</h5>
+                    </li>
+                </ul>
             </ul>
             <div class="see-results-container" v-show="matches.length != 0" v-on:click="toggleSeeAll()">{{textForSeeResults}}</div>
         </div>
 
         <div class="record-modal-container" v-show="showModal">
-            <div class="field-value-container" v-for="(value, key) in record">
-                <label class="field-label" v-bind:for="key">{{key}}:</label>
-                <input class="value-input" v-bind:id="key" type="text" v-bind:value="value" readonly>
+            <i class="fas fa-times" v-on:click="closeModal()"></i>
+            <div class="record-details-container">
+                <div class="field-value-container" v-for="(value, key) in record">
+                    <label class="field-label" v-bind:for="key">
+                        {{key.toLowerCase()
+                            .split('_')
+                            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                            .join(' ')
+                        }}:
+                    </label>
+                    <input class="value-input" v-bind:id="key" type="text" v-bind:value="value" readonly>
+                </div>
             </div>
        </div>
     </div>

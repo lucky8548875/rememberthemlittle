@@ -2724,4 +2724,194 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 .payment_option {
   padding: 1rem;
 }
+
+.admin-searchbar-container {
+  color: gray;
+  border-radius: 2rem;
+}
+
+.admin-searchbar-container .admin-searchbar-query {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 250px;
+  min-height: 40px;
+}
+
+.admin-searchbar-container .admin-searchbar-query .admin-searchbar-textfield {
+  position: absolute;
+  border-radius: 2rem;
+  background-color: transparent;
+  border-width: 0px;
+  margin: 0;
+  padding: 1rem;
+  border-width: 0px;
+  width: 90%;
+}
+
+.admin-searchbar-container .admin-searchbar-query .admin-searchbar-textfield::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.admin-searchbar-container .admin-searchbar-query .fa-search {
+  position: absolute;
+  right: 32px;
+  color: lightgray;
+}
+
+.admin-searchbar-container .admin-searchbar-query .fa-font {
+  position: absolute;
+  right: 6px;
+  color: lightgray;
+}
+
+.admin-searchbar-container .admin-searchbar-query .fa-calendar {
+  position: absolute;
+  right: 6px;
+  color: lightgray;
+}
+
+.admin-searchbar-container .results-dropdown-container {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-width: 212px;
+  max-height: 500px;
+}
+
+.admin-searchbar-container .results-dropdown-container .admin-searchbar-matchlist {
+  background-color: gray;
+  list-style-type: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.admin-searchbar-container .results-dropdown-container .admin-searchbar-matchlist .matchlist-group-container {
+  list-style-type: none;
+  margin: 2px 0 2px 0;
+  padding: 2px 0 2px 0;
+}
+
+.admin-searchbar-container .results-dropdown-container .admin-searchbar-matchlist .matchlist-group-container .matchlist-group-heading {
+  margin-left: 3px;
+}
+
+.admin-searchbar-container .results-dropdown-container .admin-searchbar-matchlist .matchlist-group-container .matchlist-item-container {
+  padding: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.admin-searchbar-container .results-dropdown-container .admin-searchbar-matchlist .matchlist-group-container .matchlist-item-container:hover {
+  background-color: aquamarine;
+}
+
+.admin-searchbar-container .results-dropdown-container .see-results-container {
+  background-color: blue;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.admin-searchbar-container .results-dropdown-container .see-results-container:hover {
+  background-color: white;
+  color: blue;
+}
+
+.admin-searchbar-container .record-modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: cadetblue;
+  padding: 1em;
+}
+
+.admin-searchbar-container .record-modal-container .fa-times {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  font-size: 25px;
+}
+
+.admin-searchbar-container .record-modal-container .record-details-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  overflow: auto;
+  min-width: 500px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 400px;
+  margin-top: 2em;
+}
+
+.admin-searchbar-container .record-modal-container .record-details-container .field-value-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  max-width: 400px;
+  max-height: 50px;
+  margin: 10px;
+}
+
+.admin-searchbar-container .record-modal-container .record-details-container .field-value-container .field-label {
+  width: 50%;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin-searchbar-container .record-modal-container .record-details-container .field-value-container .value-input {
+  width: 50%;
+  height: 30px;
+}
 /*# sourceMappingURL=playfulcss.css.map */
