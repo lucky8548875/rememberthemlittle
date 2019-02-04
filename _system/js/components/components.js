@@ -24,7 +24,7 @@ Vue.component('index-navigation', {
 
                         <span>Services</span>
                     </a>
-                    <a href="#">
+                    <a href="/app/links/gallery.html">
 
                         <span>Gallery</span>
                     </a>
