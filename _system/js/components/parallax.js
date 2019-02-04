@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         wScroll: 0,
         scrollPlacing: 0,
-        backgroundImage: "images/background.png"
+        backgroundImage: "/_system/images/backgroundgallery.png"
     },
     methods: {
         scrollMoved: function() {
