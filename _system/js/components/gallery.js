@@ -3,7 +3,16 @@ var app = new Vue({
     data: {
         wScroll: 0,
         scrollPlacing: 0,
-        backgroundImage: "/_system/images/backgroundgallery.png"
+        backgroundImage: "/_system/images/backgroundgallery.png",
+        images:['/_system/images/gallery/Picture 1 Display.jpg',
+        '/_system/images/gallery/Picture 2 Display.jpg',
+        "/_system/images/gallery/Picture 3 Display.jpg",
+        "/_system/images/gallery/Picture 4 Display.jpg",
+        "/_system/images/gallery/Picture4.jpg",
+        "/_system/images/gallery/Picture3.jpg",
+        "/_system/images/gallery/Picture1.jpg",
+        "/_system/images/gallery/Picture4.jpg",
+        "/_system/images/gallery/Picture3.jpg"]
     },
     methods: {
         scrollMoved: function() {

@@ -19,7 +19,10 @@
             <div class="surroundContainer" ref="container" @scroll="scrollMoved()" >
                 <div class="hPage">
                     <div class="boxContainer">
-                        <div class="box">
+                        <div class="box" v-for="image in images">
+                            <img v-bind:src="image">
+                        </div>
+                        <!-- <div class="box">
                             <img src="/_system/images/gallery/Picture 1 Display.jpg">
                         </div>
                         <div class="box">
@@ -45,7 +48,7 @@
                         </div>
                         <div class="box">
                             <img src="/_system/images/gallery/Picture3.jpg">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="hPage">
@@ -105,7 +108,7 @@
     <!---------------Must keep at the bottom side of the body so it will work-------------------------->
     <!------------------------------------------------------------------------------------------------->
     <script src="/_system/js/vendor/vue.js"></script> 
-    <script src="/_system/js/components/parallax.js"></script>
+    <script src="/_system/js/components/gallery.js"></script>
     <!------------------------------------------------------------------------------------------------->
     <!---------------Must keep at the bottom side of the body so it will work-------------------------->
     <!------------------------------------------------------------------------------------------------->
