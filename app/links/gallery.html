@@ -19,44 +19,17 @@
             <div class="surroundContainer" ref="container" @scroll="scrollMoved()" >
                 <div class="hPage">
                     <div class="boxContainer">
-                        <div class="box" v-for="image in images">
+                        <div class="box" v-for="image in images1">
                             <img v-bind:src="image">
                         </div>
-                        <!-- <div class="box">
-                            <img src="/_system/images/gallery/Picture 1 Display.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture 2 Display.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture 3 Display.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture 4 Display.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture4.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture3.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture1.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture4.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture3.jpg">
-                        </div> -->
                     </div>
                 </div>
                 <div class="hPage">
                     <div class="boxContainer">
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture5.jpg">
+                        <div class="box" v-for="image in images2">
+                            <img v-bind:src="image">
                         </div>
-                        <div class="box">
+                        <!-- <div class="box">
                             <img src="/_system/images/gallery/Picture6.jpg">
                         </div>
                         <div class="box">
@@ -70,20 +43,20 @@
                         </div>
                         <div class="box">
                             <img src="/_system/images/gallery/Picture5.jpg">
-                        </div>
+                        </div> -->
                     </div>                   
                 </div>
                 <div class="hPage">
                     <div class="boxContainer">
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture8.jpg">
+                        <div class="box" v-for="image in images3">
+                            <img v-bind:src="image">
                         </div>
-                        <div class="box">
+                        <!-- <div class="box">
                             <img src="/_system/images/gallery/Picture9.jpg">
                         </div>
                         <div class="box">
                             <img src="/_system/images/gallery/Picture10.jpg">
-                        </div>
+                        </div> -->
                     </div>  
                 </div>
                 <div class="hPage">
@@ -109,6 +82,7 @@
     <!------------------------------------------------------------------------------------------------->
     <script src="/_system/js/vendor/vue.js"></script> 
     <script src="/_system/js/components/gallery.js"></script>
+    <!-- <script src="/_system/js/components/components.js"></script> -->
     <!------------------------------------------------------------------------------------------------->
     <!---------------Must keep at the bottom side of the body so it will work-------------------------->
     <!------------------------------------------------------------------------------------------------->
