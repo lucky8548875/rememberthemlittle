@@ -29,21 +29,6 @@
                         <div class="box" v-for="image in images2">
                             <img v-bind:src="image">
                         </div>
-                        <!-- <div class="box">
-                            <img src="/_system/images/gallery/Picture6.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture7.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture5.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture5.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture5.jpg">
-                        </div> -->
                     </div>                   
                 </div>
                 <div class="hPage">
@@ -51,12 +36,6 @@
                         <div class="box" v-for="image in images3">
                             <img v-bind:src="image">
                         </div>
-                        <!-- <div class="box">
-                            <img src="/_system/images/gallery/Picture9.jpg">
-                        </div>
-                        <div class="box">
-                            <img src="/_system/images/gallery/Picture10.jpg">
-                        </div> -->
                     </div>  
                 </div>
                 <div class="hPage">
@@ -69,8 +48,8 @@
                 <!------------------------------------------------------------------------------------------------->
                 <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
                 <!------------------------------------------------------------------------------------------------->
-                <i id="buttonLeftArrow" @click="moveLeft()" class="fas fa-angle-left"></i>
-                <i id="buttonRightArrow" @click="moveRight()" class="fas fa-angle-right"></i>
+                <i id="buttonLeftArrow" @mouseover="moveLeft()" class="fas fa-angle-left"></i>
+                <i id="buttonRightArrow" @mouseover="moveRight()" class="fas fa-angle-right"></i>
                 <!------------------------------------------------------------------------------------------------->
                 <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
                 <!------------------------------------------------------------------------------------------------->
