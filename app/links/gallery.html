@@ -38,18 +38,11 @@
                         </div>
                     </div>  
                 </div>
-                <div class="hPage">
-                    <div class="boxContainer">
-                        <div class="box">Test 1</div>
-                        <div class="box">Test 2</div>
-                        <div class="box">Test 3</div>
-                    </div>  
-                </div>
                 <!------------------------------------------------------------------------------------------------->
                 <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
                 <!------------------------------------------------------------------------------------------------->
-                <i id="buttonLeftArrow" @mouseover="moveLeft()" class="fas fa-angle-left"></i>
-                <i id="buttonRightArrow" @mouseover="moveRight()" class="fas fa-angle-right"></i>
+                <i id="buttonLeftArrow" v-if="wScroll < -0.25" @mouseover="moveLeft()" class="fas fa-angle-left"></i>
+                <i id="buttonRightArrow"  v-if="wScroll > -125" @mouseover="moveRight()" class="fas fa-angle-right"></i>
                 <!------------------------------------------------------------------------------------------------->
                 <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
                 <!------------------------------------------------------------------------------------------------->
