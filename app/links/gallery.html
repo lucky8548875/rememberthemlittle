@@ -15,6 +15,7 @@
 </head>
 <body>
     <div id="app">
+
         <div class="wrapper" v-bind:style="{ 'background-position': wScroll + 'px center', 'background-image': 'url(' + backgroundImage +')'}">
             <div class="surroundContainer" ref="container" @scroll="scrollMoved()" >
                 <div class="hPage">
@@ -53,7 +54,9 @@
     <!---------------Must keep at the bottom side of the body so it will work-------------------------->
     <!------------------------------------------------------------------------------------------------->
     <script src="/_system/js/vendor/vue.js"></script> 
+    
     <script src="/_system/js/components/gallery.js"></script>
+    
     <!-- <script src="/_system/js/components/components.js"></script> -->
     <!------------------------------------------------------------------------------------------------->
     <!---------------Must keep at the bottom side of the body so it will work-------------------------->
