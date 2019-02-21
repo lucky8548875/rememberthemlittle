@@ -426,7 +426,7 @@ Vue.component('fileupload', {
             seeAll: false,
             textForSeeResults: 'See all results',
             inputType: 'text',
-            inputIcon: 'fas fa-font'
+            inputIcon: 'fas fa-calendar'
         }
     },
     methods: {
@@ -525,12 +525,12 @@ Vue.component('fileupload', {
             if (this.inputType == 'text')
             {
                 this.inputType = 'date';
-                this.inputIcon = 'fas fa-calendar';
+                this.inputIcon = 'fas fa-font';
             }
             else if(this.inputType == 'date')
             {
                 this.inputType = 'text';
-                this.inputIcon = 'fas fa-font';
+                this.inputIcon = 'fas fa-calendar';
             }
         },
         closeModal: function() {

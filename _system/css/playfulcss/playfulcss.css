@@ -2768,12 +2768,14 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
   position: absolute;
   right: 6px;
   color: lightgray;
+  cursor: pointer;
 }
 
 .admin-searchbar-container .admin-searchbar-query .fa-calendar {
   position: absolute;
   right: 6px;
   color: lightgray;
+  cursor: pointer;
 }
 
 .admin-searchbar-container .results-dropdown-container {
