@@ -522,6 +522,7 @@ Vue.component('fileupload', {
                 );
         },
         toggleInputType: function() {
+            this.query = "";
             if (this.inputType == 'text')
             {
                 this.inputType = 'date';
