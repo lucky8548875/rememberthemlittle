@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <input v-if="calendarMode=='Day'" type="text" v-model="$root.searchbar" @keyup.enter="searchMode()">
+                <input v-if="calendarMode=='Day'" type="date" v-model="$root.searchbar" @change="searchMode()">
 
                 <table v-if="calendarMode=='Day'">
                     <thead>
