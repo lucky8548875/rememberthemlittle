@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gallery</title>
+    <link rel="stylesheet" type="text/css" href="/_system/css/gallerycss/gallerystyle.css">
+    <style>
+        html, *{
+            scroll-behavior: smooth
+        }
+    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+
+        <div class="wrapper" v-bind:style="{ 'background-position': wScroll + 'px center', 'background-image': 'url(' + backgroundImage +')'}">
+            <div class="surroundContainer" ref="container" @scroll="scrollMoved()" >
+                <div class="hPage">
+                    <div class="boxContainer">
+                        <div class="box" v-for="image in images1">
+                            <img v-bind:src="image">
+                        </div>
+                    </div>
+                </div>
+                <div class="hPage">
+                    <div class="boxContainer">
+                        <div class="box" v-for="image in images2">
+                            <img v-bind:src="image">
+                        </div>
+                    </div>                   
+                </div>
+                <div class="hPage">
+                    <div class="boxContainer">
+                        <div class="box" v-for="image in images3">
+                            <img v-bind:src="image">
+                        </div>
+                    </div>  
+                </div>
+                <!------------------------------------------------------------------------------------------------->
+                <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
+                <!------------------------------------------------------------------------------------------------->
+                <i id="buttonLeftArrow" v-if="wScroll < -0.25" @mouseover="moveLeft()" class="fas fa-angle-left"></i>
+                <i id="buttonRightArrow"  v-if="wScroll > -125" @mouseover="moveRight()" class="fas fa-angle-right"></i>
+                <!------------------------------------------------------------------------------------------------->
+                <!-------------------------------LeftArrowButton and RightArrowButton------------------------------>
+                <!------------------------------------------------------------------------------------------------->
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------------------------------------------------------------->
+    <!---------------Must keep at the bottom side of the body so it will work-------------------------->
+    <!------------------------------------------------------------------------------------------------->
+    <script src="/_system/js/vendor/vue.js"></script> 
+    
+    <script src="/_system/js/components/gallery.js"></script>
+    
+    <!-- <script src="/_system/js/components/components.js"></script> -->
+    <!------------------------------------------------------------------------------------------------->
+    <!---------------Must keep at the bottom side of the body so it will work-------------------------->
+    <!------------------------------------------------------------------------------------------------->
+</body>
+</html>

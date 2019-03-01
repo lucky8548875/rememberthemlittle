@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#228be6">
+    <link rel="stylesheet" href="/_system/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
+    <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
+    <title>Remember Them Little</title>
+    <style>
+        .paginator a{
+            padding: 10px;
+            display: inline-block;
+
+        }
+    </style>
+</head>
+
+<body class="admin reports">
+    <!-- Vue App -->
+    <div id="app">
+        <!-- App bar-->
+        <nav>
+            <span>
+                <a class="bars" href="#" @click="$root.$refs.drawer.show()">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a class="brand" href="#">
+                    <h3>Admin Console</h3>
+                </a>
+                <div class="searchbar">
+                    <input type="text" placeholder="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+
+            </span>
+            <span>
+                <a class="section_title">
+                    <h3>Reports</h3>
+                </a>
+            </span>
+            <span>
+                <span class="links">
+                    <a href="/app/admin/calendar">
+                        Dashboard
+                    </a>
+                    <a href="/app/admin/transactions/bookings.html">
+                        Transactions
+                    </a>
+                    <a href="/app/admin/reports" class="active">
+                        Reports
+                    </a>
+                    <a href="/app/admin/settings/categories.html">
+                        Settings
+                    </a>
+                </span>
+                <a class="search" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </span>
+
+        </nav>
+
+        <div class="sidebar">
+            <a href="/">Overview</a>
+            <a href="/app/admin/reports" class="active">Sales Report</a>
+        </div>
+
+        <!-- Main Content -->
+        <transition name="slide-left" appear v-cloak>
+            <main>
+                <div class="control">
+                    <!-- <a class="filter color-primary" v-if="calendarMode=='Day'">
+                        <span>Today</span>
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+                    <a class="filter color-primary" v-if="calendarMode=='Week'">
+                        <span>This Week</span>
+                        <i class="fas fa-angle-down"></i>
+                    </a> -->
+                    <div class="group">
+                        <a href="#" :class="{'active':calendarMode=='Day'}" @click="calendarModeDay()">Day</a>
+                        <a href="#" :class="{'active':calendarMode=='Week'}" @click="calendarModeWeek()">Week</a>
+                        <a href="#" :class="{'active':calendarMode=='Month'}" @click="calendarModeMonth()">Month</a>
+                        <a href="#" :class="{'active':calendarMode=='Year'}" @click="calendarModeYear()">Year</a>
+                    </div>
+                </div>
+
+                <input v-if="calendarMode=='Day'" type="date" v-model="$root.searchbar" @change="searchMode()">
+
+                <table v-if="calendarMode=='Day'">
+                    <thead>
+                        <tr>
+                            <th><span>Date</span></th>
+                            <th><span>Account</span></th>
+                            <th><span>Total</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="sale in sales">
+                            <td>
+                                <span>{{sale.booking_date}}</span>
+                            </td>
+                            <td>
+                                <span>{{sale.account_name}}</span>
+                            </td>
+                            <td>
+                                <span>{{sale.bookings_total}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table v-if="calendarMode=='Week'">
+                        <thead>
+                            <tr>
+                                <th><span>Week Start</span></th>
+                                <th><span>Week End</span></th>
+                                <th><span>Total</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="sale in sales">
+                                <td>
+                                    <span>{{sale.weekstart}}</span>
+                                </td>
+                                <td>
+                                    <span>{{sale.weekend}}</span>
+                                </td>
+                                <td>
+                                    <span>{{sale.bookings_total}}</span>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                </table>
+
+                <table v-if="calendarMode=='Month'">
+                    <thead>
+                        <tr>
+                            <th><span>Month Start</span></th>
+                            <th><span>Month End</span></th>
+                            <th><span>Total</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="sale in sales">
+                            <td>
+                                <span>{{sale.monthstart}}</span>
+                            </td>
+                            <td>
+                                <span>{{sale.monthend}}</span>
+                            </td>
+                            <td>
+                                <span>{{sale.bookings_total}}</span>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+            </table>
+            <table v-if="calendarMode=='Year'">
+                <thead>
+                    <tr>
+                        <th><span>Year</span></th>
+                        <th><span>Total</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="sale in sales">
+                        <td>
+                            <span>{{sale.salesyear}}</span>
+                        </td>
+                        <td>
+                            <span>{{sale.bookings_total}}</span>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+        </table>
+
+        <template v-if="pageCount>1">
+            <paginate class="paginator" style="display: flex;
+            list-style-type: none;"
+                :page-count="pageCount"
+                :page-range="2"
+                :margin-pages="2"
+                :click-handler="goToPage"
+                :prev-text="'Prev'"
+                :next-text="'Next'"
+                :container-class="'className'"
+                :page-class="'page-item'">
+            </paginate>
+        </template>
+
+        <!-- <modal inline-template ref="sales" v-cloak>
+            <transition name="zoom-out">
+                <div class="booking-modal" v-if="visible">
+                    <div class="booking-mobile">
+                        <h3>
+                            <span>Sales Details</span>
+                            <a href="#" @click="visible=false">
+                                <i class="fas fa-times"></i>
+                                <span>Close</span>
+                            </a>
+
+                        </h3>
+                        <div class="overflow-container">
+                            <table>
+                                <tr>
+                                    <td>Schedule</td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>{{new Date(params.booking_date).toDateString().substr(3,12)}}</span><br><br>
+                                        <i class="fas fa-clock"></i>
+                                        <span>{{params.booking_time}}</span><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{params.booking_status}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td>Php {{params.booking_total_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Deposit Slip</td>
+                                    <td style="text-align:center">
+                                        <img :src="params.booking_deposit_slip" width="50%">
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <button @click="$root.approveBooking(params.booking_id); visible=false" class="primary wide justify-center"
+                                v-if="params.booking_status=='AWAITING_CONFIRMATION'">
+                                <span>Confirm Booking</span>
+                            </button>
+                            <button @click="$root.cancelBooking(params.booking_id); visible=false" class="wide justify-center">
+                                <span>Cancel Booking</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </modal> -->
+
+
+            </main>
+        </transition>
+
+        <!-- Sliding Drawer -->
+        <sliding-drawer ref="drawer"></sliding-drawer>
+
+    </div>
+
+    <script src="/_system/js/vendor/vue.js"></script>
+    <script src="/_system/js/vendor/vue-resource@1.5.1.js"></script>
+    <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
+    <script src="/_system/js/components/components.js"></script>
+    <script src="/_system/js/mixins/account.js"></script>
+    <script src="/_system/js/mixins/admin.js"></script>
+    <script src="/_system/js/mixins/facebook.js"></script>
+    <script>
+        Vue.component('paginate', VuejsPaginate)
+
+        var app = new Vue({
+            el: '#app',
+            mixins: [accountMixin, adminMixin, facebookMixin],
+            data: {
+                pageCategory: 'Dashboard',
+                pageTitle: 'Sales Report',
+                calendarBookingsByDate: [],
+                calendarMode: 'Day',
+                sales: [],
+                pageNum: 0,
+                pageCount: 0,
+                searchbar: '',
+                totalprice: 0
+            },
+            computed:{
+                filteredDate(){
+                    return this.bookings.filter(booking => (Date.parse(booking.booking_date) >= Date.parse(this.selected_date_from)) && (Date.parse(booking.booking_date) <= Date.parse(this.selected_date_to)) );
+                },
+                searchresult(){
+                    
+                }
+            },
+            mounted: function () {
+                this.fbInit();
+                this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                this.getPageCount();
+            },
+            methods: {
+                goToPage (pageNum) {
+                    console.log(pageNum);
+                    this.pageNum = pageNum;
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                calendarModeDay(){
+                    this.calendarMode='Day';
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                calendarModeWeek(){
+                    this.calendarMode='Week';
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                calendarModeMonth(){
+                    this.calendarMode='Month';
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                calendarModeYear(){
+                    this.calendarMode='Year';
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                },
+                searchMode(){
+                    this.getPageNumber(this.pageNum,this.calendarMode,this.searchbar);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
