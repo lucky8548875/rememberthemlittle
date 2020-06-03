@@ -2724,4 +2724,162 @@ a > * + *, button > * + *, a.button > * + *, .index main.main-index div.containe
 .payment_option {
   padding: 1rem;
 }
+
+.overview-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto;
+      grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 100%;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.overview-container div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: lightgray;
+  border-radius: 25px;
+}
+
+.overview-container .logs-container {
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+  grid-row-end: 3;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 500px;
+  max-height: 700px;
+  padding: 1em;
+}
+
+.overview-container .logs-container .logs-list {
+  list-style-type: none;
+}
+
+.overview-container .revenues-chart-container {
+  max-width: 500px;
+  max-height: 350px;
+}
+
+.overview-container .registration-count-container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+  max-width: 500px;
+  max-height: 350px;
+  padding: 1em;
+}
+
+.overview-container .registration-count-container .registration-count-title {
+  margin-bottom: 1em;
+}
+
+.overview-container .online-customers-container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 500px;
+  max-height: 350px;
+  padding: 1em;
+}
+
+.overview-container .online-customers-container .online-customers-list {
+  list-style-type: none;
+}
+
+.overview-container .bookings-chart-container {
+  max-width: 500px;
+  max-height: 350px;
+}
+
+.overview-container .bookings-approval-container {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 1500px;
+  max-height: 200px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em;
+}
+
+.overview-container .bookings-approval-container .bookings-approval-list {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.overview-container .bookings-approval-container .bookings-approval-list .bookings-approval-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+}
+
+.overview-container .bookings-approval-container .bookings-approval-list .bookings-approval-item span {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.profiling-charts-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.profiling-charts-container > div {
+  background-color: lightgray;
+  border-radius: 25px;
+  margin: 1em;
+  padding: 1em;
+}
 /*# sourceMappingURL=playfulcss.css.map */

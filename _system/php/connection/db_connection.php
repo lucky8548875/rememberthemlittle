@@ -6,7 +6,6 @@
     // $password = "root";
     // $dbname = "rtl_v1";
 
-    # Set database parameters
     // $servername = "localhost:3306";
     // $username = "root";
     // $password = "usbw";

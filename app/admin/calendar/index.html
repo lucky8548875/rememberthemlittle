@@ -10,6 +10,124 @@
     <link rel="stylesheet" href="/_system/css/playfulcss/playfulcss.css">
     <link rel="stylesheet" href="/_system/css/proxima.woff3.css">
     <title>Remember Them Little</title>
+    <style>
+        .admin-searchbar-container {
+            background-color: lightgray;
+            color: gray;
+            border-radius: 2rem;
+        }
+
+        .admin-searchbar-query {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 212px;
+            min-height: 40px;
+        }
+
+        .admin-searchbar-textfield {
+            position: absolute;
+            border-radius: 2rem;
+            background-color: transparent;
+            border-width: 0px;
+            margin: 0;
+            padding: 1rem;
+            border-width: 0px;
+        }
+
+        .admin-searchbar-container .fa-search {
+            position: absolute;
+            right: 8px;
+            color: lightgray;
+        }
+
+        .results-dropdown-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 212px;
+            max-height: 500px;
+        }
+
+        .admin-searchbar-matchlist {
+            background-color: gray;
+            list-style-type: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .matchlist-group-container {
+            list-style-type: none;
+            margin: 2px 0 2px 0;
+            padding: 2px 0 2px 0;
+        }
+
+        .matchlist-group-heading {
+            margin-left: 3px;
+        }
+
+        .matchlist-item-container {
+            padding: 5px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .matchlist-item-container:hover {
+            background-color: aquamarine;
+        }
+        
+        .see-results-container {
+            background-color: blue;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .see-results-container:hover {
+            background-color: blue;
+        }
+
+        .record-modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform:  translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            flex-flow: column wrap;
+            overflow: auto;
+            background-color: cadetblue;
+            min-width: 500px;
+            min-height: 300px;
+            max-width: 800px;
+            max-height: 500px;
+        }
+
+        .field-value-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 400px;
+            max-height: 50px;
+            margin: 10px;
+        }
+
+        .field-label {
+            width: 50%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .value-input {
+            width: 50%;
+            height: 30px;
+        }
+    </style>
 </head>
 
 <body class="admin calendar">
@@ -25,11 +143,15 @@
                 <a class="brand" href="#">
                     <h3>Admin Console</h3>
                 </a>
+                <admin-searchbar>
+
+                </admin-searchbar>
+                <!--
                 <div class="searchbar">
                     <input type="text" placeholder="Search">
                     <i class="fas fa-search"></i>
                 </div>
-
+                -->
             </span>
             <span>
                 <a class="section_title">
@@ -59,7 +181,7 @@
         </nav>
 
         <div class="sidebar">
-            <a href="/">Overview</a>
+            <a href="/app/admin/overview">Overview</a>
             <a href="/app/admin/calendar" class="active">Calendar</a>
         </div>
 

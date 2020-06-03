@@ -1,0 +1,85 @@
+.overview-container
+    display: grid
+    grid-template-columns: auto auto auto
+    grid-gap: 10px
+    justify-content: center
+    align-content: center
+    width: 100%
+    margin-left: 1em
+    margin-right: 1em
+    margin-bottom: 1em
+
+    div
+        display: flex
+        align-items: center
+        justify-content: center
+        background-color: lightgray;
+        border-radius: 25px
+
+    .logs-container
+        grid-row-start: 1
+        grid-row-end: 3
+        overflow-y: auto
+        overflow-x: hidden
+        max-width: 500px
+        max-height: 700px
+        padding: 1em
+
+        .logs-list
+            list-style-type: none
+
+    .revenues-chart-container
+        max-width: 500px
+        max-height: 350px
+
+    .registration-count-container
+        flex-direction: column
+        padding: 1em
+        max-width: 500px
+        max-height: 350px
+        padding: 1em
+
+        .registration-count-title
+            margin-bottom: 1em
+
+    .online-customers-container
+        flex-direction: column
+        padding: 1em
+        overflow-y: auto
+        overflow-x: hidden
+        max-width: 500px
+        max-height: 350px
+        padding: 1em
+
+        .online-customers-list
+            list-style-type: none
+
+    .bookings-chart-container
+        max-width: 500px
+        max-height: 350px   
+
+    .bookings-approval-container
+        grid-column-start: 1
+        grid-column-end: 4
+        overflow-y: auto
+        overflow-x: hidden
+        max-width: 1500px
+        max-height: 200px
+        flex-direction: column
+        padding: 1em
+
+        .bookings-approval-list
+            list-style-type: none
+            display: flex
+            flex-direction: column
+
+            .bookings-approval-item
+                display: flex
+                flex-direction: row
+                margin: 10px
+                padding: 10px
+
+                span
+                    margin-left: 1em
+                    margin-right: 1em
+
